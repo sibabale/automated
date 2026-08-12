@@ -1,4 +1,4 @@
-import type { ITheme, IThemeSpacing, IThemeBreakpoints, IThemeFontWeights, IThemeFontSizes } from './theme.types';
+import type { ITheme, IThemeSpacing, IThemeSize, IThemeBreakpoints, IThemeFontWeights, IThemeFontSizes } from './theme.types';
 import { breakpoints as bp } from './media';
 
 const spacing: IThemeSpacing = {
@@ -9,6 +9,15 @@ const spacing: IThemeSpacing = {
     l:   '24px',
     xl:  '32px',
     xxl: '48px',
+};
+
+const size: IThemeSize = {
+    5:   '20px',
+    11:  '44px',
+    12:  '48px',
+    20:  '80px',
+    26:  '104px',
+    160: '640px',
 };
 
 const breakpoints: IThemeBreakpoints = bp;
@@ -38,6 +47,7 @@ const fontSizes: IThemeFontSizes = {
 
 export const lightTheme: ITheme = {
     spacing,
+    size,
     breakpoints,
     fontWeights,
     fontSizes,
@@ -62,6 +72,7 @@ export const lightTheme: ITheme = {
 
 export const darkTheme: ITheme = {
     spacing,
+    size,
     breakpoints,
     fontWeights,
     fontSizes,

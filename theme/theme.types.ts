@@ -12,6 +12,15 @@ export interface IThemeSpacing {
     xxl: string;  // extra extra large — 48px
 }
 
+export interface IThemeSize {
+    5:   string; // 20px
+    11:  string; // 44px
+    12:  string; // 48px
+    20:  string; // 80px
+    26:  string; // 104px
+    160: string; // 640px
+}
+
 export interface IThemeFontSizes {
     xs:   string; // 12px — captions, labels
     sm:   string; // 14px — secondary text
@@ -66,6 +75,7 @@ export interface IThemeColors {
 
 export interface ITheme extends IThemeColors {
     spacing:     IThemeSpacing;
+    size:        IThemeSize;
     breakpoints: IThemeBreakpoints;
     fontWeights: IThemeFontWeights;
     fontSizes:   IThemeFontSizes;
