@@ -1,0 +1,69 @@
+// [ COMPONENTS > ORGANISMS > VERDICT SECTION ] ######################################################
+
+// 1.1. EXTERNAL DEPENDENCIES ......................................................................
+'use client';
+
+import React from 'react';
+// 1.1. END ........................................................................................
+
+// 1.2. INTERNAL DEPENDENCIES ......................................................................
+import {
+    VerdictDescription,
+    VerdictLabel,
+    VerdictSectionContainer,
+    VerdictSummary,
+    VerdictTitle,
+} from './verdict-section.styles';
+// 1.2. END ........................................................................................
+
+// 1.3. IMAGES .....................................................................................
+// 1.3. END ........................................................................................
+
+// 1.4. DATA .......................................................................................
+// 1.4. END ........................................................................................
+
+// 1.5. TYPES ......................................................................................
+interface IVerdictSection {
+    label?: string;
+    verdict?: string;
+    description?: string;
+}
+// 1.5. END ........................................................................................
+
+// 1.6. COMPONENT ..................................................................................
+
+const VerdictSection: React.FC<IVerdictSection> = ({
+    label = 'Investment Verdict',
+    verdict = 'Strong Buy Candidate',
+    description = 'Apple Inc. presents a highly compelling alignment with the Buffett framework. Robust operating cash flow, unmatched consumer stickiness, and a capital-light services expansion secure a wider moat despite higher debt ratios. While the 18% Margin of Safety is modest, the premium brand equity cushions systemic downside risk.',
+}) => {
+    // 1.6.1. HOOKS & API CALLS ....................................................................
+    // 1.6.1. END ..................................................................................
+
+    // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
+    // 1.6.2. END ..................................................................................
+
+    // 1.6.3. RENDER ...............................................................................
+    return (
+        <VerdictSectionContainer data-testid="verdict-section">
+            <VerdictSummary data-testid="verdict-section-summary">
+                <VerdictLabel data-testid="verdict-section-label">
+                    {label}
+                </VerdictLabel>
+                <VerdictTitle data-testid="verdict-section-title">
+                    {verdict}
+                </VerdictTitle>
+            </VerdictSummary>
+            <VerdictDescription data-testid="verdict-section-description">
+                {description}
+            </VerdictDescription>
+        </VerdictSectionContainer>
+    );
+    // 1.6.3. END ..................................................................................
+};
+
+// 1.6. END ........................................................................................
+
+export default VerdictSection;
+
+// END FILE ########################################################################################
