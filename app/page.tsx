@@ -1,11 +1,16 @@
-import Image from "next/image";
 import Header from "../components/molecules/header/header";
+import HeroSection from "../components/organisms/hero-section/hero-section";
+import KeyTenetsFrame from "../components/organisms/key-tenets-frame/key-tenets-frame";
+import ReportHeader from "../components/organisms/report-header/report-header";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-col flex-1 bg-zinc-50 font-sans ">
       <Header />
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white">
-      
+      <main className="w-full p-3 bg-white ">
+        <HeroSection />
+        <ReportHeader />
+        <KeyTenetsFrame />
       </main>
     </div>
   );
