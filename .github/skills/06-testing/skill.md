@@ -73,6 +73,33 @@ It does **not** include:
 
 ---
 
+## Negative, Boundary, and Responsive-Content Cases
+
+Every component test suite must cover relevant user-visible exceptions and
+boundary conditions, not only the default success path. Prioritize cases that
+would otherwise make the interface unusable, misleading, clipped, or
+unreadable.
+
+For content-driven components, include representative adverse values such as:
+
+- Long titles, labels, names, and descriptions.
+- Long classifications, categories, or metadata.
+- Large but presentation-ready values, such as `$289.45B`.
+- Empty, unavailable, error, or loading values when the component supports
+  them.
+
+Text wrapping, clipping, and overlap at small viewports are public behavior.
+When a component can receive variable-length content, test that each
+user-visible value remains exposed through its own stable test element. Where
+layout behavior is in scope, also inspect the component at the smallest
+supported viewport using the repository's available browser tooling.
+
+Do not write a unit test that claims a specific line break occurred: JSDOM does
+not perform browser layout. Instead, test the long-content public contract in
+the component suite and validate the real responsive layout in a browser.
+
+---
+
 ## Good Examples
 
 ### Assert accessible output
@@ -150,6 +177,35 @@ component.toggleMobileMenu();
 
 Instead, invoke the button that exposes the behavior to users.
 
+### Do not test only the default content
+
+```tsx
+// Bad: this verifies only the easiest input and misses the responsive risk.
+render(<ReportHeader companyName="Apple Inc." />);
+expect(screen.getByTestId('report-header-title')).toHaveTextContent('Apple Inc.');
+```
+
+Instead, provide a realistic long value and assert every affected public
+element remains available:
+
+```tsx
+render(
+    <ReportHeader
+        companyName="International Business Machines Corporation"
+        sector="Information Technology Services and Consulting"
+        valuation="$289.45B"
+    />,
+);
+
+expect(screen.getByTestId('report-header-title')).toHaveTextContent(
+    'International Business Machines Corporation',
+);
+expect(screen.getByTestId('report-header-sector')).toBeVisible();
+expect(screen.getByTestId('report-header-valuation')).toHaveTextContent(
+    '$289.45B',
+);
+```
+
 ---
 
 ## Query Strategy
@@ -176,3 +232,7 @@ as test selectors.
 - [ ] Interactions use the same controls a user would use.
 - [ ] Tests avoid internal state, helpers, generated classes, and layout-only DOM.
 - [ ] The test covers success and relevant user-visible failure or empty states.
+- [ ] The test covers relevant negative, boundary, or adverse-content cases.
+- [ ] Variable-length content is tested with realistic long values.
+- [ ] Responsive-content risks are checked at the smallest supported viewport
+      with available browser tooling.

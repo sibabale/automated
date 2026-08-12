@@ -42,7 +42,9 @@ Copilot should:
 - **Always apply the Testing Public Interfaces skill when writing or modifying
   tests.** Read both `components/templates/tests/index.test.temaplate.ts` and
   `components/templates/tests/index.test.example.ts`, then test observable
-  public behavior rather than implementation details.
+  public behavior rather than implementation details. Include relevant
+  negative, boundary, and responsive-content cases rather than testing only
+  the happy path.
 - **Always apply the Component Craft skill when creating or modifying
   components.** Use the Header molecule as the repository reference for
   simple JSX, isolated styled-components, theme props, and test structure.
