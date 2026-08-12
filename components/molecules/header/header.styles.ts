@@ -23,7 +23,7 @@ import type { IThemeFontWeights, IThemeFontSizes, ITheme } from '../../../theme'
 // 1.6. STYLES .....................................................................................
 
 export const ListItemContianer = styled.ul<{ $desktopOnly?: boolean }>`
-    gap: 20px;
+    gap: ${({ theme }) => theme.spacing.l};
     display: flex;
     padding: ${({ theme }) => theme.spacing.m};
     list-style: none;
@@ -75,6 +75,7 @@ export const ListItem = styled.li<IListItemProps>`
 
 export const HeaderContainer = styled.header`
     width: 100%;
+    min-height: ${({ theme }) => `calc(${theme.size[20]} - ${theme.spacing.xs})`};
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -82,6 +83,13 @@ export const HeaderContainer = styled.header`
     border-bottom: 1px solid ${({ theme }) => theme.border.default};
     background-color: ${({ theme }) => theme.background.primary};
 
+    ${media.up('md')`
+        padding: 0 ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.m}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+
+        ${ListItemContianer} {
+            padding: 0;
+        }
+    `}
 `;
 
 export const MobileMenuButton = styled.button`

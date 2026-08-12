@@ -22,6 +22,7 @@ import type { ITheme } from '../../../theme';
 // 1.6. STYLES .....................................................................................
 export const ReportHeaderContainer = styled.header`
     display: flex;
+    position: relative;
     width: 100%;
     flex-direction: column;
     align-items: stretch;
@@ -36,6 +37,7 @@ export const ReportHeaderContainer = styled.header`
 `;
 
 export const ReportIdentity = styled(motion.div)`
+    box-sizing: border-box;
     display: flex;
     min-width: 0;
     flex: 1;
@@ -48,14 +50,22 @@ export const ReportIdentity = styled(motion.div)`
     ${media.up('md')`
         padding: ${({ theme }: { theme: ITheme }) => theme.spacing.m} 0;
     `}
+
+    ${media.down('md')`
+        padding: 0 ${({ theme }: { theme: ITheme }) => `calc(${theme.size[12]} + ${theme.spacing.m})`} 0 0;
+    `}
 `;
 
 export const ReportTitle = styled.h1`
     margin: 0;
     color: ${({ theme }) => theme.text.primary};
-    font-size: ${({ theme }) => theme.fontSizes.xxxl};
+    font-size: ${({ theme }) => theme.fontSizes.xxl};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     line-height: 1.1;
+
+    ${media.up('md')`
+        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xxxl};
+    `}
 `;
 
 export const ReportTicker = styled.span`
@@ -78,10 +88,20 @@ export const ReportMeta = styled.p`
     color: ${({ theme }) => theme.text.secondary};
     font-size: ${({ theme }) => theme.fontSizes.sm};
     line-height: 1.4;
+
+    ${media.down('md')`
+        width: auto;
+    `}
 `;
 
 export const ReportMetaItem = styled.span`
     overflow-wrap: anywhere;
+
+    &:last-child {
+        ${media.down('md')`
+            display: none;
+        `}
+    }
 `;
 
 export const ReportMetaSeparator = styled.span`
@@ -95,6 +115,10 @@ export const ReportValuation = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.sm};
     line-height: 1.4;
     overflow-wrap: anywhere;
+
+    ${media.down('md')`
+        width: auto;
+    `}
 `;
 
 export const ReportScore = styled(motion.div)`
@@ -109,6 +133,14 @@ export const ReportScore = styled(motion.div)`
         width: auto;
         padding: 0;
     `}
+
+    ${media.down('md')`
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+        padding: 0;
+    `}
 `;
 
 export const ReportScoreSummary = styled.div`
@@ -119,6 +151,10 @@ export const ReportScoreSummary = styled.div`
 
     ${media.up('md')`
         text-align: right;
+    `}
+
+    ${media.down('md')`
+        display: none;
     `}
 `;
 
@@ -149,6 +185,13 @@ export const ReportScoreValue = styled.strong`
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     line-height: 1;
     text-align: center;
+
+    ${media.down('md')`
+        width: ${({ theme }: { theme: ITheme }) => theme.size[12]};
+        min-width: ${({ theme }: { theme: ITheme }) => theme.size[12]};
+        min-height: ${({ theme }: { theme: ITheme }) => theme.size[12]};
+        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xxl};
+    `}
 `;
 // 1.6. END ........................................................................................
 

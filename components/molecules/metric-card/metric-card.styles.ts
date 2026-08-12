@@ -5,6 +5,8 @@ import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+import { media } from '../../../theme';
+import type { ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -21,9 +23,13 @@ export const MetricCardContainer = styled.article`
     display: grid;
     min-width: 0;
     gap: ${({ theme }) => theme.spacing.xs};
-    padding: ${({ theme }) => theme.spacing.m};
+    padding: ${({ theme }) => theme.spacing.s};
     border: 1px solid ${({ theme }) => theme.border.default};
     background-color: ${({ theme }) => theme.background.primary};
+
+    ${media.up('md')`
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.m};
+    `}
 `;
 
 export const MetricLabel = styled.p`

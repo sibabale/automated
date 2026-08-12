@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { media } from '../../../theme';
+import type { ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -20,8 +21,13 @@ import { media } from '../../../theme';
 // 1.6. STYLES .....................................................................................
 export const KeyTenetsFrameContainer = styled.section`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.m};
-    padding-top: ${({ theme }) => theme.spacing.l};
+    gap: ${({ theme }) => theme.spacing.s};
+    padding-top: ${({ theme }) => theme.spacing.m};
+
+    ${media.up('md')`
+        gap: ${({ theme }: { theme: ITheme }) => theme.spacing.m};
+        padding-top: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
+    `}
 `;
 
 export const KeyTenetsHeading = styled.h2`
@@ -31,11 +37,15 @@ export const KeyTenetsHeading = styled.h2`
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     line-height: 1.2;
     text-transform: uppercase;
+
+    ${media.down('md')`
+        display: none;
+    `}
 `;
 
 export const KeyTenetsMetrics = styled.div`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.m};
+    gap: ${({ theme }) => theme.spacing.xs};
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     > :last-child {
@@ -45,6 +55,7 @@ export const KeyTenetsMetrics = styled.div`
     }
 
     ${media.up('md')`
+        gap: ${({ theme }: { theme: ITheme }) => theme.spacing.m};
         grid-template-columns: repeat(5, minmax(0, 1fr));
 
         > :last-child {
