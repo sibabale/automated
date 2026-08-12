@@ -14,19 +14,19 @@
 // describe('Counter Component', () => {
 //     it('renders with default title', () => {
 //         render(<Template title="Counter Component" />);
-//         expect(screen.getByText('Counter Component')).toBeInTheDocument();
+//         expect(screen.getByTestId('counter-title')).toBeInTheDocument();
 //     });
 //
 //     it('increments count on button click', () => {
 //         render(<Template title="Counter Component" />);
-//         fireEvent.click(screen.getByText('Increment'));
-//         expect(screen.getByText('1')).toBeInTheDocument();
+//         fireEvent.click(screen.getByTestId('counter-increment'));
+//         expect(screen.getByTestId('counter-count')).toHaveTextContent('1');
 //     });
 //
 //     it('decrements count on button click', () => {
 //         render(<Template title="Counter Component" />);
-//         fireEvent.click(screen.getByText('Decrement'));
-//         expect(screen.getByText('-1')).toBeInTheDocument();
+//         fireEvent.click(screen.getByTestId('counter-decrement'));
+//         expect(screen.getByTestId('counter-count')).toHaveTextContent('-1');
 //     });
 // });
 
