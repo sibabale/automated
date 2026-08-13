@@ -110,6 +110,32 @@ export const ConsolidationNoteText = styled.p`
     line-height: 1.45;
 `;
 
+export const ConsolidationLoadingNoteText = styled(ConsolidationNoteText)`
+    min-height: 7.8125rem;
+
+    > svg:first-child {
+        display: block;
+        height: 7.8125rem;
+    }
+
+    > svg:last-child {
+        display: none;
+    }
+
+    ${media.up('md')`
+        min-height: 4rem;
+
+        > svg:first-child {
+            display: none;
+        }
+
+        > svg:last-child {
+            display: block;
+            height: 4rem;
+        }
+    `}
+`;
+
 export const ConsolidationDesktopNote = styled.span`
     display: none;
 
