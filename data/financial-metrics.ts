@@ -103,7 +103,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Long Term',
-                range: '6–10 Years',
+                range: '6–9 Years',
                 value: '19.8%',
                 breakdown: [
                     { period: '2018', value: '18.4%' },
@@ -116,7 +116,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Very Long Term',
-                range: '10–20 Years',
+                range: '9–12 Years',
                 value: '16.4%',
                 breakdown: [
                     { period: '2005–2014 Avg', value: '16.4%' },
@@ -185,7 +185,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Long Term',
-                range: '6–10 Years',
+                range: '6–9 Years',
                 value: '$62.7B',
                 breakdown: [{ period: '2018', value: '$64.1B' }, { period: '2017', value: '$51.1B' }, { period: '2016', value: '$50.8B' }, { period: '2015', value: '$84.7B' }],
                 insight: 'Ecosystem scale translated recurring customer demand into cash',
@@ -193,7 +193,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Very Long Term',
-                range: '10–20 Years',
+                range: '9–12 Years',
                 value: '$22.3B',
                 breakdown: [{ period: '2005–2014 Avg', value: '$22.3B' }],
                 insight: 'Early platform expansion established the base for compounding cash flows',
@@ -260,7 +260,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Long Term',
-                range: '6–10 Years',
+                range: '6–9 Years',
                 value: '1.43',
                 breakdown: [{ period: '2018', value: '1.43' }, { period: '2017', value: '1.35' }, { period: '2016', value: '1.28' }, { period: '2015', value: '1.10' }],
                 insight: 'Gradual ramp-up of low-interest long-term debt issuance',
@@ -268,7 +268,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Very Long Term',
-                range: '10–20 Years',
+                range: '9–12 Years',
                 value: '0.82',
                 breakdown: [{ period: '2005–2014 Avg', value: '0.82' }],
                 insight: 'Historically conservative capital structure with minimal reliance on debt',
@@ -336,7 +336,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Long Term',
-                range: '6–10 Years',
+                range: '6–9 Years',
                 value: '22.4%',
                 breakdown: [{ period: '2018', value: '22.4%' }, { period: '2017', value: '21.1%' }, { period: '2016', value: '21.2%' }, { period: '2015', value: '22.8%' }],
                 insight: 'Steady operating scale improvements through vertical hardware integration',
@@ -344,7 +344,7 @@ export const financialMetrics: IFinancialMetric[] = [
             },
             {
                 label: 'Very Long Term',
-                range: '10–20 Years',
+                range: '9–12 Years',
                 value: '19.7%',
                 breakdown: [{ period: '2005–2014 Avg', value: '19.7%' }],
                 insight: 'Foundation period marked by explosive scale and transition to premium segments',
