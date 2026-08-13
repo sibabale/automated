@@ -12,6 +12,8 @@ import type { Variants } from 'motion/react';
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import HamburgerIcon from '../../../assets/icons/HamburgerIcon';
 import {
+    BrandLockup,
+    BrandMark,
     HeaderContainer,
     ListItem,
     ListItemContianer,
@@ -75,8 +77,12 @@ const Header: React.FC<IHeader> = () => {
                         data-testid="header-logo"
                         fontWeight="extraBold"
                         fontSize="xl"
+                        color="primary"
                     >
-                        oto
+                        <BrandLockup>
+                            <BrandMark aria-hidden="true" />
+                            <span>oto</span>
+                        </BrandLockup>
                     </ListItem>
                     <ListItem data-testid="header-about" $hideOnMobile>About</ListItem>
                     <ListItem data-testid="header-methodology" $hideOnMobile>

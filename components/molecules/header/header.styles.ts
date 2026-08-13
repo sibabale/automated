@@ -73,6 +73,25 @@ export const ListItem = styled.li<IListItemProps>`
     `}
 `;
 
+export const BrandLockup = styled.span`
+    display: inline-flex;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.xs};
+`;
+
+export const BrandMark = styled.span`
+    display: inline-block;
+    width: ${({ theme }) => theme.size[5]};
+    height: ${({ theme }) => theme.size[5]};
+    flex: 0 0 auto;
+    background-color: ${({ theme }) => theme.text.primary};
+
+    ${media.up('md')`
+        width: ${({ theme }: { theme: ITheme }) => theme.size[5]};
+        height: ${({ theme }: { theme: ITheme }) => theme.size[5]};
+    `}
+`;
+
 export const HeaderContainer = styled.header`
     width: 100%;
     min-height: ${({ theme }) => `calc(${theme.size[20]} - ${theme.spacing.xs})`};
