@@ -16,6 +16,7 @@ import {
     BrandLockup,
     BrandMark,
     HeaderContainer,
+    HeaderLink,
     ListItem,
     ListItemContianer,
     MobileMenuButton,
@@ -92,8 +93,8 @@ const Header: React.FC<IHeader> = () => {
                     <ListItem data-testid="header-methodology" $hideOnMobile>
                         Methodology
                     </ListItem>
-                    <ListItem data-testid="header-pricing" $hideOnMobile>
-                        Pricing
+                    <ListItem data-testid="header-portfolio" $hideOnMobile>
+                        <HeaderLink href="/portfolio">Portfolio</HeaderLink>
                     </ListItem>
                 </ListItemContianer>
                 <ListItemContianer
@@ -164,10 +165,10 @@ const Header: React.FC<IHeader> = () => {
                             Methodology
                         </MobileMenuItem>
                         <MobileMenuItem
-                            data-testid="header-mobile-pricing"
+                            data-testid="header-mobile-portfolio"
                             variants={mobileMenuItemVariants}
                         >
-                            Pricing
+                            <HeaderLink href="/portfolio">Portfolio</HeaderLink>
                         </MobileMenuItem>
                         <MobileMenuItem
                             data-testid="header-mobile-signin"

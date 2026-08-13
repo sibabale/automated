@@ -18,13 +18,14 @@ When multiple skills are relevant, apply them in the following order:
 2. Engineering Principles
 3. Scaffolding (always applied when creating any new component, style, or test file)
 4. Component Craft (always applied when creating or modifying components)
-5. Component States (always applied when creating or modifying asynchronous or collection-driven components)
-6. Motion Design (always applied when creating or modifying animated UI)
-7. Testing Public Interfaces (always applied when creating or modifying tests)
-8. Repository Standards (Documentation, Code Review, Testing, Security)
-9. Language-specific Skills
-10. Framework-specific Skills
-11. Domain-specific Skills
+5. Surface Integrity (always applied when creating or materially changing a page or page-level section)
+6. Component States (always applied when creating or modifying asynchronous or collection-driven components)
+7. Motion Design (always applied when creating or modifying animated UI)
+8. Testing Public Interfaces (always applied when creating or modifying tests)
+9. Repository Standards (Documentation, Code Review, Testing, Security)
+10. Language-specific Skills
+11. Framework-specific Skills
+12. Domain-specific Skills
 
 ## Expectations
 
@@ -49,6 +50,14 @@ Copilot should:
 - **Always apply the Component Craft skill when creating or modifying
   components.** Use the Header molecule as the repository reference for
   simple JSX, isolated styled-components, theme props, and test structure.
+- **Always apply the Surface Integrity skill when creating or materially
+  changing a page or page-level section.** Inspect incumbent compositions and
+  the typed theme before implementation; preserve explicit exclusions; use no
+  literal colors or raw font sizes; and define compact, tablet, and desktop
+  compositions around the longest supported values. Validate each
+  page-versus-component responsibility decision; when it is materially
+  ambiguous, ask the user rather than assuming extraction or inlining is
+  correct.
 - **Always apply the Component States skill when creating or modifying
   asynchronous or collection-driven components.** Scaffold colocated
   `<component>.loading.tsx`, `<component>.empty.tsx`, and

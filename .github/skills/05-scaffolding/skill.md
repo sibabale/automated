@@ -58,6 +58,21 @@ the smallest appropriate theme token and scale it proportionally at larger
 breakpoints. Font size, line-height, and wrapping are responsive layout inputs,
 not post-implementation refinements.
 
+Before adding a page-level section or summary card, inspect the equivalent
+composition already used in the application and reuse it where its
+responsibility fits. Do not create a page-specific visual variant merely
+because similar markup is easy to write.
+
+Use only typed theme tokens for colors, font sizes, font weights, spacing, and
+available size values. Do not introduce literal hex colors, raw font sizes, or
+ad hoc dimensions where an existing token expresses the value. Extend the
+typed theme first when a required semantic value does not exist.
+
+For responsive grids that display variable-length values, define and validate
+the compact, tablet, and desktop column counts independently. A breakpoint must
+not inherit a denser desktop grid until its available width can accommodate the
+longest supported value without clipping or overflow.
+
 ### 2. Preserve every section marker
 
 Every template contains labelled section markers in the form:
@@ -86,7 +101,10 @@ component name.
 
 When scaffolding a new component file:
 
-- The interface is named `I<ComponentName>` (e.g. `ICounter`).
+- The props contract is named `I<ComponentName>` (e.g. `ICounter`). Use an
+  interface when the component has props; use
+  `type I<ComponentName> = Record<never, never>` for a no-props component so
+  the scaffold passes the repository lint rules.
 - The component is a typed `React.FC<I<ComponentName>>`.
 - The component is the **default export**.
 - Use standard HTML/JSX elements (`div`, `p`, `button`, `span`, etc.) — **not**

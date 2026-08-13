@@ -1,12 +1,11 @@
-// [ MAIN DIR > SUB DIR ] #########################################################################
+// [ COMPONENTS > MOLECULES > PORTFOLIO HOLDINGS TABLE HEADER ] ######################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-"use client";
 import React from 'react';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-
+import { PortfolioHoldingsHeaderRow } from './portfolio-holdings-table-header.styles';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -16,12 +15,11 @@ import React from 'react';
 // 1.4. END ........................................................................................
 
 // 1.5. TYPES ......................................................................................
-type ITemplate = Record<never, never>;
+type IPortfolioHoldingsTableHeader = Record<never, never>;
 // 1.5. END ........................................................................................
 
 // 1.6. COMPONENT ..................................................................................
-
-const Template: React.FC<ITemplate> = () => {
+const PortfolioHoldingsTableHeader: React.FC<IPortfolioHoldingsTableHeader> = () => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
     // 1.6.1. END ..................................................................................
 
@@ -29,18 +27,15 @@ const Template: React.FC<ITemplate> = () => {
     // 1.6.2. END ..................................................................................
 
     // 1.6.3. RENDER ...............................................................................
-
     return (
-        <div>
-
-        </div>
+        <PortfolioHoldingsHeaderRow data-testid="portfolio-holdings-table-header">
+            <th>Company</th><th>Ticker</th><th>Shares</th><th>Avg. buy</th><th>Current</th><th>Value</th><th>Gain / loss</th><th>Buffett score</th>
+        </PortfolioHoldingsHeaderRow>
     );
-
     // 1.6.3. END ..................................................................................
 };
-
 // 1.6. END ........................................................................................
 
-export default Template;
+export default PortfolioHoldingsTableHeader;
 
 // END FILE ########################################################################################
