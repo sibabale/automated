@@ -6,7 +6,7 @@ import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { media } from '../../../theme';
+import { media, pressableBounce } from '../../../theme';
 import type { ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
@@ -21,6 +21,7 @@ import type { ITheme } from '../../../theme';
 
 // 1.6. STYLES .....................................................................................
 export const MetricCardContainer = styled(Link)`
+    ${pressableBounce}
     display: grid;
     min-width: 0;
     gap: ${({ theme }) => theme.spacing.xs};

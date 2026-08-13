@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+import { pressableBounce } from '../../../theme';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -31,6 +32,7 @@ export const PortfolioPaginationContainer = styled.nav`
 `;
 
 export const PortfolioPaginationControl = styled.button`
+    ${pressableBounce}
     display: grid;
     min-width: ${({ theme }) => `calc(${theme.size[5]} + ${theme.spacing.s})`};
     min-height: ${({ theme }) => `calc(${theme.size[5]} + ${theme.spacing.s})`};

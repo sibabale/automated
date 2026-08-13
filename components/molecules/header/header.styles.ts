@@ -8,7 +8,7 @@ import Link from 'next/link';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { media } from '../../../theme';
+import { media, pressableBounce } from '../../../theme';
 import type { IThemeFontWeights, IThemeFontSizes, ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
@@ -118,6 +118,7 @@ export const HeaderContainer = styled.header`
 `;
 
 export const MobileMenuButton = styled.button`
+    ${pressableBounce}
     display: flex;
     margin-left: auto;
     padding: ${({ theme }) => theme.spacing.xs};
@@ -138,6 +139,7 @@ export const MobileMenuButton = styled.button`
 `;
 
 export const ThemeModeToggle = styled.button<{ $mode: 'light' | 'dark' }>`
+    ${pressableBounce}
     position: relative;
     display: flex;
     box-sizing: content-box;

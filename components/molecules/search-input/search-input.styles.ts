@@ -6,7 +6,7 @@ import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { media } from '../../../theme';
+import { media, pressableBounce } from '../../../theme';
 import type { ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
@@ -74,6 +74,7 @@ export const SearchInputField = styled.input`
 `;
 
 export const SearchSubmitButton = styled(motion.button)`
+    ${pressableBounce}
     display: grid;
     min-width: ${({ theme }) => theme.size[12]};
     place-items: center;

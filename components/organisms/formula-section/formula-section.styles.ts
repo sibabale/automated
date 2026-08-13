@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { media } from '../../../theme';
+import { media, pressableBounce } from '../../../theme';
 import type { ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
@@ -189,6 +189,7 @@ export const FormulaStateMessage = styled.p`
 `;
 
 export const FormulaStateAction = styled.button`
+    ${pressableBounce}
     border: 1px solid ${({ theme }) => theme.border.strong};
     background-color: ${({ theme }) => theme.background.primary};
     color: ${({ theme }) => theme.text.primary};
