@@ -25,6 +25,9 @@ one worked example for each file type.
 | File type      | Template                                          | Example                                            |
 |----------------|---------------------------------------------------|----------------------------------------------------|
 | Component      | `components/templates/components/component.template.tsx` | `components/templates/components/component.example.tsx` |
+| Loading state  | `components/templates/components/component.loading.template.tsx` | `components/templates/components/component.loading.example.tsx` |
+| Empty state    | `components/templates/components/component.empty.template.tsx` | `components/templates/components/component.empty.example.tsx` |
+| Error state    | `components/templates/components/component.error.template.tsx` | `components/templates/components/component.error.example.tsx` |
 | Styles         | `components/templates/styles/index.styles.template.ts`   | `components/templates/styles/index.styles.example.ts`   |
 | Test           | `components/templates/tests/index.test.temaplate.ts`     | `components/templates/tests/index.test.example.ts`      |
 
@@ -40,6 +43,20 @@ When creating a **new component**, **new style file**, or **new test file**:
 2. Use it verbatim as the skeleton for the new file.
 3. Fill in only what is needed — do not remove sections, reorder them, or
    invent new top-level sections.
+
+When a component supports asynchronous or collection-driven content, scaffold
+its colocated loading, empty, and error components from the matching state
+templates. These state files reuse the primary component's style and test files.
+Loading skeletons must approximate the loaded component's responsive dimensions
+and the position, width, height, and spacing of its visible elements at every
+supported viewport. Design each breakpoint's loader geometry alongside the
+loaded component; never defer responsive approximation until after the base
+loader is complete.
+
+When scaffolding responsive components, define mobile-first typography using
+the smallest appropriate theme token and scale it proportionally at larger
+breakpoints. Font size, line-height, and wrapping are responsive layout inputs,
+not post-implementation refinements.
 
 ### 2. Preserve every section marker
 

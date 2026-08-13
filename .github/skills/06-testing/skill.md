@@ -27,6 +27,19 @@ Before writing a new test:
    interactions, callbacks, and observable side effects.
 5. Write assertions only against that interface.
 
+When a component has colocated loading, empty, and error components, keep their
+coverage in the primary component's test file. Verify loading status semantics,
+empty-state copy and actions, error alert semantics, and retry callbacks.
+Inspect loading states at every supported breakpoint with the available browser
+tooling as part of implementing the loader, not after it is otherwise complete.
+Confirm each viewport's container, skeleton geometry, ordering, and reflow
+approximate that viewport's loaded component without layout shift.
+
+Inspect responsive typography at every supported viewport alongside layout:
+font size, line-height, wrapping, and hierarchy must scale proportionally and
+keep text readable without clipping, overflow, or unintended composition
+changes.
+
 Use `@testing-library/react` and prefer `userEvent` for realistic interactions.
 Use `fireEvent` only when `userEvent` cannot represent the required browser
 event.

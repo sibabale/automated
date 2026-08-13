@@ -36,6 +36,16 @@ When creating or modifying a component:
    `<component-name>.styles.ts` file.
 5. Write or update public-interface tests using the Header test as the
    behavioral reference.
+6. For asynchronous or collection-driven content, scaffold
+   `<component-name>.loading.tsx`, `<component-name>.empty.tsx`, and
+   `<component-name>.error.tsx`. Each state component shares the primary
+   component's styles and test suite.
+7. Loading states must reuse the primary component's responsive container and
+   layout dimensions so they do not shift the page when content resolves.
+   Their skeleton shapes must also approximate each loaded element's position,
+   dimensions, spacing, and breakpoint-specific reflow. Build and validate
+   this approximation across all supported viewports alongside the loaded
+   component; responsive loader geometry is not a follow-up task.
 
 ---
 
@@ -130,6 +140,11 @@ return (
   `theme.fontSizes` token, then use `media.up(...)` overrides to increase type
   only when larger viewports have room. Do not preserve desktop-sized type on
   small devices without a deliberate readability requirement.
+- Treat typography scaling as part of responsive layout construction, not a
+  final polish pass. Define each text role's size, line-height, and wrapping
+  behavior for every supported viewport alongside the component layout. Reduce
+  type proportionally on narrower viewports when necessary to preserve
+  hierarchy, readable measures, and the intended composition without overflow.
 
 ### Good
 

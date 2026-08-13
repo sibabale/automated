@@ -1,7 +1,7 @@
 // [ COMPONENTS > MOLECULES > COUNTER ] ############################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
 // 1.1. END ........................................................................................
 
@@ -20,13 +20,37 @@
 
 // 1.6. STYLES .....................................................................................
 
-// export const Container = styled.div``;
+export const ComponentStateContainer = styled.section`
+    display: grid;
+    justify-items: center;
+    gap: ${({ theme }) => theme.spacing.s};
+    padding: ${({ theme }) => theme.spacing.l};
+    border: 1px solid ${({ theme }) => theme.border.default};
+    background-color: ${({ theme }) => theme.background.surface};
+    color: ${({ theme }) => theme.text.secondary};
+    text-align: center;
+`;
 
-// export const Title = styled.p``;
+export const ComponentStateTitle = styled.h2`
+    margin: 0;
+    color: ${({ theme }) => theme.text.primary};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+`;
 
-// export const Count = styled.p``;
+export const ComponentStateMessage = styled.p`
+    margin: 0;
+    font-family: var(--font-geist-sans), sans-serif;
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+`;
 
-// export const Button = styled.button``;
+export const ComponentStateAction = styled.button`
+    border: 1px solid ${({ theme }) => theme.border.strong};
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.text.primary};
+    cursor: pointer;
+    font: inherit;
+    padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.s}`};
+`;
 
 // 1.6. END ........................................................................................
 

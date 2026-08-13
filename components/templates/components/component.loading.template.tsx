@@ -1,12 +1,14 @@
-// [ COMPONENTS > MOLECULES > COUNTER ] ############################################################
+// [ COMPONENTS > STATES > COMPONENT LOADING ] #######################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-"use client";
-import React, { useState } from 'react';
+'use client';
 
+import React from 'react';
+import ContentLoader from 'react-content-loader';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+// Import shared state primitives from './component.styles'.
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -16,42 +18,45 @@ import React, { useState } from 'react';
 // 1.4. END ........................................................................................
 
 // 1.5. TYPES ......................................................................................
-interface ITemplate {
-    title: string;
+interface IComponentLoading {
+    label?: string;
 }
 // 1.5. END ........................................................................................
 
 // 1.6. COMPONENT ..................................................................................
 
-const Template: React.FC<ITemplate> = ({ title = 'Counter Component' }) => {
+const ComponentLoading: React.FC<IComponentLoading> = ({
+    label = 'Loading content',
+}) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
-    const [count, setCount] = useState<number>(0);
-
     // 1.6.1. END ..................................................................................
 
     // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
     // 1.6.2. END ..................................................................................
 
     // 1.6.3. RENDER ...............................................................................
-
     return (
-        <div data-testid="component">
-            <p data-testid="component-title">{title}</p>
-            <p data-testid="component-count">{count}</p>
-            <button data-testid="component-increment" onClick={() => setCount(count + 1)}>
-                Increment
-            </button>
-            <button data-testid="component-decrement" onClick={() => setCount(count - 1)}>
-                Decrement
-            </button>
+        <div data-testid="component-loading" role="status">
+            <ContentLoader
+                aria-label={label}
+                height={120}
+                title={label}
+                uniqueKey="component-loading"
+                viewBox="0 0 400 120"
+                width="100%"
+            >
+                <rect height="20" rx="4" width="45%" x="0" y="0" />
+                <rect height="16" rx="4" width="100%" x="0" y="36" />
+                <rect height="16" rx="4" width="80%" x="0" y="64" />
+                <rect height="28" rx="4" width="35%" x="0" y="92" />
+            </ContentLoader>
         </div>
     );
-
     // 1.6.3. END ..................................................................................
 };
 
 // 1.6. END ........................................................................................
 
-export default Template;
+export default ComponentLoading;
 
 // END FILE ########################################################################################

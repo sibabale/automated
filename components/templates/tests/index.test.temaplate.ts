@@ -11,6 +11,8 @@
 
 // 1.3. TEST CASES ................................................................................
 // Use stable, component-prefixed data-testid attributes as primary selectors.
+// Add loading, empty, and error-state cases to this file when the component
+// supports asynchronous or collection-driven content.
 
 // 1.3. END ........................................................................................
 

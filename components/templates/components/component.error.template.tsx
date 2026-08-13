@@ -1,12 +1,13 @@
-// [ COMPONENTS > MOLECULES > COUNTER ] ############################################################
+// [ COMPONENTS > STATES > COMPONENT ERROR ] #########################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-"use client";
-import React, { useState } from 'react';
+'use client';
 
+import React from 'react';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+// Import shared state primitives from './component.styles'.
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -16,42 +17,45 @@ import React, { useState } from 'react';
 // 1.4. END ........................................................................................
 
 // 1.5. TYPES ......................................................................................
-interface ITemplate {
-    title: string;
+interface IComponentError {
+    message?: string;
+    onRetry?: () => void;
+    retryLabel?: string;
+    title?: string;
 }
 // 1.5. END ........................................................................................
 
 // 1.6. COMPONENT ..................................................................................
 
-const Template: React.FC<ITemplate> = ({ title = 'Counter Component' }) => {
+const ComponentError: React.FC<IComponentError> = ({
+    message = 'Please try again in a moment.',
+    onRetry,
+    retryLabel = 'Try again',
+    title = 'Unable to load content',
+}) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
-    const [count, setCount] = useState<number>(0);
-
     // 1.6.1. END ..................................................................................
 
     // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
     // 1.6.2. END ..................................................................................
 
     // 1.6.3. RENDER ...............................................................................
-
     return (
-        <div data-testid="component">
-            <p data-testid="component-title">{title}</p>
-            <p data-testid="component-count">{count}</p>
-            <button data-testid="component-increment" onClick={() => setCount(count + 1)}>
-                Increment
-            </button>
-            <button data-testid="component-decrement" onClick={() => setCount(count - 1)}>
-                Decrement
-            </button>
-        </div>
+        <section data-testid="component-error" role="alert">
+            <h2>{title}</h2>
+            <p>{message}</p>
+            {onRetry && (
+                <button data-testid="component-error-retry" onClick={onRetry} type="button">
+                    {retryLabel}
+                </button>
+            )}
+        </section>
     );
-
     // 1.6.3. END ..................................................................................
 };
 
 // 1.6. END ........................................................................................
 
-export default Template;
+export default ComponentError;
 
 // END FILE ########################################################################################

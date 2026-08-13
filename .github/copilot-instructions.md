@@ -18,12 +18,13 @@ When multiple skills are relevant, apply them in the following order:
 2. Engineering Principles
 3. Scaffolding (always applied when creating any new component, style, or test file)
 4. Component Craft (always applied when creating or modifying components)
-5. Motion Design (always applied when creating or modifying animated UI)
-6. Testing Public Interfaces (always applied when creating or modifying tests)
-7. Repository Standards (Documentation, Code Review, Testing, Security)
-8. Language-specific Skills
-9. Framework-specific Skills
-10. Domain-specific Skills
+5. Component States (always applied when creating or modifying asynchronous or collection-driven components)
+6. Motion Design (always applied when creating or modifying animated UI)
+7. Testing Public Interfaces (always applied when creating or modifying tests)
+8. Repository Standards (Documentation, Code Review, Testing, Security)
+9. Language-specific Skills
+10. Framework-specific Skills
+11. Domain-specific Skills
 
 ## Expectations
 
@@ -48,6 +49,21 @@ Copilot should:
 - **Always apply the Component Craft skill when creating or modifying
   components.** Use the Header molecule as the repository reference for
   simple JSX, isolated styled-components, theme props, and test structure.
+- **Always apply the Component States skill when creating or modifying
+  asynchronous or collection-driven components.** Scaffold colocated
+  `<component>.loading.tsx`, `<component>.empty.tsx`, and
+  `<component>.error.tsx` files from the canonical templates. Their styles and
+  tests belong to the primary component's existing `*.styles.ts` and
+  `*.test.tsx` files. Loading containers must preserve the loaded component's
+  responsive width and height to prevent layout shift. Skeleton shapes must
+  also approximate the loaded elements' positions, dimensions, gaps, and
+  responsive reflow. Build this approximation for every supported viewport
+  alongside the loaded component; responsive loader geometry is never an
+  afterthought.
+- **Treat typography as responsive layout.** Define mobile-first font sizes,
+  line-heights, and wrapping with theme tokens, then scale type proportionally
+  at larger viewports. Validate each text role across supported viewports while
+  building the component; typography must not be deferred as visual polish.
 - **Always apply the Motion Design skill when creating or modifying animated
   UI.** Motion is a runtime dependency and transitions must be purposeful,
   reduced-motion aware, and implemented using the repository motion pattern.

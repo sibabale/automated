@@ -1,12 +1,13 @@
-// [ COMPONENTS > MOLECULES > COUNTER ] ############################################################
+// [ COMPONENTS > STATES > COMPONENT EMPTY ] #########################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-"use client";
-import React, { useState } from 'react';
+'use client';
 
+import React from 'react';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+// Import shared state primitives from './component.styles'.
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -16,42 +17,45 @@ import React, { useState } from 'react';
 // 1.4. END ........................................................................................
 
 // 1.5. TYPES ......................................................................................
-interface ITemplate {
-    title: string;
+interface IComponentEmpty {
+    actionLabel?: string;
+    message?: string;
+    onAction?: () => void;
+    title?: string;
 }
 // 1.5. END ........................................................................................
 
 // 1.6. COMPONENT ..................................................................................
 
-const Template: React.FC<ITemplate> = ({ title = 'Counter Component' }) => {
+const ComponentEmpty: React.FC<IComponentEmpty> = ({
+    actionLabel,
+    message = 'There is no content to display yet.',
+    onAction,
+    title = 'Nothing here yet',
+}) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
-    const [count, setCount] = useState<number>(0);
-
     // 1.6.1. END ..................................................................................
 
     // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
     // 1.6.2. END ..................................................................................
 
     // 1.6.3. RENDER ...............................................................................
-
     return (
-        <div data-testid="component">
-            <p data-testid="component-title">{title}</p>
-            <p data-testid="component-count">{count}</p>
-            <button data-testid="component-increment" onClick={() => setCount(count + 1)}>
-                Increment
-            </button>
-            <button data-testid="component-decrement" onClick={() => setCount(count - 1)}>
-                Decrement
-            </button>
-        </div>
+        <section data-testid="component-empty">
+            <h2>{title}</h2>
+            <p>{message}</p>
+            {actionLabel && onAction && (
+                <button data-testid="component-empty-action" onClick={onAction} type="button">
+                    {actionLabel}
+                </button>
+            )}
+        </section>
     );
-
     // 1.6.3. END ..................................................................................
 };
 
 // 1.6. END ........................................................................................
 
-export default Template;
+export default ComponentEmpty;
 
 // END FILE ########################################################################################
