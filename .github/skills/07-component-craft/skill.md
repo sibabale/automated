@@ -126,6 +126,10 @@ return (
 - Use typed, transient style props (for example, `$isOpen`) only when a style
   varies by component state or a public prop.
 - Do not put layout-only or visual logic in the component file.
+- Define typography mobile-first. Base styles must use the smallest appropriate
+  `theme.fontSizes` token, then use `media.up(...)` overrides to increase type
+  only when larger viewports have room. Do not preserve desktop-sized type on
+  small devices without a deliberate readability requirement.
 
 ### Good
 
