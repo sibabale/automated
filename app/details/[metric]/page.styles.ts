@@ -25,6 +25,14 @@ export const DetailPageMain = styled.main`
     background-color: ${({ theme }) => theme.background.surface};
 `;
 
+export const DesktopBreadcrumb = styled.div`
+    display: none;
+
+    ${media.up('md')`
+        display: block;
+    `}
+`;
+
 export const DetailContentFlow = styled.div`
     display: grid;
     gap: ${({ theme }) => theme.spacing.s};

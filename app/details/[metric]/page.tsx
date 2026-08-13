@@ -12,9 +12,11 @@ import EducationalSection from '../../../components/organisms/educational-sectio
 import EducationalSectionLoading from '../../../components/organisms/educational-section/educational-section.loading';
 import HorizonCard from '../../../components/molecules/horizon-card/horizon-card';
 import HorizonCardLoading from '../../../components/molecules/horizon-card/horizon-card.loading';
+import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
 import { getFinancialMetric } from '../../../data/financial-metrics';
 import {
     DetailContentFlow,
+    DesktopBreadcrumb,
     DetailPageMain,
     HorizonAnalysisGrid,
     HorizonAnalysisSection,
@@ -43,6 +45,13 @@ export default function MetricDetailsPage({
     return (
         <div>
             <Header />
+            <DesktopBreadcrumb>
+                <BreadcrumbContainer
+                    companyName="Apple Inc."
+                    currentLabel={metric?.label ?? 'Metric details'}
+                    ticker="AAPL"
+                />
+            </DesktopBreadcrumb>
             <DetailPageMain>
                 {isContentLoading ? (
                     <DetailLeadSectionLoading />
