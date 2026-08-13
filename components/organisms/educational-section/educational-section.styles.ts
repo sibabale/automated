@@ -37,6 +37,23 @@ export const EducationalCopy = styled.div`
     gap: ${({ theme }) => theme.spacing.l};
 `;
 
+export const EducationalLoadingCopy = styled.div`
+    min-height: 14rem;
+
+    > svg {
+        display: block;
+        height: 14rem;
+    }
+
+    ${media.up('md')`
+        min-height: 21.125rem;
+
+        > svg {
+            height: 21.125rem;
+        }
+    `}
+`;
+
 export const EducationalContentGroup = styled.div`
     display: grid;
     gap: ${({ theme }) => theme.spacing.s};
@@ -89,6 +106,31 @@ export const EducationalQuote = styled.blockquote`
 
     ${media.up('md')`
         padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
+    `}
+`;
+
+export const EducationalLoadingQuote = styled.blockquote`
+    display: grid;
+    box-sizing: border-box;
+    height: 13.1875rem;
+    margin: 0;
+    padding: ${({ theme }) => theme.spacing.l};
+    border: 1px solid ${({ theme }) => theme.border.strong};
+    background-color: ${({ theme }) => theme.background.surface};
+
+    > svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    ${media.up('md')`
+        height: 21.125rem;
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
+
+        > svg {
+            height: 100%;
+        }
     `}
 `;
 
