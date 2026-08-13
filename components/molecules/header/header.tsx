@@ -84,10 +84,12 @@ const Header: React.FC<IHeader> = () => {
                         fontSize="xl"
                         color="primary"
                     >
-                        <BrandLockup>
-                            <BrandMark aria-hidden="true" />
-                            <span>oto</span>
-                        </BrandLockup>
+                        <HeaderLink href="/" aria-label="Go to home">
+                            <BrandLockup>
+                                <BrandMark aria-hidden="true" />
+                                <span>oto</span>
+                            </BrandLockup>
+                        </HeaderLink>
                     </ListItem>
                     <ListItem data-testid="header-about" $hideOnMobile>About</ListItem>
                     <ListItem data-testid="header-methodology" $hideOnMobile>

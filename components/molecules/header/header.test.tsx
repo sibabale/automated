@@ -33,6 +33,10 @@ describe('Header', () => {
             'aria-expanded',
             'false',
         );
+        expect(screen.getByTestId('header-logo').querySelector('a')).toHaveAttribute(
+            'href',
+            '/',
+        );
         expect(screen.queryByTestId('header-signin')).not.toBeInTheDocument();
         expect(screen.queryByTestId('header-create-account')).not.toBeInTheDocument();
     });
