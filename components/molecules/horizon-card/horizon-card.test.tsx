@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
 import HorizonCard from './horizon-card';
+import HorizonCardLoading from './horizon-card.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
@@ -65,6 +66,17 @@ describe('HorizonCard', () => {
         );
 
         expect(screen.getByTestId('trend-badge')).toHaveAttribute('data-variant', 'down');
+    });
+
+    it('announces time horizon loading', () => {
+        render(
+            <StyledThemeProvider>
+                <HorizonCardLoading />
+            </StyledThemeProvider>,
+        );
+
+        expect(screen.getByTestId('horizon-card-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading time horizon analysis')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................
