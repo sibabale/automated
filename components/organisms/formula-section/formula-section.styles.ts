@@ -27,7 +27,7 @@ export const FormulaSectionContainer = styled.section`
 
     ${media.up('md')`
         gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
-        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.m}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
     `}
 `;
 

@@ -28,7 +28,7 @@ export const ConsolidationSummaryContainer = styled.section`
     ${media.up('md')`
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
-        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.m}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
     `}
 `;
 

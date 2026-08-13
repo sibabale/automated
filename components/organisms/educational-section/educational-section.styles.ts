@@ -28,7 +28,7 @@ export const EducationalSectionContainer = styled.section`
     ${media.up('md')`
         grid-template-columns: minmax(0, 1.65fr) minmax(0, 0.95fr);
         gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xxl};
-        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xxl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.m}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xxl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
     `}
 `;
 

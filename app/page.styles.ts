@@ -30,6 +30,11 @@ export const MainContent = styled.main`
     width: 100%;
     flex: 1;
     padding: 0 ${({ theme }) => theme.spacing.m} ${({ theme }) => theme.spacing.xxl};
+
+    ${media.up('md')`
+        padding-right: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
+        padding-left: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
+    `}
 `;
 
 export const HeroLayout = styled.div`

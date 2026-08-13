@@ -103,7 +103,7 @@ export const HeaderContainer = styled.header`
     background-color: ${({ theme }) => theme.background.primary};
 
     ${media.up('md')`
-        padding: 0 ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.m}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+        padding: 0 ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
 
         ${ListItemContianer} {
             padding: 0;

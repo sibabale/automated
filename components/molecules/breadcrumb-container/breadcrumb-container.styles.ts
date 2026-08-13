@@ -31,7 +31,7 @@ export const BreadcrumbContainer = styled.nav`
     overflow-x: auto;
 
     ${media.up('md')`
-        padding: 0 ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.m}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+        padding: 0 ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
     `}
 `;
 
