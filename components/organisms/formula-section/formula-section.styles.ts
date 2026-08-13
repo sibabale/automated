@@ -68,10 +68,38 @@ export const FormulaContent = styled.div`
 
 export const FormulaLoadingIntro = styled.div`
     min-width: 0;
+    min-height: 8.9375rem;
+
+    > svg {
+        display: block;
+        height: 8.9375rem;
+    }
+
+    ${media.up('md')`
+        min-height: 9.25rem;
+
+        > svg {
+            height: 9.25rem;
+        }
+    `}
 `;
 
 export const FormulaLoadingContent = styled.div`
     min-width: 0;
+    min-height: 9.5rem;
+
+    > svg {
+        display: block;
+        height: 9.5rem;
+    }
+
+    ${media.up('md')`
+        min-height: 12.875rem;
+
+        > svg {
+            height: 12.875rem;
+        }
+    `}
 `;
 
 export const FormulaPanels = styled.div`

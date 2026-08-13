@@ -7,6 +7,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import FormulaSectionEmpty from './formula-section.empty';
 import FormulaSectionError from './formula-section.error';
 import FormulaSectionLoading from './formula-section.loading';
@@ -29,9 +30,11 @@ const formulaProps = {
 
 const renderFormulaSection = (props = formulaProps) =>
     render(
-        <StyledThemeProvider>
-            <FormulaSection {...props} />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <FormulaSection {...props} />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('FormulaSection', () => {
@@ -63,9 +66,11 @@ describe('FormulaSection', () => {
 
     it('announces the calculation loading state', () => {
         render(
-            <StyledThemeProvider>
-                <FormulaSectionLoading />
-            </StyledThemeProvider>,
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <FormulaSectionLoading />
+                </StyledThemeProvider>
+            </ReduxProvider>,
         );
 
         expect(screen.getByTestId('formula-section-loading')).toHaveAttribute('role', 'status');
@@ -74,9 +79,11 @@ describe('FormulaSection', () => {
 
     it('renders the supplied empty state copy', () => {
         render(
-            <StyledThemeProvider>
-                <FormulaSectionEmpty />
-            </StyledThemeProvider>,
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <FormulaSectionEmpty />
+                </StyledThemeProvider>
+            </ReduxProvider>,
         );
 
         expect(screen.getByTestId('formula-section-empty')).toHaveTextContent('No data available');
@@ -86,9 +93,11 @@ describe('FormulaSection', () => {
         const onRetry = vi.fn();
 
         render(
-            <StyledThemeProvider>
-                <FormulaSectionError onRetry={onRetry} />
-            </StyledThemeProvider>,
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <FormulaSectionError onRetry={onRetry} />
+                </StyledThemeProvider>
+            </ReduxProvider>,
         );
         fireEvent.click(screen.getByTestId('formula-section-error-retry'));
 
