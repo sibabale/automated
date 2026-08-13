@@ -104,12 +104,11 @@ export const financialMetrics: IFinancialMetric[] = [
             {
                 label: 'Long Term',
                 range: '6–9 Years',
-                value: '19.8%',
+                value: '18.4%',
                 breakdown: [
                     { period: '2018', value: '18.4%' },
                     { period: '2017', value: '17.2%' },
                     { period: '2016', value: '19.6%' },
-                    { period: '2015', value: '23.8%' },
                 ],
                 insight: 'Steady improvement as ecosystem matured',
                 trend: 'down',
@@ -127,7 +126,7 @@ export const financialMetrics: IFinancialMetric[] = [
         ],
         consolidation: {
             title: 'Consolidation Summary',
-            values: ['26.1%', '23.7%', '19.8%', '16.4%'],
+            values: ['26.1%', '23.7%', '18.4%', '16.4%'],
             denominator: '4 (Adjusted for Weight)',
             result: '21.3%',
             note: 'Weighted average with recency bias — recent years carry higher weight. This ensures the consolidated ROE accurately reflects current operational efficiency while retaining historical performance memory.',
@@ -186,8 +185,8 @@ export const financialMetrics: IFinancialMetric[] = [
             {
                 label: 'Long Term',
                 range: '6–9 Years',
-                value: '$62.7B',
-                breakdown: [{ period: '2018', value: '$64.1B' }, { period: '2017', value: '$51.1B' }, { period: '2016', value: '$50.8B' }, { period: '2015', value: '$84.7B' }],
+                value: '$55.3B',
+                breakdown: [{ period: '2018', value: '$64.1B' }, { period: '2017', value: '$51.1B' }, { period: '2016', value: '$50.8B' }],
                 insight: 'Ecosystem scale translated recurring customer demand into cash',
                 trend: 'down',
             },
@@ -202,7 +201,7 @@ export const financialMetrics: IFinancialMetric[] = [
         ],
         consolidation: {
             title: 'Consolidation Summary',
-            values: ['$110.5B', '$91.0B', '$62.7B', '$22.3B'],
+            values: ['$110.5B', '$91.0B', '$55.3B', '$22.3B'],
             denominator: '4 (Adjusted for Weight)',
             result: '$110.5B',
             note: 'Weighted average with recency bias — recent cash generation carries greater weight while preserving longer-term operating context.',
@@ -261,8 +260,8 @@ export const financialMetrics: IFinancialMetric[] = [
             {
                 label: 'Long Term',
                 range: '6–9 Years',
-                value: '1.43',
-                breakdown: [{ period: '2018', value: '1.43' }, { period: '2017', value: '1.35' }, { period: '2016', value: '1.28' }, { period: '2015', value: '1.10' }],
+                value: '1.35',
+                breakdown: [{ period: '2018', value: '1.43' }, { period: '2017', value: '1.35' }, { period: '2016', value: '1.28' }],
                 insight: 'Gradual ramp-up of low-interest long-term debt issuance',
                 trend: 'up',
             },
@@ -277,7 +276,7 @@ export const financialMetrics: IFinancialMetric[] = [
         ],
         consolidation: {
             title: 'Consolidation Summary',
-            values: ['1.72', '1.95', '1.43', '0.82'],
+            values: ['1.72', '1.95', '1.35', '0.82'],
             denominator: '4 (Adjusted for Weight)',
             result: '1.87',
             note: 'Weighted average with recency bias — recent years carry higher weight. This ensures the consolidated D/E ratio accurately reflects current operational efficiency while retaining historical performance memory.',
@@ -337,8 +336,8 @@ export const financialMetrics: IFinancialMetric[] = [
             {
                 label: 'Long Term',
                 range: '6–9 Years',
-                value: '22.4%',
-                breakdown: [{ period: '2018', value: '22.4%' }, { period: '2017', value: '21.1%' }, { period: '2016', value: '21.2%' }, { period: '2015', value: '22.8%' }],
+                value: '21.6%',
+                breakdown: [{ period: '2018', value: '22.4%' }, { period: '2017', value: '21.1%' }, { period: '2016', value: '21.2%' }],
                 insight: 'Steady operating scale improvements through vertical hardware integration',
                 trend: 'down',
             },
@@ -353,7 +352,7 @@ export const financialMetrics: IFinancialMetric[] = [
         ],
         consolidation: {
             title: 'Consolidation Summary',
-            values: ['25.9%', '24.1%', '22.4%', '19.7%'],
+            values: ['25.9%', '24.1%', '21.6%', '19.7%'],
             denominator: '4 (Adjusted for Weight)',
             result: '25.3%',
             note: 'Weighted average with recency bias — recent years carry higher weight. This ensures the consolidated Profit Margin accurately reflects current operational efficiency while retaining historical performance memory.',
