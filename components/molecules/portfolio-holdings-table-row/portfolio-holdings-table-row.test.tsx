@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
 import PortfolioHoldingsTableRow from './portfolio-holdings-table-row';
+import PortfolioHoldingsTableRowLoading from './portfolio-holdings-table-row.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
@@ -24,6 +25,21 @@ describe('PortfolioHoldingsTableRow', () => {
         expect(screen.getByTestId('portfolio-holdings-gain-loss')).toHaveTextContent(
             '+$20.88K',
         );
+    });
+
+    it('announces portfolio holding loading', () => {
+        render(
+            <StyledThemeProvider>
+                <table>
+                    <tbody>
+                        <PortfolioHoldingsTableRowLoading index={0} />
+                    </tbody>
+                </table>
+            </StyledThemeProvider>,
+        );
+
+        expect(screen.getByTestId('portfolio-holdings-table-row-loading')).toHaveAttribute('aria-busy', 'true');
+        expect(screen.getByLabelText('Loading portfolio holding')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................
