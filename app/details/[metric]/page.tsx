@@ -2,7 +2,6 @@
 
 import { use, useEffect, useState } from 'react';
 import Header from '../../../components/molecules/header/header';
-import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
 import DetailLeadSection from '../../../components/organisms/detail-lead-section/detail-lead-section';
 import FormulaSection from '../../../components/organisms/formula-section/formula-section';
 import FormulaSectionLoading from '../../../components/organisms/formula-section/formula-section.loading';
@@ -41,11 +40,6 @@ export default function MetricDetailsPage({
         <div>
             <Header />
             <DetailPageMain>
-                <BreadcrumbContainer
-                    companyName="Apple Inc."
-                    ticker="AAPL"
-                    currentLabel={metric?.label ?? 'Metric details'}
-                />
                 <DetailLeadSection
                     companyName="Apple Inc."
                     ticker="AAPL"
