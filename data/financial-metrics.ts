@@ -62,7 +62,7 @@ export const financialMetrics: IFinancialMetric[] = [
     {
         slug: 'return-on-equity',
         label: 'Return on Equity',
-        value: '21.3%',
+        value: '156.1%',
         description: 'Buffett Target: > 15%',
         formula: {
             title: 'How ROE Is Calculated',
@@ -73,7 +73,7 @@ export const financialMetrics: IFinancialMetric[] = [
             numeratorValue: '$96.99B',
             denominatorValue: '$62.15B',
             factor: '× 100',
-            result: '21.3%',
+            result: '156.1%',
             footnote: 'Based on TTM (trailing twelve months) figures from SEC filings',
         },
         horizons: [
@@ -233,9 +233,9 @@ export const financialMetrics: IFinancialMetric[] = [
             title: 'How D/E Is Calculated',
             standardFormulaLabel: 'Standard Formula',
             actualsLabel: 'AAPL TTM Actuals',
-            numeratorLabel: 'Total Liabilities',
+            numeratorLabel: 'Total Debt',
             denominatorLabel: "Shareholders' Equity",
-            numeratorValue: '$290.40B',
+            numeratorValue: '$116.22B',
             denominatorValue: '$62.15B',
             factor: '',
             result: '1.87',

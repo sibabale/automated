@@ -21,6 +21,12 @@ test('exposes metric detail loading with accessible route context', async ({ pag
 
     expect(results.violations).toEqual([]);
 });
+
+test('returns a not-found page for an unknown metric', async ({ page }) => {
+    await page.goto('/details/unknown-metric');
+
+    await expect(page.getByText('404')).toBeVisible();
+});
 // 1.3. END ........................................................................................
 
 // END FILE ##########################################################################################

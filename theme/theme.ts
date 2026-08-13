@@ -55,7 +55,7 @@ export const lightTheme: ITheme = {
     text: {
         primary: '#111827',
         secondary: '#4B5563',
-        tertiary: '#6B7280',
+        tertiary: '#94A3B8',
         inverse: '#F1F5F9',
     },
     background: {

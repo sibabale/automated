@@ -47,7 +47,7 @@ const mobileMenuItemVariants: Variants = {
     open: {
         opacity: 1,
         y: 0,
-        transition: { duration: 2, ease: 'easeOut' },
+        transition: { duration: 0.2, ease: 'easeOut' },
     },
 };
 // 1.4. END ........................................................................................
@@ -155,6 +155,7 @@ const Header: React.FC<IHeader> = () => {
                             Methodology
                         </MobileMenuItem>
                         <MobileMenuItem
+                            $interactive
                             data-testid="header-mobile-portfolio"
                             variants={mobileMenuItemVariants}
                         >

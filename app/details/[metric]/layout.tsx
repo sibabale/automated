@@ -2,6 +2,7 @@
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import React from 'react';
 // 1.1. END ........................................................................................
 
@@ -12,6 +13,7 @@ import { getFinancialMetric } from '../../../data/financial-metrics';
 // 1.3. TYPES ......................................................................................
 interface IMetricLayout {
     children: React.ReactNode;
+    params: Promise<{ metric: string }>;
 }
 
 interface IMetricLayoutMetadata {
@@ -32,7 +34,18 @@ export const generateMetadata = async ({
 // 1.4. END ........................................................................................
 
 // 1.5. COMPONENT ..................................................................................
-const MetricLayout: React.FC<IMetricLayout> = ({ children }) => children;
+const MetricLayout = async ({
+    children,
+    params,
+}: IMetricLayout) => {
+    const { metric } = await params;
+
+    if (!getFinancialMetric(metric)) {
+        notFound();
+    }
+
+    return children;
+};
 // 1.5. END ........................................................................................
 
 export default MetricLayout;

@@ -207,7 +207,7 @@ export const MobileNavigation = styled(motion.ul)`
     `}
 `;
 
-export const MobileMenuItem = styled(motion.li)`
+export const MobileMenuItem = styled(motion.li)<{ $interactive?: boolean }>`
     box-sizing: border-box;
     display: flex;
     width: 100%;
@@ -218,11 +218,14 @@ export const MobileMenuItem = styled(motion.li)`
     color: ${({ theme }) => theme.text.primary};
     font-size: ${({ theme }) => theme.fontSizes.sm};
     font-weight: ${({ theme }) => theme.fontWeights.regular};
-    cursor: pointer;
+    cursor: ${({ $interactive }) => ($interactive ? 'pointer' : 'default')};
 
-    &:hover {
-        background-color: ${({ theme }) => theme.background.surface};
+    ${({ $interactive, theme }) => $interactive && `
+        &:hover {
+            background-color: ${theme.background.surface};
+        }
     }
+    `}
 `;
 
 // 1.6. END ........................................................................................

@@ -109,6 +109,7 @@ export interface ITheme extends IThemeColors {
 import 'styled-components';
 
 declare module 'styled-components' {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- Module augmentation requires an interface extension.
     export interface DefaultTheme extends ITheme {}
 }
 
