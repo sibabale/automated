@@ -173,6 +173,11 @@ export const PortfolioHoldingCard = styled.article`
 
 `;
 
+export const PortfolioHoldingCardLoadingContent = styled.div`
+    grid-column: 1 / -1;
+    min-width: 0;
+`;
+
 export const PortfolioHoldingName = styled.strong`
     color: ${({ theme }) => theme.text.primary};
     font-size: ${({ theme }) => theme.fontSizes.sm};

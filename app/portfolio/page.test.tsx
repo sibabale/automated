@@ -1,8 +1,8 @@
 // [ APP > PORTFOLIO PAGE ] ###########################################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { act, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
@@ -19,8 +19,26 @@ const renderPortfolioPage = () =>
     );
 
 describe('PortfolioPage', () => {
-    it('renders portfolio valuation and all visible holdings', () => {
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    it('keeps the page shell available and announces portfolio loading', () => {
         renderPortfolioPage();
+
+        expect(screen.getByTestId('header')).toBeVisible();
+        expect(screen.getByTestId('portfolio-page')).toBeVisible();
+        expect(screen.getByTestId('portfolio-metrics-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getAllByLabelText('Loading portfolio data')).not.toHaveLength(0);
+        expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled();
+    });
+
+    it('renders portfolio valuation and all visible holdings', () => {
+        vi.useFakeTimers();
+        renderPortfolioPage();
+        act(() => {
+            vi.advanceTimersByTime(5_000);
+        });
 
         expect(screen.getByTestId('portfolio-page')).toBeVisible();
         expect(screen.getAllByText('Apple Inc.')).toHaveLength(2);
