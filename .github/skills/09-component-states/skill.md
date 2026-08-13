@@ -56,6 +56,9 @@ or state-specific test files.
   and body copy will render. Approximate each visible element's width, height,
   row position, gaps, and responsive reflow; do not use a generic skeleton
   arrangement inside an otherwise correctly sized container.
+- Reproduce every visible border in the loaded component. Reuse the loaded
+  container where it owns the border; for nested bordered elements, render the
+  matching loader boundary rather than replacing it with an unbounded block.
 - Treat responsive approximation as part of constructing the loader, not a
   later polish pass. Define skeleton geometry for every supported viewport at
   the same time as the loaded component: each breakpoint must mirror its own
@@ -75,6 +78,9 @@ or state-specific test files.
 - When a loader’s viewBox is narrower than its responsive container, set
   `preserveAspectRatio="none"` so its skeleton uses the full available width
   instead of centering in the card.
+- When a loaded view changes semantic layout between breakpoints (for example,
+  table rows on desktop and cards on mobile), render matching breakpoint-visible
+  loader structures instead of stretching one desktop SVG across both layouts.
 
 ### Empty
 
