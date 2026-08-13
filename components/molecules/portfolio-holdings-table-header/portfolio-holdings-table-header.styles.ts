@@ -1,11 +1,11 @@
-// [ COMPONENTS > ATOMS > TREND BADGE ] ##############################################################
+// [ COMPONENTS > MOLECULES > PORTFOLIO HOLDINGS TABLE HEADER ] ######################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
 import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-
+import type { ITheme } from '../../../theme';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -15,42 +15,17 @@ import styled from 'styled-components';
 // 1.4. END ........................................................................................
 
 // 1.5. FUNCTIONS ..................................................................................
-export type TTrendBadgeVariant = 'up' | 'down';
-
-export const trendBadgeColors: Record<TTrendBadgeVariant, { background: string; border: string; icon: string }> = {
-    up: {
-        background: '#F0FDF4',
-        border: '#86EFAC',
-        icon: '#29B56B',
-    },
-    down: {
-        background: '#FCE3E3',
-        border: '#FCA5A5',
-        icon: '#C42B2B',
-    },
-};
 // 1.5. END ........................................................................................
 
 // 1.6. STYLES .....................................................................................
-export const TrendBadgeIcon = styled.svg<{ $variant: TTrendBadgeVariant }>`
-    display: block;
-    flex-shrink: 0;
-    width: clamp(1.25rem, 4vw, 1.75rem);
-    height: auto;
-
-    & rect {
-        fill: ${({ $variant }) => trendBadgeColors[$variant].background};
-        stroke: ${({ $variant }) => trendBadgeColors[$variant].border};
-    }
-
-    & path {
-        fill: ${({ $variant }) => trendBadgeColors[$variant].icon};
-    }
-`;
-
-export const TrendValue = styled.span<{ $variant: TTrendBadgeVariant }>`
-    && {
-        color: ${({ $variant }) => trendBadgeColors[$variant].icon};
+export const PortfolioHoldingsHeaderRow = styled.tr`
+    th {
+        padding: ${({ theme }: { theme: ITheme }) => `${theme.spacing.m} ${theme.spacing.s}`};
+        border-bottom: 1px solid ${({ theme }: { theme: ITheme }) => theme.border.default};
+        color: ${({ theme }: { theme: ITheme }) => theme.text.secondary};
+        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xs};
+        text-align: left;
+        text-transform: uppercase;
     }
 `;
 // 1.6. END ........................................................................................

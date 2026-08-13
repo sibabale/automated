@@ -40,6 +40,12 @@ font size, line-height, wrapping, and hierarchy must scale proportionally and
 keep text readable without clipping, overflow, or unintended composition
 changes.
 
+For a grid or table with variable-length values, validate the longest
+presentation-ready value at compact, tablet, and desktop widths. Treat clipped,
+overlapping, or low-contrast values as a failed responsive-content case. Verify
+that table body values use the theme's readable primary text token unless a
+separate, documented semantic color token is intentionally applied.
+
 Use `@testing-library/react` and prefer `userEvent` for realistic interactions.
 Use `fireEvent` only when `userEvent` cannot represent the required browser
 event.

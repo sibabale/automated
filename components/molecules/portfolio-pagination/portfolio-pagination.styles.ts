@@ -1,11 +1,10 @@
-// [ COMPONENTS > ATOMS > TREND BADGE ] ##############################################################
+// [ COMPONENTS > MOLECULES > PORTFOLIO PAGINATION ] ##################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
 import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -15,42 +14,42 @@ import styled from 'styled-components';
 // 1.4. END ........................................................................................
 
 // 1.5. FUNCTIONS ..................................................................................
-export type TTrendBadgeVariant = 'up' | 'down';
-
-export const trendBadgeColors: Record<TTrendBadgeVariant, { background: string; border: string; icon: string }> = {
-    up: {
-        background: '#F0FDF4',
-        border: '#86EFAC',
-        icon: '#29B56B',
-    },
-    down: {
-        background: '#FCE3E3',
-        border: '#FCA5A5',
-        icon: '#C42B2B',
-    },
-};
 // 1.5. END ........................................................................................
 
 // 1.6. STYLES .....................................................................................
-export const TrendBadgeIcon = styled.svg<{ $variant: TTrendBadgeVariant }>`
-    display: block;
-    flex-shrink: 0;
-    width: clamp(1.25rem, 4vw, 1.75rem);
-    height: auto;
+export const PortfolioPaginationContainer = styled.nav`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: ${({ theme }) => theme.text.secondary};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
 
-    & rect {
-        fill: ${({ $variant }) => trendBadgeColors[$variant].background};
-        stroke: ${({ $variant }) => trendBadgeColors[$variant].border};
-    }
-
-    & path {
-        fill: ${({ $variant }) => trendBadgeColors[$variant].icon};
+    div {
+        display: flex;
+        gap: ${({ theme }) => theme.spacing.ss};
     }
 `;
 
-export const TrendValue = styled.span<{ $variant: TTrendBadgeVariant }>`
-    && {
-        color: ${({ $variant }) => trendBadgeColors[$variant].icon};
+export const PortfolioPaginationControl = styled.button`
+    display: grid;
+    min-width: ${({ theme }) => `calc(${theme.size[5]} + ${theme.spacing.s})`};
+    min-height: ${({ theme }) => `calc(${theme.size[5]} + ${theme.spacing.s})`};
+    place-items: center;
+    border: 1px solid ${({ theme }) => theme.border.default};
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.text.secondary};
+    cursor: pointer;
+    font: inherit;
+
+    &[aria-current='page'] {
+        border-color: ${({ theme }) => theme.text.primary};
+        background-color: ${({ theme }) => theme.text.primary};
+        color: ${({ theme }) => theme.text.inverse};
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
     }
 `;
 // 1.6. END ........................................................................................

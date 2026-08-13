@@ -49,7 +49,7 @@ describe('Header', () => {
             [
                 'header-mobile-about',
                 'header-mobile-methodology',
-                'header-mobile-pricing',
+                'header-mobile-portfolio',
                 'header-mobile-signin',
                 'header-mobile-create-account',
             ].forEach((testId) => {
@@ -58,6 +58,15 @@ describe('Header', () => {
                     ).toBeVisible();
             });
         }, { timeout: 3000 });
+    });
+
+    it('links to the portfolio page', () => {
+        renderHeader();
+
+        expect(screen.getByTestId('header-portfolio').querySelector('a')).toHaveAttribute(
+            'href',
+            '/portfolio',
+        );
     });
 
     it('closes the mobile navigation from the menu button', async () => {

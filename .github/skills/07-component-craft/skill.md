@@ -46,6 +46,11 @@ When creating or modifying a component:
    dimensions, spacing, and breakpoint-specific reflow. Build and validate
    this approximation across all supported viewports alongside the loaded
    component; responsive loader geometry is not a follow-up task.
+8. Before implementation, write a concise requirement inventory from the user
+   request and supplied reference. It must identify required content,
+   responsive behavior, explicit exclusions, and existing components that may
+   be reused. Do not add visualizations, controls, sections, copy, or
+   interactions that are not supported by that inventory.
 
 ---
 
@@ -62,8 +67,15 @@ When creating or modifying a component:
 - Use semantic HTML first: `button` for actions, `nav` for navigation, `ul`
   and `li` for lists, and headings for headings.
 - Keep public component props small, descriptive, and typed.
+- Use `type I<ComponentName> = Record<never, never>` for a no-props typed
+  component rather than an empty interface, which violates the repository lint
+  rules.
 - Extract a child component only when it has a distinct responsibility or is
   reused.
+- When that boundary is uncertain, validate the decision against the current
+  caller, likely reuse, public props, and testability. Ask the user when the
+  choice materially changes the surface or API rather than extracting or
+  inlining by assumption.
 
 ### Test Attributes
 
@@ -133,6 +145,10 @@ return (
 - Use `styled-components` for styles.
 - Read design values from `theme` in style interpolations. Do not import a
   static theme object into a component style file.
+- Use only typed theme tokens for colors, typography, spacing, and available
+  size values. Literal color values and raw `font-size` declarations are not
+  permitted in application styles. If the system lacks a semantic token,
+  extend the typed theme deliberately before consuming it.
 - Use typed, transient style props (for example, `$isOpen`) only when a style
   varies by component state or a public prop.
 - Do not put layout-only or visual logic in the component file.
@@ -145,6 +161,10 @@ return (
   behavior for every supported viewport alongside the component layout. Reduce
   type proportionally on narrower viewports when necessary to preserve
   hierarchy, readable measures, and the intended composition without overflow.
+- Treat tablet as a first-class composition, not a scaled desktop. Define grid
+  column counts, value sizing, and wrapping for compact, tablet, and desktop
+  widths independently. Validate the longest supported value before increasing
+  a grid's density.
 
 ### Good
 
