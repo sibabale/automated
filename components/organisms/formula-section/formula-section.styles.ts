@@ -165,8 +165,8 @@ export const FormulaStateIcon = styled.span<{ $variant: 'empty' | 'error' }>`
     height: ${({ theme }) => theme.size[12]};
     place-items: center;
     border-radius: 50%;
-    color: ${({ $variant }) => ($variant === 'error' ? '#EF4444' : '#94A3B8')};
-    background-color: ${({ $variant }) => ($variant === 'error' ? '#FEF2F2' : 'transparent')};
+    color: ${({ theme, $variant }) => ($variant === 'error' ? theme.status.error.icon : theme.status.muted)};
+    background-color: ${({ theme, $variant }) => ($variant === 'error' ? theme.status.error.background : 'transparent')};
     border: ${({ $variant, theme }) => ($variant === 'empty' ? `1px dashed ${theme.border.subtle}` : 'none')};
 `;
 

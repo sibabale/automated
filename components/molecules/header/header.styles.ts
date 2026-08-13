@@ -131,6 +131,57 @@ export const MobileMenuButton = styled.button`
     `}
 `;
 
+export const ThemeModeControl = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: ${({ theme }) => theme.spacing.s};
+    border: 1px solid ${({ theme }) => theme.border.default};
+`;
+
+export const ThemeModeButton = styled.button<{ $isActive: boolean }>`
+    display: grid;
+    width: ${({ theme }) => theme.size[11]};
+    height: ${({ theme }) => theme.size[11]};
+    place-items: center;
+    border: 0;
+    background-color: ${({ theme, $isActive }) => (
+        $isActive ? theme.background.inverse : 'transparent'
+    )};
+    color: ${({ theme, $isActive }) => (
+        $isActive ? theme.text.inverse : theme.text.secondary
+    )};
+    cursor: pointer;
+
+    & + & {
+        border-left: 1px solid ${({ theme }) => theme.border.default};
+    }
+
+    &:hover {
+        color: ${({ theme, $isActive }) => (
+            $isActive ? theme.text.inverse : theme.text.primary
+        )};
+        background-color: ${({ theme, $isActive }) => (
+            $isActive ? theme.background.inverse : theme.background.surface
+        )};
+    }
+
+    &:focus-visible {
+        position: relative;
+        outline: 2px solid ${({ theme }) => theme.border.strong};
+        outline-offset: -2px;
+    }
+
+    svg {
+        width: ${({ theme }) => theme.size[5]};
+        height: ${({ theme }) => theme.size[5]};
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.75;
+    }
+`;
+
 export const MobileNavigation = styled(motion.ul)`
     display: flex;
     box-sizing: border-box;

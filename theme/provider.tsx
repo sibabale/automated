@@ -3,7 +3,7 @@
 // [ THEME > PROVIDER ] ############################################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 // 1.1. END ........................................................................................
 
@@ -19,6 +19,25 @@ interface IStyledThemeProvider {
 }
 // 1.3. END ........................................................................................
 
+type TColorMode = 'light' | 'dark';
+
+interface IColorModeContext {
+    mode: TColorMode;
+    setMode: (mode: TColorMode) => void;
+}
+
+const ColorModeContext = createContext<IColorModeContext | null>(null);
+
+export const useColorMode = (): IColorModeContext => {
+    const colorMode = useContext(ColorModeContext);
+
+    if (!colorMode) {
+        throw new Error('useColorMode must be used within StyledThemeProvider.');
+    }
+
+    return colorMode;
+};
+
 // 1.4. COMPONENT ..................................................................................
 
 const StyledThemeProvider: React.FC<IStyledThemeProvider> = ({
@@ -26,16 +45,18 @@ const StyledThemeProvider: React.FC<IStyledThemeProvider> = ({
     defaultMode = 'light',
 }) => {
     // 1.4.1. HOOKS ....................................................................................
-    const [mode, setMode] = useState<'light' | 'dark'>(defaultMode);
+    const [mode, setMode] = useState<TColorMode>(defaultMode);
 
     const activeTheme: ITheme = mode === 'dark' ? darkTheme : lightTheme;
     // 1.4.1. END ......................................................................................
 
     // 1.4.2. RENDER ...................................................................................
     return (
-        <ThemeProvider theme={activeTheme}>
-            {children}
-        </ThemeProvider>
+        <ColorModeContext.Provider value={{ mode, setMode }}>
+            <ThemeProvider theme={activeTheme}>
+                {children}
+            </ThemeProvider>
+        </ColorModeContext.Provider>
     );
     // 1.4.2. END ......................................................................................
 };

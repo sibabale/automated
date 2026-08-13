@@ -16,19 +16,6 @@ import styled from 'styled-components';
 
 // 1.5. FUNCTIONS ..................................................................................
 export type TTrendBadgeVariant = 'up' | 'down';
-
-const trendBadgeColors: Record<TTrendBadgeVariant, { background: string; border: string; icon: string }> = {
-    up: {
-        background: '#F0FDF4',
-        border: '#86EFAC',
-        icon: '#29B56B',
-    },
-    down: {
-        background: '#FCE3E3',
-        border: '#FCA5A5',
-        icon: '#C42B2B',
-    },
-};
 // 1.5. END ........................................................................................
 
 // 1.6. STYLES .....................................................................................
@@ -39,12 +26,12 @@ export const TrendBadgeIcon = styled.svg<{ $variant: TTrendBadgeVariant }>`
     height: auto;
 
     & rect {
-        fill: ${({ $variant }) => trendBadgeColors[$variant].background};
-        stroke: ${({ $variant }) => trendBadgeColors[$variant].border};
+        fill: ${({ theme, $variant }) => theme.status[$variant === 'up' ? 'positive' : 'negative'].background};
+        stroke: ${({ theme, $variant }) => theme.status[$variant === 'up' ? 'positive' : 'negative'].border};
     }
 
     & path {
-        fill: ${({ $variant }) => trendBadgeColors[$variant].icon};
+        fill: ${({ theme, $variant }) => theme.status[$variant === 'up' ? 'positive' : 'negative'].icon};
     }
 `;
 // 1.6. END ........................................................................................

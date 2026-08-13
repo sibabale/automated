@@ -40,7 +40,7 @@ export default function MetricDetailsPage({
     return (
         <div>
             <Header />
-            <DetailPageMain className="bg-white">
+            <DetailPageMain>
                 <BreadcrumbContainer
                     companyName="Apple Inc."
                     ticker="AAPL"

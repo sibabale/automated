@@ -69,6 +69,23 @@ export const lightTheme: ITheme = {
         medium: '#64748B',
         subtle: '#CBD5E1',
     },
+    status: {
+        positive: {
+            background: '#F0FDF4',
+            border: '#86EFAC',
+            icon: '#29B56B',
+        },
+        negative: {
+            background: '#FCE3E3',
+            border: '#FCA5A5',
+            icon: '#C42B2B',
+        },
+        error: {
+            background: '#FEF2F2',
+            icon: '#EF4444',
+        },
+        muted: '#94A3B8',
+    },
 };
 
 export const darkTheme: ITheme = {
@@ -94,6 +111,23 @@ export const darkTheme: ITheme = {
         strong: '#E2E8F0',
         medium: '#64748B',
         subtle: '#475569',
+    },
+    status: {
+        positive: {
+            background: '#133B2A',
+            border: '#237A4B',
+            icon: '#5EE89A',
+        },
+        negative: {
+            background: '#471C24',
+            border: '#8F3542',
+            icon: '#FF8A8A',
+        },
+        error: {
+            background: '#471C24',
+            icon: '#FF8A8A',
+        },
+        muted: '#94A3B8',
     },
 };
 

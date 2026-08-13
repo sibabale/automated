@@ -72,6 +72,23 @@ export interface IThemeColors {
         medium: string;
         subtle: string;
     };
+    status: {
+        positive: {
+            background: string;
+            border: string;
+            icon: string;
+        };
+        negative: {
+            background: string;
+            border: string;
+            icon: string;
+        };
+        error: {
+            background: string;
+            icon: string;
+        };
+        muted: string;
+    };
 }
 
 export interface ITheme extends IThemeColors {

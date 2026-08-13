@@ -32,6 +32,23 @@ describe('Header', () => {
         );
     });
 
+    it('switches the selected color mode', async () => {
+        const user = userEvent.setup();
+
+        renderHeader();
+
+        const lightModeButton = screen.getByRole('button', { name: 'Use light mode' });
+        const darkModeButton = screen.getByRole('button', { name: 'Use dark mode' });
+
+        expect(lightModeButton).toHaveAttribute('aria-pressed', 'true');
+        expect(darkModeButton).toHaveAttribute('aria-pressed', 'false');
+
+        await user.click(darkModeButton);
+
+        expect(lightModeButton).toHaveAttribute('aria-pressed', 'false');
+        expect(darkModeButton).toHaveAttribute('aria-pressed', 'true');
+    });
+
     it('opens the mobile navigation and exposes every navigation item', async () => {
         const user = userEvent.setup();
 
