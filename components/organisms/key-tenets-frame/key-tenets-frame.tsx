@@ -7,6 +7,7 @@ import React from 'react';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+import { financialMetrics } from '../../../data/financial-metrics';
 import MetricCard from '../../molecules/metric-card/metric-card';
 import {
     KeyTenetsFrameContainer,
@@ -45,31 +46,15 @@ const KeyTenetsFrame: React.FC<IKeyTenetsFrame> = ({
                 {title}
             </KeyTenetsHeading>
             <KeyTenetsMetrics data-testid="key-tenets-frame-metrics">
-                <MetricCard
-                    label="Return on Equity"
-                    value="21.3%"
-                    description="Buffett Target: > 15%"
-                />
-                <MetricCard
-                    label="Free Cash Flow"
-                    value="$110.5B"
-                    description="Consistent expansion"
-                />
-                <MetricCard
-                    label="Debt-to-Equity"
-                    value="1.87"
-                    description="Highly serviceable"
-                />
-                <MetricCard
-                    label="Profit Margin"
-                    value="25.3%"
-                    description="Industry leading"
-                />
-                <MetricCard
-                    label="Margin of Safety"
-                    value="18%"
-                    description="Undervalued buffer"
-                />
+                {financialMetrics.map((metric) => (
+                    <MetricCard
+                        key={metric.slug}
+                        href={`/details/${metric.slug}`}
+                        label={metric.label}
+                        value={metric.value}
+                        description={metric.description}
+                    />
+                ))}
             </KeyTenetsMetrics>
         </KeyTenetsFrameContainer>
     );
