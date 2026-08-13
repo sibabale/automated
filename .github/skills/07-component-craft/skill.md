@@ -51,6 +51,10 @@ When creating or modifying a component:
    responsive behavior, explicit exclusions, and existing components that may
    be reused. Do not add visualizations, controls, sections, copy, or
    interactions that are not supported by that inventory.
+9. When a visual instruction could affect either the named component or its
+   surrounding layout, ask the user to identify the target before editing.
+   Never reduce a parent container's spacing or dimensions to satisfy an
+   ambiguous instruction about a child control.
 
 ---
 

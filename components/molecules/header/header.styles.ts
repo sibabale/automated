@@ -137,54 +137,54 @@ export const MobileMenuButton = styled.button`
     `}
 `;
 
-export const ThemeModeControl = styled.div`
+export const ThemeModeToggle = styled.button<{ $mode: 'light' | 'dark' }>`
+    position: relative;
     display: flex;
+    box-sizing: content-box;
+    width: ${({ theme }) => `calc(${theme.size[5]} + ${theme.size[5]})`};
+    height: ${({ theme }) => theme.size[5]};
     align-items: center;
+    justify-content: space-between;
     margin-left: ${({ theme }) => theme.spacing.s};
+    padding: ${({ theme }) => theme.spacing.xxxs};
     border: 1px solid ${({ theme }) => theme.border.default};
-`;
-
-export const ThemeModeButton = styled.button<{ $isActive: boolean }>`
-    display: grid;
-    width: ${({ theme }) => theme.size[11]};
-    height: ${({ theme }) => theme.size[11]};
-    place-items: center;
-    border: 0;
-    background-color: ${({ theme, $isActive }) => (
-        $isActive ? theme.background.inverse : 'transparent'
-    )};
-    color: ${({ theme, $isActive }) => (
-        $isActive ? theme.text.inverse : theme.text.secondary
-    )};
+    border-radius: 999px;
+    background-color: ${({ theme }) => theme.background.primary};
     cursor: pointer;
 
-    & + & {
-        border-left: 1px solid ${({ theme }) => theme.border.default};
-    }
-
-    &:hover {
-        color: ${({ theme, $isActive }) => (
-            $isActive ? theme.text.inverse : theme.text.primary
-        )};
-        background-color: ${({ theme, $isActive }) => (
-            $isActive ? theme.background.inverse : theme.background.surface
-        )};
-    }
-
     &:focus-visible {
-        position: relative;
         outline: 2px solid ${({ theme }) => theme.border.strong};
         outline-offset: -2px;
     }
+`;
+
+export const ThemeModeThumb = styled.span<{ $mode: 'light' | 'dark' }>`
+    position: relative;
+    display: grid;
+    width: ${({ theme }) => theme.size[5]};
+    height: ${({ theme }) => theme.size[5]};
+    place-items: center;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.background.surface};
+    color: ${({ theme }) => theme.text.primary};
+    transform: ${({ $mode, theme }) => (
+        $mode === 'dark' ? `translateX(${theme.size[5]})` : 'translateX(0)'
+    )};
+    transition: transform 180ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 
     svg {
-        width: ${({ theme }) => theme.size[5]};
-        height: ${({ theme }) => theme.size[5]};
+        width: ${({ theme }) => `calc(${theme.size[5]} - ${theme.spacing.xs})`};
+        height: ${({ theme }) => `calc(${theme.size[5]} - ${theme.spacing.xs})`};
         fill: none;
         stroke: currentColor;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 1.75;
+        transform: ${({ $mode }) => ($mode === 'dark' ? 'scaleX(-1)' : 'none')};
     }
 `;
 

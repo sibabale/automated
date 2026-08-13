@@ -2,6 +2,7 @@ import type { ITheme, IThemeSpacing, IThemeSize, IThemeBreakpoints, IThemeFontWe
 import { breakpoints as bp } from './media';
 
 const spacing: IThemeSpacing = {
+    xxxs: '2px',
     ss:  '4px',
     xs:  '8px',
     s:   '12px',

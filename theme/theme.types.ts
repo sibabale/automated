@@ -3,6 +3,7 @@
 // 1.1. TYPES ..........................................................................................
 
 export interface IThemeSpacing {
+    xxxs: string; // extra extra extra small — 2px
     ss:  string;  // super small  — 4px
     xs:  string;  // extra small  — 8px
     s:   string;  // small        — 12px

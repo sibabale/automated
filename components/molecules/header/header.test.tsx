@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import Header from './header';
 // 1.2. END ........................................................................................
 
@@ -15,9 +16,11 @@ import Header from './header';
 
 const renderHeader = () =>
     render(
-        <StyledThemeProvider>
-            <Header />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <Header />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('Header', () => {
@@ -30,6 +33,8 @@ describe('Header', () => {
             'aria-expanded',
             'false',
         );
+        expect(screen.queryByTestId('header-signin')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('header-create-account')).not.toBeInTheDocument();
     });
 
     it('switches the selected color mode', async () => {
@@ -37,16 +42,14 @@ describe('Header', () => {
 
         renderHeader();
 
-        const lightModeButton = screen.getByRole('button', { name: 'Use light mode' });
-        const darkModeButton = screen.getByRole('button', { name: 'Use dark mode' });
+        const modeToggle = screen.getByRole('switch', { name: 'Switch to dark mode' });
 
-        expect(lightModeButton).toHaveAttribute('aria-pressed', 'true');
-        expect(darkModeButton).toHaveAttribute('aria-pressed', 'false');
+        expect(modeToggle).toHaveAttribute('aria-checked', 'false');
 
-        await user.click(darkModeButton);
+        await user.click(modeToggle);
 
-        expect(lightModeButton).toHaveAttribute('aria-pressed', 'false');
-        expect(darkModeButton).toHaveAttribute('aria-pressed', 'true');
+        expect(modeToggle).toHaveAttribute('aria-checked', 'true');
+        expect(modeToggle).toHaveAccessibleName('Switch to light mode');
     });
 
     it('opens the mobile navigation and exposes every navigation item', async () => {
@@ -67,8 +70,6 @@ describe('Header', () => {
                 'header-mobile-about',
                 'header-mobile-methodology',
                 'header-mobile-portfolio',
-                'header-mobile-signin',
-                'header-mobile-create-account',
             ].forEach((testId) => {
                     expect(
                         within(mobileNavigation).getByTestId(testId),

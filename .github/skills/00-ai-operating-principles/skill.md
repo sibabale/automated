@@ -49,6 +49,10 @@ First:
 If critical information is missing, ask concise clarifying questions before
 continuing.
 
+When a request could apply to more than one UI element, layout region, or
+scope, ask which target the user means before changing any of them. Do not
+infer a broader target from nearby context, screenshots, or a previous change.
+
 Never invent requirements.
 
 ---
