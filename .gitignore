@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# design references
+/designs/
+
 # production
 /build
 
