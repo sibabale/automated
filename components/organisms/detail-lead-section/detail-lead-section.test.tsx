@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
 import DetailLeadSection from './detail-lead-section';
+import DetailLeadSectionLoading from './detail-lead-section.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
@@ -50,6 +51,17 @@ describe('DetailLeadSection', () => {
         expect(screen.getByTestId('detail-lead-section-description')).toHaveTextContent(
             'Consistent expansion through challenging market conditions',
         );
+    });
+
+    it('announces metric detail loading', () => {
+        render(
+            <StyledThemeProvider>
+                <DetailLeadSectionLoading />
+            </StyledThemeProvider>,
+        );
+
+        expect(screen.getByTestId('detail-lead-section-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading metric details')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................

@@ -52,10 +52,35 @@ export const DetailLeadBackLink = styled(Link)`
     `}
 `;
 
+export const DetailLeadLoadingBack = styled.div`
+    grid-column: 1 / -1;
+
+    ${media.up('md')`
+        display: none;
+    `}
+`;
+
 export const DetailLeadContent = styled.div`
     display: grid;
     min-width: 0;
     gap: ${({ theme }) => theme.spacing.xs};
+`;
+
+export const DetailLeadLoadingContent = styled(DetailLeadContent)`
+    height: 4.75rem;
+
+    > svg {
+        display: block;
+        height: 4.75rem;
+    }
+
+    ${media.up('md')`
+        height: 4.625rem;
+
+        > svg {
+            height: 4.625rem;
+        }
+    `}
 `;
 
 export const DetailLeadCompany = styled.p`
