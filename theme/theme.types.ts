@@ -63,6 +63,7 @@ export interface IThemeColors {
     background: {
         primary: string;
         surface: string;
+        loader: string;
         inverse: string;
     };
     border: {

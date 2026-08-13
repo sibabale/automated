@@ -21,81 +21,73 @@ import type { ITheme } from '../../../theme';
 // 1.6. STYLES .....................................................................................
 export const FormulaSectionContainer = styled.section`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.l};
-    padding: ${({ theme }) => theme.spacing.l} ${({ theme }) => theme.spacing.m};
-    background-color: ${({ theme }) => theme.background.surface};
+    grid-template-columns: minmax(0, 1fr);
+    gap: ${({ theme }) => theme.spacing.xl};
+    padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.xl};
+    background-color: ${({ theme }) => theme.background.primary};
 
     ${media.up('md')`
-        gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
-        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
+        grid-template-columns: minmax(15rem, 0.8fr) minmax(0, 1.8fr);
+        gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xxl};
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xxl} ${({ theme }: { theme: ITheme }) => `max(${theme.spacing.xl}, calc((100% - (${theme.size[160]} + ${theme.size[160]})) / 2))`};
     `}
+`;
+
+export const FormulaIntro = styled.div`
+    display: grid;
+    align-content: start;
+    gap: ${({ theme }) => theme.spacing.l};
+`;
+
+export const FormulaIntroLabel = styled.p`
+    margin: 0;
+    color: ${({ theme }) => theme.text.tertiary};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
 `;
 
 export const FormulaSectionTitle = styled.h2`
-    display: none;
     margin: 0;
     color: ${({ theme }) => theme.text.primary};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
+    font-size: ${({ theme }) => theme.fontSizes.xl};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
-    line-height: 1.2;
-    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
 
     ${media.up('md')`
-        display: block;
+        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xxxl};
     `}
+`;
+
+export const FormulaContent = styled.div`
+    min-width: 0;
+`;
+
+export const FormulaLoadingIntro = styled.div`
+    min-width: 0;
+`;
+
+export const FormulaLoadingContent = styled.div`
+    min-width: 0;
 `;
 
 export const FormulaPanels = styled.div`
-    display: none;
-    gap: ${({ theme }) => theme.spacing.xl};
-
-    ${media.up('md')`
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    `}
-`;
-
-export const FormulaMobileSummary = styled.div`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.s};
-
-    ${media.up('md')`
-        display: none;
-    `}
+    gap: ${({ theme }) => theme.spacing.l};
 `;
 
-export const FormulaMobileTitle = styled.h2`
-    margin: 0 0 ${({ theme }) => theme.spacing.ss};
-    color: ${({ theme }) => theme.text.primary};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: ${({ theme }) => theme.fontWeights.bold};
-    line-height: 1.2;
-    text-transform: uppercase;
-`;
-
-export const FormulaMobileLine = styled.p`
-    margin: 0;
-    color: ${({ theme }) => theme.text.primary};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    line-height: 1.4;
-`;
-
-export const FormulaMobileLineLabel = styled.span`
-    margin-right: ${({ theme }) => theme.spacing.xs};
-    color: ${({ theme }) => theme.text.secondary};
-    font-weight: ${({ theme }) => theme.fontWeights.medium};
-`;
-
-export const FormulaPanel = styled.div<{ $withDivider?: boolean }>`
+export const FormulaPanel = styled.div`
     display: grid;
     min-width: 0;
-    gap: ${({ theme }) => theme.spacing.m};
+    gap: ${({ theme }) => theme.spacing.s};
 
-    ${({ $withDivider, theme }) => $withDivider && media.up('md')`
-        padding-left: ${theme.spacing.xl};
-        border-left: 1px solid ${theme.border.default};
-    `}
+    & + & {
+        padding-top: ${({ theme }) => theme.spacing.l};
+        border-top: 1px solid ${({ theme }) => theme.border.default};
+    }
 `;
 
 export const FormulaPanelLabel = styled.p`
@@ -103,6 +95,7 @@ export const FormulaPanelLabel = styled.p`
     color: ${({ theme }) => theme.text.secondary};
     font-size: ${({ theme }) => theme.fontSizes.xs};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
+    letter-spacing: 0.02em;
     line-height: 1.2;
     text-transform: uppercase;
 `;
@@ -112,14 +105,15 @@ export const FormulaExpression = styled.div`
     min-width: 0;
     flex-wrap: wrap;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.s};
+    gap: ${({ theme }) => theme.spacing.ss};
     color: ${({ theme }) => theme.text.primary};
-    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     line-height: 1.2;
 
     ${media.up('md')`
-        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xl};
+        gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xs};
+        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.lg};
     `}
 `;
 
@@ -139,10 +133,10 @@ export const FormulaDenominator = styled.span`
 `;
 
 export const FormulaResult = styled.strong`
-    font-size: ${({ theme }) => theme.fontSizes.xxl};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
 
     ${media.up('md')`
-        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xxxl};
+        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xxl};
     `}
 `;
 
@@ -151,10 +145,57 @@ export const FormulaFootnote = styled.p`
     color: ${({ theme }) => theme.text.secondary};
     font-size: ${({ theme }) => theme.fontSizes.xs};
     line-height: 1.4;
+`;
 
-    ${media.up('md')`
-        font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xs};
-    `}
+export const FormulaStateContainer = styled.section`
+    display: grid;
+    min-height: 19rem;
+    place-content: center;
+    justify-items: center;
+    gap: ${({ theme }) => theme.spacing.s};
+    padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.xl};
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.text.secondary};
+    text-align: center;
+`;
+
+export const FormulaStateIcon = styled.span<{ $variant: 'empty' | 'error' }>`
+    display: grid;
+    width: ${({ theme }) => theme.size[12]};
+    height: ${({ theme }) => theme.size[12]};
+    place-items: center;
+    border-radius: 50%;
+    color: ${({ $variant }) => ($variant === 'error' ? '#EF4444' : '#94A3B8')};
+    background-color: ${({ $variant }) => ($variant === 'error' ? '#FEF2F2' : 'transparent')};
+    border: ${({ $variant, theme }) => ($variant === 'empty' ? `1px dashed ${theme.border.subtle}` : 'none')};
+`;
+
+export const FormulaStateTitle = styled.h2`
+    margin: ${({ theme }) => `${theme.spacing.s} 0 0`};
+    color: ${({ theme }) => theme.text.primary};
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+`;
+
+export const FormulaStateMessage = styled.p`
+    max-width: 29rem;
+    margin: 0;
+    color: ${({ theme }) => theme.text.secondary};
+    font-family: var(--font-geist-sans), sans-serif;
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    line-height: 1.5;
+`;
+
+export const FormulaStateAction = styled.button`
+    border: 1px solid ${({ theme }) => theme.border.strong};
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.text.primary};
+    cursor: pointer;
+    font: inherit;
+    margin-top: ${({ theme }) => theme.spacing.s};
+    padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.s}`};
 `;
 // 1.6. END ........................................................................................
 

@@ -1,10 +1,11 @@
 'use client';
 
-import { use } from 'react';
+import { use, useEffect, useState } from 'react';
 import Header from '../../../components/molecules/header/header';
 import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
 import DetailLeadSection from '../../../components/organisms/detail-lead-section/detail-lead-section';
 import FormulaSection from '../../../components/organisms/formula-section/formula-section';
+import FormulaSectionLoading from '../../../components/organisms/formula-section/formula-section.loading';
 import ConsolidationSummary from '../../../components/organisms/consolidation-summary/consolidation-summary';
 import EducationalSection from '../../../components/organisms/educational-section/educational-section';
 import HorizonCard from '../../../components/molecules/horizon-card/horizon-card';
@@ -26,6 +27,15 @@ export default function MetricDetailsPage({
 }: IMetricDetailsPage) {
     const { metric: metricSlug } = use(params);
     const metric = getFinancialMetric(metricSlug);
+    const [isFormulaLoading, setIsFormulaLoading] = useState(true);
+
+    useEffect(() => {
+        const timeout = window.setTimeout(() => {
+            setIsFormulaLoading(false);
+        }, 5_000);
+
+        return () => window.clearTimeout(timeout);
+    }, [metricSlug]);
 
     return (
         <div>
@@ -44,7 +54,11 @@ export default function MetricDetailsPage({
                     description={metric?.description ?? 'Metric information is unavailable.'}
                 />
                 <DetailContentFlow>
-                    {metric?.formula && <FormulaSection {...metric.formula} />}
+                    {metric?.formula && (
+                        isFormulaLoading
+                            ? <FormulaSectionLoading />
+                            : <FormulaSection {...metric.formula} />
+                    )}
                     {metric?.education && <EducationalSection {...metric.education} />}
                     {metric?.horizons && (
                         <HorizonAnalysisSection>

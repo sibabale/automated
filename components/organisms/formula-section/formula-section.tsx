@@ -8,14 +8,13 @@ import React from 'react';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import {
+    FormulaContent,
     FormulaDenominator,
     FormulaExpression,
     FormulaFootnote,
     FormulaFraction,
-    FormulaMobileLine,
-    FormulaMobileLineLabel,
-    FormulaMobileSummary,
-    FormulaMobileTitle,
+    FormulaIntro,
+    FormulaIntroLabel,
     FormulaNumerator,
     FormulaPanel,
     FormulaPanelLabel,
@@ -76,70 +75,63 @@ const FormulaSection: React.FC<IFormulaSection> = ({
     // 1.6.3. RENDER ...............................................................................
     return (
         <FormulaSectionContainer data-testid="formula-section">
-            <FormulaSectionTitle data-testid="formula-section-title">
-                {title}
-            </FormulaSectionTitle>
-            <FormulaMobileSummary data-testid="formula-section-mobile-summary">
-                <FormulaMobileTitle>Formula &amp; Current Actuals</FormulaMobileTitle>
-                <FormulaMobileLine>
-                    <FormulaMobileLineLabel>Formula:</FormulaMobileLineLabel>
-                    {numeratorLabel} {isSubtraction ? '−' : '/'} {denominatorLabel} {!isSubtraction && factor}
-                </FormulaMobileLine>
-                <FormulaMobileLine>
-                    <FormulaMobileLineLabel>Values:</FormulaMobileLineLabel>
-                    {numeratorValue} / {denominatorValue}
-                </FormulaMobileLine>
-                <FormulaMobileLine>
-                    <FormulaMobileLineLabel>Result:</FormulaMobileLineLabel>
-                    {result} {metricAbbreviation}
-                </FormulaMobileLine>
-            </FormulaMobileSummary>
-            <FormulaPanels>
-                <FormulaPanel>
-                    <FormulaPanelLabel data-testid="formula-section-standard-label">
-                        {standardFormulaLabel}
-                    </FormulaPanelLabel>
-                    <FormulaExpression data-testid="formula-section-standard-formula">
-                        <span>{metricAbbreviation} =</span>
-                        {isSubtraction ? (
-                            <span>{numeratorLabel} − {denominatorLabel}</span>
-                        ) : (
-                            <>
-                                <FormulaFraction>
-                                    <FormulaNumerator>{numeratorLabel}</FormulaNumerator>
-                                    <FormulaDenominator>{denominatorLabel}</FormulaDenominator>
-                                </FormulaFraction>
-                                <span>{factor}</span>
-                            </>
-                        )}
-                    </FormulaExpression>
-                </FormulaPanel>
-                <FormulaPanel $withDivider>
-                    <FormulaPanelLabel data-testid="formula-section-actuals-label">
-                        {actualsLabel}
-                    </FormulaPanelLabel>
-                    <FormulaExpression data-testid="formula-section-actuals-formula">
-                        <span>{metricAbbreviation} =</span>
-                        {isSubtraction ? (
-                            <span>{numeratorValue} − {denominatorValue} =</span>
-                        ) : (
-                            <>
-                                <FormulaFraction>
-                                    <FormulaNumerator>{numeratorValue}</FormulaNumerator>
-                                    <FormulaDenominator>{denominatorValue}</FormulaDenominator>
-                                </FormulaFraction>
-                                <span>{factor} =</span>
-                            </>
-                        )}
-                        <FormulaResult data-testid="formula-section-result">
-                            {result}
-                        </FormulaResult>
-                    </FormulaExpression>
-                </FormulaPanel>
-            </FormulaPanels>
-            <FormulaFootnote data-testid="formula-section-footnote">
-                {footnote}
-            </FormulaFootnote>
+            <FormulaIntro>
+                <FormulaIntroLabel>Calculation logic</FormulaIntroLabel>
+                <FormulaSectionTitle data-testid="formula-section-title">
+                    {title}
+                </FormulaSectionTitle>
+                <FormulaFootnote data-testid="formula-section-footnote">
+                    {footnote}
+                </FormulaFootnote>
+            </FormulaIntro>
+            <FormulaContent>
+                <FormulaPanels>
+                    <FormulaPanel>
+                        <FormulaPanelLabel data-testid="formula-section-standard-label">
+                            {standardFormulaLabel}
+                        </FormulaPanelLabel>
+                        <FormulaExpression data-testid="formula-section-standard-formula">
+                            <span>{metricAbbreviation}</span>
+                            <span>=</span>
+                            {isSubtraction ? (
+                                <span>{numeratorLabel} − {denominatorLabel}</span>
+                            ) : (
+                                <>
+                                    <FormulaFraction>
+                                        <FormulaNumerator>{numeratorLabel}</FormulaNumerator>
+                                        <FormulaDenominator>{denominatorLabel}</FormulaDenominator>
+                                    </FormulaFraction>
+                                    <span>{factor}</span>
+                                </>
+                            )}
+                        </FormulaExpression>
+                    </FormulaPanel>
+                    <FormulaPanel>
+                        <FormulaPanelLabel data-testid="formula-section-actuals-label">
+                            {actualsLabel}
+                        </FormulaPanelLabel>
+                        <FormulaExpression data-testid="formula-section-actuals-formula">
+                            <span>{metricAbbreviation}</span>
+                            <span>=</span>
+                            {isSubtraction ? (
+                                <span>{numeratorValue} − {denominatorValue}</span>
+                            ) : (
+                                <>
+                                    <FormulaFraction>
+                                        <FormulaNumerator>{numeratorValue}</FormulaNumerator>
+                                        <FormulaDenominator>{denominatorValue}</FormulaDenominator>
+                                    </FormulaFraction>
+                                    <span>{factor}</span>
+                                </>
+                            )}
+                            <span>=</span>
+                            <FormulaResult data-testid="formula-section-result">
+                                {result}
+                            </FormulaResult>
+                        </FormulaExpression>
+                    </FormulaPanel>
+                </FormulaPanels>
+            </FormulaContent>
         </FormulaSectionContainer>
     );
     // 1.6.3. END ........................................................................................

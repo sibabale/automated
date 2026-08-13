@@ -60,6 +60,7 @@ export const lightTheme: ITheme = {
     background: {
         primary: '#FAFBFC',
         surface: '#F4F5F7',
+        loader: '#E5E7EB',
         inverse: '#1E293B',
     },
     border: {
@@ -85,6 +86,7 @@ export const darkTheme: ITheme = {
     background: {
         primary: '#111827',
         surface: '#1E293B',
+        loader: '#334155',
         inverse: '#F1F5F9',
     },
     border: {
