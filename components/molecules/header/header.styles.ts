@@ -3,6 +3,7 @@
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
 import styled from 'styled-components';
 import { motion } from 'motion/react';
+import Link from 'next/link';
 
 // 1.1. END ........................................................................................
 
@@ -71,6 +72,11 @@ export const ListItem = styled.li<IListItemProps>`
             background-color: ${theme.background.surface};
         }
     `}
+`;
+
+export const HeaderLink = styled(Link)`
+    color: inherit;
+    text-decoration: none;
 `;
 
 export const BrandLockup = styled.span`

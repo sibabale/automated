@@ -1,12 +1,17 @@
-// [ MAIN DIR > SUB DIR ] #########################################################################
+// [ COMPONENTS > MOLECULES > PORTFOLIO SUMMARY CARD ] ################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-"use client";
 import React from 'react';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-
+import type { TTrendBadgeVariant } from '../../atoms/trend-badge/trend-badge.styles';
+import {
+    PortfolioSummaryCardContainer,
+    PortfolioSummaryDescription,
+    PortfolioSummaryLabel,
+    PortfolioSummaryValue,
+} from './portfolio-summary-card.styles';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -16,12 +21,21 @@ import React from 'react';
 // 1.4. END ........................................................................................
 
 // 1.5. TYPES ......................................................................................
-type ITemplate = Record<never, never>;
+interface IPortfolioSummaryCard {
+    label: string;
+    value: string;
+    description?: string;
+    trend?: TTrendBadgeVariant;
+}
 // 1.5. END ........................................................................................
 
 // 1.6. COMPONENT ..................................................................................
-
-const Template: React.FC<ITemplate> = () => {
+const PortfolioSummaryCard: React.FC<IPortfolioSummaryCard> = ({
+    label,
+    value,
+    description,
+    trend,
+}) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
     // 1.6.1. END ..................................................................................
 
@@ -29,18 +43,17 @@ const Template: React.FC<ITemplate> = () => {
     // 1.6.2. END ..................................................................................
 
     // 1.6.3. RENDER ...............................................................................
-
     return (
-        <div>
-
-        </div>
+        <PortfolioSummaryCardContainer data-testid="portfolio-summary-card">
+            <PortfolioSummaryLabel>{label}</PortfolioSummaryLabel>
+            <PortfolioSummaryValue $trend={trend}>{value}</PortfolioSummaryValue>
+            {description && <PortfolioSummaryDescription>{description}</PortfolioSummaryDescription>}
+        </PortfolioSummaryCardContainer>
     );
-
     // 1.6.3. END ..................................................................................
 };
-
 // 1.6. END ........................................................................................
 
-export default Template;
+export default PortfolioSummaryCard;
 
 // END FILE ########################################################################################

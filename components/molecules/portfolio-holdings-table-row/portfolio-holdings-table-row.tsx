@@ -1,12 +1,15 @@
-// [ MAIN DIR > SUB DIR ] #########################################################################
+// [ COMPONENTS > MOLECULES > PORTFOLIO HOLDINGS TABLE ROW ] #########################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-"use client";
 import React from 'react';
+import type { Variants } from 'motion/react';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
-
+import { formatPortfolioCurrency, getPortfolioTrend } from '../../../data/portfolio';
+import type { IPortfolioHolding } from '../../../data/portfolio';
+import { TrendValue } from '../../atoms/trend-badge/trend-badge.styles';
+import { PortfolioHoldingsDataCell, PortfolioHoldingsRow } from './portfolio-holdings-table-row.styles';
 // 1.2. END ........................................................................................
 
 // 1.3. IMAGES .....................................................................................
@@ -16,12 +19,22 @@ import React from 'react';
 // 1.4. END ........................................................................................
 
 // 1.5. TYPES ......................................................................................
-type ITemplate = Record<never, never>;
+interface IPortfolioHoldingsTableRow {
+    holding: IPortfolioHolding;
+}
 // 1.5. END ........................................................................................
 
 // 1.6. COMPONENT ..................................................................................
+const holdingsRowVariants: Variants = {
+    hidden: { opacity: 0, y: 4 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1.2, ease: 'easeOut' },
+    },
+};
 
-const Template: React.FC<ITemplate> = () => {
+const PortfolioHoldingsTableRow: React.FC<IPortfolioHoldingsTableRow> = ({ holding }) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
     // 1.6.1. END ..................................................................................
 
@@ -29,18 +42,18 @@ const Template: React.FC<ITemplate> = () => {
     // 1.6.2. END ..................................................................................
 
     // 1.6.3. RENDER ...............................................................................
-
     return (
-        <div>
-
-        </div>
+        <PortfolioHoldingsRow
+            data-testid="portfolio-holdings-table-row"
+            variants={holdingsRowVariants}
+        >
+            <th>{holding.company}</th><PortfolioHoldingsDataCell>{holding.ticker}</PortfolioHoldingsDataCell><PortfolioHoldingsDataCell>{holding.shares}</PortfolioHoldingsDataCell><PortfolioHoldingsDataCell>{formatPortfolioCurrency(holding.averageBuy)}</PortfolioHoldingsDataCell><PortfolioHoldingsDataCell>{formatPortfolioCurrency(holding.current)}</PortfolioHoldingsDataCell><PortfolioHoldingsDataCell>{formatPortfolioCurrency(holding.value)}</PortfolioHoldingsDataCell><PortfolioHoldingsDataCell><TrendValue $variant={getPortfolioTrend(holding.gainLoss)} data-testid="portfolio-holdings-gain-loss">{formatPortfolioCurrency(holding.gainLoss)}</TrendValue></PortfolioHoldingsDataCell><PortfolioHoldingsDataCell>{holding.score}</PortfolioHoldingsDataCell>
+        </PortfolioHoldingsRow>
     );
-
     // 1.6.3. END ..................................................................................
 };
-
 // 1.6. END ........................................................................................
 
-export default Template;
+export default PortfolioHoldingsTableRow;
 
 // END FILE ########################################################################################
