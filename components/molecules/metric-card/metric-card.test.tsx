@@ -12,6 +12,7 @@ import MetricCard from './metric-card';
 
 // 1.3. TEST CASES ................................................................................
 const renderMetricCard = (props = {
+    href: '/details/return-on-equity',
     label: 'Return on Equity',
     value: '21.3%',
     description: 'Buffett Target: > 15%',
@@ -27,6 +28,10 @@ describe('MetricCard', () => {
         renderMetricCard();
 
         expect(screen.getByTestId('metric-card')).toBeVisible();
+        expect(screen.getByTestId('metric-card')).toHaveAttribute(
+            'href',
+            '/details/return-on-equity',
+        );
         expect(screen.getByTestId('metric-card-label')).toHaveTextContent(
             'Return on Equity',
         );
@@ -40,6 +45,7 @@ describe('MetricCard', () => {
 
     it('keeps long metric content available through its public elements', () => {
         renderMetricCard({
+            href: '/details/long-term-shareholder-return',
             label: 'Long-Term Shareholder Return on Common Equity',
             value: '$1,284.72B',
             description: 'Consistent expansion through challenging market conditions',

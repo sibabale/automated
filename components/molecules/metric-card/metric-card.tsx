@@ -23,6 +23,7 @@ import {
 
 // 1.5. TYPES ......................................................................................
 interface IMetricCard {
+    href: string;
     label: string;
     value: string;
     description: string;
@@ -32,6 +33,7 @@ interface IMetricCard {
 // 1.6. COMPONENT ..................................................................................
 
 const MetricCard: React.FC<IMetricCard> = ({
+    href,
     label,
     value,
     description,
@@ -44,7 +46,11 @@ const MetricCard: React.FC<IMetricCard> = ({
 
     // 1.6.3. RENDER ...............................................................................
     return (
-        <MetricCardContainer data-testid="metric-card">
+        <MetricCardContainer
+            href={href}
+            aria-label={`View ${label} details`}
+            data-testid="metric-card"
+        >
             <MetricLabel data-testid="metric-card-label">{label}</MetricLabel>
             <MetricValue data-testid="metric-card-value">{value}</MetricValue>
             <MetricDescription data-testid="metric-card-description">

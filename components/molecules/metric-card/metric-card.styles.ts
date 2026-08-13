@@ -1,6 +1,7 @@
 // [ COMPONENTS > MOLECULES > METRIC CARD ] ##########################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
+import Link from 'next/link';
 import styled from 'styled-components';
 // 1.1. END ........................................................................................
 
@@ -19,13 +20,15 @@ import type { ITheme } from '../../../theme';
 // 1.5. END ........................................................................................
 
 // 1.6. STYLES .....................................................................................
-export const MetricCardContainer = styled.article`
+export const MetricCardContainer = styled(Link)`
     display: grid;
     min-width: 0;
     gap: ${({ theme }) => theme.spacing.xs};
     padding: ${({ theme }) => theme.spacing.s};
     border: 1px solid ${({ theme }) => theme.border.default};
     background-color: ${({ theme }) => theme.background.primary};
+    color: inherit;
+    text-decoration: none;
 
     ${media.up('md')`
         padding: ${({ theme }: { theme: ITheme }) => theme.spacing.m};
