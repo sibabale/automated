@@ -35,7 +35,17 @@ const ReportHeaderLoading: React.FC<IReportHeaderLoading> = ({
                     width="100%"
                 >
                     <rect height="28" rx="2" width="55%" x="0" y="0" />
-                    <rect height="16" rx="2" width="64" x="0" y="40" />
+                    <rect
+                        fill="none"
+                        height="16"
+                        rx="0"
+                        stroke={theme.border.subtle}
+                        strokeWidth="1"
+                        width="64"
+                        x="0.5"
+                        y="39.5"
+                    />
+                    <rect height="10" rx="2" width="46" x="5" y="43" />
                     <rect height="12" rx="2" width="68%" x="0" y="72" />
                 </ContentLoader>
             </ReportHeaderLoadingIdentity>
