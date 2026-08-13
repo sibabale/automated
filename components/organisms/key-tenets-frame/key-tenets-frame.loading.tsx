@@ -22,8 +22,8 @@ const KeyTenetsFrameLoading: React.FC<IKeyTenetsFrameLoading> = ({
     const theme = useTheme();
 
     return (
-        <KeyTenetsFrameContainer data-testid="key-tenets-frame-loading" role="status">
-            <KeyTenetsLoadingTitle aria-label={label} />
+        <KeyTenetsFrameContainer aria-label={label} data-testid="key-tenets-frame-loading" role="status">
+            <KeyTenetsLoadingTitle />
             <KeyTenetsMetrics>
                 {Array.from({ length: 5 }, (_, index) => (
                     <KeyTenetsLoadingCard key={index}>
