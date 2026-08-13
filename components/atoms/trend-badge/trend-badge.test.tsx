@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 // 1.1. END ........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
+import { StyledThemeProvider } from '../../../theme';
 import TrendBadge from './trend-badge';
 // 1.2. END ........................................................................................
 
@@ -15,7 +16,11 @@ describe('TrendBadge', () => {
         ['up', 'Improving trend'],
         ['down', 'Declining trend'],
     ] as const)('renders the %s variant', (variant, label) => {
-        render(<TrendBadge variant={variant} />);
+        render(
+            <StyledThemeProvider>
+                <TrendBadge variant={variant} />
+            </StyledThemeProvider>,
+        );
 
         const badge = screen.getByTestId('trend-badge');
 

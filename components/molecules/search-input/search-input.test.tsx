@@ -8,15 +8,18 @@ import { describe, expect, it, vi } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import SearchInput from './search-input';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
 const renderSearchInput = (onSearch = vi.fn()) =>
     render(
-        <StyledThemeProvider>
-            <SearchInput onSearch={onSearch} />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <SearchInput onSearch={onSearch} />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('SearchInput', () => {

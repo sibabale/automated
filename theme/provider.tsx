@@ -3,7 +3,8 @@
 // [ THEME > PROVIDER ] ############################################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import React from 'react';
+import React, { useContext } from 'react';
+import { ReactReduxContext } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 // 1.1. END ........................................................................................
 
@@ -11,6 +12,7 @@ import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from './theme';
 import type { ITheme } from './theme.types';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import ReduxProvider from '../redux/provider';
 import { setThemeMode } from '../redux/slices/theme.slice';
 import type { TThemeMode } from '../redux/slices/theme.slice';
 // 1.2. END ........................................................................................
@@ -28,7 +30,7 @@ interface IColorModeContext {
 
 // 1.4. COMPONENT ..................................................................................
 
-const StyledThemeProvider: React.FC<IStyledThemeProvider> = ({ children }) => {
+const ActiveStyledThemeProvider: React.FC<IStyledThemeProvider> = ({ children }) => {
     // 1.4.1. HOOKS ....................................................................................
     const mode = useAppSelector((state) => state.theme.mode);
 
@@ -40,6 +42,20 @@ const StyledThemeProvider: React.FC<IStyledThemeProvider> = ({ children }) => {
         <ThemeProvider theme={activeTheme}>{children}</ThemeProvider>
     );
     // 1.4.2. END ......................................................................................
+};
+
+const StyledThemeProvider: React.FC<IStyledThemeProvider> = ({ children }) => {
+    const reduxContext = useContext(ReactReduxContext);
+
+    if (reduxContext) {
+        return <ActiveStyledThemeProvider>{children}</ActiveStyledThemeProvider>;
+    }
+
+    return (
+        <ReduxProvider>
+            <ActiveStyledThemeProvider>{children}</ActiveStyledThemeProvider>
+        </ReduxProvider>
+    );
 };
 
 export const useColorMode = (): IColorModeContext => {

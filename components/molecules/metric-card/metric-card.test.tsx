@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import MetricCard from './metric-card';
 // 1.2. END ........................................................................................
 
@@ -18,9 +19,11 @@ const renderMetricCard = (props = {
     description: 'Buffett Target: > 15%',
 }) =>
     render(
-        <StyledThemeProvider>
-            <MetricCard {...props} />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <MetricCard {...props} />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('MetricCard', () => {
