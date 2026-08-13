@@ -22,8 +22,8 @@ const QualitativePillarsLoading: React.FC<IQualitativePillarsLoading> = ({
     const theme = useTheme();
 
     return (
-        <QualitativePillarsContainer data-testid="qualitative-pillars-loading" role="status">
-            <QualitativePillarsLoadingTitle aria-label={label} />
+        <QualitativePillarsContainer aria-label={label} data-testid="qualitative-pillars-loading" role="status">
+            <QualitativePillarsLoadingTitle />
             <QualitativePillarsGrid>
                 {Array.from({ length: 4 }, (_, index) => (
                     <QualitativePillarsLoadingCard key={index}>
