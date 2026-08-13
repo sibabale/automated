@@ -7,15 +7,19 @@ import { describe, expect, it } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import VerdictSection from './verdict-section';
+import VerdictSectionLoading from './verdict-section.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
 const renderVerdictSection = (props = {}) =>
     render(
-        <StyledThemeProvider>
-            <VerdictSection {...props} />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <VerdictSection {...props} />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('VerdictSection', () => {
@@ -43,6 +47,19 @@ describe('VerdictSection', () => {
         expect(screen.getByTestId('verdict-section-description')).toHaveTextContent(
             'The business combines durable consumer demand, recurring services revenue, and disciplined capital allocation while maintaining a modest but meaningful margin of safety.',
         );
+    });
+
+    it('announces the verdict loading state', () => {
+        render(
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <VerdictSectionLoading />
+                </StyledThemeProvider>
+            </ReduxProvider>,
+        );
+
+        expect(screen.getByTestId('verdict-section-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading investment verdict')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................

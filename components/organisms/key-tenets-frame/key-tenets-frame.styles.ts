@@ -65,6 +65,23 @@ export const KeyTenetsMetrics = styled.div`
         }
     `}
 `;
+
+export const KeyTenetsLoadingTitle = styled.div`
+    width: ${({ theme }) => `calc(${theme.size[20]} + ${theme.size[20]})`};
+    height: ${({ theme }) => theme.fontSizes.sm};
+    background-color: ${({ theme }) => theme.background.loader};
+`;
+
+export const KeyTenetsLoadingCard = styled.div`
+    min-width: 0;
+    padding: ${({ theme }) => theme.spacing.s};
+    border: 1px solid ${({ theme }) => theme.border.default};
+    background-color: ${({ theme }) => theme.background.primary};
+
+    ${media.up('md')`
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.m};
+    `}
+`;
 // 1.6. END ........................................................................................
 
 // END FILE ########################################################################################

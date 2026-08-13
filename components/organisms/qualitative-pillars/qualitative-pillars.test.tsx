@@ -7,15 +7,19 @@ import { describe, expect, it } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import QualitativePillars from './qualitative-pillars';
+import QualitativePillarsLoading from './qualitative-pillars.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
 const renderQualitativePillars = () =>
     render(
-        <StyledThemeProvider>
-            <QualitativePillars />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <QualitativePillars />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('QualitativePillars', () => {
@@ -31,6 +35,19 @@ describe('QualitativePillars', () => {
                 'criteria-card',
             ),
         ).toHaveLength(4);
+    });
+
+    it('announces the qualitative pillars loading state', () => {
+        render(
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <QualitativePillarsLoading />
+                </StyledThemeProvider>
+            </ReduxProvider>,
+        );
+
+        expect(screen.getByTestId('qualitative-pillars-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading qualitative pillars')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................

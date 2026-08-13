@@ -47,6 +47,19 @@ export const QualitativePillarsGrid = styled.div`
         grid-template-columns: repeat(2, minmax(0, 1fr));
     `}
 `;
+
+export const QualitativePillarsLoadingTitle = styled.div`
+    width: ${({ theme }) => `calc(${theme.size[20]} + ${theme.size[20]} + ${theme.size[20]})`};
+    height: ${({ theme }) => theme.fontSizes.sm};
+    background-color: ${({ theme }) => theme.background.loader};
+`;
+
+export const QualitativePillarsLoadingCard = styled.div`
+    min-height: ${({ theme }) => `calc(${theme.size[20]} + ${theme.size[20]})`};
+    padding: ${({ theme }) => theme.spacing.l};
+    border: 1px solid ${({ theme }) => theme.border.default};
+    background-color: ${({ theme }) => theme.background.primary};
+`;
 // 1.6. END ........................................................................................
 
 // END FILE ########################################################################################

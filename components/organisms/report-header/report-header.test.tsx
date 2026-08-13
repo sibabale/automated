@@ -8,7 +8,9 @@ import { describe, expect, it } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import ReportHeader from './report-header';
+import ReportHeaderLoading from './report-header.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
@@ -16,9 +18,11 @@ const renderReportHeader = (
     props: ComponentProps<typeof ReportHeader> = {},
 ) =>
     render(
-        <StyledThemeProvider>
-            <ReportHeader {...props} />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <ReportHeader {...props} />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('ReportHeader', () => {
@@ -90,6 +94,19 @@ describe('ReportHeader', () => {
         expect(screen.getByTestId('report-header-score-description')).toHaveTextContent(
             'Exceptional Long-Term Competitive Advantages',
         );
+    });
+
+    it('announces the report loading state', () => {
+        render(
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <ReportHeaderLoading />
+                </StyledThemeProvider>
+            </ReduxProvider>,
+        );
+
+        expect(screen.getByTestId('report-header-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading company report')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................

@@ -7,15 +7,19 @@ import { describe, expect, it } from 'vitest';
 
 // 1.2. INTERNAL DEPENDENCIES ......................................................................
 import { StyledThemeProvider } from '../../../theme';
+import ReduxProvider from '../../../redux/provider';
 import KeyTenetsFrame from './key-tenets-frame';
+import KeyTenetsFrameLoading from './key-tenets-frame.loading';
 // 1.2. END ........................................................................................
 
 // 1.3. TEST CASES ................................................................................
 const renderKeyTenetsFrame = () =>
     render(
-        <StyledThemeProvider>
-            <KeyTenetsFrame />
-        </StyledThemeProvider>,
+        <ReduxProvider>
+            <StyledThemeProvider>
+                <KeyTenetsFrame />
+            </StyledThemeProvider>
+        </ReduxProvider>,
     );
 
 describe('KeyTenetsFrame', () => {
@@ -31,6 +35,19 @@ describe('KeyTenetsFrame', () => {
                 'metric-card',
             ),
         ).toHaveLength(5);
+    });
+
+    it('announces the key tenets loading state', () => {
+        render(
+            <ReduxProvider>
+                <StyledThemeProvider>
+                    <KeyTenetsFrameLoading />
+                </StyledThemeProvider>
+            </ReduxProvider>,
+        );
+
+        expect(screen.getByTestId('key-tenets-frame-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading key tenets and ratios')).toBeVisible();
     });
 });
 // 1.3. END ........................................................................................

@@ -66,6 +66,15 @@ or state-specific test files.
 - Provide a descriptive loader title and a `role="status"` container.
 - Use a stable `uniqueKey` to avoid server/client SVG identifier mismatches.
 - Read loader colors from the styled-components theme.
+- At each supported viewport, compare the loaded component and its loader in
+  the browser using their bounding rectangles. Verify that corresponding
+  regions preserve their left/top position, width, height, and column ratio;
+  correct the loader’s grid, flex basis, or absolute placement when those
+  measurements diverge. Do not approve approximation from skeleton content
+  alone.
+- When a loader’s viewBox is narrower than its responsive container, set
+  `preserveAspectRatio="none"` so its skeleton uses the full available width
+  instead of centering in the card.
 
 ### Empty
 

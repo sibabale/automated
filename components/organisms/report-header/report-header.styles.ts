@@ -193,6 +193,32 @@ export const ReportScoreValue = styled.strong`
         font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.xxl};
     `}
 `;
+
+export const ReportHeaderLoadingIdentity = styled.div`
+    box-sizing: border-box;
+    padding: 0 ${({ theme }) => `calc(${theme.size[12]} + ${theme.spacing.m})`} 0 0;
+
+    ${media.up('md')`
+        flex: 0 1 80%;
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.m} 0;
+    `}
+`;
+
+export const ReportHeaderLoadingScore = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: ${({ theme }) => theme.size[12]};
+    min-width: ${({ theme }) => theme.size[12]};
+    min-height: ${({ theme }) => theme.size[12]};
+
+    ${media.up('md')`
+        position: static;
+        width: 20%;
+        min-width: 0;
+        min-height: ${({ theme }: { theme: ITheme }) => theme.size[20]};
+    `}
+`;
 // 1.6. END ........................................................................................
 
 // END FILE ########################################################################################
