@@ -1,0 +1,33 @@
+// [ BACKEND > FEATURES > CALCULATIONS > ROE SERVICE ] ###############################################
+
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
+// 1.1. END ..........................................................................................
+
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
+import { logger } from "../logger.js";
+// 1.2. END ..........................................................................................
+
+// 1.3. SERVICE ......................................................................................
+/**
+ * Calculates Return on Equity (ROE) based on provided financial metrics.
+ */
+export async function calculateROE(
+  netIncome: number,
+  shareholderEquity: number,
+  correlationId: string,
+): Promise<number> {
+  // 1.3.1. VALIDATION ...............................................................................
+  logger.debug({ correlationId, netIncome, shareholderEquity }, "Calculating ROE");
+  // 1.3.1. END ......................................................................................
+
+  // 1.3.2. CALCULATION ..............................................................................
+  // TODO: Implement ROE formula: (Net Income / Shareholder Equity) * 100
+  const roe = (netIncome / shareholderEquity) * 100;
+  logger.info({ correlationId, roe }, "ROE calculated successfully");
+  // 1.3.2. END ......................................................................................
+
+  return roe;
+}
+// 1.3. END ..........................................................................................
+
+// END FILE ##########################################################################################

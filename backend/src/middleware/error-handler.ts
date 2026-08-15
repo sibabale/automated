@@ -19,6 +19,7 @@ export const errorHandler: ErrorRequestHandler = (error, request, response, _nex
   // 1.3.1. LOCAL VARIABLES ..........................................................................
   const isExpected = error instanceof HttpError;
   const statusCode = isExpected ? error.statusCode : 500;
+  const correlationId = request.correlationId;
   // 1.3.1. END ......................................................................................
 
   // 1.3.2. CORE LOGIC ...............................................................................
@@ -29,6 +30,7 @@ export const errorHandler: ErrorRequestHandler = (error, request, response, _nex
   }
 
   response.status(statusCode).json({
+    correlationId,
     error: {
       message: isExpected ? error.message : "Internal server error",
     },

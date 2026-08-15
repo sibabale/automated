@@ -1,10 +1,10 @@
 // [ BACKEND > HTTP > APPLICATION > TESTS ] ##########################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
-import assert from "node:assert/strict";
 import { once } from "node:events";
-import { type AddressInfo } from "node:net";
+import assert from "node:assert/strict";
 import { type Server } from "node:http";
+import { type AddressInfo } from "node:net";
 import { after, before, describe, it } from "node:test";
 // 1.1. END ..........................................................................................
 
@@ -43,24 +43,43 @@ describe("HTTP application", () => {
   // 1.3.2. HEALTH ENDPOINT ..........................................................................
   it("reports that the service is healthy", async () => {
     const response = await fetch(`${baseUrl}/health`);
+    const body = (await response.json()) as {
+      status?: string;
+      correlationId?: string;
+    };
 
     assert.equal(response.status, 200);
-    assert.deepEqual(await response.json(), { status: "ok" });
+    assert.equal(body.status, "ok");
+    assert.equal(typeof body.correlationId, "string");
   });
   // 1.3.2. END ......................................................................................
 
   // 1.3.3. UNKNOWN ROUTE ............................................................................
   it("returns the standard error response for an unknown route", async () => {
     const response = await fetch(`${baseUrl}/unknown`);
+    const body = (await response.json()) as {
+      correlationId?: string;
+      error?: { message?: string };
+    };
 
     assert.equal(response.status, 404);
-    assert.deepEqual(await response.json(), {
-      error: {
-        message: "Route GET /unknown was not found",
-      },
-    });
+    assert.equal(body.error?.message, "Route GET /unknown was not found");
+    assert.equal(typeof body.correlationId, "string");
   });
   // 1.3.3. END ......................................................................................
+
+  // 1.3.4. CORRELATION ID ...........................................................................
+  it("reuses an inbound correlation id and echoes it on the response", async () => {
+    const correlationId = "test-correlation-id";
+    const response = await fetch(`${baseUrl}/health`, {
+      headers: { "x-correlation-id": correlationId },
+    });
+    const body = (await response.json()) as { correlationId?: string };
+
+    assert.equal(response.headers.get("x-correlation-id"), correlationId);
+    assert.equal(body.correlationId, correlationId);
+  });
+  // 1.3.4. END ......................................................................................
 });
 // 1.3. END ..........................................................................................
 

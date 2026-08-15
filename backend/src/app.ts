@@ -1,16 +1,18 @@
 // [ BACKEND > HTTP > APPLICATION ] ##################################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
-import express from "express";
-import type { Application } from "express";
 import helmet from "helmet";
+import express from "express";
 import { pinoHttp } from "pino-http";
+import type { Application } from "express";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import { errorHandler } from "./middleware/error-handler.js";
-import { notFoundHandler } from "./middleware/not-found-handler.js";
 import { logger } from "./logger.js";
+import { errorHandler } from "./middleware/error-handler.js";
+import { correlationId } from "./middleware/correlation-id.js";
+import { notFoundHandler } from "./middleware/not-found-handler.js";
+import { calculateROEController } from "./controllers/return-on-equity.controller.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. APPLICATION ..................................................................................
@@ -27,13 +29,16 @@ export function createApp(): Application {
   app.disable("x-powered-by");
   app.use(helmet());
   app.use(pinoHttp({ logger }));
+  app.use(correlationId);
   app.use(express.json({ limit: "1mb" }));
   // 1.3.1. END ......................................................................................
 
   // 1.3.2. ROUTES ...................................................................................
-  app.get("/health", (_request, response) => {
-    response.status(200).json({ status: "ok" });
+  app.get("/health", (request, response) => {
+    response.status(200).json({ status: "ok", correlationId: request.correlationId });
   });
+
+  app.get("/calculate/roe", calculateROEController);
   // 1.3.2. END ......................................................................................
 
   // 1.3.3. ERROR HANDLING ...........................................................................
