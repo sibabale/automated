@@ -84,6 +84,12 @@ Copilot should:
   and error responses include it; and clients must send the `x-correlation-id`
   header on every request. Reuse the canonical middleware in
   `backend/src/middleware/correlation-id.ts` — never bare `console.*`.
+- **Always apply the Explanatory Comments skill.** Once a block of code crosses
+  a complexity threshold — non-obvious control flow, concurrency or lifecycle
+  coordination, multi-step transformations, failure mapping, or dense
+  expressions — document it with a short, plain-English comment describing what
+  it does and why. Leave trivial, self-evident code uncommented, and keep
+  comparable complexity documented comparably within a file.
 - **Always apply the Object Key Ordering skill when writing or modifying object
   literals in `backend/`.** Object property order is a first-class, observable
   feature of JavaScript. A backend-only pre-commit script
