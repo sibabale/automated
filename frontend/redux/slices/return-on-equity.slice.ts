@@ -31,7 +31,7 @@ export interface ConsolidatedSummary {
     result: string;
 }
 
-export interface FormulaTTMActuals {
+export interface TrailingTwelveMonthsActuals {
     netIncome: string;
     shareholdersEquity: string;
 }
@@ -46,7 +46,7 @@ interface ReturnOnEquityState {
     ticker: string | null;
     horizons: ReturnOnEquityHorizonResult[];
     consolidatedSummary: ConsolidatedSummary | null;
-    ttmActuals: FormulaTTMActuals | null;
+    trailingTwelveMonthsActuals: TrailingTwelveMonthsActuals | null;
     errorKind: ReturnOnEquityErrorKind | null;
     errorMessage: string | null;
 }
@@ -58,7 +58,7 @@ const initialState: ReturnOnEquityState = {
     ticker: null,
     horizons: [],
     consolidatedSummary: null,
-    ttmActuals: null,
+    trailingTwelveMonthsActuals: null,
     errorKind: null,
     errorMessage: null,
 };
@@ -93,7 +93,7 @@ export const fetchReturnOnEquity = createAsyncThunk<
         ticker: string;
         horizons: ReturnOnEquityHorizonResult[];
         consolidatedSummary: ConsolidatedSummary;
-        ttmActuals: FormulaTTMActuals;
+        trailingTwelveMonthsActuals: TrailingTwelveMonthsActuals;
     },
     string,
     { rejectValue: ReturnOnEquityRejection }
@@ -124,7 +124,7 @@ export const fetchReturnOnEquity = createAsyncThunk<
         ticker: payload?.data?.ticker ?? ticker,
         horizons: payload?.data?.horizons ?? [],
         consolidatedSummary: payload?.data?.consolidatedSummary ?? { values: [], result: '—', denominator: '0' },
-        ttmActuals: payload?.data?.ttmActuals ?? { netIncome: '—', shareholdersEquity: '—' },
+        trailingTwelveMonthsActuals: payload?.data?.trailingTwelveMonthsActuals ?? { netIncome: '—', shareholdersEquity: '—' },
     };
 });
 // 1.5. END ..........................................................................................
@@ -146,7 +146,7 @@ const returnOnEquitySlice = createSlice({
                 state.ticker = action.payload.ticker;
                 state.horizons = action.payload.horizons;
                 state.consolidatedSummary = action.payload.consolidatedSummary;
-                state.ttmActuals = action.payload.ttmActuals;
+                state.trailingTwelveMonthsActuals = action.payload.trailingTwelveMonthsActuals;
                 state.errorKind = null;
                 state.errorMessage = null;
             })

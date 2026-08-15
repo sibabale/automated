@@ -8,7 +8,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type {
     ConsolidatedSummary,
-    FormulaTTMActuals,
+    TrailingTwelveMonthsActuals,
     ReturnOnEquityErrorKind,
     ReturnOnEquityHorizonResult,
     ReturnOnEquityStatus,
@@ -82,11 +82,14 @@ export const selectConsolidatedSummary = createSelector(
  * The TTM (trailing twelve months) actuals for the formula section display.
  * Returns null until the analysis succeeds.
  *
+ * Trailing Twelve Months (TTM) represents the most recent 12-month period of
+ * financial data, useful for understanding current operating performance.
+ *
  * Memoized so the value stays the same across renders unless the underlying state changes.
  */
-export const selectTTMActuals = createSelector(
+export const selectTrailingTwelveMonthsActuals = createSelector(
     selectReturnOnEquity,
-    (slice): FormulaTTMActuals | null => slice.ttmActuals,
+    (slice): TrailingTwelveMonthsActuals | null => slice.trailingTwelveMonthsActuals,
 );
 // 1.4. END ..........................................................................................
 

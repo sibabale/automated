@@ -35,9 +35,10 @@ interface ConsolidatedSummaryView {
 }
 
 /**
- * TTM actuals used in formula displays: pre-formatted for client consumption.
+ * Trailing twelve months (TTM) actuals used in formula displays: pre-formatted
+ * for client consumption. TTM represents the most recent 12-month period.
  */
-interface FormulaTTMView {
+interface FormulaTrailingTwelveMonthsActuals {
   netIncome: string;
   shareholdersEquity: string;
 }
@@ -51,7 +52,7 @@ export interface ReturnOnEquityResponse {
     ticker: string;
     horizons: HorizonView[];
     consolidatedSummary: ConsolidatedSummaryView;
-    ttmActuals: FormulaTTMView;
+    trailingTwelveMonthsActuals: FormulaTrailingTwelveMonthsActuals;
   };
 }
 // 1.3. END ..........................................................................................
@@ -132,7 +133,7 @@ function toResponseData(analysis: ReturnOnEquityAnalysis): ReturnOnEquityRespons
   const horizonValues = horizonViews.map((h) => h.value);
   const consolidatedSummary = calculateConsolidatedSummary(horizonValues);
 
-  const ttmActuals: FormulaTTMView = {
+  const trailingTwelveMonthsActuals: FormulaTrailingTwelveMonthsActuals = {
     netIncome: formatCurrency(analysis.ttmNetIncome),
     shareholdersEquity: formatCurrency(analysis.ttmShareholdersEquity),
   };
@@ -141,7 +142,7 @@ function toResponseData(analysis: ReturnOnEquityAnalysis): ReturnOnEquityRespons
     ticker: analysis.ticker,
     horizons: horizonViews,
     consolidatedSummary,
-    ttmActuals,
+    trailingTwelveMonthsActuals,
   };
 }
 

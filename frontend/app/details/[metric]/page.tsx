@@ -21,7 +21,7 @@ import {
     selectReturnOnEquityIsEmpty,
     selectReturnOnEquityStatus,
     selectConsolidatedSummary,
-    selectTTMActuals,
+    selectTrailingTwelveMonthsActuals,
 } from '../../../redux/selectors/return-on-equity.selectors';
 import {
     DetailContentFlow,
@@ -48,7 +48,7 @@ export default function MetricDetailsPage({
     const horizonsAreEmpty = useAppSelector(selectReturnOnEquityIsEmpty);
     const horizonError = useAppSelector(selectReturnOnEquityError);
     const consolidatedData = useAppSelector(selectConsolidatedSummary);
-    const ttmActuals = useAppSelector(selectTTMActuals);
+    const ttmActuals = useAppSelector(selectTrailingTwelveMonthsActuals);
 
     useEffect(() => {
         dispatch(fetchReturnOnEquity('RDDT'));

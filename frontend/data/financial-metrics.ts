@@ -67,14 +67,14 @@ export const financialMetrics: IFinancialMetric[] = [
         formula: {
             title: 'How ROE Is Calculated',
             standardFormulaLabel: 'Standard Formula',
-            actualsLabel: 'AAPL TTM Actuals',
+            actualsLabel: 'AAPL Trailing Twelve Months',
             numeratorLabel: 'Net Income',
             denominatorLabel: "Shareholders' Equity",
             numeratorValue: '$96.99B',
             denominatorValue: '$62.15B',
             factor: '× 100',
             result: '156.1%',
-            footnote: 'Based on TTM (trailing twelve months) figures from SEC filings',
+            footnote: 'Based on trailing twelve months (TTM) figures from SEC filings',
         },
         horizons: [
             {
