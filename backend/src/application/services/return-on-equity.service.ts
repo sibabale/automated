@@ -32,11 +32,14 @@ export interface ReturnOnEquityHorizon {
 }
 
 /**
- * The full return-on-equity picture for a company across every horizon.
+ * The full return-on-equity picture for a company across every horizon,
+ * including TTM actuals for formula display.
  */
 export interface ReturnOnEquityAnalysis {
   ticker: string;
   horizons: ReturnOnEquityHorizon[];
+  ttmNetIncome: number;
+  ttmShareholdersEquity: number;
 }
 // 1.3. END ..........................................................................................
 
@@ -158,9 +161,15 @@ export async function analyseReturnOnEquity(
   });
   // 1.6.2. END ......................................................................................
 
+  // 1.6.3. TTM ACTUALS ..............................................................................
+  const ttmYear = ordered[0] ?? { netIncome: 0, shareholdersEquity: 0 };
+  const ttmNetIncome = ttmYear.netIncome ?? 0;
+  const ttmShareholdersEquity = ttmYear.shareholdersEquity ?? 0;
+  // 1.6.3. END ......................................................................................
+
   logger.info({ correlationId, ticker, horizons: horizons.length }, "Return on equity analysed");
 
-  return { ticker, horizons };
+  return { ticker, horizons, ttmNetIncome, ttmShareholdersEquity };
 }
 // 1.6. END ..........................................................................................
 

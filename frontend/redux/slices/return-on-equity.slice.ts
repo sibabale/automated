@@ -31,6 +31,11 @@ export interface ConsolidatedSummary {
     result: string;
 }
 
+export interface FormulaTTMActuals {
+    netIncome: string;
+    shareholdersEquity: string;
+}
+
 interface ReturnOnEquityRejection {
     kind: ReturnOnEquityErrorKind;
     message: string;
@@ -41,6 +46,7 @@ interface ReturnOnEquityState {
     ticker: string | null;
     horizons: ReturnOnEquityHorizonResult[];
     consolidatedSummary: ConsolidatedSummary | null;
+    ttmActuals: FormulaTTMActuals | null;
     errorKind: ReturnOnEquityErrorKind | null;
     errorMessage: string | null;
 }
@@ -52,6 +58,7 @@ const initialState: ReturnOnEquityState = {
     ticker: null,
     horizons: [],
     consolidatedSummary: null,
+    ttmActuals: null,
     errorKind: null,
     errorMessage: null,
 };
@@ -82,7 +89,12 @@ function errorKindForStatus(status: number): ReturnOnEquityErrorKind {
  * the selectors can turn into a friendly error state.
  */
 export const fetchReturnOnEquity = createAsyncThunk<
-    { ticker: string; horizons: ReturnOnEquityHorizonResult[]; consolidatedSummary: ConsolidatedSummary },
+    {
+        ticker: string;
+        horizons: ReturnOnEquityHorizonResult[];
+        consolidatedSummary: ConsolidatedSummary;
+        ttmActuals: FormulaTTMActuals;
+    },
     string,
     { rejectValue: ReturnOnEquityRejection }
 >('returnOnEquity/fetch', async (ticker, { rejectWithValue }) => {
@@ -112,6 +124,7 @@ export const fetchReturnOnEquity = createAsyncThunk<
         ticker: payload?.data?.ticker ?? ticker,
         horizons: payload?.data?.horizons ?? [],
         consolidatedSummary: payload?.data?.consolidatedSummary ?? { values: [], result: '—', denominator: '0' },
+        ttmActuals: payload?.data?.ttmActuals ?? { netIncome: '—', shareholdersEquity: '—' },
     };
 });
 // 1.5. END ..........................................................................................
@@ -133,6 +146,7 @@ const returnOnEquitySlice = createSlice({
                 state.ticker = action.payload.ticker;
                 state.horizons = action.payload.horizons;
                 state.consolidatedSummary = action.payload.consolidatedSummary;
+                state.ttmActuals = action.payload.ttmActuals;
                 state.errorKind = null;
                 state.errorMessage = null;
             })

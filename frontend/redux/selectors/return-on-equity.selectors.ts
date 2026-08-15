@@ -8,6 +8,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type {
     ConsolidatedSummary,
+    FormulaTTMActuals,
     ReturnOnEquityErrorKind,
     ReturnOnEquityHorizonResult,
     ReturnOnEquityStatus,
@@ -75,6 +76,17 @@ export const selectReturnOnEquityError = createSelector(
 export const selectConsolidatedSummary = createSelector(
     selectReturnOnEquity,
     (slice): ConsolidatedSummary | null => slice.consolidatedSummary,
+);
+
+/**
+ * The TTM (trailing twelve months) actuals for the formula section display.
+ * Returns null until the analysis succeeds.
+ *
+ * Memoized so the value stays the same across renders unless the underlying state changes.
+ */
+export const selectTTMActuals = createSelector(
+    selectReturnOnEquity,
+    (slice): FormulaTTMActuals | null => slice.ttmActuals,
 );
 // 1.4. END ..........................................................................................
 

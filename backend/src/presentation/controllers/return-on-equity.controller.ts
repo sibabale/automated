@@ -35,6 +35,14 @@ interface ConsolidatedSummaryView {
 }
 
 /**
+ * TTM actuals used in formula displays: pre-formatted for client consumption.
+ */
+interface FormulaTTMView {
+  netIncome: string;
+  shareholdersEquity: string;
+}
+
+/**
  * Shape of a successful return-on-equity analysis response body.
  */
 export interface ReturnOnEquityResponse {
@@ -43,6 +51,7 @@ export interface ReturnOnEquityResponse {
     ticker: string;
     horizons: HorizonView[];
     consolidatedSummary: ConsolidatedSummaryView;
+    ttmActuals: FormulaTTMView;
   };
 }
 // 1.3. END ..........................................................................................
@@ -53,6 +62,24 @@ export interface ReturnOnEquityResponse {
  */
 function formatPercent(value: number): string {
   return `${value.toFixed(1)}%`;
+}
+
+/**
+ * Formats a currency value to a human-readable shorthand: billions (B) or millions (M).
+ * Matches the client display convention (e.g., "$96.99B").
+ */
+function formatCurrency(valueInDollars: number): string {
+  const absValue = Math.abs(valueInDollars);
+
+  if (absValue >= 1_000_000_000) {
+    return `$${(valueInDollars / 1_000_000_000).toFixed(2)}B`;
+  }
+
+  if (absValue >= 1_000_000) {
+    return `$${(valueInDollars / 1_000_000).toFixed(1)}M`;
+  }
+
+  return `$${valueInDollars.toFixed(0)}`;
 }
 
 /**
@@ -105,10 +132,16 @@ function toResponseData(analysis: ReturnOnEquityAnalysis): ReturnOnEquityRespons
   const horizonValues = horizonViews.map((h) => h.value);
   const consolidatedSummary = calculateConsolidatedSummary(horizonValues);
 
+  const ttmActuals: FormulaTTMView = {
+    netIncome: formatCurrency(analysis.ttmNetIncome),
+    shareholdersEquity: formatCurrency(analysis.ttmShareholdersEquity),
+  };
+
   return {
     ticker: analysis.ticker,
     horizons: horizonViews,
     consolidatedSummary,
+    ttmActuals,
   };
 }
 
