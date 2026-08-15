@@ -17,19 +17,28 @@ entire codebase.
 
 ---
 
-## Mandatory Templates
+## Frontend Templates
 
-All templates are located at `components/templates/`. There is one template and
+All frontend templates are located at `frontend/components/templates/`. There is one template and
 one worked example for each file type.
 
 | File type      | Template                                          | Example                                            |
 |----------------|---------------------------------------------------|----------------------------------------------------|
-| Component      | `components/templates/components/component.template.tsx` | `components/templates/components/component.example.tsx` |
-| Loading state  | `components/templates/components/component.loading.template.tsx` | `components/templates/components/component.loading.example.tsx` |
-| Empty state    | `components/templates/components/component.empty.template.tsx` | `components/templates/components/component.empty.example.tsx` |
-| Error state    | `components/templates/components/component.error.template.tsx` | `components/templates/components/component.error.example.tsx` |
-| Styles         | `components/templates/styles/index.styles.template.ts`   | `components/templates/styles/index.styles.example.ts`   |
-| Test           | `components/templates/tests/index.test.temaplate.ts`     | `components/templates/tests/index.test.example.ts`      |
+| Component      | `frontend/components/templates/components/component.template.tsx` | `frontend/components/templates/components/component.example.tsx` |
+| Loading state  | `frontend/components/templates/components/component.loading.template.tsx` | `frontend/components/templates/components/component.loading.example.tsx` |
+| Empty state    | `frontend/components/templates/components/component.empty.template.tsx` | `frontend/components/templates/components/component.empty.example.tsx` |
+| Error state    | `frontend/components/templates/components/component.error.template.tsx` | `frontend/components/templates/components/component.error.example.tsx` |
+| Styles         | `frontend/components/templates/styles/index.styles.template.ts`   | `frontend/components/templates/styles/index.styles.example.ts`   |
+| Test           | `frontend/components/templates/tests/index.test.temaplate.ts`     | `frontend/components/templates/tests/index.test.example.ts`      |
+
+## Backend Templates
+
+All backend templates are located at `backend/templates/`. The templates define the standard structure for files: external dependencies, internal dependencies, core logic/implementation, and section markers for visual clarity.
+
+| File type      | Template                                          |
+|----------------|---------------------------------------------------|
+| General File   | `backend/templates/file.template.ts`              |
+| Test           | `backend/templates/test.template.ts`              |
 
 ---
 
