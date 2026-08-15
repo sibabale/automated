@@ -2,7 +2,8 @@
 
 node scripts/validate-banner-width.js || banner_failed=1
 node scripts/validate-import-order.js || import_failed=1
+node scripts/validate-object-order.js || object_failed=1
 
-if [ "$banner_failed" = "1" ] || [ "$import_failed" = "1" ]; then
+if [ "$banner_failed" = "1" ] || [ "$import_failed" = "1" ] || [ "$object_failed" = "1" ]; then
   exit 1
 fi
