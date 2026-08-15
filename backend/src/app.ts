@@ -12,7 +12,7 @@ import { logger } from "./logger.js";
 import { errorHandler } from "./application/middleware/error-handler.js";
 import { correlationId } from "./application/middleware/correlation-id.js";
 import { notFoundHandler } from "./application/middleware/not-found-handler.js";
-import { calculateROEController } from "./presentation/controllers/return-on-equity.controller.js";
+import { returnOnEquityController } from "./presentation/controllers/return-on-equity.controller.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. APPLICATION ..................................................................................
@@ -38,7 +38,7 @@ export function createApp(): Application {
     response.status(200).json({ status: "ok", correlationId: request.correlationId });
   });
 
-  app.get("/calculate/roe", calculateROEController);
+  app.get("/analysis/return-on-equity", returnOnEquityController);
   // 1.3.2. END ......................................................................................
 
   // 1.3.3. ERROR HANDLING ...........................................................................
