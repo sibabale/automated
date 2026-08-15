@@ -12,6 +12,7 @@ import HorizonCardError from '../../../components/molecules/horizon-card/horizon
 import HorizonCardLoading from '../../../components/molecules/horizon-card/horizon-card.loading';
 import DetailLeadSection from '../../../components/organisms/detail-lead-section/detail-lead-section';
 import EducationalSection from '../../../components/organisms/educational-section/educational-section';
+import FormulaSectionLoading from '../../../components/organisms/formula-section/formula-section.loading';
 import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
 import ConsolidationSummary from '../../../components/organisms/consolidation-summary/consolidation-summary';
 import ConsolidationSummaryLoading from '../../../components/organisms/consolidation-summary/consolidation-summary.loading';
@@ -87,13 +88,17 @@ export default function MetricDetailsPage({
                 />
                 <DetailContentFlow>
                     {metric?.formula && (
-                        <FormulaSection
-                            {...metric.formula}
-                            numeratorValue={ttmActuals?.netIncome ?? metric.formula.numeratorValue}
-                            denominatorValue={
-                                ttmActuals?.shareholdersEquity ?? metric.formula.denominatorValue
-                            }
-                        />
+                        horizonStatus === 'loading' ? (
+                            <FormulaSectionLoading label="Loading trailing twelve months data" />
+                        ) : (
+                            <FormulaSection
+                                {...metric.formula}
+                                numeratorValue={ttmActuals?.netIncome ?? metric.formula.numeratorValue}
+                                denominatorValue={
+                                    ttmActuals?.shareholdersEquity ?? metric.formula.denominatorValue
+                                }
+                            />
+                        )
                     )}
                     {metric?.education && <EducationalSection {...metric.education} />}
                     {metric?.horizons && (
