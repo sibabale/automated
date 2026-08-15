@@ -23,10 +23,11 @@ When multiple skills are relevant, apply them in the following order:
 7. Motion Design (always applied when creating or modifying animated UI)
 8. Testing Public Interfaces (always applied when creating or modifying tests)
 9. Observability / Correlation IDs (always applied when logging, returning responses, handling errors, or calling the backend)
-10. Repository Standards (Documentation, Code Review, Testing, Security)
-11. Language-specific Skills
-12. Framework-specific Skills
-13. Domain-specific Skills
+10. Object Key Ordering (always applied when writing or modifying object literals in `backend/`)
+11. Repository Standards (Documentation, Code Review, Testing, Security)
+12. Language-specific Skills
+13. Framework-specific Skills
+14. Domain-specific Skills
 
 ## Expectations
 
@@ -83,5 +84,13 @@ Copilot should:
   and error responses include it; and clients must send the `x-correlation-id`
   header on every request. Reuse the canonical middleware in
   `backend/src/middleware/correlation-id.ts` — never bare `console.*`.
+- **Always apply the Object Key Ordering skill when writing or modifying object
+  literals in `backend/`.** Object property order is a first-class, observable
+  feature of JavaScript. A backend-only pre-commit script
+  (`scripts/validate-object-order.js`) re-sorts objects **only** when they are
+  explicitly marked `@sort-keys`. Add that marker only to order-insensitive
+  lookup maps; never mark CSS-in-JS objects, ORM `orderBy` clauses, signed or
+  hashed JSON payloads, iteration-ordered maps, or destructuring patterns, and
+  override any proposal to mark them.
 
 The AI Operating Principles are the foundation for all engineering tasks and should guide every response and code change.
