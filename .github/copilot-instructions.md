@@ -22,10 +22,11 @@ When multiple skills are relevant, apply them in the following order:
 6. Component States (always applied when creating or modifying asynchronous or collection-driven components)
 7. Motion Design (always applied when creating or modifying animated UI)
 8. Testing Public Interfaces (always applied when creating or modifying tests)
-9. Repository Standards (Documentation, Code Review, Testing, Security)
-10. Language-specific Skills
-11. Framework-specific Skills
-12. Domain-specific Skills
+9. Observability / Correlation IDs (always applied when logging, returning responses, handling errors, or calling the backend)
+10. Repository Standards (Documentation, Code Review, Testing, Security)
+11. Language-specific Skills
+12. Framework-specific Skills
+13. Domain-specific Skills
 
 ## Expectations
 
@@ -76,5 +77,11 @@ Copilot should:
 - **Always apply the Motion Design skill when creating or modifying animated
   UI.** Motion is a runtime dependency and transitions must be purposeful,
   reduced-motion aware, and implemented using the repository motion pattern.
+- **Always apply the Correlation IDs skill when logging, returning a response,
+  handling an error, or calling the backend.** Every backend log line must
+  carry a `correlationId`; services receive it as a `string` parameter; success
+  and error responses include it; and clients must send the `x-correlation-id`
+  header on every request. Reuse the canonical middleware in
+  `backend/src/middleware/correlation-id.ts` — never bare `console.*`.
 
 The AI Operating Principles are the foundation for all engineering tasks and should guide every response and code change.
