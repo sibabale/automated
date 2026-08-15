@@ -1,3 +1,8 @@
 #!/bin/sh
 
-node scripts/validate-banner-width.js
+node scripts/validate-banner-width.js || banner_failed=1
+node scripts/validate-import-order.js || import_failed=1
+
+if [ "$banner_failed" = "1" ] || [ "$import_failed" = "1" ]; then
+  exit 1
+fi
