@@ -26,6 +26,15 @@ interface HorizonView {
 }
 
 /**
+ * Consolidated summary: arithmetic mean of all horizon values for display.
+ */
+interface ConsolidatedSummaryView {
+  values: string[];
+  denominator: string;
+  result: string;
+}
+
+/**
  * Shape of a successful return-on-equity analysis response body.
  */
 export interface ReturnOnEquityResponse {
@@ -33,6 +42,7 @@ export interface ReturnOnEquityResponse {
   data: {
     ticker: string;
     horizons: HorizonView[];
+    consolidatedSummary: ConsolidatedSummaryView;
   };
 }
 // 1.3. END ..........................................................................................
@@ -46,24 +56,59 @@ function formatPercent(value: number): string {
 }
 
 /**
+ * Parses a percentage string to a numeric value, or returns 0 if invalid.
+ */
+function parsePercentValue(percentStr: string): number {
+  const numeric = parseFloat(percentStr.replace("%", ""));
+  return Number.isNaN(numeric) ? 0 : numeric;
+}
+
+/**
+ * Calculates the arithmetic mean of percentage values for the consolidated summary.
+ */
+function calculateConsolidatedSummary(
+  horizonValues: string[],
+): ConsolidatedSummaryView {
+  if (!horizonValues || horizonValues.length === 0) {
+    return { values: [], result: "—", denominator: "0" };
+  }
+
+  const numericValues = horizonValues.map(parsePercentValue);
+  const sum = numericValues.reduce((acc, val) => acc + val, 0);
+  const average = sum / numericValues.length;
+
+  return {
+    values: horizonValues,
+    result: formatPercent(average),
+    denominator: String(numericValues.length),
+  };
+}
+
+/**
  * Converts the numeric analysis into the client's presentation contract.
  *
  * Formatting lives here, at the edge, so the service keeps returning precise
  * numbers that remain easy to test and reuse.
  */
 function toResponseData(analysis: ReturnOnEquityAnalysis): ReturnOnEquityResponse["data"] {
+  const horizonViews: HorizonView[] = analysis.horizons.map((horizon) => ({
+    label: horizon.label,
+    range: horizon.range,
+    value: formatPercent(horizon.averageReturnOnEquity),
+    breakdown: horizon.breakdown.map((year) => ({
+      period: String(year.fiscalYear),
+      value: formatPercent(year.returnOnEquity),
+    })),
+    trend: horizon.trend,
+  }));
+
+  const horizonValues = horizonViews.map((h) => h.value);
+  const consolidatedSummary = calculateConsolidatedSummary(horizonValues);
+
   return {
     ticker: analysis.ticker,
-    horizons: analysis.horizons.map((horizon) => ({
-      label: horizon.label,
-      range: horizon.range,
-      value: formatPercent(horizon.averageReturnOnEquity),
-      breakdown: horizon.breakdown.map((year) => ({
-        period: String(year.fiscalYear),
-        value: formatPercent(year.returnOnEquity),
-      })),
-      trend: horizon.trend,
-    })),
+    horizons: horizonViews,
+    consolidatedSummary,
   };
 }
 

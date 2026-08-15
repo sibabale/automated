@@ -1,0 +1,95 @@
+- generic [active] [ref=f5e1]:
+  - button "Open Next.js Dev Tools" [ref=f5e7] [cursor=pointer]
+  - alert [ref=f5e11]
+  - generic [ref=f5e12]:
+    - banner [ref=f5e13]:
+      - list [ref=f5e14]:
+        - listitem [ref=f5e15]:
+          - link "Go to home" [ref=f5e16] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f5e17]: oto
+        - listitem [ref=f5e20]: About
+        - listitem [ref=f5e21]: Methodology
+        - listitem [ref=f5e22]:
+          - link "Portfolio" [ref=f5e23] [cursor=pointer]:
+            - /url: /portfolio
+      - switch "Switch to dark mode" [ref=f5e24] [cursor=pointer]
+    - navigation "Breadcrumb" [ref=f5e30]:
+      - list [ref=f5e31]:
+        - listitem [ref=f5e32]:
+          - link "← Back to Overview" [ref=f5e33] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f5e34]: "|"
+        - listitem [ref=f5e35]: Apple Inc. (AAPL)
+        - listitem [ref=f5e36]: ›
+        - listitem [ref=f5e37]: Return on Equity
+      - generic [ref=f5e38]: SEC Filing Data · USD
+    - main [ref=f5e39]:
+      - generic [ref=f5e40]:
+        - generic [ref=f5e41]:
+          - paragraph [ref=f5e42]: Apple Inc. · AAPL
+          - heading "Return on Equity" [level=1] [ref=f5e43]
+        - generic [ref=f5e44]:
+          - status [ref=f5e45]:
+            - img "Loading current return on equity" [ref=f5e46]
+          - paragraph [ref=f5e47]: "Buffett Target: > 15%"
+      - generic [ref=f5e48]:
+        - generic [ref=f5e49]:
+          - generic [ref=f5e50]:
+            - paragraph [ref=f5e51]: Calculation logic
+            - heading "How ROE Is Calculated" [level=2] [ref=f5e52]
+            - paragraph [ref=f5e53]: Based on TTM (trailing twelve months) figures from SEC filings
+          - generic [ref=f5e55]:
+            - generic [ref=f5e56]:
+              - paragraph [ref=f5e57]: Standard Formula
+              - generic [ref=f5e58]:
+                - generic [ref=f5e59]: ROE
+                - generic [ref=f5e60]: =
+                - generic [ref=f5e61]:
+                  - generic [ref=f5e62]: Net Income
+                  - generic [ref=f5e63]: Shareholders' Equity
+                - generic [ref=f5e64]: × 100
+            - generic [ref=f5e65]:
+              - paragraph [ref=f5e66]: AAPL TTM Actuals
+              - generic [ref=f5e67]:
+                - generic [ref=f5e68]: ROE
+                - generic [ref=f5e69]: =
+                - generic [ref=f5e70]:
+                  - generic [ref=f5e71]: $96.99B
+                  - generic [ref=f5e72]: $62.15B
+                - generic [ref=f5e73]: × 100
+                - generic [ref=f5e74]: =
+                - strong [ref=f5e75]: 156.1%
+        - generic [ref=f5e76]:
+          - generic [ref=f5e77]:
+            - generic [ref=f5e78]:
+              - heading "What Is Return on Equity?" [level=2] [ref=f5e79]
+              - paragraph [ref=f5e80]: Return on Equity (ROE) measures the net income returned as a percentage of shareholders' equity. It reveals how efficiently a company uses investor capital to generate profits.
+            - generic [ref=f5e81]:
+              - heading "Why ROE Matters in Value Investing" [level=2] [ref=f5e82]
+              - generic [ref=f5e83]:
+                - paragraph [ref=f5e84]: Warren Buffett considers ROE one of the most important indicators of a quality business. A consistently high ROE (above 15%) suggests a company has a durable competitive advantage — or economic moat.
+                - paragraph [ref=f5e85]: Companies that can sustain high ROE over decades demonstrate that their business model generates superior returns without requiring excessive leverage. This is a hallmark of what Buffett calls "wonderful businesses at fair prices."
+          - blockquote [ref=f5e86]:
+            - generic [ref=f5e87]: ”
+            - paragraph [ref=f5e88]: "\"We prefer businesses that can be characterized as wonderful businesses at fair prices rather than fair businesses at wonderful prices. One of the keys is consistently high return on equity without excess debt.\""
+            - generic [ref=f5e89]:
+              - generic [ref=f5e90]: — Warren Buffett
+              - generic [ref=f5e91]: Chairman & CEO, Berkshire Hathaway
+        - generic [ref=f5e92]:
+          - heading "Time Horizon Analysis" [level=2] [ref=f5e93]
+          - generic [ref=f5e94]:
+            - status "Loading time horizon analysis" [ref=f5e95]
+            - status "Loading time horizon analysis" [ref=f5e115]
+            - status "Loading time horizon analysis" [ref=f5e135]
+            - status "Loading time horizon analysis" [ref=f5e155]
+        - status [ref=f5e175]:
+          - heading "Loading consolidation summary" [level=2] [ref=f5e176]:
+            - img "Loading consolidation summary" [ref=f5e177]
+          - generic [ref=f5e180]:
+            - paragraph [ref=f5e181]
+            - paragraph [ref=f5e183]
+  - contentinfo [ref=f5e185]:
+    - generic [ref=f5e186]:
+      - strong [ref=f5e187]: oto
+      - generic [ref=f5e188]: © 2026 oto

@@ -1,0 +1,151 @@
+// [ REDUX > SLICES > RETURN ON EQUITY ] #############################################################
+
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// 1.1. END ..........................................................................................
+
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
+// 1.2. END ..........................................................................................
+
+// 1.3. TYPES ........................................................................................
+export type ReturnOnEquityStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
+
+export type ReturnOnEquityErrorKind = 'not-found' | 'rate-limit' | 'timeout' | 'server' | 'network';
+
+export interface ReturnOnEquityBreakdownYear {
+    period: string;
+    value: string;
+}
+
+export interface ReturnOnEquityHorizonResult {
+    label: string;
+    range: string;
+    value: string;
+    breakdown: ReturnOnEquityBreakdownYear[];
+    trend: 'up' | 'down';
+}
+
+export interface ConsolidatedSummary {
+    values: string[];
+    denominator: string;
+    result: string;
+}
+
+interface ReturnOnEquityRejection {
+    kind: ReturnOnEquityErrorKind;
+    message: string;
+}
+
+interface ReturnOnEquityState {
+    status: ReturnOnEquityStatus;
+    ticker: string | null;
+    horizons: ReturnOnEquityHorizonResult[];
+    consolidatedSummary: ConsolidatedSummary | null;
+    errorKind: ReturnOnEquityErrorKind | null;
+    errorMessage: string | null;
+}
+// 1.3. END ..........................................................................................
+
+// 1.4. INITIAL STATE ................................................................................
+const initialState: ReturnOnEquityState = {
+    status: 'idle',
+    ticker: null,
+    horizons: [],
+    consolidatedSummary: null,
+    errorKind: null,
+    errorMessage: null,
+};
+// 1.4. END ..........................................................................................
+
+// 1.5. THUNK ........................................................................................
+/**
+ * Maps an upstream HTTP status to the kind of failure the user interface shows.
+ */
+function errorKindForStatus(status: number): ReturnOnEquityErrorKind {
+    switch (status) {
+        case 404:
+            return 'not-found';
+        case 429:
+            return 'rate-limit';
+        case 504:
+            return 'timeout';
+        default:
+            return 'server';
+    }
+}
+
+/**
+ * Fetches a company's return-on-equity analysis through the same-origin proxy.
+ *
+ * The proxy keeps the backend origin private, so this thunk only ever talks to
+ * the local `/api` route. Failures are normalised into a `kind`/`message` pair
+ * the selectors can turn into a friendly error state.
+ */
+export const fetchReturnOnEquity = createAsyncThunk<
+    { ticker: string; horizons: ReturnOnEquityHorizonResult[]; consolidatedSummary: ConsolidatedSummary },
+    string,
+    { rejectValue: ReturnOnEquityRejection }
+>('returnOnEquity/fetch', async (ticker, { rejectWithValue }) => {
+    let response: Response;
+
+    try {
+        response = await fetch(`/api/analysis/return-on-equity?ticker=${encodeURIComponent(ticker)}`, {
+            headers: { accept: 'application/json' },
+        });
+    } catch {
+        return rejectWithValue({
+            kind: 'network',
+            message: 'We could not reach the analysis service. Check your connection and try again.',
+        });
+    }
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+        return rejectWithValue({
+            kind: errorKindForStatus(response.status),
+            message: payload?.error?.message ?? 'The analysis could not be loaded.',
+        });
+    }
+
+    return {
+        ticker: payload?.data?.ticker ?? ticker,
+        horizons: payload?.data?.horizons ?? [],
+        consolidatedSummary: payload?.data?.consolidatedSummary ?? { values: [], result: '—', denominator: '0' },
+    };
+});
+// 1.5. END ..........................................................................................
+
+// 1.6. SLICE ........................................................................................
+const returnOnEquitySlice = createSlice({
+    name: 'returnOnEquity',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchReturnOnEquity.pending, (state) => {
+                state.status = 'loading';
+                state.errorKind = null;
+                state.errorMessage = null;
+            })
+            .addCase(fetchReturnOnEquity.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.ticker = action.payload.ticker;
+                state.horizons = action.payload.horizons;
+                state.consolidatedSummary = action.payload.consolidatedSummary;
+                state.errorKind = null;
+                state.errorMessage = null;
+            })
+            .addCase(fetchReturnOnEquity.rejected, (state, action) => {
+                state.status = 'failed';
+                state.horizons = [];
+                state.errorKind = action.payload?.kind ?? 'server';
+                state.errorMessage = action.payload?.message ?? 'The analysis could not be loaded.';
+            });
+    },
+});
+// 1.6. END ..........................................................................................
+
+export default returnOnEquitySlice.reducer;
+
+// END FILE ##########################################################################################

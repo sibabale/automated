@@ -1,24 +1,24 @@
-// [ COMPONENTS > MOLECULES > HORIZON CARD ] ########################################################
+// [ COMPONENTS > MOLECULES > HORIZON CARD ] #########################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import styled, { keyframes } from 'styled-components';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { motion } from 'motion/react';
-// 1.1. END ........................................................................................
+import styled, { keyframes } from 'styled-components';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { media } from '../../../theme';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. IMAGES .....................................................................................
-// 1.3. END ........................................................................................
+// 1.3. IMAGES .......................................................................................
+// 1.3. END ..........................................................................................
 
-// 1.4. DATA .......................................................................................
-// 1.4. END ........................................................................................
+// 1.4. DATA .........................................................................................
+// 1.4. END ..........................................................................................
 
-// 1.5. FUNCTIONS ..................................................................................
-// 1.5. END ........................................................................................
+// 1.5. FUNCTIONS ....................................................................................
+// 1.5. END ..........................................................................................
 
-// 1.6. STYLES .....................................................................................
+// 1.6. STYLES .......................................................................................
 export const HorizonCardContainer = styled(motion.article)`
     display: grid;
     min-width: 0;
@@ -231,6 +231,44 @@ export const HorizonCardInsightIcon = styled.span`
     color: ${({ theme }) => theme.border.medium};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
-// 1.6. END ........................................................................................
 
-// END FILE ########################################################################################
+export const HorizonCardStateContainer = styled.section`
+    display: grid;
+    justify-items: center;
+    gap: ${({ theme }) => theme.spacing.s};
+    padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.l};
+    border: 1px solid ${({ theme }) => theme.border.default};
+    border-radius: 0;
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.text.secondary};
+    text-align: center;
+`;
+
+export const HorizonCardStateTitle = styled.h3`
+    margin: 0;
+    color: ${({ theme }) => theme.text.primary};
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    line-height: 1.2;
+    text-transform: uppercase;
+`;
+
+export const HorizonCardStateMessage = styled.p`
+    max-width: 42ch;
+    margin: 0;
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    line-height: 1.5;
+`;
+
+export const HorizonCardStateAction = styled.button`
+    padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.m}`};
+    border: 1px solid ${({ theme }) => theme.border.strong};
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.text.primary};
+    font: inherit;
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    cursor: pointer;
+`;
+// 1.6. END ..........................................................................................
+
+// END FILE ##########################################################################################

@@ -9,6 +9,7 @@ export default defineConfig({
             'app/**/*.{test,spec}.{ts,tsx}',
             'components/**/*.{test,spec}.{ts,tsx}',
             'data/**/*.{test,spec}.{ts,tsx}',
+            'redux/**/*.{test,spec}.{ts,tsx}',
             'test/**/*.{test,spec}.{ts,tsx}',
         ],
         setupFiles: './test/setup.ts',

@@ -1,18 +1,21 @@
-// [ COMPONENTS > ORGANISMS > DETAIL LEAD SECTION ] #################################################
+// [ COMPONENTS > ORGANISMS > DETAIL LEAD SECTION ] ##################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { render, screen } from '@testing-library/react';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
+import React from 'react';
 import { describe, expect, it } from 'vitest';
-// 1.1. END ........................................................................................
+import { render, screen } from '@testing-library/react';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { StyledThemeProvider } from '../../../theme';
 import DetailLeadSection from './detail-lead-section';
 import DetailLeadSectionLoading from './detail-lead-section.loading';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. TEST CASES ................................................................................
-const renderDetailLeadSection = (props = {
+// 1.3. TEST CASES ...................................................................................
+type DetailLeadSectionProps = React.ComponentProps<typeof DetailLeadSection>;
+
+const renderDetailLeadSection = (props: DetailLeadSectionProps = {
     companyName: 'Apple Inc.',
     ticker: 'AAPL',
     title: 'Return on Equity',
@@ -63,7 +66,23 @@ describe('DetailLeadSection', () => {
         expect(screen.getByTestId('detail-lead-section-loading')).toHaveAttribute('role', 'status');
         expect(screen.getByLabelText('Loading metric details')).toBeVisible();
     });
-});
-// 1.3. END ........................................................................................
 
-// END FILE ########################################################################################
+    it('shows a headline skeleton while the metric value is loading, keeping static copy visible', () => {
+        renderDetailLeadSection({
+            companyName: 'Apple Inc.',
+            ticker: 'AAPL',
+            title: 'Return on Equity',
+            value: '21.3%',
+            description: 'Buffett Target: > 15%',
+            isValueLoading: true,
+        });
+
+        expect(screen.getByTestId('detail-lead-section-title')).toHaveTextContent('Return on Equity');
+        expect(screen.getByTestId('detail-lead-section-value-loading')).toHaveAttribute('role', 'status');
+        expect(screen.getByLabelText('Loading current return on equity')).toBeVisible();
+        expect(screen.queryByTestId('detail-lead-section-value')).toBeNull();
+    });
+});
+// 1.3. END ..........................................................................................
+
+// END FILE ##########################################################################################

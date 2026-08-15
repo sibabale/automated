@@ -1,19 +1,27 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { use, useEffect } from 'react';
 import Header from '../../../components/molecules/header/header';
-import DetailLeadSection from '../../../components/organisms/detail-lead-section/detail-lead-section';
-import DetailLeadSectionLoading from '../../../components/organisms/detail-lead-section/detail-lead-section.loading';
+import { getFinancialMetric } from '../../../data/financial-metrics';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import HorizonCard from '../../../components/molecules/horizon-card/horizon-card';
+import { fetchReturnOnEquity } from '../../../redux/slices/return-on-equity.slice';
 import FormulaSection from '../../../components/organisms/formula-section/formula-section';
-import FormulaSectionLoading from '../../../components/organisms/formula-section/formula-section.loading';
+import HorizonCardEmpty from '../../../components/molecules/horizon-card/horizon-card.empty';
+import HorizonCardError from '../../../components/molecules/horizon-card/horizon-card.error';
+import HorizonCardLoading from '../../../components/molecules/horizon-card/horizon-card.loading';
+import DetailLeadSection from '../../../components/organisms/detail-lead-section/detail-lead-section';
+import EducationalSection from '../../../components/organisms/educational-section/educational-section';
+import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
 import ConsolidationSummary from '../../../components/organisms/consolidation-summary/consolidation-summary';
 import ConsolidationSummaryLoading from '../../../components/organisms/consolidation-summary/consolidation-summary.loading';
-import EducationalSection from '../../../components/organisms/educational-section/educational-section';
-import EducationalSectionLoading from '../../../components/organisms/educational-section/educational-section.loading';
-import HorizonCard from '../../../components/molecules/horizon-card/horizon-card';
-import HorizonCardLoading from '../../../components/molecules/horizon-card/horizon-card.loading';
-import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
-import { getFinancialMetric } from '../../../data/financial-metrics';
+import {
+    selectReturnOnEquityError,
+    selectReturnOnEquityHorizons,
+    selectReturnOnEquityIsEmpty,
+    selectReturnOnEquityStatus,
+    selectConsolidatedSummary,
+} from '../../../redux/selectors/return-on-equity.selectors';
 import {
     DetailContentFlow,
     DesktopBreadcrumb,
@@ -32,15 +40,29 @@ export default function MetricDetailsPage({
 }: IMetricDetailsPage) {
     const { metric: metricSlug } = use(params);
     const metric = getFinancialMetric(metricSlug);
-    const [isContentLoading, setIsContentLoading] = useState(true);
+
+    const dispatch = useAppDispatch();
+    const horizonStatus = useAppSelector(selectReturnOnEquityStatus);
+    const horizons = useAppSelector(selectReturnOnEquityHorizons);
+    const horizonsAreEmpty = useAppSelector(selectReturnOnEquityIsEmpty);
+    const horizonError = useAppSelector(selectReturnOnEquityError);
+    const consolidatedData = useAppSelector(selectConsolidatedSummary);
 
     useEffect(() => {
-        const timeout = window.setTimeout(() => {
-            setIsContentLoading(false);
-        }, 5_000);
+        dispatch(fetchReturnOnEquity('RDDT'));
+    }, [dispatch]);
 
-        return () => window.clearTimeout(timeout);
-    }, [metricSlug]);
+    const loadHorizons = () => {
+        dispatch(fetchReturnOnEquity('RDDT'));
+    };
+
+    const insightForTrend = (trend: 'up' | 'down') =>
+        trend === 'up'
+            ? 'Improving returns across this period.'
+            : 'Softening returns across this period.';
+
+    const isHeadlineLoading = horizonStatus === 'idle' || horizonStatus === 'loading';
+    const currentReturnOnEquity = consolidatedData?.result ?? '—';
 
     return (
         <div>
@@ -53,50 +75,65 @@ export default function MetricDetailsPage({
                 />
             </DesktopBreadcrumb>
             <DetailPageMain>
-                {isContentLoading ? (
-                    <DetailLeadSectionLoading />
-                ) : (
-                    <DetailLeadSection
-                        companyName="Apple Inc."
-                        ticker="AAPL"
-                        title={metric?.label ?? 'Metric details'}
-                        value={metric?.value ?? '—'}
-                        description={metric?.description ?? 'Metric information is unavailable.'}
-                    />
-                )}
+                <DetailLeadSection
+                    companyName="Apple Inc."
+                    ticker="AAPL"
+                    title={metric?.label ?? 'Metric details'}
+                    value={currentReturnOnEquity}
+                    description={metric?.description ?? 'Metric information is unavailable.'}
+                    isValueLoading={isHeadlineLoading}
+                />
                 <DetailContentFlow>
-                    {metric?.formula && (
-                        isContentLoading
-                            ? <FormulaSectionLoading />
-                            : <FormulaSection {...metric.formula} />
-                    )}
-                    {metric?.education && (
-                        isContentLoading
-                            ? <EducationalSectionLoading />
-                            : <EducationalSection {...metric.education} />
-                    )}
+                    {metric?.formula && <FormulaSection {...metric.formula} />}
+                    {metric?.education && <EducationalSection {...metric.education} />}
                     {metric?.horizons && (
                         <HorizonAnalysisSection>
                             <HorizonAnalysisTitle>Time Horizon Analysis</HorizonAnalysisTitle>
-                            <HorizonAnalysisGrid>
-                                {isContentLoading
-                                    ? metric.horizons.map((horizon) => (
+                            {horizonError ? (
+                                <HorizonCardError message={horizonError.message} onRetry={loadHorizons} />
+                            ) : horizonsAreEmpty ? (
+                                <HorizonCardEmpty />
+                            ) : horizonStatus === 'succeeded' ? (
+                                <HorizonAnalysisGrid>
+                                    {horizons.map((horizon) => (
+                                        <HorizonCard
+                                            key={horizon.label}
+                                            label={horizon.label}
+                                            range={horizon.range}
+                                            value={horizon.value}
+                                            breakdown={horizon.breakdown}
+                                            insight={insightForTrend(horizon.trend)}
+                                            trend={horizon.trend}
+                                        />
+                                    ))}
+                                </HorizonAnalysisGrid>
+                            ) : (
+                                <HorizonAnalysisGrid>
+                                    {metric.horizons.map((horizon) => (
                                         <HorizonCardLoading
                                             key={horizon.label}
                                             loaderKey={`horizon-card-loading-${horizon.label}`}
                                             mobileInsightLines={horizon.insight.length > 50 ? 2 : 1}
                                         />
-                                    ))
-                                    : metric.horizons.map((horizon) => (
-                                        <HorizonCard key={horizon.label} {...horizon} />
                                     ))}
-                            </HorizonAnalysisGrid>
+                                </HorizonAnalysisGrid>
+                            )}
                         </HorizonAnalysisSection>
                     )}
-                    {metric?.consolidation && (
-                        isContentLoading
-                            ? <ConsolidationSummaryLoading />
-                            : <ConsolidationSummary {...metric.consolidation} />
+                     {metric?.consolidation && (
+                        isHeadlineLoading || !consolidatedData ? (
+                            <ConsolidationSummaryLoading />
+                        ) : (
+                            <ConsolidationSummary
+                                title={metric.consolidation.title}
+                                values={consolidatedData.values}
+                                denominator={consolidatedData.denominator}
+                                result={consolidatedData.result}
+                                note={metric.consolidation.note}
+                                mobileResult={consolidatedData.result}
+                                mobileNote={metric.consolidation.mobileNote}
+                            />
+                        )
                     )}
                 </DetailContentFlow>
             </DetailPageMain>
