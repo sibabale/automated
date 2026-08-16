@@ -6,6 +6,7 @@
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { createApp } from "./app.js";
 import { logger } from "./logger.js";
+import { fileURLToPath } from "node:url";
 // 1.2. END ..........................................................................................
 
 // 1.3. CONSTANTS ....................................................................................
@@ -35,12 +36,28 @@ export function getPort(value = process.env.PORT): number {
 // 1.4. END ..........................................................................................
 
 // 1.5. SERVER .......................................................................................
-const port = getPort();
-const app = createApp();
+/**
+ * Opens the network port and starts accepting requests.
+ *
+ * Kept in a function guarded by the entry-point check below so importing this
+ * module (for example from tests that exercise {@link getPort}) has no side
+ * effects and never binds a port.
+ */
+export function startServer(): void {
+  const port = getPort();
+  const app = createApp();
 
-app.listen(port, () => {
-  logger.info({ port }, "HTTP server listening");
-});
+  app.listen(port, () => {
+    logger.info({ port }, "HTTP server listening");
+  });
+}
+
+// Only start the server when this file is run directly as the process entry
+// point, not when it is imported. `process.argv[1]` is the executed script's
+// path, which matches this module's own path only for a direct run.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  startServer();
+}
 // 1.5. END ..........................................................................................
 
 // END FILE ##########################################################################################
