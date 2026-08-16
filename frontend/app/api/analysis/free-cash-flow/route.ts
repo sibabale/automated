@@ -6,6 +6,11 @@ import type { NextRequest } from 'next/server';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import {
+    CORRELATION_ID_HEADER,
+    createCorrelationHeaders,
+    resolveCorrelationId,
+} from '@/lib/correlation-id';
 // 1.2. END ..........................................................................................
 
 // 1.3. CONFIGURATION ................................................................................
@@ -28,12 +33,19 @@ const BACKEND_URL = process.env.BACKEND_URL ?? 'http://localhost:3001';
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
     // 1.4.1. INPUT ..................................................................................
+    const correlationId = resolveCorrelationId(request.headers.get(CORRELATION_ID_HEADER));
     const ticker = request.nextUrl.searchParams.get('ticker')?.trim() ?? '';
 
     if (!ticker) {
         return NextResponse.json(
-            { error: { message: 'Missing required query parameter: ticker' } },
-            { status: 400 },
+            {
+                correlationId,
+                error: { message: 'Missing required query parameter: ticker' },
+            },
+            {
+                headers: createCorrelationHeaders(correlationId),
+                status: 400,
+            },
         );
     }
     // 1.4.1. END ....................................................................................
@@ -44,16 +56,26 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         const response = await fetch(upstream, {
             cache: 'no-store',
-            headers: { accept: 'application/json' },
+            headers: createCorrelationHeaders(correlationId, { accept: 'application/json' }),
         });
 
         const payload = await response.json();
+        const upstreamCorrelationId = response.headers.get(CORRELATION_ID_HEADER) ?? correlationId;
 
-        return NextResponse.json(payload, { status: response.status });
+        return NextResponse.json(payload, {
+            headers: createCorrelationHeaders(upstreamCorrelationId),
+            status: response.status,
+        });
     } catch {
         return NextResponse.json(
-            { error: { message: 'The analysis service is unavailable. Please try again shortly.' } },
-            { status: 502 },
+            {
+                correlationId,
+                error: { message: 'The analysis service is unavailable. Please try again shortly.' },
+            },
+            {
+                headers: createCorrelationHeaders(correlationId),
+                status: 502,
+            },
         );
     }
     // 1.4.2. END ....................................................................................

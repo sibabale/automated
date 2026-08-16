@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import { CORRELATION_ID_HEADER } from '@/lib/correlation-id';
 import reducer, { fetchReturnOnEquity } from './return-on-equity.slice';
 // 1.2. END ..........................................................................................
 
@@ -35,12 +36,14 @@ describe('returnOnEquity slice', () => {
                 trend: 'up' as const,
             },
         ];
-        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(jsonResponse(200, { data: { ticker: 'AAPL', horizons } })));
+        const fetchMock = vi.fn().mockResolvedValue(jsonResponse(200, { data: { ticker: 'AAPL', horizons } }));
+        vi.stubGlobal('fetch', fetchMock);
 
         const store = makeStore();
         await store.dispatch(fetchReturnOnEquity('AAPL'));
         const state = store.getState().returnOnEquity;
 
+        expect(new Headers(fetchMock.mock.calls[0]?.[1]?.headers).get(CORRELATION_ID_HEADER)).toEqual(expect.any(String));
         expect(state.status).toBe('succeeded');
         expect(state.ticker).toBe('AAPL');
         expect(state.horizons).toHaveLength(1);

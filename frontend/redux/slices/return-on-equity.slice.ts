@@ -5,6 +5,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import { createCorrelationHeaders, createCorrelationId } from '@/lib/correlation-id';
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -99,10 +100,11 @@ export const fetchReturnOnEquity = createAsyncThunk<
     { rejectValue: ReturnOnEquityRejection }
 >('returnOnEquity/fetch', async (ticker, { rejectWithValue }) => {
     let response: Response;
+    const correlationId = createCorrelationId();
 
     try {
         response = await fetch(`/api/analysis/return-on-equity?ticker=${encodeURIComponent(ticker)}`, {
-            headers: { accept: 'application/json' },
+            headers: createCorrelationHeaders(correlationId, { accept: 'application/json' }),
         });
     } catch {
         return rejectWithValue({
