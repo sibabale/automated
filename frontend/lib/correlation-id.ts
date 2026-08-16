@@ -25,7 +25,11 @@ export function createCorrelationId(): string {
         return randomUuid();
     }
 
-    return `cid-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const randomSegment = Math.floor(Math.random() * 0xffffffff)
+        .toString(16)
+        .padStart(8, '0');
+
+    return `cid-${Date.now()}-${randomSegment}`;
 }
 
 /**

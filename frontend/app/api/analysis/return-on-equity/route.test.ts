@@ -33,10 +33,11 @@ describe('return on equity proxy route', () => {
     });
 
     it('forwards the ticker and correlation id to the backend and returns its response unchanged', async () => {
+        const payload = { correlationId: 'cid-upstream-roe', data: { ticker: 'AAPL', horizons: [] } };
         const fetchMock = vi.fn().mockResolvedValue({
             headers: new Headers({ [CORRELATION_ID_HEADER]: 'cid-upstream-roe' }),
             status: 200,
-            json: async () => ({ correlationId: 'cid-upstream-roe', data: { ticker: 'AAPL', horizons: [] } }),
+            json: async () => payload,
         });
         vi.stubGlobal('fetch', fetchMock);
 
@@ -47,10 +48,7 @@ describe('return on equity proxy route', () => {
         expect(new Headers(fetchMock.mock.calls[0]?.[1]?.headers).get(CORRELATION_ID_HEADER)).toBe('cid-client-roe');
         expect(response.status).toBe(200);
         expect(response.headers.get(CORRELATION_ID_HEADER)).toBe('cid-upstream-roe');
-        await expect(response.json()).resolves.toMatchObject({
-            correlationId: 'cid-upstream-roe',
-            data: { ticker: 'AAPL' },
-        });
+        await expect(response.json()).resolves.toEqual(payload);
     });
 
     it('returns a gateway error when the backend cannot be reached', async () => {

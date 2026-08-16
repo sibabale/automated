@@ -33,10 +33,11 @@ describe('free cash flow proxy route', () => {
     });
 
     it('forwards the ticker and correlation id to the backend and returns its response unchanged', async () => {
+        const payload = { correlationId: 'cid-upstream-fcf', data: { ticker: 'RDDT', horizons: [] } };
         const fetchMock = vi.fn().mockResolvedValue({
             headers: new Headers({ [CORRELATION_ID_HEADER]: 'cid-upstream-fcf' }),
             status: 200,
-            json: async () => ({ correlationId: 'cid-upstream-fcf', data: { ticker: 'RDDT', horizons: [] } }),
+            json: async () => payload,
         });
         vi.stubGlobal('fetch', fetchMock);
 
@@ -47,10 +48,7 @@ describe('free cash flow proxy route', () => {
         expect(new Headers(fetchMock.mock.calls[0]?.[1]?.headers).get(CORRELATION_ID_HEADER)).toBe('cid-client-fcf');
         expect(response.status).toBe(200);
         expect(response.headers.get(CORRELATION_ID_HEADER)).toBe('cid-upstream-fcf');
-        await expect(response.json()).resolves.toMatchObject({
-            correlationId: 'cid-upstream-fcf',
-            data: { ticker: 'RDDT' },
-        });
+        await expect(response.json()).resolves.toEqual(payload);
     });
 
     it('returns a gateway error when the backend cannot be reached', async () => {
