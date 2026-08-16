@@ -13,6 +13,13 @@ shared versus written per feature, the build order, and the automated
 Definition of Done. Follow it so every feature — whether written by a person or
 an autonomous agent — matches the reference by construction.
 
+When the work will be done by a remote or autonomous agent, also read
+**`.github/skills/17-remote-metric-delivery/skill.md`** before coding. It is the
+repository's operating contract for metric delivery: which skills must be
+loaded, which ROE and free-cash-flow files must be inspected first, how the DDD
+layers and frontend seams must be preserved, and which validations an agent
+must clear before claiming the feature is complete.
+
 The skills in `.github/skills/` are mandatory, not advisory. In particular:
 scaffolding (copy templates, never write files from scratch), testing and
 mutation resistance (the testing bar), commit size and conventional commits

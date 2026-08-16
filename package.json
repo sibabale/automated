@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "new:metric": "node ./scripts/new-metric.mjs",
+    "test:new-metric": "node --test ./scripts/new-metric.test.mjs"
+  },
   "devDependencies": {
     "husky": "^9.1.7"
   }

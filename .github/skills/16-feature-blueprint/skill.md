@@ -33,6 +33,27 @@ The reference feature to copy from, at every layer:
 - Frontend: `frontend/redux/slices/return-on-equity.slice.ts`, its selectors,
   the `/api/analysis/return-on-equity` route, and the `/details/[metric]` page.
 
+## Phase C generator
+
+Use `pnpm new:metric -- --slug <metric-slug> --label "<Metric Label>"` from the
+repository root to scaffold the metric file manifest into a compile-safe draft.
+
+What the generator does now:
+
+- creates the backend service, repository, and controller files plus colocated tests;
+- creates the frontend proxy route, slice, and selectors plus their tests;
+- appends a placeholder registry entry to `frontend/data/financial-metrics.ts`;
+- prints a remote-agent kickoff brief that lists the required skills, reference
+  files, seams, and validation gates for the new metric;
+- leaves explicit TODOs where the real formula, provider mapping, route wiring,
+  and live page mapping still depend on the metric's actual financial inputs.
+
+This means a new feature starts from a consistent, agent-readable draft rather
+than a blank page, while still forcing the metric-specific business logic to be
+filled in deliberately. For remote delivery, pair the scaffold with
+**`.github/skills/17-remote-metric-delivery/skill.md`** so the agent also loads
+the repo know-how that made free cash flow successful.
+
 ---
 
 ## The Feature Contract
@@ -208,6 +229,8 @@ Do not pre-generalise a pattern that has only one consumer; wait for the second.
 
 ## Related Skills
 
+- **Remote Metric Delivery** — the operating contract for autonomous delivery:
+  required skills, reference files, repo seams, and validation expectations.
 - **Scaffolding** — never write a new file from scratch; copy the template.
 - **Testing the Public Interface** and **Mutation Resistance** — the testing bar
   every layer must clear.

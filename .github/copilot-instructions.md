@@ -98,5 +98,10 @@ Copilot should:
   lookup maps; never mark CSS-in-JS objects, ORM `orderBy` clauses, signed or
   hashed JSON payloads, iteration-ordered maps, or destructuring patterns, and
   override any proposal to mark them.
+- **When building or changing a financial-metric feature, always apply the
+  Remote Metric Delivery skill** in addition to the Feature Blueprint. Remote
+  and local agents must first inspect the ROE and free-cash-flow reference
+  files, preserve the backend DDD layers and frontend three-seam wiring, and
+  clear the repo's validation gates before claiming the feature is complete.
 
 The AI Operating Principles are the foundation for all engineering tasks and should guide every response and code change.
