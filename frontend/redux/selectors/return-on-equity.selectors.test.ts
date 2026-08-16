@@ -31,14 +31,19 @@ const consolidatedSummary = {
     result: '26.1%',
     denominator: '1',
 };
+
+const trailingTwelveMonthsActuals = {
+    netIncome: '$96.99B',
+    shareholdersEquity: '$62.15B',
+};
 // 1.3. END ..........................................................................................
 
 // 1.4. TEST CASES ...................................................................................
 describe('returnOnEquity selectors', () => {
     it('reports emptiness only after a successful load returns no horizons', () => {
-        const loading = stateWith({ status: 'loading', ticker: null, horizons: [], consolidatedSummary: null, errorKind: null, errorMessage: null });
-        const empty = stateWith({ status: 'succeeded', ticker: 'ZZZZ', horizons: [], consolidatedSummary, errorKind: null, errorMessage: null });
-        const loaded = stateWith({ status: 'succeeded', ticker: 'AAPL', horizons: [horizon], consolidatedSummary, errorKind: null, errorMessage: null });
+        const loading = stateWith({ status: 'loading', ticker: null, horizons: [], consolidatedSummary: null, trailingTwelveMonthsActuals: null, errorKind: null, errorMessage: null });
+        const empty = stateWith({ status: 'succeeded', ticker: 'ZZZZ', horizons: [], consolidatedSummary, trailingTwelveMonthsActuals, errorKind: null, errorMessage: null });
+        const loaded = stateWith({ status: 'succeeded', ticker: 'AAPL', horizons: [horizon], consolidatedSummary, trailingTwelveMonthsActuals, errorKind: null, errorMessage: null });
 
         expect(selectReturnOnEquityIsEmpty(loading)).toBe(false);
         expect(selectReturnOnEquityIsEmpty(empty)).toBe(true);
@@ -51,17 +56,18 @@ describe('returnOnEquity selectors', () => {
             ticker: 'AAPL',
             horizons: [],
             consolidatedSummary: null,
+            trailingTwelveMonthsActuals: null,
             errorKind: 'rate-limit',
             errorMessage: 'Too many requests',
         });
-        const succeeded = stateWith({ status: 'succeeded', ticker: 'AAPL', horizons: [horizon], consolidatedSummary, errorKind: null, errorMessage: null });
+        const succeeded = stateWith({ status: 'succeeded', ticker: 'AAPL', horizons: [horizon], consolidatedSummary, trailingTwelveMonthsActuals, errorKind: null, errorMessage: null });
 
         expect(selectReturnOnEquityError(failed)).toEqual({ kind: 'rate-limit', message: 'Too many requests' });
         expect(selectReturnOnEquityError(succeeded)).toBeNull();
     });
 
     it('passes through the current status and horizons', () => {
-        const loaded = stateWith({ status: 'succeeded', ticker: 'AAPL', horizons: [horizon], consolidatedSummary, errorKind: null, errorMessage: null });
+        const loaded = stateWith({ status: 'succeeded', ticker: 'AAPL', horizons: [horizon], consolidatedSummary, trailingTwelveMonthsActuals, errorKind: null, errorMessage: null });
 
         expect(selectReturnOnEquityStatus(loaded)).toBe('succeeded');
         expect(selectReturnOnEquityHorizons(loaded)).toEqual([horizon]);

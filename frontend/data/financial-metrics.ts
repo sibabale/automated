@@ -52,6 +52,8 @@ export interface IFinancialMetric {
     label: string;
     value: string;
     description: string;
+    liveCompanyName?: string;
+    liveTicker?: string;
     formula?: IFinancialMetricFormula;
     horizons?: IFinancialMetricHorizon[];
     consolidation?: IFinancialMetricConsolidation;
@@ -64,6 +66,8 @@ export const financialMetrics: IFinancialMetric[] = [
         label: 'Return on Equity',
         value: '156.1%',
         description: 'Buffett Target: > 15%',
+        liveCompanyName: 'Reddit, Inc.',
+        liveTicker: 'RDDT',
         formula: {
             title: 'How ROE Is Calculated',
             standardFormulaLabel: 'Standard Formula',
@@ -153,10 +157,12 @@ export const financialMetrics: IFinancialMetric[] = [
         label: 'Free Cash Flow',
         value: '$110.5B',
         description: 'Consistent expansion',
+        liveCompanyName: 'Reddit, Inc.',
+        liveTicker: 'RDDT',
         formula: {
-            title: 'How Free Cash Flow Is Calculated',
+            title: 'How FCF Is Calculated',
             standardFormulaLabel: 'Standard Formula',
-            actualsLabel: 'AAPL TTM Actuals',
+            actualsLabel: 'RDDT Trailing Twelve Months',
             numeratorLabel: 'Operating Cash Flow',
             denominatorLabel: 'Capital Expenditures',
             numeratorValue: '$118.3B',
@@ -164,7 +170,7 @@ export const financialMetrics: IFinancialMetric[] = [
             factor: '−',
             calculationOperator: 'subtract',
             result: '$110.5B',
-            footnote: 'Representative trailing twelve months figures based on company cash flow reporting',
+            footnote: 'Based on trailing twelve months (TTM) figures from company cash flow reporting',
             metricAbbreviation: 'FCF',
         },
         horizons: [
