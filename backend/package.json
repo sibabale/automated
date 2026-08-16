@@ -8,14 +8,24 @@
     "build": "tsc",
     "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
     "start": "node --env-file-if-exists=.env dist/server.js",
-    "test": "tsx --test test/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "test": "tsx --test 'src/**/*.test.ts'",
+    "coverage": "c8 tsx --test 'src/**/*.test.ts'",
+    "coverage:gate": "c8 --check-coverage tsx --test 'src/**/*.test.ts'",
+    "typecheck": "tsc --noEmit",
+    "stryker": "npx stryker run",
+    "mutation": "pnpm coverage:gate && npx stryker run ./stryker.conf.cjs",
+    "verify-pacts": "node ./verify-pacts.js"
   },
   "devDependencies": {
+    "@pact-foundation/pact": "^10.0.0",
+    "@stryker-mutator/core": "^4.0.0",
+    "@stryker-mutator/html-reporter": "^3.1.0",
+    "@stryker-mutator/typescript": "^4.0.0",
     "@types/express": "^5.0.6",
     "@types/node": "^26.2.0",
+    "c8": "^12.0.0",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "express": "^5.2.1",
