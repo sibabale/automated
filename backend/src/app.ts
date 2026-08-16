@@ -12,8 +12,8 @@ import { logger } from "./logger.js";
 import { errorHandler } from "./application/middleware/error-handler/index.js";
 import { correlationId } from "./application/middleware/correlation-id/index.js";
 import { notFoundHandler } from "./application/middleware/not-found-handler/index.js";
+import { freeCashFlowController } from "./presentation/controllers/free-cash-flow/index.js";
 import { returnOnEquityController } from "./presentation/controllers/return-on-equity/index.js";
-import { createFmpFinancialDataRepository } from "./infrastructure/repositories/fmp-financial-data/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. APPLICATION ..................................................................................
@@ -33,10 +33,12 @@ export function createApp(options?: { repositoryFactory?: () => any }): Applicat
   app.use(correlationId);
   app.use(express.json({ limit: "1mb" }));
 
-  // Allow tests to override repository creation via options; fall back to the
-  // production FMP repository factory. Stored on the app so controllers can
-  // retrieve it from the request's app instance.
-  app.set("repositoryFactory", options?.repositoryFactory ?? createFmpFinancialDataRepository);
+  // Allow tests to override repository creation for every metric via options.
+  // When absent, each controller falls back to its own production repository,
+  // so a single override can stand in for all metrics during testing.
+  if (options?.repositoryFactory) {
+    app.set("repositoryFactory", options.repositoryFactory);
+  }
   // 1.3.1. END ......................................................................................
 
   // 1.3.2. ROUTES ...................................................................................
@@ -45,6 +47,7 @@ export function createApp(options?: { repositoryFactory?: () => any }): Applicat
   });
 
   app.get("/analysis/return-on-equity", returnOnEquityController);
+  app.get("/analysis/free-cash-flow", freeCashFlowController);
   // 1.3.2. END ......................................................................................
 
   // 1.3.3. ERROR HANDLING ...........................................................................
