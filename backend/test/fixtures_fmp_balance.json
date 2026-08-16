@@ -1,0 +1,8 @@
+[
+  { "fiscalYear": 2024, "date": "2024-12-31", "totalStockholdersEquity": 100 },
+  { "fiscalYear": 2023, "date": "2023-12-31", "totalStockholdersEquity": 95 },
+  { "fiscalYear": 2022, "date": "2022-12-31", "totalStockholdersEquity": 90 },
+  { "fiscalYear": 2021, "date": "2021-12-31", "totalStockholdersEquity": 85 },
+  { "fiscalYear": 2020, "date": "2020-12-31", "totalStockholdersEquity": 80 },
+  { "fiscalYear": 2019, "date": "2019-12-31", "totalStockholdersEquity": 75 }
+]

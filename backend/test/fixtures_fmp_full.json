@@ -1,0 +1,8 @@
+[
+  { "fiscalYear": 2024, "date": "2024-12-31", "netIncome": 1000 },
+  { "fiscalYear": 2023, "date": "2023-12-31", "netIncome": 900 },
+  { "fiscalYear": 2022, "date": "2022-12-31", "netIncome": 800 },
+  { "fiscalYear": 2021, "date": "2021-12-31", "netIncome": 700 },
+  { "fiscalYear": 2020, "date": "2020-12-31", "netIncome": 600 },
+  { "fiscalYear": 2019, "date": "2019-12-31", "netIncome": 500 }
+]
