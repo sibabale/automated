@@ -70,10 +70,10 @@ describe("Return on equity analysis", () => {
     const analysis = await analyseReturnOnEquity("AAPL", fakeRepository(financials), CORRELATION_ID);
     const [short, medium] = analysis.horizons;
 
-    assert.ok(Math.abs(short!.averageReturnOnEquity - (28.3 + 25.8 + 24.2) / 3) < 1e-9);
+    assert.ok(Math.abs(short!.average - (28.3 + 25.8 + 24.2) / 3) < 1e-9);
     assert.equal(short!.trend, "up");
 
-    assert.ok(Math.abs(medium!.averageReturnOnEquity - (22.1 + 21.5 + 27.2) / 3) < 1e-9);
+    assert.ok(Math.abs(medium!.average - (22.1 + 21.5 + 27.2) / 3) < 1e-9);
     assert.equal(medium!.trend, "down");
   });
   // 1.4.2. END ......................................................................................

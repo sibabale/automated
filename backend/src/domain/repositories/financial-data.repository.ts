@@ -16,8 +16,12 @@ import type { FinancialYear } from "../entities/financial-year.entity.js";
  * provider such as Financial Modeling Prep or Alpaca is supplied by an
  * infrastructure adapter that implements this interface, so swapping providers
  * never touches the domain or the services that rely on it.
+ *
+ * The port is generic over the year entity so each metric receives exactly the
+ * reported fields its formula needs. It defaults to {@link FinancialYear} so
+ * existing return-on-equity callers read unchanged.
  */
-export interface FinancialDataRepository {
+export interface FinancialDataRepository<TYear = FinancialYear> {
   /**
    * Returns up to `years` of completed fiscal years for a ticker, ordered
    * newest first. Years with incomplete figures are omitted rather than
@@ -31,7 +35,7 @@ export interface FinancialDataRepository {
     ticker: string,
     years: number,
     correlationId: string,
-  ): Promise<FinancialYear[]>;
+  ): Promise<TYear[]>;
 }
 // 1.3. END ..........................................................................................
 

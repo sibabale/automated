@@ -6,16 +6,15 @@ import type { RequestHandler } from "express";
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { HttpError } from "../../../errors/http-error/index.js";
+import { statusForFmpError } from "../../fmp-error-status/index.js";
+import type { ConsolidatedSummary } from "../../formatting/index.js";
 import { FmpClientError } from "../../../infrastructure/clients/fmp-client/index.js";
+import type { FinancialYear } from "../../../domain/entities/financial-year.entity.js";
 import { analyseReturnOnEquity } from "../../../application/services/return-on-equity/index.js";
 import type { ReturnOnEquityAnalysis } from "../../../application/services/return-on-equity/index.js";
+import { formatPercent, formatCurrency, calculateConsolidatedSummary } from "../../formatting/index.js";
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
-import {
-  formatPercent,
-  formatCurrency,
-  calculateConsolidatedSummary,
-} from "./formatting/index.js";
-import type { ConsolidatedSummary } from "./formatting/index.js";
+import { createFmpFinancialDataRepository } from "../../../infrastructure/repositories/fmp-financial-data/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -59,22 +58,25 @@ export interface ReturnOnEquityResponse {
  * Converts the numeric analysis into the client's presentation contract.
  *
  * Formatting lives here, at the edge, so the service keeps returning precise
- * numbers that remain easy to test and reuse.
+ * numbers that remain easy to test and reuse. The consolidated summary is built
+ * from the precise horizon averages, never re-parsed from formatted strings.
  */
 function toResponseData(analysis: ReturnOnEquityAnalysis): ReturnOnEquityResponse["data"] {
   const horizonViews: HorizonView[] = analysis.horizons.map((horizon) => ({
     label: horizon.label,
     range: horizon.range,
-    value: formatPercent(horizon.averageReturnOnEquity),
+    value: formatPercent(horizon.average),
     breakdown: horizon.breakdown.map((year) => ({
       period: String(year.fiscalYear),
-      value: formatPercent(year.returnOnEquity),
+      value: formatPercent(year.value),
     })),
     trend: horizon.trend,
   }));
 
-  const horizonValues = horizonViews.map((h) => h.value);
-  const consolidatedSummary = calculateConsolidatedSummary(horizonValues);
+  const consolidatedSummary = calculateConsolidatedSummary(
+    analysis.horizons.map((horizon) => horizon.average),
+    formatPercent,
+  );
 
   const trailingTwelveMonthsActuals: FormulaTrailingTwelveMonthsActuals = {
     netIncome: formatCurrency(analysis.ttmNetIncome),
@@ -87,22 +89,6 @@ function toResponseData(analysis: ReturnOnEquityAnalysis): ReturnOnEquityRespons
     consolidatedSummary,
     trailingTwelveMonthsActuals,
   };
-}
-
-/**
- * Translates a provider failure into the HTTP status the client should see.
- */
-function statusForFmpError(kind: FmpClientError["kind"]): number {
-  switch (kind) {
-    case "not-found":
-      return 404;
-    case "rate-limit":
-      return 429;
-    case "timeout":
-      return 504;
-    default:
-      return 502;
-  }
 }
 // 1.4. END ..........................................................................................
 
@@ -123,13 +109,13 @@ export const returnOnEquityController: RequestHandler = async (request, response
 
   // 1.5.2. CORE LOGIC ...............................................................................
   try {
-    // The composition root (createApp) always resolves and stores the
-    // repository factory — an injected one in tests, the production FMP factory
-    // otherwise — so the controller reads that single source of truth directly.
-    const repositoryFactory = request.app.get(
-      "repositoryFactory",
-    ) as () => FinancialDataRepository;
-    const repository = repositoryFactory();
+    // Tests can override repository creation for the whole app; otherwise the
+    // production return-on-equity repository is used. Reading the override from
+    // the app keeps this controller free of any wiring decision.
+    const override = request.app.get("repositoryFactory") as
+      | (() => FinancialDataRepository<FinancialYear>)
+      | undefined;
+    const repository = (override ?? createFmpFinancialDataRepository)();
     const analysis = await analyseReturnOnEquity(ticker, repository, request.correlationId);
 
     const body: ReturnOnEquityResponse = {

@@ -1,11 +1,11 @@
-// [ BACKEND > PRESENTATION > CONTROLLERS > RETURN ON EQUITY > FORMATTING ] ##########################
+// [ BACKEND > PRESENTATION > FORMATTING ] ###########################################################
 //
-// Pure presentation-formatting helpers for the return-on-equity response.
-// Extracted from the controller so the calculation and formatting logic can be
-// unit-tested directly with exhaustive, table-driven cases. Keeping these as
-// small exported pure functions (rather than inline handler logic) shrinks the
-// mutable surface and lets every boundary, literal, and branch be asserted
-// exactly — see .github/skills/15-mutation-resistance.
+// Pure presentation-formatting helpers shared by every metric response.
+// Extracted from the controllers so the formatting logic can be unit-tested
+// directly with exhaustive, table-driven cases. Keeping these as small exported
+// pure functions (rather than inline handler logic) shrinks the mutable surface
+// and lets every boundary, literal, and branch be asserted exactly — see
+// .github/skills/15-mutation-resistance.
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 // None — pure functions over primitives.
@@ -14,7 +14,7 @@
 // 1.2. TYPES ........................................................................................
 /**
  * Consolidated summary: the display-ready mean of all horizon values, with the
- * raw values and the denominator used to compute it.
+ * raw formatted values and the denominator used to compute it.
  */
 export interface ConsolidatedSummary {
   values: string[];
@@ -51,42 +51,35 @@ export function formatCurrency(valueInDollars: number): string {
 
   return `$${valueInDollars.toFixed(0)}`;
 }
+// 1.3. END ..........................................................................................
 
-/**
- * Parses a percentage string (e.g. "12.3%") back to its numeric value, or 0
- * when the string does not contain a parseable number.
- */
-export function parsePercentValue(percentStr: string): number {
-  // parseFloat stops at the first non-numeric character, so a trailing "%"
-  // (the only shape formatPercent produces, e.g. "12.3%") is ignored without
-  // any explicit stripping. Keeping the parse direct leaves no redundant
-  // string literal for a mutant to exploit.
-  const numeric = parseFloat(percentStr);
-  return Number.isNaN(numeric) ? 0 : numeric;
-}
-
+// 1.4. CONSOLIDATION ................................................................................
 /**
  * Calculates the consolidated summary — the arithmetic mean of the horizon
- * percentage strings. An empty input yields the placeholder summary rather than
- * dividing by zero.
+ * values — and formats it with the metric's own formatter so percentages and
+ * dollar amounts each read correctly. An empty input yields the placeholder
+ * summary rather than dividing by zero.
+ *
+ * @param numericValues - The precise per-horizon averages, still numeric.
+ * @param format - The metric's formatter, applied to each value and the mean.
  */
 export function calculateConsolidatedSummary(
-  horizonValues: string[],
+  numericValues: number[],
+  format: (value: number) => string,
 ): ConsolidatedSummary {
-  if (!horizonValues || horizonValues.length === 0) {
-    return { values: [], result: "—", denominator: "0" };
+  if (numericValues.length === 0) {
+    return { values: [], result: "\u2014", denominator: "0" };
   }
 
-  const numericValues = horizonValues.map(parsePercentValue);
   const sum = numericValues.reduce((acc, val) => acc + val, 0);
-  const average = sum / numericValues.length;
+  const mean = sum / numericValues.length;
 
   return {
-    values: horizonValues,
-    result: formatPercent(average),
+    values: numericValues.map(format),
+    result: format(mean),
     denominator: String(numericValues.length),
   };
 }
-// 1.3. END ..........................................................................................
+// 1.4. END ..........................................................................................
 
 // END FILE ##########################################################################################

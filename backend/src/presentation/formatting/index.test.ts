@@ -1,4 +1,4 @@
-// [ BACKEND > PRESENTATION > CONTROLLERS > RETURN ON EQUITY > FORMATTING > TESTS ] ##################
+// [ BACKEND > PRESENTATION > FORMATTING > TESTS ] ###################################################
 //
 // Table-driven unit tests for the pure formatting helpers. Every case asserts
 // an EXACT string or numeric result and covers both sides of each boundary and
@@ -12,12 +12,7 @@ import { describe, it } from "node:test";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import {
-  formatPercent,
-  formatCurrency,
-  parsePercentValue,
-  calculateConsolidatedSummary,
-} from "./index.js";
+import { formatPercent, formatCurrency, calculateConsolidatedSummary } from "./index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. MOCKS ........................................................................................
@@ -119,72 +114,59 @@ describe("formatCurrency", () => {
   // 1.4.15. END .....................................................................................
 });
 
-describe("parsePercentValue", () => {
-  // 1.4.16. PARSES A WELL FORMED PERCENTAGE STRING ..................................................
-  it("parses a well-formed percentage string back to its number", () => {
-    assert.equal(parsePercentValue("12.3%"), 12.3);
-  });
-  // 1.4.16. END .....................................................................................
-
-  // 1.4.17. PARSES A NEGATIVE PERCENTAGE STRING .....................................................
-  it("parses a negative percentage string", () => {
-    assert.equal(parsePercentValue("-5.5%"), -5.5);
-  });
-  // 1.4.17. END .....................................................................................
-
-  // 1.4.18. RETURNS 0 FOR A NON NUMERIC .............................................................
-  it("returns 0 for a non-numeric string (kills the NaN ternary true-branch)", () => {
-    assert.equal(parsePercentValue("abc%"), 0);
-  });
-  // 1.4.18. END .....................................................................................
-
-  // 1.4.19. RETURNS THE PARSED NUMBER FOR A .........................................................
-  it("returns the parsed number for a valid string (kills the NaN ternary false-branch)", () => {
-    assert.equal(parsePercentValue("42.0%"), 42);
-  });
-  // 1.4.19. END .....................................................................................
-});
-
 describe("calculateConsolidatedSummary", () => {
-  // 1.4.20. RETURNS THE PLACEHOLDER SUMMARY FOR AN ..................................................
+  // 1.4.16. RETURNS THE PLACEHOLDER SUMMARY FOR AN ..................................................
   it("returns the placeholder summary for an empty list (kills conditional false-branch)", () => {
-    assert.deepEqual(calculateConsolidatedSummary([]), {
+    assert.deepEqual(calculateConsolidatedSummary([], formatPercent), {
       values: [],
-      result: "—",
+      result: "\u2014",
       denominator: "0",
     });
   });
-  // 1.4.20. END .....................................................................................
+  // 1.4.16. END .....................................................................................
 
-  // 1.4.21. AVERAGES MULTIPLE VALUES AND FORMATS THE ................................................
-  it("averages multiple values and formats the result (kills addition and division mutants)", () => {
-    assert.deepEqual(calculateConsolidatedSummary(["10.0%", "20.0%", "30.0%"]), {
+  // 1.4.17. AVERAGES MULTIPLE VALUES AND FORMATS AS PERCENT .........................................
+  it("averages multiple values and formats with the percent formatter (kills add/divide mutants)", () => {
+    assert.deepEqual(calculateConsolidatedSummary([10, 20, 30], formatPercent), {
       values: ["10.0%", "20.0%", "30.0%"],
       result: "20.0%",
       denominator: "3",
     });
   });
-  // 1.4.21. END .....................................................................................
+  // 1.4.17. END .....................................................................................
 
-  // 1.4.22. COMPUTES THE MEAN OF TWO VALUES .........................................................
+  // 1.4.18. COMPUTES THE MEAN OF TWO VALUES .........................................................
   it("computes the mean of two values (distinguishes '+' from '-' and '/' from '*')", () => {
-    assert.deepEqual(calculateConsolidatedSummary(["10.0%", "20.0%"]), {
+    assert.deepEqual(calculateConsolidatedSummary([10, 20], formatPercent), {
       values: ["10.0%", "20.0%"],
       result: "15.0%",
       denominator: "2",
     });
   });
-  // 1.4.22. END .....................................................................................
+  // 1.4.18. END .....................................................................................
 
-  // 1.4.23. HANDLES A SINGLE VALUE WITHOUT DIVIDING .................................................
+  // 1.4.19. HANDLES A SINGLE VALUE WITHOUT DIVIDING .................................................
   it("handles a single value without dividing incorrectly (kills conditional true-branch)", () => {
-    assert.deepEqual(calculateConsolidatedSummary(["15.0%"]), {
+    assert.deepEqual(calculateConsolidatedSummary([15], formatPercent), {
       values: ["15.0%"],
       result: "15.0%",
       denominator: "1",
     });
   });
-  // 1.4.23. END .....................................................................................
+  // 1.4.19. END .....................................................................................
+
+  // 1.4.20. APPLIES THE SUPPLIED FORMATTER TO VALUES AND MEAN .......................................
+  it("formats every value and the mean with the given currency formatter (proves formatter is used)", () => {
+    assert.deepEqual(
+      calculateConsolidatedSummary([1_000_000_000, 3_000_000_000], formatCurrency),
+      {
+        values: ["$1.00B", "$3.00B"],
+        result: "$2.00B",
+        denominator: "2",
+      },
+    );
+  });
+  // 1.4.20. END .....................................................................................
 });
 // 1.4. END ..........................................................................................
 
