@@ -10,7 +10,7 @@ import {
     CORRELATION_ID_HEADER,
     createCorrelationHeaders,
     resolveCorrelationId,
-} from '@/lib/correlation-id';
+} from '../../../../lib/correlation-id';
 // 1.2. END ..........................................................................................
 
 // 1.3. CONFIGURATION ................................................................................
