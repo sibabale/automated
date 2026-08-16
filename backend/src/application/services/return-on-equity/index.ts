@@ -4,9 +4,9 @@
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import { logger } from "../../logger.js";
-import type { FinancialYear } from "../../domain/entities/financial-year.entity.js";
-import type { FinancialDataRepository } from "../../domain/repositories/financial-data.repository.js";
+import { logger } from "../../../logger.js";
+import type { FinancialYear } from "../../../domain/entities/financial-year.entity.js";
+import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -162,9 +162,12 @@ export async function analyseReturnOnEquity(
   // 1.6.2. END ......................................................................................
 
   // 1.6.3. TTM ACTUALS ..............................................................................
+  // The repository guarantees numeric fields on every FinancialYear (rows with
+  // missing figures are dropped), and the empty-history fallback below supplies
+  // numeric zeros, so the trailing-twelve-month actuals need no further guards.
   const ttmYear = ordered[0] ?? { netIncome: 0, shareholdersEquity: 0 };
-  const ttmNetIncome = ttmYear.netIncome ?? 0;
-  const ttmShareholdersEquity = ttmYear.shareholdersEquity ?? 0;
+  const ttmNetIncome = ttmYear.netIncome;
+  const ttmShareholdersEquity = ttmYear.shareholdersEquity;
   // 1.6.3. END ......................................................................................
 
   logger.info({ correlationId, ticker, horizons: horizons.length }, "Return on equity analysed");

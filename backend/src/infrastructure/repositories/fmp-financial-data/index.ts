@@ -4,10 +4,10 @@
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import type { FmpRecord } from "../clients/fmp-client.js";
-import { fmpGetJson, FMP_ENDPOINTS } from "../clients/fmp-client.js";
-import type { FinancialYear } from "../../domain/entities/financial-year.entity.js";
-import type { FinancialDataRepository } from "../../domain/repositories/financial-data.repository.js";
+import type { FmpRecord } from "../../clients/fmp-client/index.js";
+import { fmpGetJson, FMP_ENDPOINTS } from "../../clients/fmp-client/index.js";
+import type { FinancialYear } from "../../../domain/entities/financial-year.entity.js";
+import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. HELPERS ......................................................................................

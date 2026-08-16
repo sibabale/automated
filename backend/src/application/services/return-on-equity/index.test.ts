@@ -6,12 +6,12 @@ import { describe, it } from "node:test";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import type { FinancialYear } from "../src/domain/entities/financial-year.entity.js";
-import { analyseReturnOnEquity } from "../src/application/services/return-on-equity.service.js";
-import type { FinancialDataRepository } from "../src/domain/repositories/financial-data.repository.js";
+import { analyseReturnOnEquity } from "./index.js";
+import type { FinancialYear } from "../../../domain/entities/financial-year.entity.js";
+import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 // 1.2. END ..........................................................................................
 
-// 1.3. HELPERS ......................................................................................
+// 1.3. MOCKS ........................................................................................
 /**
  * Builds a fiscal year whose return on equity equals `returnOnEquity` by fixing
  * equity at 100 so `netIncome` reads directly as the percentage under test.
@@ -20,9 +20,7 @@ function year(fiscalYear: number, returnOnEquity: number): FinancialYear {
   return { fiscalYear, netIncome: returnOnEquity, shareholdersEquity: 100 };
 }
 
-/**
- * A repository stub that returns fixed data, keeping the tests free of network.
- */
+/** A repository stub that returns fixed data, keeping the tests free of network. */
 function fakeRepository(financials: FinancialYear[]): FinancialDataRepository {
   return {
     async getAnnualFinancials() {
@@ -36,7 +34,7 @@ const CORRELATION_ID = "test-correlation-id";
 
 // 1.4. TEST CASES ...................................................................................
 describe("Return on equity analysis", () => {
-  // 1.4.1. FULL HISTORY .............................................................................
+  // 1.4.1. GROUPS TWELVE YEARS INTO FOUR NON ........................................................
   it("groups twelve years into four non-overlapping horizons", async () => {
     const financials = [
       year(2024, 28.3), year(2023, 25.8), year(2022, 24.2),
@@ -62,7 +60,7 @@ describe("Return on equity analysis", () => {
   });
   // 1.4.1. END ......................................................................................
 
-  // 1.4.2. AVERAGES AND TREND .......................................................................
+  // 1.4.2. AVERAGES EACH HORIZON AND DERIVES ITS ....................................................
   it("averages each horizon and derives its trend from newest versus oldest", async () => {
     const financials = [
       year(2024, 28.3), year(2023, 25.8), year(2022, 24.2),
@@ -80,7 +78,7 @@ describe("Return on equity analysis", () => {
   });
   // 1.4.2. END ......................................................................................
 
-  // 1.4.3. PARTIAL HISTORY ..........................................................................
+  // 1.4.3. OMITS HORIZONS THAT HAVE NO DATA .........................................................
   it("omits horizons that have no data when history is short", async () => {
     const financials = [
       year(2024, 28.3), year(2023, 25.8), year(2022, 24.2),
@@ -97,7 +95,7 @@ describe("Return on equity analysis", () => {
   });
   // 1.4.3. END ......................................................................................
 
-  // 1.4.4. UNUSABLE EQUITY ..........................................................................
+  // 1.4.4. EXCLUDES YEARS WHOSE EQUITY IS ZERO ......................................................
   it("excludes years whose equity is zero to avoid dividing by nothing", async () => {
     const financials = [
       year(2024, 28.3),
@@ -114,6 +112,16 @@ describe("Return on equity analysis", () => {
     );
   });
   // 1.4.4. END ......................................................................................
+
+  // 1.4.5. RETURNS ZERO TRAILING TWELVE MONTH ACTUALS WHEN NO HISTORY EXISTS ........................
+  it("returns zero trailing-twelve-month actuals and no horizons when history is empty", async () => {
+    const analysis = await analyseReturnOnEquity("AAPL", fakeRepository([]), CORRELATION_ID);
+
+    assert.deepEqual(analysis.horizons, []);
+    assert.equal(analysis.ttmNetIncome, 0);
+    assert.equal(analysis.ttmShareholdersEquity, 0);
+  });
+  // 1.4.5. END ......................................................................................
 });
 // 1.4. END ..........................................................................................
 

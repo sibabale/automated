@@ -15,8 +15,11 @@ const DEFAULT_PORT = 3001;
 // 1.4. FUNCTIONS ....................................................................................
 /**
  * Reads and validates the port before the server begins accepting requests.
+ *
+ * Exported so tests can exercise all validation branches without triggering
+ * the server-startup side effects at the bottom of this file.
  */
-function getPort(value = process.env.PORT): number {
+export function getPort(value = process.env.PORT): number {
   if (value === undefined) {
     return DEFAULT_PORT;
   }

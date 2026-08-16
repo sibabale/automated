@@ -5,11 +5,17 @@ import type { RequestHandler } from "express";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import { HttpError } from "../../errors/http-error.js";
-import { FmpClientError } from "../../infrastructure/clients/fmp-client.js";
-import { analyseReturnOnEquity } from "../../application/services/return-on-equity.service.js";
-import type { ReturnOnEquityAnalysis } from "../../application/services/return-on-equity.service.js";
-import { createFmpFinancialDataRepository } from "../../infrastructure/repositories/fmp-financial-data.repository.js";
+import { HttpError } from "../../../errors/http-error/index.js";
+import { FmpClientError } from "../../../infrastructure/clients/fmp-client/index.js";
+import { analyseReturnOnEquity } from "../../../application/services/return-on-equity/index.js";
+import type { ReturnOnEquityAnalysis } from "../../../application/services/return-on-equity/index.js";
+import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
+import {
+  formatPercent,
+  formatCurrency,
+  calculateConsolidatedSummary,
+} from "./formatting/index.js";
+import type { ConsolidatedSummary } from "./formatting/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -23,15 +29,6 @@ interface HorizonView {
   value: string;
   breakdown: Array<{ period: string; value: string }>;
   trend: "up" | "down";
-}
-
-/**
- * Consolidated summary: arithmetic mean of all horizon values for display.
- */
-interface ConsolidatedSummaryView {
-  values: string[];
-  denominator: string;
-  result: string;
 }
 
 /**
@@ -51,67 +48,13 @@ export interface ReturnOnEquityResponse {
   data: {
     ticker: string;
     horizons: HorizonView[];
-    consolidatedSummary: ConsolidatedSummaryView;
+    consolidatedSummary: ConsolidatedSummary;
     trailingTwelveMonthsActuals: FormulaTrailingTwelveMonthsActuals;
   };
 }
 // 1.3. END ..........................................................................................
 
 // 1.4. MAPPING ......................................................................................
-/**
- * Formats a percentage to one decimal place, matching the client's display.
- */
-function formatPercent(value: number): string {
-  return `${value.toFixed(1)}%`;
-}
-
-/**
- * Formats a currency value to a human-readable shorthand: billions (B) or millions (M).
- * Matches the client display convention (e.g., "$96.99B").
- */
-function formatCurrency(valueInDollars: number): string {
-  const absValue = Math.abs(valueInDollars);
-
-  if (absValue >= 1_000_000_000) {
-    return `$${(valueInDollars / 1_000_000_000).toFixed(2)}B`;
-  }
-
-  if (absValue >= 1_000_000) {
-    return `$${(valueInDollars / 1_000_000).toFixed(1)}M`;
-  }
-
-  return `$${valueInDollars.toFixed(0)}`;
-}
-
-/**
- * Parses a percentage string to a numeric value, or returns 0 if invalid.
- */
-function parsePercentValue(percentStr: string): number {
-  const numeric = parseFloat(percentStr.replace("%", ""));
-  return Number.isNaN(numeric) ? 0 : numeric;
-}
-
-/**
- * Calculates the arithmetic mean of percentage values for the consolidated summary.
- */
-function calculateConsolidatedSummary(
-  horizonValues: string[],
-): ConsolidatedSummaryView {
-  if (!horizonValues || horizonValues.length === 0) {
-    return { values: [], result: "—", denominator: "0" };
-  }
-
-  const numericValues = horizonValues.map(parsePercentValue);
-  const sum = numericValues.reduce((acc, val) => acc + val, 0);
-  const average = sum / numericValues.length;
-
-  return {
-    values: horizonValues,
-    result: formatPercent(average),
-    denominator: String(numericValues.length),
-  };
-}
-
 /**
  * Converts the numeric analysis into the client's presentation contract.
  *
@@ -180,7 +123,13 @@ export const returnOnEquityController: RequestHandler = async (request, response
 
   // 1.5.2. CORE LOGIC ...............................................................................
   try {
-    const repository = createFmpFinancialDataRepository();
+    // The composition root (createApp) always resolves and stores the
+    // repository factory — an injected one in tests, the production FMP factory
+    // otherwise — so the controller reads that single source of truth directly.
+    const repositoryFactory = request.app.get(
+      "repositoryFactory",
+    ) as () => FinancialDataRepository;
+    const repository = repositoryFactory();
     const analysis = await analyseReturnOnEquity(ticker, repository, request.correlationId);
 
     const body: ReturnOnEquityResponse = {

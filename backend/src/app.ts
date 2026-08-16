@@ -9,10 +9,11 @@ import type { Application } from "express";
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { logger } from "./logger.js";
-import { errorHandler } from "./application/middleware/error-handler.js";
-import { correlationId } from "./application/middleware/correlation-id.js";
-import { notFoundHandler } from "./application/middleware/not-found-handler.js";
-import { returnOnEquityController } from "./presentation/controllers/return-on-equity.controller.js";
+import { errorHandler } from "./application/middleware/error-handler/index.js";
+import { correlationId } from "./application/middleware/correlation-id/index.js";
+import { notFoundHandler } from "./application/middleware/not-found-handler/index.js";
+import { returnOnEquityController } from "./presentation/controllers/return-on-equity/index.js";
+import { createFmpFinancialDataRepository } from "./infrastructure/repositories/fmp-financial-data/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. APPLICATION ..................................................................................
@@ -22,7 +23,7 @@ import { returnOnEquityController } from "./presentation/controllers/return-on-e
  * Keeping creation separate from process startup makes the request pipeline
  * directly testable and keeps transport concerns in `server.ts`.
  */
-export function createApp(): Application {
+export function createApp(options?: { repositoryFactory?: () => any }): Application {
   // 1.3.1. MIDDLEWARE ...............................................................................
   const app = express();
 
@@ -31,6 +32,11 @@ export function createApp(): Application {
   app.use(pinoHttp({ logger }));
   app.use(correlationId);
   app.use(express.json({ limit: "1mb" }));
+
+  // Allow tests to override repository creation via options; fall back to the
+  // production FMP repository factory. Stored on the app so controllers can
+  // retrieve it from the request's app instance.
+  app.set("repositoryFactory", options?.repositoryFactory ?? createFmpFinancialDataRepository);
   // 1.3.1. END ......................................................................................
 
   // 1.3.2. ROUTES ...................................................................................
