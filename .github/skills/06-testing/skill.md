@@ -242,6 +242,99 @@ as test selectors.
 
 ---
 
+## Mutation Resistance
+
+Public-interface tests must also be **mutation-resistant**: a test that passes
+against the real code but also passes against a mechanically-broken version of
+it is a weak test. Backend logic is verified with Stryker mutation testing,
+whose mutators are a fixed, documented set, so every mutant is predictable and
+can be pre-empted.
+
+Before running the mutation suite, apply the **Mutation Resistance** skill
+(`.github/skills/15-mutation-resistance/skill.md`) and its mutator→kill map.
+The core disciplines it requires:
+
+- Assert **exact** strings, numbers, and object shapes — never a fragment,
+  a length, or a `typeof` check where the full value is knowable.
+- Test **both sides of every boundary** and **both directions of every branch**.
+- Put calculation/formatting logic in **exported pure functions** with
+  table-driven unit tests, not only indirect HTTP assertions.
+- Gate to **100%** c8 line + branch coverage **before** running Stryker;
+  coverage is the cheap prefilter, mutation is the real check.
+
+### Reaching 100% coverage without gaming it
+
+The gate is 100% for a reason: the last few percent are exactly where the
+defensive branches Stryker attacks live. Close them with real tests, not by
+lowering the threshold.
+
+- **Test reachable defensive branches, do not just eyeball them.** Each of these
+  is a real branch and a real test:
+  - error mapping — a repository/service that throws a **generic** `Error`
+    (not the typed domain error) must exercise the `next(error)` / 500
+    fallthrough, distinct from the mapped typed-error paths;
+  - empty-collection fallbacks — an empty input list must exercise the
+    zero/placeholder fallback (e.g. empty financials → TTM actuals of `0`);
+  - parse-failure `catch` — a `response.json()` that rejects needs a source of
+    genuinely malformed bytes (spin up an inline server that returns an invalid
+    JSON body; structured mocks that `JSON.stringify` can never trigger it);
+  - missing-config fallbacks — an unset env var must hit its default; cover it
+    through observable behavior (e.g. unset `FMP_BASE_URL` **and** the API key so
+    the pre-fetch guard fires) rather than making a real network call.
+- **Exercise every injection seam.** If production code accepts an injected
+  factory/override (a test seam), the default-path tests do **not** cover the
+  injected branch. Add a test that passes an injected double — both a succeeding
+  one and a throwing one — so the seam and the code that reads it are covered.
+  *Real gap:* `createApp`'s `repositoryFactory` option was never passed a real
+  factory, leaving the assembly branch uncovered until a test injected one.
+- **Exclude type-only files from coverage — never write tests for a type.**
+  `export interface` files (domain entities, repository ports) and `.d.ts`
+  compile to **zero JavaScript**, so c8 reports them as 0% and the 100% gate can
+  never go green while they are counted. Add them to `.c8rc.json`'s `exclude`
+  with a one-line justification. Before excluding a 0% file, confirm it has **no
+  runtime code** (`grep` for `const|function|class` — a pure interface has
+  none); exclude the specific files, not whole directories, so future runtime
+  code is not silently hidden.
+
+### Unhappy paths and exception handling are first-class, not afterthoughts
+
+The happy path is the smallest part of the contract. Most surviving mutants and
+most production incidents live on the paths that reject, skip, fall back, or
+throw — so **every** such path needs its own test that asserts the *outcome*,
+not merely that the line executed.
+
+- **Assert the excluded/fallback outcome, both directions.** A parser that drops
+  malformed rows must be tested with a malformed row and asserted **absent** from
+  the result, and with a valid row asserted **present**. A fiscal-year fallback
+  that reads `date` when `fiscalYear` is missing needs a row with each shape, and
+  a boundary case at the exact threshold (`year > 1900` → test `1900` and
+  `1901`). *Real gap:* the FMP repository's `readNumber`/`readFiscalYear` guards
+  and the row-skip loops were 100% covered yet never asserted the exclusion, so
+  every branch and boundary mutant survived.
+- **Every `catch` / error branch asserts the mapped error, exactly.** For each
+  thrown or mapped failure, assert the error **type, `name`, `kind`/`code`, and
+  message** — a blanked message (`StringLiteral → ""`) or a dropped `this.name`
+  must fail. Map each status boundary explicitly (test `400`, not just `>= 400`)
+  and cover the "unsupported shape" / default `throw` at the end of a
+  discriminating chain with an input that reaches it (e.g. a primitive body, not
+  an object or array).
+- **Assert what you send to collaborators, not just what you return.** When a
+  repository or client is mocked, assert the **arguments** it was called with —
+  exact request params (`{ symbol, period, limit }`), the exact `limit`/`years`,
+  the endpoint. A mutated outgoing object (`→ {}`) is invisible to a test that
+  only checks the return value. Use a spy and assert its recorded call.
+- **Assert security-relevant configuration through behavior.** Redaction lists,
+  disabled fingerprinting headers, and body-size limits are contract. Assert that
+  a secret header is **scrubbed** from emitted logs (`redact: […] → []` must
+  fail), that `x-powered-by` is **absent** from responses, and that an oversized
+  body is rejected — do not leave these as unasserted config literals.
+- **Assert side-effect logs.** Where the correlation-id discipline applies, a log
+  call is observable output: spy on the logger and assert the message and bound
+  `correlationId`, or record it as a documented equivalent mutant. See the
+  Mutation Resistance skill's "Side-Effect & Collaborator Calls".
+
+---
+
 ## Checklist
 
 - [ ] Test file was scaffolded from the canonical template.
@@ -255,3 +348,26 @@ as test selectors.
 - [ ] Variable-length content is tested with realistic long values.
 - [ ] Responsive-content risks are checked at the smallest supported viewport
       with available browser tooling.
+- [ ] Backend logic is mutation-resistant per the Mutation Resistance skill:
+      exact assertions, both-sided boundaries, both-directional branches, and
+      pure calculation logic tested directly.
+- [ ] Reachable defensive branches are tested: generic-error/`next(error)`
+      fallthroughs, empty-input fallbacks, parse-failure `catch` blocks, and
+      missing-config/env fallbacks.
+- [ ] Unhappy paths assert the **outcome** both ways: excluded/malformed inputs
+      are asserted **absent**, valid inputs **present**, and each guard boundary
+      is tested at its exact threshold.
+- [ ] Every `catch`/error branch asserts the mapped error exactly (type, `name`,
+      `kind`/`code`, message), and each status/shape boundary reaches its own
+      branch (test `400`, the primitive-body default `throw`, etc.).
+- [ ] Arguments sent to mocked collaborators are asserted (request params,
+      `limit`/`years`, endpoint), not only the returned value.
+- [ ] Security config is asserted through behavior: secrets scrubbed from logs,
+      `x-powered-by` absent, oversized bodies rejected.
+- [ ] Side-effect log lines are asserted (message + bound `correlationId`) or
+      documented as equivalent mutants.
+- [ ] Every injection seam is exercised with an injected double (both a
+      succeeding and a throwing one), not only the default path.
+- [ ] Type-only files (interfaces, ports, `.d.ts`) are excluded from c8 with
+      justification — never tested as if they were runtime code — and the c8
+      gate is a green **100%** before Stryker runs.
