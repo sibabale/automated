@@ -18,6 +18,7 @@ import storage from 'redux-persist/lib/storage';
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import themeReducer from './slices/theme.slice';
 import counterReducer from './slices/counter.slice';
+import profitMarginReducer from './slices/profit-margin.slice';
 import debtToEquityReducer from './slices/debt-to-equity.slice';
 import freeCashFlowReducer from './slices/free-cash-flow.slice';
 import returnOnEquityReducer from './slices/return-on-equity.slice';
@@ -29,7 +30,7 @@ const persistConfig = {
     version: 1,
     storage,
     // whitelist: ['counter'], // only persist specific slices
-    blacklist: ['returnOnEquity', 'freeCashFlow', 'debtToEquity'], // live financial data is fetched fresh, never persisted
+    blacklist: ['returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin'], // live financial data is fetched fresh, never persisted
 };
 // 1.3. END ..........................................................................................
 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
     theme: themeReducer,
     debtToEquity: debtToEquityReducer,
     freeCashFlow: freeCashFlowReducer,
+    profitMargin: profitMarginReducer,
     returnOnEquity: returnOnEquityReducer,
 });
 // 1.4. END ..........................................................................................

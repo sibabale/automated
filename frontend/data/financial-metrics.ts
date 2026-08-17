@@ -312,7 +312,9 @@ export const financialMetrics: IFinancialMetric[] = [
         slug: 'profit-margin',
         label: 'Profit Margin',
         value: '25.3%',
-        description: 'Industry leading',
+        description: 'Premium earnings power',
+        liveCompanyName: 'Apple Inc.',
+        liveTicker: 'AAPL',
         formula: {
             title: 'How Profit Margin Is Calculated',
             standardFormulaLabel: 'Standard Formula',
@@ -363,11 +365,11 @@ export const financialMetrics: IFinancialMetric[] = [
         consolidation: {
             title: 'Consolidation Summary',
             values: ['25.9%', '24.1%', '21.6%', '22.0%'],
-            denominator: '4 (Adjusted for Weight)',
-            result: '25.3%',
-            note: 'Weighted average with recency bias — recent years carry higher weight. This ensures the consolidated Profit Margin accurately reflects current operational efficiency while retaining historical performance memory.',
-            mobileResult: '23.0%',
-            mobileNote: 'Weighted average with recency bias — recent years carry higher weight to reflect premium services transition.',
+            denominator: '4 Horizons',
+            result: '23.4%',
+            note: 'Arithmetic mean across the reported horizon averages. It balances recent profitability with older operating performance instead of relying on a single year.',
+            mobileResult: '23.4%',
+            mobileNote: 'Arithmetic mean across the reported horizon averages.',
         },
         education: {
             definitionTitle: 'What Is Profit Margin?',

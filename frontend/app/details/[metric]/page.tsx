@@ -4,6 +4,7 @@ import { use, useEffect } from 'react';
 import Header from '../../../components/molecules/header/header';
 import { getFinancialMetric } from '../../../data/financial-metrics';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { fetchProfitMargin } from '../../../redux/slices/profit-margin.slice';
 import type { IFinancialMetricHorizon } from '../../../data/financial-metrics';
 import { fetchDebtToEquity } from '../../../redux/slices/debt-to-equity.slice';
 import { fetchFreeCashFlow } from '../../../redux/slices/free-cash-flow.slice';
@@ -35,6 +36,14 @@ import {
     selectFreeCashFlowStatus,
     selectFreeCashFlowTrailingTwelveMonthsActuals,
 } from '../../../redux/selectors/free-cash-flow.selectors';
+import {
+    selectProfitMarginConsolidatedSummary,
+    selectProfitMarginError,
+    selectProfitMarginHorizons,
+    selectProfitMarginIsEmpty,
+    selectProfitMarginStatus,
+    selectProfitMarginTrailingTwelveMonthsActuals,
+} from '../../../redux/selectors/profit-margin.selectors';
 import {
     selectReturnOnEquityError,
     selectReturnOnEquityHorizons,
@@ -76,7 +85,7 @@ type LiveMetricView = {
 };
 
 type MetricLiveConfig = {
-    kind: 'return-on-equity' | 'free-cash-flow' | 'debt-to-equity';
+    kind: 'return-on-equity' | 'free-cash-flow' | 'debt-to-equity' | 'profit-margin';
     insights: Record<'up' | 'down', string>;
     emptyStateTitle?: string;
 };
@@ -106,6 +115,14 @@ const liveMetricConfig: Record<string, MetricLiveConfig> = {
             down: 'Leverage eased across this period.',
         },
         emptyStateTitle: 'No debt-to-equity ratio to show',
+    },
+    'profit-margin': {
+        kind: 'profit-margin',
+        insights: {
+            up: 'Profitability improved across this period.',
+            down: 'Profitability softened across this period.',
+        },
+        emptyStateTitle: 'No profit margin to show',
     },
 };
 
@@ -137,6 +154,12 @@ export default function MetricDetailsPage({
     const freeCashFlowErrorState = useAppSelector(selectFreeCashFlowError);
     const freeCashFlowConsolidated = useAppSelector(selectFreeCashFlowConsolidatedSummary);
     const freeCashFlowActuals = useAppSelector(selectFreeCashFlowTrailingTwelveMonthsActuals);
+    const profitMarginStatus = useAppSelector(selectProfitMarginStatus);
+    const profitMarginHorizons = useAppSelector(selectProfitMarginHorizons);
+    const profitMarginIsEmptyState = useAppSelector(selectProfitMarginIsEmpty);
+    const profitMarginErrorState = useAppSelector(selectProfitMarginError);
+    const profitMarginConsolidated = useAppSelector(selectProfitMarginConsolidatedSummary);
+    const profitMarginActuals = useAppSelector(selectProfitMarginTrailingTwelveMonthsActuals);
 
     const liveViewByMetric: Record<string, LiveMetricView> = {
         'return-on-equity': {
@@ -162,6 +185,14 @@ export default function MetricDetailsPage({
             error: freeCashFlowErrorState,
             consolidatedSummary: freeCashFlowConsolidated,
             trailingTwelveMonthsActuals: freeCashFlowActuals,
+        },
+        'profit-margin': {
+            status: profitMarginStatus,
+            horizons: profitMarginHorizons,
+            isEmpty: profitMarginIsEmptyState,
+            error: profitMarginErrorState,
+            consolidatedSummary: profitMarginConsolidated,
+            trailingTwelveMonthsActuals: profitMarginActuals,
         },
     };
 
@@ -200,6 +231,13 @@ export default function MetricDetailsPage({
             };
         }
 
+        if (liveConfig.kind === 'profit-margin') {
+            return {
+                numeratorValue: profitMarginActuals?.netIncome ?? formula.numeratorValue,
+                denominatorValue: profitMarginActuals?.revenue ?? formula.denominatorValue,
+            };
+        }
+
         return {
             numeratorValue: freeCashFlowActuals?.operatingCashFlow ?? formula.numeratorValue,
             denominatorValue: freeCashFlowActuals?.capitalExpenditure ?? formula.denominatorValue,
@@ -221,6 +259,11 @@ export default function MetricDetailsPage({
             return;
         }
 
+        if (liveConfig.kind === 'profit-margin') {
+            dispatch(fetchProfitMargin(liveTicker));
+            return;
+        }
+
         dispatch(fetchFreeCashFlow(liveTicker));
     }, [dispatch, liveConfig, liveTicker]);
 
@@ -236,6 +279,11 @@ export default function MetricDetailsPage({
 
         if (liveConfig.kind === 'debt-to-equity') {
             dispatch(fetchDebtToEquity(liveTicker));
+            return;
+        }
+
+        if (liveConfig.kind === 'profit-margin') {
+            dispatch(fetchProfitMargin(liveTicker));
             return;
         }
 

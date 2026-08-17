@@ -82,6 +82,19 @@ describe('DetailLeadSection', () => {
         expect(screen.getByLabelText('Loading current return on equity')).toBeVisible();
         expect(screen.queryByTestId('detail-lead-section-value')).toBeNull();
     });
+
+    it('uses the supplied metric title in the loading announcement', () => {
+        renderDetailLeadSection({
+            companyName: 'Apple Inc.',
+            ticker: 'AAPL',
+            title: 'Profit Margin',
+            value: '25.3%',
+            description: 'Premium earnings power',
+            isValueLoading: true,
+        });
+
+        expect(screen.getByLabelText('Loading current profit margin')).toBeVisible();
+    });
 });
 // 1.3. END ..........................................................................................
 

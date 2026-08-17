@@ -57,6 +57,7 @@ const DetailLeadSection: React.FC<IDetailLeadSection> = ({
     // 1.6.1. END ....................................................................................
 
     // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
+    const valueLoadingLabel = `Loading current ${title.toLowerCase()}`;
     // 1.6.2. END ....................................................................................
 
     // 1.6.3. RENDER .................................................................................
@@ -83,12 +84,12 @@ const DetailLeadSection: React.FC<IDetailLeadSection> = ({
                         role="status"
                     >
                         <ContentLoader
-                            aria-label="Loading current return on equity"
+                            aria-label={valueLoadingLabel}
                             backgroundColor={theme.background.loader}
                             foregroundColor={theme.border.subtle}
                             height={44}
                             preserveAspectRatio="none"
-                            title="Loading current return on equity"
+                            title={valueLoadingLabel}
                             uniqueKey="detail-lead-section-value-loading"
                             viewBox="0 0 180 44"
                             width="100%"
