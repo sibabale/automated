@@ -1,4 +1,4 @@
-// [ APP > API > ANALYSIS > FREE CASH FLOW ] #########################################################
+// [ APP > API > ANALYSIS > DEBT TO EQUITY ] #########################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { NextResponse } from 'next/server';
@@ -24,7 +24,7 @@ const BACKEND_URL = process.env.BACKEND_URL ?? 'http://localhost:3001';
 
 // 1.4. ROUTE HANDLER ................................................................................
 /**
- * Forwards a free-cash-flow analysis request to the backend service.
+ * Forwards a debt-to-equity analysis request to the backend service.
  *
  * The browser calls this same-origin route so the backend origin and any
  * credentials it requires stay private to the server. The incoming correlation
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     // 1.4.1. END ....................................................................................
 
     // 1.4.2. FORWARD ................................................................................
-    const upstream = `${BACKEND_URL}/analysis/free-cash-flow?ticker=${encodeURIComponent(ticker)}`;
+    const upstream = `${BACKEND_URL}/analysis/debt-to-equity?ticker=${encodeURIComponent(ticker)}`;
 
     try {
         const response = await fetch(upstream, {

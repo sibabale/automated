@@ -4,6 +4,8 @@ import { use, useEffect } from 'react';
 import Header from '../../../components/molecules/header/header';
 import { getFinancialMetric } from '../../../data/financial-metrics';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import type { IFinancialMetricHorizon } from '../../../data/financial-metrics';
+import { fetchDebtToEquity } from '../../../redux/slices/debt-to-equity.slice';
 import { fetchFreeCashFlow } from '../../../redux/slices/free-cash-flow.slice';
 import HorizonCard from '../../../components/molecules/horizon-card/horizon-card';
 import { fetchReturnOnEquity } from '../../../redux/slices/return-on-equity.slice';
@@ -17,6 +19,14 @@ import FormulaSectionLoading from '../../../components/organisms/formula-section
 import BreadcrumbContainer from '../../../components/molecules/breadcrumb-container/breadcrumb-container';
 import ConsolidationSummary from '../../../components/organisms/consolidation-summary/consolidation-summary';
 import ConsolidationSummaryLoading from '../../../components/organisms/consolidation-summary/consolidation-summary.loading';
+import {
+    selectDebtToEquityConsolidatedSummary,
+    selectDebtToEquityError,
+    selectDebtToEquityHorizons,
+    selectDebtToEquityIsEmpty,
+    selectDebtToEquityStatus,
+    selectDebtToEquityTrailingTwelveMonthsActuals,
+} from '../../../redux/selectors/debt-to-equity.selectors';
 import {
     selectFreeCashFlowConsolidatedSummary,
     selectFreeCashFlowError,
@@ -66,15 +76,36 @@ type LiveMetricView = {
 };
 
 type MetricLiveConfig = {
-    kind: 'return-on-equity' | 'free-cash-flow';
+    kind: 'return-on-equity' | 'free-cash-flow' | 'debt-to-equity';
+    insights: Record<'up' | 'down', string>;
+    emptyStateTitle?: string;
 };
+
+type MetricHorizonView = LiveMetricView['horizons'][number] | IFinancialMetricHorizon;
 
 const liveMetricConfig: Record<string, MetricLiveConfig> = {
     'return-on-equity': {
         kind: 'return-on-equity',
+        insights: {
+            up: 'Improving returns across this period.',
+            down: 'Softening returns across this period.',
+        },
     },
     'free-cash-flow': {
         kind: 'free-cash-flow',
+        insights: {
+            up: 'Cash generation improved across this period.',
+            down: 'Cash generation softened across this period.',
+        },
+        emptyStateTitle: 'No free cash flow to show',
+    },
+    'debt-to-equity': {
+        kind: 'debt-to-equity',
+        insights: {
+            up: 'Leverage increased across this period.',
+            down: 'Leverage eased across this period.',
+        },
+        emptyStateTitle: 'No debt-to-equity ratio to show',
     },
 };
 
@@ -94,6 +125,12 @@ export default function MetricDetailsPage({
     const returnOnEquityErrorState = useAppSelector(selectReturnOnEquityError);
     const returnOnEquityConsolidated = useAppSelector(selectConsolidatedSummary);
     const returnOnEquityActuals = useAppSelector(selectTrailingTwelveMonthsActuals);
+    const debtToEquityStatus = useAppSelector(selectDebtToEquityStatus);
+    const debtToEquityHorizons = useAppSelector(selectDebtToEquityHorizons);
+    const debtToEquityIsEmptyState = useAppSelector(selectDebtToEquityIsEmpty);
+    const debtToEquityErrorState = useAppSelector(selectDebtToEquityError);
+    const debtToEquityConsolidated = useAppSelector(selectDebtToEquityConsolidatedSummary);
+    const debtToEquityActuals = useAppSelector(selectDebtToEquityTrailingTwelveMonthsActuals);
     const freeCashFlowStatus = useAppSelector(selectFreeCashFlowStatus);
     const freeCashFlowHorizons = useAppSelector(selectFreeCashFlowHorizons);
     const freeCashFlowIsEmptyState = useAppSelector(selectFreeCashFlowIsEmpty);
@@ -109,6 +146,14 @@ export default function MetricDetailsPage({
             error: returnOnEquityErrorState,
             consolidatedSummary: returnOnEquityConsolidated,
             trailingTwelveMonthsActuals: returnOnEquityActuals,
+        },
+        'debt-to-equity': {
+            status: debtToEquityStatus,
+            horizons: debtToEquityHorizons,
+            isEmpty: debtToEquityIsEmptyState,
+            error: debtToEquityErrorState,
+            consolidatedSummary: debtToEquityConsolidated,
+            trailingTwelveMonthsActuals: debtToEquityActuals,
         },
         'free-cash-flow': {
             status: freeCashFlowStatus,
@@ -148,6 +193,13 @@ export default function MetricDetailsPage({
             };
         }
 
+        if (liveConfig.kind === 'debt-to-equity') {
+            return {
+                numeratorValue: debtToEquityActuals?.totalDebt ?? formula.numeratorValue,
+                denominatorValue: debtToEquityActuals?.shareholdersEquity ?? formula.denominatorValue,
+            };
+        }
+
         return {
             numeratorValue: freeCashFlowActuals?.operatingCashFlow ?? formula.numeratorValue,
             denominatorValue: freeCashFlowActuals?.capitalExpenditure ?? formula.denominatorValue,
@@ -164,6 +216,11 @@ export default function MetricDetailsPage({
             return;
         }
 
+        if (liveConfig.kind === 'debt-to-equity') {
+            dispatch(fetchDebtToEquity(liveTicker));
+            return;
+        }
+
         dispatch(fetchFreeCashFlow(liveTicker));
     }, [dispatch, liveConfig, liveTicker]);
 
@@ -177,13 +234,23 @@ export default function MetricDetailsPage({
             return;
         }
 
+        if (liveConfig.kind === 'debt-to-equity') {
+            dispatch(fetchDebtToEquity(liveTicker));
+            return;
+        }
+
         dispatch(fetchFreeCashFlow(liveTicker));
     };
 
-    const insightForTrend = (trend: 'up' | 'down') =>
-        trend === 'up'
-            ? 'Improving returns across this period.'
-            : 'Softening returns across this period.';
+    const insightForHorizon = (horizon: MetricHorizonView): string => {
+        if (liveConfig) {
+            // Live metric responses only return the trend direction, so the page keeps
+            // the user-facing insight copy in the metric config and derives it here.
+            return liveConfig.insights[horizon.trend];
+        }
+
+        return 'insight' in horizon ? horizon.insight : '';
+    };
 
     return (
         <div>
@@ -223,9 +290,7 @@ export default function MetricDetailsPage({
                             {horizonError ? (
                                 <HorizonCardError message={horizonError.message} onRetry={loadHorizons} />
                             ) : horizonsAreEmpty ? (
-                                <HorizonCardEmpty
-                                    title={metric.label === 'Free Cash Flow' ? 'No free cash flow to show' : undefined}
-                                />
+                                <HorizonCardEmpty title={liveConfig?.emptyStateTitle} />
                             ) : horizonStatus === 'succeeded' ? (
                                 <HorizonAnalysisGrid>
                                     {horizons.map((horizon) => (
@@ -235,7 +300,7 @@ export default function MetricDetailsPage({
                                             range={horizon.range}
                                             value={horizon.value}
                                             breakdown={horizon.breakdown}
-                                            insight={insightForTrend(horizon.trend)}
+                                            insight={insightForHorizon(horizon)}
                                             trend={horizon.trend}
                                         />
                                     ))}

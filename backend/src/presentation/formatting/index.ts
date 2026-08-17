@@ -33,6 +33,14 @@ export function formatPercent(value: number): string {
 }
 
 /**
+ * Formats a unitless ratio to exactly two decimal places, matching the client
+ * display for debt-to-equity analysis (e.g. 1.875 -> "1.88").
+ */
+export function formatRatio(value: number): string {
+  return value.toFixed(2);
+}
+
+/**
  * Formats a dollar amount to a human-readable shorthand: billions ("B") at or
  * above 1e9, millions ("M") at or above 1e6, otherwise whole dollars. The sign
  * is preserved by dividing the signed value while the suffix is chosen from the

@@ -93,6 +93,16 @@ describe('HorizonCardEmpty', () => {
         expect(screen.getByTestId('horizon-card-empty')).toBeVisible();
         expect(screen.getByTestId('horizon-card-empty')).toHaveTextContent('No return on equity to show');
     });
+
+    it('renders a metric-specific empty title when supplied', () => {
+        render(
+            <StyledThemeProvider>
+                <HorizonCardEmpty title="No debt-to-equity ratio to show" />
+            </StyledThemeProvider>,
+        );
+
+        expect(screen.getByTestId('horizon-card-empty')).toHaveTextContent('No debt-to-equity ratio to show');
+    });
 });
 
 describe('HorizonCardError', () => {

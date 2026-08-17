@@ -1,4 +1,4 @@
-// [ APP > API > ANALYSIS > RETURN ON EQUITY > TESTS ] ###############################################
+// [ APP > API > ANALYSIS > DEBT TO EQUITY > TESTS ] #################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { NextRequest } from 'next/server';
@@ -21,9 +21,9 @@ afterEach(() => {
     vi.restoreAllMocks();
 });
 
-describe('return on equity proxy route', () => {
+describe('debt-to-equity proxy route', () => {
     it('rejects a request without a ticker and preserves the correlation id header', async () => {
-        const response = await GET(request('http://localhost/api/analysis/return-on-equity'));
+        const response = await GET(request('http://localhost/api/analysis/debt-to-equity'));
 
         expect(response.status).toBe(400);
         expect(response.headers.get('x-correlation-id')).toBe('cid-from-browser');
@@ -43,7 +43,7 @@ describe('return on equity proxy route', () => {
         ));
         vi.stubGlobal('fetch', fetchMock);
 
-        const response = await GET(request('http://localhost/api/analysis/return-on-equity?ticker=aapl'));
+        const response = await GET(request('http://localhost/api/analysis/debt-to-equity?ticker=aapl'));
 
         expect(fetchMock).toHaveBeenCalledTimes(1);
         expect(fetchMock).toHaveBeenCalledWith(
@@ -63,7 +63,7 @@ describe('return on equity proxy route', () => {
     it('returns a gateway error when the backend cannot be reached', async () => {
         vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('connection refused')));
 
-        const response = await GET(request('http://localhost/api/analysis/return-on-equity?ticker=AAPL'));
+        const response = await GET(request('http://localhost/api/analysis/debt-to-equity?ticker=AAPL'));
 
         expect(response.status).toBe(502);
         expect(response.headers.get('x-correlation-id')).toBe('cid-from-browser');

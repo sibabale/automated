@@ -10,7 +10,10 @@ import { GET } from './route';
 // 1.2. END ..........................................................................................
 
 // 1.3. HELPERS ......................................................................................
-const request = (url: string) => new NextRequest(url);
+const request = (url: string, correlationId = 'cid-from-browser') =>
+    new NextRequest(url, {
+        headers: { 'x-correlation-id': correlationId },
+    });
 // 1.3. END ..........................................................................................
 
 // 1.4. TEST CASES ...................................................................................
@@ -19,25 +22,41 @@ afterEach(() => {
 });
 
 describe('free cash flow proxy route', () => {
-    it('rejects a request without a ticker', async () => {
+    it('rejects a request without a ticker and preserves the correlation id header', async () => {
         const response = await GET(request('http://localhost/api/analysis/free-cash-flow'));
 
         expect(response.status).toBe(400);
+        expect(response.headers.get('x-correlation-id')).toBe('cid-from-browser');
         await expect(response.json()).resolves.toMatchObject({ error: { message: expect.any(String) } });
     });
 
-    it('forwards the ticker to the backend and returns its response unchanged', async () => {
-        const fetchMock = vi.fn().mockResolvedValue({
-            status: 200,
-            json: async () => ({ data: { ticker: 'RDDT', horizons: [] } }),
-        });
+    it('forwards the ticker and correlation id to the backend and returns its response unchanged', async () => {
+        const fetchMock = vi.fn().mockResolvedValue(new Response(
+            JSON.stringify({ data: { ticker: 'RDDT', horizons: [] } }),
+            {
+                status: 200,
+                headers: {
+                    'content-type': 'application/json',
+                    'x-correlation-id': 'cid-from-backend',
+                },
+            },
+        ));
         vi.stubGlobal('fetch', fetchMock);
 
         const response = await GET(request('http://localhost/api/analysis/free-cash-flow?ticker=rddt'));
 
         expect(fetchMock).toHaveBeenCalledTimes(1);
-        expect(fetchMock.mock.calls[0]?.[0]).toContain('ticker=rddt');
+        expect(fetchMock).toHaveBeenCalledWith(
+            expect.stringContaining('ticker=rddt'),
+            expect.objectContaining({
+                headers: expect.objectContaining({
+                    accept: 'application/json',
+                    'x-correlation-id': 'cid-from-browser',
+                }),
+            }),
+        );
         expect(response.status).toBe(200);
+        expect(response.headers.get('x-correlation-id')).toBe('cid-from-backend');
         await expect(response.json()).resolves.toMatchObject({ data: { ticker: 'RDDT' } });
     });
 
@@ -47,6 +66,7 @@ describe('free cash flow proxy route', () => {
         const response = await GET(request('http://localhost/api/analysis/free-cash-flow?ticker=RDDT'));
 
         expect(response.status).toBe(502);
+        expect(response.headers.get('x-correlation-id')).toBe('cid-from-browser');
     });
 });
 // 1.4. END ..........................................................................................

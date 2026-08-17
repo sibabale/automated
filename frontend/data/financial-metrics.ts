@@ -235,6 +235,8 @@ export const financialMetrics: IFinancialMetric[] = [
         label: 'Debt-to-Equity',
         value: '1.87',
         description: 'Highly serviceable',
+        liveCompanyName: 'Apple Inc.',
+        liveTicker: 'AAPL',
         formula: {
             title: 'How D/E Is Calculated',
             standardFormulaLabel: 'Standard Formula',
@@ -285,11 +287,11 @@ export const financialMetrics: IFinancialMetric[] = [
         consolidation: {
             title: 'Consolidation Summary',
             values: ['1.72', '1.95', '1.35', '1.06'],
-            denominator: '4 (Adjusted for Weight)',
+            denominator: '4 Horizons',
             result: '1.87',
-            note: 'Weighted average with recency bias — recent years carry higher weight. This ensures the consolidated D/E ratio accurately reflects current operational efficiency while retaining historical performance memory.',
-            mobileResult: '1.48',
-            mobileNote: 'Reflects intentional leverage escalation over the past decades rather than capital distress.',
+            mobileResult: '1.87',
+            note: 'Arithmetic mean across the reported horizon averages. It balances recent leverage with older capital-structure choices instead of relying on a single year.',
+            mobileNote: 'Arithmetic mean across the reported horizon averages.',
         },
         education: {
             definitionTitle: 'What Is Debt-to-Equity Ratio?',
