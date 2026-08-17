@@ -1,16 +1,16 @@
 // [ COMPONENTS > MOLECULES > BREADCRUMB CONTAINER ] #################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { render, screen } from '@testing-library/react';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { describe, expect, it } from 'vitest';
-// 1.1. END ........................................................................................
+import { render, screen } from '@testing-library/react';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { StyledThemeProvider } from '../../../theme';
 import BreadcrumbContainer from './breadcrumb-container';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. TEST CASES ................................................................................
+// 1.3. TEST CASES ...................................................................................
 const renderBreadcrumbContainer = (currentLabel = 'Return on Equity') =>
     render(
         <StyledThemeProvider>
@@ -39,7 +39,25 @@ describe('BreadcrumbContainer', () => {
             'Long-Term Shareholder Return on Common Equity',
         );
     });
-});
-// 1.3. END ........................................................................................
 
-// END FILE ########################################################################################
+    it('uses the supplied overview link when the active ticker is encoded in the route', () => {
+        render(
+            <StyledThemeProvider>
+                <BreadcrumbContainer
+                    companyName="Microsoft Corporation"
+                    ticker="MSFT"
+                    currentLabel="Profit Margin"
+                    overviewHref="/?ticker=MSFT"
+                />
+            </StyledThemeProvider>,
+        );
+
+        expect(screen.getByTestId('breadcrumb-container-overview')).toHaveAttribute(
+            'href',
+            '/?ticker=MSFT',
+        );
+    });
+});
+// 1.3. END ..........................................................................................
+
+// END FILE ##########################################################################################

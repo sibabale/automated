@@ -18,9 +18,11 @@ import storage from 'redux-persist/lib/storage';
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import themeReducer from './slices/theme.slice';
 import counterReducer from './slices/counter.slice';
+import overviewReducer from './slices/overview.slice';
 import profitMarginReducer from './slices/profit-margin.slice';
 import debtToEquityReducer from './slices/debt-to-equity.slice';
 import freeCashFlowReducer from './slices/free-cash-flow.slice';
+import marginOfSafetyReducer from './slices/margin-of-safety.slice';
 import returnOnEquityReducer from './slices/return-on-equity.slice';
 // 1.2. END ..........................................................................................
 
@@ -30,7 +32,7 @@ const persistConfig = {
     version: 1,
     storage,
     // whitelist: ['counter'], // only persist specific slices
-    blacklist: ['returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin'], // live financial data is fetched fresh, never persisted
+    blacklist: ['overview', 'returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin', 'marginOfSafety'], // live financial data is fetched fresh, never persisted
 };
 // 1.3. END ..........................................................................................
 
@@ -38,8 +40,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
     counter: counterReducer,
     theme: themeReducer,
+    overview: overviewReducer,
     debtToEquity: debtToEquityReducer,
     freeCashFlow: freeCashFlowReducer,
+    marginOfSafety: marginOfSafetyReducer,
     profitMargin: profitMarginReducer,
     returnOnEquity: returnOnEquityReducer,
 });

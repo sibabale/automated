@@ -98,6 +98,15 @@ describe("fmpGetJson (FMP HTTP client)", () => {
   });
   // 1.4.6. END ......................................................................................
 
+  // 1.4.6A. SENDS THE CURRENT DCF PATH CORRECTLY ....................................................
+  it("sends the documented discounted-cash-flow path correctly for margin-of-safety data", async () => {
+    await withMock({ "discounted-cash-flow": { body: [] } }, async (mock) => {
+      await fmpGetJson(FMP_ENDPOINTS.discountedCashFlow, { symbol: "AAPL" }, "cid-004c");
+      assert.equal(mock.lastRequest?.pathname, "discounted-cash-flow");
+    });
+  });
+  // 1.4.6A. END .....................................................................................
+
   // 1.4.7. SENDS SYMBOL WITH CORRECT PARAMETER NAME .................................................
   it("sends symbol with correct parameter name 'symbol' (kills StringLiteral)", async () => {
     await withMock({ "income-statement": { body: [] } }, async (mock) => {

@@ -1,6 +1,8 @@
 'use client';
 
 import { use, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import type { AppDispatch } from '../../../redux/store';
 import Header from '../../../components/molecules/header/header';
 import { getFinancialMetric } from '../../../data/financial-metrics';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
@@ -9,6 +11,7 @@ import type { IFinancialMetricHorizon } from '../../../data/financial-metrics';
 import { fetchDebtToEquity } from '../../../redux/slices/debt-to-equity.slice';
 import { fetchFreeCashFlow } from '../../../redux/slices/free-cash-flow.slice';
 import HorizonCard from '../../../components/molecules/horizon-card/horizon-card';
+import { fetchMarginOfSafety } from '../../../redux/slices/margin-of-safety.slice';
 import { fetchReturnOnEquity } from '../../../redux/slices/return-on-equity.slice';
 import FormulaSection from '../../../components/organisms/formula-section/formula-section';
 import HorizonCardEmpty from '../../../components/molecules/horizon-card/horizon-card.empty';
@@ -37,6 +40,14 @@ import {
     selectFreeCashFlowTrailingTwelveMonthsActuals,
 } from '../../../redux/selectors/free-cash-flow.selectors';
 import {
+    selectMarginOfSafetyConsolidatedSummary,
+    selectMarginOfSafetyError,
+    selectMarginOfSafetyHorizons,
+    selectMarginOfSafetyIsEmpty,
+    selectMarginOfSafetyStatus,
+    selectMarginOfSafetyTrailingTwelveMonthsActuals,
+} from '../../../redux/selectors/margin-of-safety.selectors';
+import {
     selectProfitMarginConsolidatedSummary,
     selectProfitMarginError,
     selectProfitMarginHorizons,
@@ -45,6 +56,11 @@ import {
     selectProfitMarginTrailingTwelveMonthsActuals,
 } from '../../../redux/selectors/profit-margin.selectors';
 import {
+    selectOverviewReportHeader,
+    selectOverviewStatus,
+    selectOverviewTicker,
+} from '../../../redux/selectors/overview.selectors';
+import {
     selectReturnOnEquityError,
     selectReturnOnEquityHorizons,
     selectReturnOnEquityIsEmpty,
@@ -52,6 +68,7 @@ import {
     selectConsolidatedSummary,
     selectTrailingTwelveMonthsActuals,
 } from '../../../redux/selectors/return-on-equity.selectors';
+import { fetchOverview } from '../../../redux/slices/overview.slice';
 import {
     DetailContentFlow,
     DesktopBreadcrumb,
@@ -85,9 +102,10 @@ type LiveMetricView = {
 };
 
 type MetricLiveConfig = {
-    kind: 'return-on-equity' | 'free-cash-flow' | 'debt-to-equity' | 'profit-margin';
+    kind: 'return-on-equity' | 'free-cash-flow' | 'debt-to-equity' | 'profit-margin' | 'margin-of-safety';
     insights: Record<'up' | 'down', string>;
     emptyStateTitle?: string;
+    hasHorizonAnalysis?: boolean;
 };
 
 type MetricHorizonView = LiveMetricView['horizons'][number] | IFinancialMetricHorizon;
@@ -124,18 +142,67 @@ const liveMetricConfig: Record<string, MetricLiveConfig> = {
         },
         emptyStateTitle: 'No profit margin to show',
     },
+    'margin-of-safety': {
+        kind: 'margin-of-safety',
+        insights: {
+            up: 'The valuation discount widened across this period.',
+            down: 'The valuation discount narrowed across this period.',
+        },
+        emptyStateTitle: 'No current valuation snapshot to show',
+        hasHorizonAnalysis: false,
+    },
 };
+
+function dispatchLiveMetricFetch(
+    ticker: string,
+    kind: MetricLiveConfig['kind'],
+    dispatch: AppDispatch,
+) {
+    if (kind === 'return-on-equity') {
+        dispatch(fetchReturnOnEquity(ticker));
+        return;
+    }
+
+    if (kind === 'debt-to-equity') {
+        dispatch(fetchDebtToEquity(ticker));
+        return;
+    }
+
+    if (kind === 'profit-margin') {
+        dispatch(fetchProfitMargin(ticker));
+        return;
+    }
+
+    if (kind === 'margin-of-safety') {
+        dispatch(fetchMarginOfSafety(ticker));
+        return;
+    }
+
+    dispatch(fetchFreeCashFlow(ticker));
+}
+
+function replaceFormulaTickerPrefix(label: string, ticker: string): string {
+    const [_, ...suffixParts] = label.split(' ');
+
+    if (suffixParts.length === 0) {
+        return ticker;
+    }
+
+    return `${ticker} ${suffixParts.join(' ')}`;
+}
 
 export default function MetricDetailsPage({
     params,
 }: IMetricDetailsPage) {
     const { metric: metricSlug } = use(params);
+    const searchParams = useSearchParams();
     const metric = getFinancialMetric(metricSlug);
     const liveConfig = liveMetricConfig[metricSlug];
-    const liveTicker = metric?.liveTicker ?? 'AAPL';
-    const liveCompanyName = metric?.liveCompanyName ?? 'Apple Inc.';
 
     const dispatch = useAppDispatch();
+    const overviewReportHeader = useAppSelector(selectOverviewReportHeader);
+    const overviewStatus = useAppSelector(selectOverviewStatus);
+    const overviewTicker = useAppSelector(selectOverviewTicker);
     const returnOnEquityStatus = useAppSelector(selectReturnOnEquityStatus);
     const returnOnEquityHorizons = useAppSelector(selectReturnOnEquityHorizons);
     const returnOnEquityIsEmptyState = useAppSelector(selectReturnOnEquityIsEmpty);
@@ -154,12 +221,26 @@ export default function MetricDetailsPage({
     const freeCashFlowErrorState = useAppSelector(selectFreeCashFlowError);
     const freeCashFlowConsolidated = useAppSelector(selectFreeCashFlowConsolidatedSummary);
     const freeCashFlowActuals = useAppSelector(selectFreeCashFlowTrailingTwelveMonthsActuals);
+    const marginOfSafetyStatus = useAppSelector(selectMarginOfSafetyStatus);
+    const marginOfSafetyHorizons = useAppSelector(selectMarginOfSafetyHorizons);
+    const marginOfSafetyIsEmptyState = useAppSelector(selectMarginOfSafetyIsEmpty);
+    const marginOfSafetyErrorState = useAppSelector(selectMarginOfSafetyError);
+    const marginOfSafetyConsolidated = useAppSelector(selectMarginOfSafetyConsolidatedSummary);
+    const marginOfSafetyActuals = useAppSelector(selectMarginOfSafetyTrailingTwelveMonthsActuals);
     const profitMarginStatus = useAppSelector(selectProfitMarginStatus);
     const profitMarginHorizons = useAppSelector(selectProfitMarginHorizons);
     const profitMarginIsEmptyState = useAppSelector(selectProfitMarginIsEmpty);
     const profitMarginErrorState = useAppSelector(selectProfitMarginError);
     const profitMarginConsolidated = useAppSelector(selectProfitMarginConsolidatedSummary);
     const profitMarginActuals = useAppSelector(selectProfitMarginTrailingTwelveMonthsActuals);
+    const requestedTicker = searchParams.get('ticker')?.trim().toUpperCase() ?? '';
+    const liveTicker = requestedTicker || overviewTicker || metric?.liveTicker || 'AAPL';
+    const liveCompanyName = overviewTicker === liveTicker
+        ? overviewReportHeader?.companyName ?? '—'
+        : requestedTicker
+            ? '—'
+            : (metric?.liveCompanyName ?? 'Apple Inc.');
+    const overviewHref = `/?ticker=${encodeURIComponent(liveTicker)}`;
 
     const liveViewByMetric: Record<string, LiveMetricView> = {
         'return-on-equity': {
@@ -186,6 +267,14 @@ export default function MetricDetailsPage({
             consolidatedSummary: freeCashFlowConsolidated,
             trailingTwelveMonthsActuals: freeCashFlowActuals,
         },
+        'margin-of-safety': {
+            status: marginOfSafetyStatus,
+            horizons: marginOfSafetyHorizons,
+            isEmpty: marginOfSafetyIsEmptyState,
+            error: marginOfSafetyErrorState,
+            consolidatedSummary: marginOfSafetyConsolidated,
+            trailingTwelveMonthsActuals: marginOfSafetyActuals,
+        },
         'profit-margin': {
             status: profitMarginStatus,
             horizons: profitMarginHorizons,
@@ -199,14 +288,21 @@ export default function MetricDetailsPage({
     const liveView = liveConfig ? liveViewByMetric[metricSlug] ?? null : null;
     const horizonStatus = liveView?.status ?? 'succeeded';
     const horizons = liveView?.horizons ?? metric?.horizons ?? [];
-    const horizonsAreEmpty = liveView?.isEmpty ?? false;
+    const analysisIsEmpty = liveView?.isEmpty ?? false;
     const horizonError = liveView?.error ?? null;
     const consolidatedData = liveView?.consolidatedSummary ?? metric?.consolidation ?? null;
+    const showsHorizonAnalysis = Boolean(metric?.horizons) && (liveConfig?.hasHorizonAnalysis ?? true);
+    const showsCurrentOnlySummary = liveConfig?.hasHorizonAnalysis === false;
     const isHeadlineLoading = liveConfig
         ? horizonStatus === 'idle' || horizonStatus === 'loading'
         : false;
     const currentMetricValue = consolidatedData?.result ?? metric?.value ?? '—';
     const formula = metric?.formula;
+    const formulaActualsLabel = formula
+        ? liveConfig
+            ? replaceFormulaTickerPrefix(formula.actualsLabel, liveTicker)
+            : formula.actualsLabel
+        : null;
     const formulaActuals = (() => {
         if (!formula || !liveConfig) {
             return formula
@@ -238,56 +334,49 @@ export default function MetricDetailsPage({
             };
         }
 
+        if (liveConfig.kind === 'margin-of-safety') {
+            const intrinsicValue = marginOfSafetyActuals?.intrinsicValue;
+            const stockPrice = marginOfSafetyActuals?.stockPrice;
+
+            return {
+                numeratorValue: intrinsicValue ?? formula.numeratorValue,
+                denominatorValue: stockPrice ?? formula.denominatorValue,
+            };
+        }
+
         return {
             numeratorValue: freeCashFlowActuals?.operatingCashFlow ?? formula.numeratorValue,
             denominatorValue: freeCashFlowActuals?.capitalExpenditure ?? formula.denominatorValue,
         };
     })();
+    const formulaResult = liveConfig?.kind === 'margin-of-safety'
+        ? currentMetricValue
+        : (formula?.result ?? '—');
 
     useEffect(() => {
-        if (!liveConfig) {
+        if (!liveConfig || !liveTicker) {
             return;
         }
 
-        if (liveConfig.kind === 'return-on-equity') {
-            dispatch(fetchReturnOnEquity(liveTicker));
-            return;
-        }
-
-        if (liveConfig.kind === 'debt-to-equity') {
-            dispatch(fetchDebtToEquity(liveTicker));
-            return;
-        }
-
-        if (liveConfig.kind === 'profit-margin') {
-            dispatch(fetchProfitMargin(liveTicker));
-            return;
-        }
-
-        dispatch(fetchFreeCashFlow(liveTicker));
+        dispatchLiveMetricFetch(liveTicker, liveConfig.kind, dispatch);
     }, [dispatch, liveConfig, liveTicker]);
+
+    useEffect(() => {
+        if (!liveTicker) {
+            return;
+        }
+
+        if (overviewStatus === 'idle' || overviewTicker !== liveTicker) {
+            dispatch(fetchOverview(liveTicker));
+        }
+    }, [dispatch, liveTicker, overviewStatus, overviewTicker]);
 
     const loadHorizons = () => {
         if (!liveConfig) {
             return;
         }
 
-        if (liveConfig.kind === 'return-on-equity') {
-            dispatch(fetchReturnOnEquity(liveTicker));
-            return;
-        }
-
-        if (liveConfig.kind === 'debt-to-equity') {
-            dispatch(fetchDebtToEquity(liveTicker));
-            return;
-        }
-
-        if (liveConfig.kind === 'profit-margin') {
-            dispatch(fetchProfitMargin(liveTicker));
-            return;
-        }
-
-        dispatch(fetchFreeCashFlow(liveTicker));
+        dispatchLiveMetricFetch(liveTicker, liveConfig.kind, dispatch);
     };
 
     const insightForHorizon = (horizon: MetricHorizonView): string => {
@@ -307,12 +396,14 @@ export default function MetricDetailsPage({
                 <BreadcrumbContainer
                     companyName={liveCompanyName}
                     currentLabel={metric?.label ?? 'Metric details'}
+                    overviewHref={overviewHref}
                     ticker={liveTicker}
                 />
             </DesktopBreadcrumb>
             <DetailPageMain>
                 <DetailLeadSection
                     companyName={liveCompanyName}
+                    overviewHref={overviewHref}
                     ticker={liveTicker}
                     title={metric?.label ?? 'Metric details'}
                     value={currentMetricValue}
@@ -321,23 +412,25 @@ export default function MetricDetailsPage({
                 />
                 <DetailContentFlow>
                     {formula && (
-                        horizonStatus === 'loading' ? (
+                        isHeadlineLoading ? (
                             <FormulaSectionLoading label="Loading trailing twelve months data" />
                         ) : (
                             <FormulaSection
                                 {...formula}
+                                actualsLabel={formulaActualsLabel ?? formula.actualsLabel}
                                 numeratorValue={formulaActuals?.numeratorValue ?? formula.numeratorValue}
                                 denominatorValue={formulaActuals?.denominatorValue ?? formula.denominatorValue}
+                                result={formulaResult}
                             />
                         )
                     )}
                     {metric?.education && <EducationalSection {...metric.education} />}
-                    {metric?.horizons && (
+                    {showsHorizonAnalysis && (
                         <HorizonAnalysisSection>
                             <HorizonAnalysisTitle>Time Horizon Analysis</HorizonAnalysisTitle>
                             {horizonError ? (
                                 <HorizonCardError message={horizonError.message} onRetry={loadHorizons} />
-                            ) : horizonsAreEmpty ? (
+                            ) : analysisIsEmpty ? (
                                 <HorizonCardEmpty title={liveConfig?.emptyStateTitle} />
                             ) : horizonStatus === 'succeeded' ? (
                                 <HorizonAnalysisGrid>
@@ -355,7 +448,7 @@ export default function MetricDetailsPage({
                                 </HorizonAnalysisGrid>
                             ) : (
                                 <HorizonAnalysisGrid>
-                                    {metric.horizons.map((horizon) => (
+                                    {(metric?.horizons ?? []).map((horizon) => (
                                         <HorizonCardLoading
                                             key={horizon.label}
                                             loaderKey={`horizon-card-loading-${horizon.label}`}
@@ -366,9 +459,13 @@ export default function MetricDetailsPage({
                             )}
                         </HorizonAnalysisSection>
                     )}
-                     {metric?.consolidation && (
+                    {metric?.consolidation && (
                         isHeadlineLoading || !consolidatedData ? (
                             <ConsolidationSummaryLoading />
+                        ) : showsCurrentOnlySummary && horizonError ? (
+                            <HorizonCardError message={horizonError.message} onRetry={loadHorizons} />
+                        ) : showsCurrentOnlySummary && analysisIsEmpty ? (
+                            <HorizonCardEmpty title={liveConfig?.emptyStateTitle} />
                         ) : (
                             <ConsolidationSummary
                                 title={metric.consolidation.title}

@@ -1,23 +1,23 @@
 // [ COMPONENTS > MOLECULES > SEARCH INPUT ] #########################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { describe, expect, it, vi } from 'vitest';
-// 1.1. END ........................................................................................
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { StyledThemeProvider } from '../../../theme';
-import ReduxProvider from '../../../redux/provider';
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import SearchInput from './search-input';
-// 1.2. END ........................................................................................
+import ReduxProvider from '../../../redux/provider';
+import { StyledThemeProvider } from '../../../theme';
+// 1.2. END ..........................................................................................
 
-// 1.3. TEST CASES ................................................................................
-const renderSearchInput = (onSearch = vi.fn()) =>
+// 1.3. TEST CASES ...................................................................................
+const renderSearchInput = (props: React.ComponentProps<typeof SearchInput> = {}) =>
     render(
         <ReduxProvider>
             <StyledThemeProvider>
-                <SearchInput onSearch={onSearch} />
+                <SearchInput {...props} />
             </StyledThemeProvider>
         </ReduxProvider>,
     );
@@ -41,7 +41,7 @@ describe('SearchInput', () => {
         const onSearch = vi.fn();
         const user = userEvent.setup();
 
-        renderSearchInput(onSearch);
+        renderSearchInput({ onSearch });
 
         await user.type(screen.getByTestId('search-input-field'), 'AAPL');
         await user.click(screen.getByTestId('search-input-submit'));
@@ -53,7 +53,7 @@ describe('SearchInput', () => {
         const onSearch = vi.fn();
         const user = userEvent.setup();
 
-        renderSearchInput(onSearch);
+        renderSearchInput({ onSearch });
 
         await user.type(screen.getByTestId('search-input-field'), 'MSFT{Enter}');
 
@@ -64,13 +64,13 @@ describe('SearchInput', () => {
         const onSearch = vi.fn();
         const user = userEvent.setup();
 
-        renderSearchInput(onSearch);
+        renderSearchInput({ onSearch });
 
         await user.type(screen.getByTestId('search-input-field'), '   {Enter}');
 
         expect(onSearch).not.toHaveBeenCalled();
     });
 });
-// 1.3. END ........................................................................................
+// 1.3. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

@@ -59,6 +59,13 @@ export function formatCurrency(valueInDollars: number): string {
 
   return `$${valueInDollars.toFixed(0)}`;
 }
+
+/**
+ * Formats a per-share price to exactly two decimal places.
+ */
+export function formatSharePrice(valueInDollars: number): string {
+  return `$${valueInDollars.toFixed(2)}`;
+}
 // 1.3. END ..........................................................................................
 
 // 1.4. CONSOLIDATION ................................................................................

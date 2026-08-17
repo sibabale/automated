@@ -1,21 +1,23 @@
-// [ COMPONENTS > ORGANISMS > FORMULA SECTION ] #####################################################
+// [ COMPONENTS > ORGANISMS > FORMULA SECTION ] ######################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { fireEvent, render, screen } from '@testing-library/react';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { describe, expect, it, vi } from 'vitest';
-// 1.1. END ........................................................................................
+import { fireEvent, render, screen } from '@testing-library/react';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { StyledThemeProvider } from '../../../theme';
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
+import FormulaSection from './formula-section';
 import ReduxProvider from '../../../redux/provider';
+import { StyledThemeProvider } from '../../../theme';
 import FormulaSectionEmpty from './formula-section.empty';
 import FormulaSectionError from './formula-section.error';
 import FormulaSectionLoading from './formula-section.loading';
-import FormulaSection from './formula-section';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. TEST CASES ................................................................................
-const formulaProps = {
+// 1.3. TEST CASES ...................................................................................
+type FormulaSectionProps = React.ComponentProps<typeof FormulaSection>;
+
+const formulaProps: FormulaSectionProps = {
     title: 'How ROE Is Calculated',
     standardFormulaLabel: 'Standard Formula',
     actualsLabel: 'AAPL TTM Actuals',
@@ -64,6 +66,31 @@ describe('FormulaSection', () => {
         );
     });
 
+    it('renders subtraction formulas with one visible minus operation per side', () => {
+        renderFormulaSection({
+            ...formulaProps,
+            title: 'How Margin of Safety Is Calculated',
+            actualsLabel: 'MSFT Latest Valuation Snapshot',
+            numeratorLabel: 'Intrinsic Value',
+            denominatorLabel: 'Current Price',
+            numeratorValue: '$250.00',
+            denominatorValue: '$200.00',
+            calculationOperator: 'subtract',
+            result: '20.0%',
+            metricAbbreviation: 'MOS',
+        });
+
+        expect(screen.getByTestId('formula-section-standard-formula')).toHaveTextContent(
+            'MOS=Intrinsic Value − Current Price',
+        );
+        expect(screen.getByTestId('formula-section-actuals-label')).toHaveTextContent(
+            'MSFT Latest Valuation Snapshot',
+        );
+        expect(screen.getByTestId('formula-section-actuals-formula')).toHaveTextContent(
+            'MOS=$250.00 − $200.00=20.0%',
+        );
+    });
+
     it('announces the calculation loading state', () => {
         render(
             <ReduxProvider>
@@ -105,6 +132,6 @@ describe('FormulaSection', () => {
         expect(onRetry).toHaveBeenCalledOnce();
     });
 });
-// 1.3. END ........................................................................................
+// 1.3. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

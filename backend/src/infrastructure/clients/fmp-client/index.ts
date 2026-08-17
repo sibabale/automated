@@ -52,6 +52,7 @@ export const FMP_ENDPOINTS = {
   keyMetrics: "key-metrics",
   balanceSheet: "balance-sheet-statement",
   incomeStatement: "income-statement",
+  discountedCashFlow: "discounted-cash-flow",
 } as const;
 
 export type FmpEndpoint = (typeof FMP_ENDPOINTS)[keyof typeof FMP_ENDPOINTS];

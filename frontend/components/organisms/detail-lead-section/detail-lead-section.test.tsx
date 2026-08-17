@@ -95,6 +95,22 @@ describe('DetailLeadSection', () => {
 
         expect(screen.getByLabelText('Loading current profit margin')).toBeVisible();
     });
+
+    it('uses the supplied overview link when returning to the active company overview', () => {
+        renderDetailLeadSection({
+            companyName: 'Microsoft Corporation',
+            ticker: 'MSFT',
+            title: 'Profit Margin',
+            value: '35.0%',
+            description: 'Premium earnings power',
+            overviewHref: '/?ticker=MSFT',
+        });
+
+        expect(screen.getByTestId('detail-lead-section-back')).toHaveAttribute(
+            'href',
+            '/?ticker=MSFT',
+        );
+    });
 });
 // 1.3. END ..........................................................................................
 

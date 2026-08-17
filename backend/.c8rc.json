@@ -10,6 +10,7 @@
     "src/domain/entities/financial-year.entity.ts",
     "src/domain/entities/cash-flow-year.entity.ts",
     "src/domain/entities/debt-to-equity-year.entity.ts",
+    "src/domain/entities/margin-of-safety-year.entity.ts",
     "src/domain/entities/profit-margin-year.entity.ts",
     "src/domain/repositories/financial-data.repository.ts",
     "src/**/*.d.ts",

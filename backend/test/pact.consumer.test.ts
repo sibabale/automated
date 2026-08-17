@@ -61,4 +61,60 @@ describe('Pact consumer (example)', () => {
     await provider.verify();
     await provider.finalize();
   });
+
+  it('creates a pact for the margin-of-safety endpoint (skippable)', async () => {
+    let PactModule;
+    try {
+      PactModule = await import('@pact-foundation/pact');
+    } catch (err) {
+      console.warn('Pact native bindings unavailable; skipping pact consumer test:', err?.message ?? err);
+      return;
+    }
+
+    const { Pact } = PactModule;
+
+    const provider = new Pact({
+      consumer: 'consumer-frontend',
+      provider: 'backend-service',
+      port: 12346,
+      dir: './test/pacts',
+      log: './logs/pact.log',
+    });
+
+    await provider.setup();
+
+    await provider.addInteraction({
+      uponReceiving: 'a request for margin of safety',
+      withRequest: {
+        method: 'GET',
+        path: '/analysis/margin-of-safety',
+        query: 'ticker=AAPL',
+        headers: { 'Accept': 'application/json' },
+      },
+      willRespondWith: {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+        body: {
+          correlationId: 'test-correlation',
+          data: {
+            ticker: 'AAPL',
+            horizons: [],
+            consolidatedSummary: { values: ['20.0%'], denominator: '1', result: '20.0%' },
+            trailingTwelveMonthsActuals: { intrinsicValue: '$250.00', stockPrice: '$200.00' }
+          }
+        }
+      }
+    });
+
+    const res = await fetch('http://127.0.0.1:12346/analysis/margin-of-safety?ticker=AAPL', {
+      headers: { Accept: 'application/json' },
+    });
+
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.equal(body.data.ticker, 'AAPL');
+
+    await provider.verify();
+    await provider.finalize();
+  });
 });

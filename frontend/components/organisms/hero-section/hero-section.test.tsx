@@ -1,21 +1,21 @@
 // [ COMPONENTS > ORGANISMS > HERO SECTION ] #########################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { describe, expect, it, vi } from 'vitest';
-// 1.1. END ........................................................................................
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { StyledThemeProvider } from '../../../theme';
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import HeroSection from './hero-section';
-// 1.2. END ........................................................................................
+import { StyledThemeProvider } from '../../../theme';
+// 1.2. END ..........................................................................................
 
-// 1.3. TEST CASES ................................................................................
-const renderHeroSection = (onSearch = vi.fn()) =>
+// 1.3. TEST CASES ...................................................................................
+const renderHeroSection = (props: React.ComponentProps<typeof HeroSection> = {}) =>
     render(
         <StyledThemeProvider>
-            <HeroSection onSearch={onSearch} />
+            <HeroSection {...props} />
         </StyledThemeProvider>,
     );
 
@@ -40,13 +40,19 @@ describe('HeroSection', () => {
         const onSearch = vi.fn();
         const user = userEvent.setup();
 
-        renderHeroSection(onSearch);
+        renderHeroSection({ onSearch });
 
         await user.type(screen.getByTestId('search-input-field'), 'BRK.B{Enter}');
 
         expect(onSearch).toHaveBeenCalledWith('BRK.B');
     });
-});
-// 1.3. END ........................................................................................
 
-// END FILE ########################################################################################
+    it('passes the supplied active ticker into the visible search field', () => {
+        renderHeroSection({ searchValue: 'MSFT' });
+
+        expect(screen.getByTestId('search-input-field')).toHaveValue('MSFT');
+    });
+});
+// 1.3. END ..........................................................................................
+
+// END FILE ##########################################################################################

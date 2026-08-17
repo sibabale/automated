@@ -11,10 +11,12 @@ import type { Application } from "express";
 import { logger } from "./logger.js";
 import { errorHandler } from "./application/middleware/error-handler/index.js";
 import { correlationId } from "./application/middleware/correlation-id/index.js";
+import { overviewController } from "./presentation/controllers/overview/index.js";
 import { notFoundHandler } from "./application/middleware/not-found-handler/index.js";
 import { profitMarginController } from "./presentation/controllers/profit-margin/index.js";
 import { debtToEquityController } from "./presentation/controllers/debt-to-equity/index.js";
 import { freeCashFlowController } from "./presentation/controllers/free-cash-flow/index.js";
+import { marginOfSafetyController } from "./presentation/controllers/margin-of-safety/index.js";
 import { returnOnEquityController } from "./presentation/controllers/return-on-equity/index.js";
 // 1.2. END ..........................................................................................
 
@@ -52,6 +54,8 @@ export function createApp(options?: { repositoryFactory?: () => any }): Applicat
   app.get("/analysis/free-cash-flow", freeCashFlowController);
   app.get("/analysis/debt-to-equity", debtToEquityController);
   app.get("/analysis/profit-margin", profitMarginController);
+  app.get("/analysis/margin-of-safety", marginOfSafetyController);
+  app.get("/overview", overviewController);
   // 1.3.2. END ......................................................................................
 
   // 1.3.3. ERROR HANDLING ...........................................................................
