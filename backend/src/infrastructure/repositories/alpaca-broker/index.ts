@@ -71,7 +71,7 @@ export function createAlpacaBrokerRepository(): BrokerRepository {
       const positions = await alpacaGetPositions(mode, correlationId);
       return positions.map((position) => ({
         ticker: readString(position.symbol) ?? "UNKNOWN",
-        companyName: null,
+        companyName: readString(position.asset_name) ?? readString(position.name),
         mode,
         quantity: readNumber(position.qty) ?? 0,
         averageEntryPrice: readNumber(position.avg_entry_price),

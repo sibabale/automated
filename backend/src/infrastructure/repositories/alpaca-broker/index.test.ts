@@ -96,6 +96,7 @@ describe("createAlpacaBrokerRepository", () => {
         return [
           {
             symbol: "MSFT",
+            asset_name: "Microsoft Corporation",
             qty: "3",
             avg_entry_price: "400",
             current_price: "420",
@@ -111,6 +112,7 @@ describe("createAlpacaBrokerRepository", () => {
       const positions = await repository.getPortfolioPositions("live", "cid-broker-003");
       assert.equal(positions.length, 1);
       assert.equal(positions[0]!.ticker, "MSFT");
+      assert.equal(positions[0]!.companyName, "Microsoft Corporation");
       assert.equal(positions[0]!.mode, "live");
       assert.equal(positions[0]!.marketValue, 1260);
     } finally {

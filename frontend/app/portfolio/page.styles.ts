@@ -1,25 +1,25 @@
-// [ APP > PORTFOLIO PAGE ] ###########################################################################
+// [ APP > PORTFOLIO PAGE ] ##########################################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import styled from 'styled-components';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { motion } from 'motion/react';
-// 1.1. END ........................................................................................
+import styled from 'styled-components';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { media } from '../../theme';
 import type { ITheme } from '../../theme';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. IMAGES .....................................................................................
-// 1.3. END ........................................................................................
+// 1.3. IMAGES .......................................................................................
+// 1.3. END ..........................................................................................
 
-// 1.4. DATA .......................................................................................
-// 1.4. END ........................................................................................
+// 1.4. DATA .........................................................................................
+// 1.4. END ..........................................................................................
 
-// 1.5. FUNCTIONS ..................................................................................
-// 1.5. END ........................................................................................
+// 1.5. FUNCTIONS ....................................................................................
+// 1.5. END ..........................................................................................
 
-// 1.6. STYLES .....................................................................................
+// 1.6. STYLES .......................................................................................
 export const PortfolioContainer = styled.div`
     min-height: 100vh;
     background-color: ${({ theme }) => theme.background.primary};
@@ -111,6 +111,42 @@ export const PortfolioHoldings = styled.section`
     gap: ${({ theme }) => theme.spacing.m};
 `;
 
+export const PortfolioStateContainer = styled.section`
+    display: grid;
+    gap: ${({ theme }) => theme.spacing.s};
+    padding: ${({ theme }) => theme.spacing.l};
+    border: 1px solid ${({ theme }) => theme.border.default};
+    border-radius: ${({ theme }) => theme.spacing.xs};
+    background-color: ${({ theme }) => theme.background.surface};
+`;
+
+export const PortfolioStateTitle = styled.h2`
+    margin: 0;
+    color: ${({ theme }) => theme.text.primary};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    line-height: 1.2;
+`;
+
+export const PortfolioStateDescription = styled.p`
+    margin: 0;
+    color: ${({ theme }) => theme.text.secondary};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    line-height: 1.5;
+`;
+
+export const PortfolioStateAction = styled.button`
+    width: fit-content;
+    padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.m}`};
+    border: 1px solid ${({ theme }) => theme.border.default};
+    border-radius: ${({ theme }) => theme.spacing.ss};
+    background-color: ${({ theme }) => theme.background.surface};
+    color: ${({ theme }) => theme.text.primary};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    cursor: pointer;
+`;
+
 export const PortfolioHoldingsTable = styled.table`
     display: none;
 
@@ -200,6 +236,6 @@ export const PortfolioHoldingScore = styled.span`
     font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-// 1.6. END ........................................................................................
+// 1.6. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################
