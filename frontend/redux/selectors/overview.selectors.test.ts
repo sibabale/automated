@@ -22,12 +22,15 @@ const stateWith = (slice: RootState['overview']): RootState =>
 
 // 1.4. TEST CASES ...................................................................................
 describe('overview selectors', () => {
-    it('maps fetched metric values onto the static card metadata', () => {
+    it('maps fetched metric values onto overview cards and applies Buffett-style labels', () => {
         const state = stateWith({
             status: 'succeeded',
             ticker: 'MSFT',
             metrics: [
                 { slug: 'return-on-equity', value: '35.0%' },
+                { slug: 'free-cash-flow', value: '$12.5B' },
+                { slug: 'debt-to-equity', value: '0.80' },
+                { slug: 'profit-margin', value: '18.0%' },
                 { slug: 'margin-of-safety', value: '12.0%' },
             ],
             reportHeader: {
@@ -46,14 +49,99 @@ describe('overview selectors', () => {
                 slug: 'return-on-equity',
                 label: 'Return on Equity',
                 value: '35.0%',
+                description: 'Buffett Target: > 15%',
+            }),
+            expect.objectContaining({
+                slug: 'free-cash-flow',
+                value: '$12.5B',
+                description: 'Funds growth and expansion',
+            }),
+            expect.objectContaining({
+                slug: 'debt-to-equity',
+                value: '0.80',
+                description: 'Manageable leverage',
+            }),
+            expect.objectContaining({
+                slug: 'profit-margin',
+                value: '18.0%',
+                description: 'Acceptable pricing power',
             }),
             expect.objectContaining({
                 slug: 'margin-of-safety',
                 value: '12.0%',
+                description: 'Fairly valued',
             }),
+        ]));
+    });
+
+    it('keeps the fallback copy when a live value is missing or cannot be parsed', () => {
+        const state = stateWith({
+            status: 'succeeded',
+            ticker: 'NVDA',
+            metrics: [
+                { slug: 'free-cash-flow', value: '—' },
+                { slug: 'debt-to-equity', value: 'not-a-number' },
+            ],
+            reportHeader: {
+                companyName: 'NVIDIA Corporation',
+                industry: 'Semiconductors',
+                sector: 'Technology',
+                sharePrice: '$172.42 USD',
+                ticker: 'NVDA',
+            },
+            errorKind: null,
+            errorMessage: null,
+        });
+
+        expect(selectOverviewMetricCards(state)).toEqual(expect.arrayContaining([
             expect.objectContaining({
                 slug: 'free-cash-flow',
-                value: '—',
+                description: 'Consistent expansion',
+            }),
+            expect.objectContaining({
+                slug: 'debt-to-equity',
+                description: 'Highly serviceable',
+            }),
+        ]));
+    });
+
+    it('classifies weak threshold values with the lowest-signal labels', () => {
+        const state = stateWith({
+            status: 'succeeded',
+            ticker: 'TSLA',
+            metrics: [
+                { slug: 'free-cash-flow', value: '-$0.5B' },
+                { slug: 'debt-to-equity', value: '2.10' },
+                { slug: 'profit-margin', value: '8.0%' },
+                { slug: 'margin-of-safety', value: '-12.0%' },
+            ],
+            reportHeader: {
+                companyName: 'Tesla, Inc.',
+                industry: 'Auto Manufacturers',
+                sector: 'Consumer Cyclical',
+                sharePrice: '$289.12 USD',
+                ticker: 'TSLA',
+            },
+            errorKind: null,
+            errorMessage: null,
+        });
+
+        expect(selectOverviewMetricCards(state)).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                slug: 'free-cash-flow',
+                description: 'Limited capacity to self-fund growth',
+            }),
+            expect.objectContaining({
+                slug: 'debt-to-equity',
+                description: 'Leverage risk',
+            }),
+            expect.objectContaining({
+                slug: 'profit-margin',
+                description: 'Low pricing power',
+            }),
+            expect.objectContaining({
+                slug: 'margin-of-safety',
+                description: 'Overvalued',
             }),
         ]));
     });
