@@ -126,11 +126,36 @@ describe("Overview controller integration (mocked FMP)", () => {
       ticker: "AAPL",
     });
     assert.deepEqual(body.data.metrics, [
-      { slug: "return-on-equity", value: "25.0%" },
-      { slug: "free-cash-flow", value: "$96" },
-      { slug: "debt-to-equity", value: "1.50" },
-      { slug: "profit-margin", value: "20.0%" },
-      { slug: "margin-of-safety", value: "25.0%" },
+      {
+        slug: "return-on-equity",
+        value: "25.0%",
+        strength: "strong",
+        description: "Strong shareholder returns",
+      },
+      {
+        slug: "free-cash-flow",
+        value: "$96",
+        strength: "medium",
+        description: "Supports ongoing investment",
+      },
+      {
+        slug: "debt-to-equity",
+        value: "1.50",
+        strength: "medium",
+        description: "Manageable leverage",
+      },
+      {
+        slug: "profit-margin",
+        value: "20.0%",
+        strength: "strong",
+        description: "High pricing power",
+      },
+      {
+        slug: "margin-of-safety",
+        value: "25.0%",
+        strength: "strong",
+        description: "Attractive discount",
+      },
     ]);
   });
   // 1.4.2. END ......................................................................................
@@ -169,11 +194,36 @@ describe("Overview controller integration (mocked FMP)", () => {
         ticker: "MISS",
       });
       assert.deepEqual(body.data.metrics, [
-        { slug: "return-on-equity", value: "—" },
-        { slug: "free-cash-flow", value: "—" },
-        { slug: "debt-to-equity", value: "—" },
-        { slug: "profit-margin", value: "—" },
-        { slug: "margin-of-safety", value: "—" },
+        {
+          slug: "return-on-equity",
+          value: "—",
+          strength: "weak",
+          description: "Weak shareholder returns",
+        },
+        {
+          slug: "free-cash-flow",
+          value: "—",
+          strength: "weak",
+          description: "Limited capacity to self-fund growth",
+        },
+        {
+          slug: "debt-to-equity",
+          value: "—",
+          strength: "weak",
+          description: "Leverage risk",
+        },
+        {
+          slug: "profit-margin",
+          value: "—",
+          strength: "weak",
+          description: "Low pricing power",
+        },
+        {
+          slug: "margin-of-safety",
+          value: "—",
+          strength: "weak",
+          description: "Overvalued",
+        },
       ]);
     } finally {
       await close();

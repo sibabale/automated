@@ -57,7 +57,12 @@ describe('HomePage', () => {
                         ticker: 'MSFT',
                     },
                     metrics: [
-                        { slug: 'return-on-equity', value: '35.0%' },
+                        {
+                            slug: 'return-on-equity',
+                            value: '35.0%',
+                            strength: 'strong',
+                            description: 'Strong shareholder returns',
+                        },
                     ],
                 },
             }),

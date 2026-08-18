@@ -8,6 +8,8 @@ import type { RequestHandler } from "express";
 import { HttpError } from "../../../errors/http-error/index.js";
 import { FmpClientError } from "../../../infrastructure/clients/fmp-client/index.js";
 import { buildOverview, type OverviewAnalysis } from "../../../application/services/overview/index.js";
+import type { MetricStrength } from "../../../domain/entities/automated-investment-decision.entity.js";
+import { classifyMetricStrengths } from "../../../application/services/automated-investment-runner/index.js";
 import { createFmpCashFlowDataRepository } from "../../../infrastructure/repositories/fmp-cash-flow-data/index.js";
 import { createFmpFinancialDataRepository } from "../../../infrastructure/repositories/fmp-financial-data/index.js";
 import { createFmpCompanyProfileRepository } from "../../../infrastructure/repositories/fmp-company-profile/index.js";
@@ -32,6 +34,8 @@ interface OverviewMetricView {
     | "profit-margin"
     | "margin-of-safety";
   value: string;
+  strength: MetricStrength;
+  description: string;
 }
 
 interface OverviewReportHeaderView {
@@ -72,6 +76,51 @@ function formatMetricValue(
   }
 }
 
+function describeMetric(slug: OverviewMetricView["slug"], strength: MetricStrength): string {
+  switch (slug) {
+    case "return-on-equity":
+      if (strength === "strong") {
+        return "Strong shareholder returns";
+      }
+      if (strength === "medium") {
+        return "Acceptable shareholder returns";
+      }
+      return "Weak shareholder returns";
+    case "free-cash-flow":
+      if (strength === "strong") {
+        return "Funds growth and expansion";
+      }
+      if (strength === "medium") {
+        return "Supports ongoing investment";
+      }
+      return "Limited capacity to self-fund growth";
+    case "debt-to-equity":
+      if (strength === "strong") {
+        return "Conservative leverage";
+      }
+      if (strength === "medium") {
+        return "Manageable leverage";
+      }
+      return "Leverage risk";
+    case "profit-margin":
+      if (strength === "strong") {
+        return "High pricing power";
+      }
+      if (strength === "medium") {
+        return "Acceptable pricing power";
+      }
+      return "Low pricing power";
+    case "margin-of-safety":
+      if (strength === "strong") {
+        return "Attractive discount";
+      }
+      if (strength === "medium") {
+        return "Fairly valued";
+      }
+      return "Overvalued";
+  }
+}
+
 /**
  * Converts the raw overview analysis into the client's display contract.
  *
@@ -79,27 +128,39 @@ function formatMetricValue(
  * renderable without inventing data the provider did not send.
  */
 function toResponseData(analysis: OverviewAnalysis): OverviewResponse["data"] {
+  const strengths = classifyMetricStrengths(analysis.metrics);
+
   return {
     metrics: [
       {
         slug: "return-on-equity",
         value: formatMetricValue("return-on-equity", analysis.metrics.returnOnEquity),
+        strength: strengths.returnOnEquity,
+        description: describeMetric("return-on-equity", strengths.returnOnEquity),
       },
       {
         slug: "free-cash-flow",
         value: formatMetricValue("free-cash-flow", analysis.metrics.freeCashFlow),
+        strength: strengths.freeCashFlow,
+        description: describeMetric("free-cash-flow", strengths.freeCashFlow),
       },
       {
         slug: "debt-to-equity",
         value: formatMetricValue("debt-to-equity", analysis.metrics.debtToEquity),
+        strength: strengths.debtToEquity,
+        description: describeMetric("debt-to-equity", strengths.debtToEquity),
       },
       {
         slug: "profit-margin",
         value: formatMetricValue("profit-margin", analysis.metrics.profitMargin),
+        strength: strengths.profitMargin,
+        description: describeMetric("profit-margin", strengths.profitMargin),
       },
       {
         slug: "margin-of-safety",
         value: formatMetricValue("margin-of-safety", analysis.metrics.marginOfSafety),
+        strength: strengths.marginOfSafety,
+        description: describeMetric("margin-of-safety", strengths.marginOfSafety),
       },
     ],
     reportHeader: {

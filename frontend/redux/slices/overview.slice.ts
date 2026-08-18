@@ -19,6 +19,8 @@ export type OverviewErrorKind = 'not-found' | 'rate-limit' | 'timeout' | 'server
 export interface OverviewMetricValue {
     slug: 'return-on-equity' | 'free-cash-flow' | 'debt-to-equity' | 'profit-margin' | 'margin-of-safety';
     value: string;
+    strength: 'strong' | 'medium' | 'weak';
+    description: string;
 }
 
 export interface OverviewReportHeader {

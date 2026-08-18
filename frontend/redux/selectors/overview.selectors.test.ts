@@ -22,16 +22,16 @@ const stateWith = (slice: RootState['overview']): RootState =>
 
 // 1.4. TEST CASES ...................................................................................
 describe('overview selectors', () => {
-    it('maps fetched metric values onto overview cards and applies Buffett-style labels', () => {
+    it('maps backend-supplied metric values and descriptions onto overview cards', () => {
         const state = stateWith({
             status: 'succeeded',
             ticker: 'MSFT',
             metrics: [
-                { slug: 'return-on-equity', value: '35.0%' },
-                { slug: 'free-cash-flow', value: '$12.5B' },
-                { slug: 'debt-to-equity', value: '0.80' },
-                { slug: 'profit-margin', value: '18.0%' },
-                { slug: 'margin-of-safety', value: '12.0%' },
+                { slug: 'return-on-equity', value: '35.0%', strength: 'strong', description: 'Strong shareholder returns' },
+                { slug: 'free-cash-flow', value: '$12.5B', strength: 'strong', description: 'Funds growth and expansion' },
+                { slug: 'debt-to-equity', value: '0.80', strength: 'medium', description: 'Manageable leverage' },
+                { slug: 'profit-margin', value: '18.0%', strength: 'medium', description: 'Acceptable pricing power' },
+                { slug: 'margin-of-safety', value: '12.0%', strength: 'medium', description: 'Fairly valued' },
             ],
             reportHeader: {
                 companyName: 'Microsoft Corporation',
@@ -49,38 +49,42 @@ describe('overview selectors', () => {
                 slug: 'return-on-equity',
                 label: 'Return on Equity',
                 value: '35.0%',
-                description: 'Buffett Target: > 15%',
+                strength: 'strong',
+                description: 'Strong shareholder returns',
             }),
             expect.objectContaining({
                 slug: 'free-cash-flow',
                 value: '$12.5B',
+                strength: 'strong',
                 description: 'Funds growth and expansion',
             }),
             expect.objectContaining({
                 slug: 'debt-to-equity',
                 value: '0.80',
+                strength: 'medium',
                 description: 'Manageable leverage',
             }),
             expect.objectContaining({
                 slug: 'profit-margin',
                 value: '18.0%',
+                strength: 'medium',
                 description: 'Acceptable pricing power',
             }),
             expect.objectContaining({
                 slug: 'margin-of-safety',
                 value: '12.0%',
+                strength: 'medium',
                 description: 'Fairly valued',
             }),
         ]));
     });
 
-    it('keeps the fallback copy when a live value is missing or cannot be parsed', () => {
+    it('keeps the static metric copy only for cards the backend did not return', () => {
         const state = stateWith({
             status: 'succeeded',
             ticker: 'NVDA',
             metrics: [
-                { slug: 'free-cash-flow', value: '—' },
-                { slug: 'debt-to-equity', value: 'not-a-number' },
+                { slug: 'free-cash-flow', value: '—', strength: 'weak', description: 'Limited capacity to self-fund growth' },
             ],
             reportHeader: {
                 companyName: 'NVIDIA Corporation',
@@ -96,24 +100,26 @@ describe('overview selectors', () => {
         expect(selectOverviewMetricCards(state)).toEqual(expect.arrayContaining([
             expect.objectContaining({
                 slug: 'free-cash-flow',
-                description: 'Consistent expansion',
+                strength: 'weak',
+                description: 'Limited capacity to self-fund growth',
             }),
             expect.objectContaining({
                 slug: 'debt-to-equity',
+                strength: 'weak',
                 description: 'Highly serviceable',
             }),
         ]));
     });
 
-    it('classifies weak threshold values with the lowest-signal labels', () => {
+    it('passes through backend weak descriptions', () => {
         const state = stateWith({
             status: 'succeeded',
             ticker: 'TSLA',
             metrics: [
-                { slug: 'free-cash-flow', value: '-$0.5B' },
-                { slug: 'debt-to-equity', value: '2.10' },
-                { slug: 'profit-margin', value: '8.0%' },
-                { slug: 'margin-of-safety', value: '-12.0%' },
+                { slug: 'free-cash-flow', value: '-$0.5B', strength: 'weak', description: 'Limited capacity to self-fund growth' },
+                { slug: 'debt-to-equity', value: '2.10', strength: 'weak', description: 'Leverage risk' },
+                { slug: 'profit-margin', value: '8.0%', strength: 'weak', description: 'Low pricing power' },
+                { slug: 'margin-of-safety', value: '-12.0%', strength: 'weak', description: 'Overvalued' },
             ],
             reportHeader: {
                 companyName: 'Tesla, Inc.',
@@ -129,18 +135,22 @@ describe('overview selectors', () => {
         expect(selectOverviewMetricCards(state)).toEqual(expect.arrayContaining([
             expect.objectContaining({
                 slug: 'free-cash-flow',
+                strength: 'weak',
                 description: 'Limited capacity to self-fund growth',
             }),
             expect.objectContaining({
                 slug: 'debt-to-equity',
+                strength: 'weak',
                 description: 'Leverage risk',
             }),
             expect.objectContaining({
                 slug: 'profit-margin',
+                strength: 'weak',
                 description: 'Low pricing power',
             }),
             expect.objectContaining({
                 slug: 'margin-of-safety',
+                strength: 'weak',
                 description: 'Overvalued',
             }),
         ]));
