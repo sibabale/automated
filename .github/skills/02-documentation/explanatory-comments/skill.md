@@ -78,6 +78,12 @@ or CLIENT section) and an equally complex sibling section (for example a REQUEST
 section) does not, that is an inconsistency to fix. Comparable complexity
 deserves comparable explanation.
 
+For backend tests in this repository, preserve the same section separation used
+in the incumbent suite: a `TEST CASES` section, then a short headline comment
+above each `it(...)` block, followed by a matching `END` line after the block.
+This keeps tests scannable and aligned with the rest of the backend files even
+when the individual test body is small.
+
 ---
 
 ## Common Mistakes

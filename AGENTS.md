@@ -26,6 +26,37 @@ mutation resistance (the testing bar), commit size and conventional commits
 (how to land work), and the frontend craft/state/surface skills (rendering
 standards). When multiple skills apply, the more specific one wins.
 
+## AI commit discipline
+
+AI sessions must enforce the `commit-size` and `conventional-commits` skills as
+first-class operating rules, not as optional suggestions and not as something
+left to Git hooks to catch later.
+
+Before creating any commit, an AI agent must:
+
+- Split the work into the smallest independently reviewable commit or commits
+  that still make sense together.
+- Avoid title-only commits and avoid a single catch-all commit for a multi-step
+  change.
+- Write a Conventional Commit title with a required body.
+- Include at least two bullet points in the commit body explaining why the
+  change was needed and what changed.
+- Prefer multiple small commits over one broad commit when the changes can be
+  reviewed or reverted independently.
+
+Git hooks and Husky are validation layers only. They do not replace the AI's
+responsibility to choose proper commit boundaries and write compliant commit
+messages up front.
+
+## Git commit hook note
+
+This repository uses Husky's custom hooks path (`core.hooksPath=.husky/_`).
+Keep the AI-attribution stripping logic wired under the active Husky path so it
+applies consistently in future sessions. The intended behavior is to remove AI
+co-author trailers such as
+`Co-authored-by: Copilot App <223556219+Copilot@users.noreply.github.com>` and
+similar generated footer lines from commit messages.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
