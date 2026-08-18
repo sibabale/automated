@@ -7,6 +7,7 @@
 import { createApp } from "./app.js";
 import { logger } from "./logger.js";
 import { fileURLToPath } from "node:url";
+import { startCronRunner } from "./services/cron-runner/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. CONSTANTS ....................................................................................
@@ -46,9 +47,17 @@ export function getPort(value = process.env.PORT): number {
 export function startServer(): void {
   const port = getPort();
   const app = createApp();
+  let cronRunnerStarted = false;
 
   app.listen(port, () => {
     logger.info({ port }, "HTTP server listening");
+
+    // `listening` can fire again if this helper is reused across environments
+    // that restart the underlying server object, so guard the singleton runner.
+    if (!cronRunnerStarted) {
+      startCronRunner();
+      cronRunnerStarted = true;
+    }
   });
 }
 

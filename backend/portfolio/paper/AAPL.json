@@ -1,0 +1,17 @@
+{
+  "trade-paper-90b6c42a-f12": {
+    "clientOrderId": "trade-paper-90b6c42a-f12",
+    "brokerOrderId": "ba1284a8-7ddb-4072-a193-76e57a5bc367",
+    "ticker": "AAPL",
+    "mode": "paper",
+    "side": "buy",
+    "orderType": "market",
+    "quantity": 13,
+    "submittedAt": "2026-08-18T11:18:06.592293461Z",
+    "scoreAtPurchase": null,
+    "verdictAtPurchase": null,
+    "analysisModel": null,
+    "constitutionVersion": null,
+    "thesisSnapshot": null
+  }
+}
