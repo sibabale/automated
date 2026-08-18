@@ -126,6 +126,24 @@ describe("createFmpCashFlowDataRepository", () => {
     assert.ok(Array.isArray(result));
   });
   // 1.4.6. END ......................................................................................
+
+  // 1.4.7. USES LIMIT-ONLY QUERY SHAPE FOR ANNUAL HISTORY ...........................................
+  it("requests annual history using symbol and limit without a period parameter", async () => {
+    const mock = await startRepoMock([
+      { fiscalYear: "2023", operatingCashFlow: 110_000, capitalExpenditure: -30_000, date: "2023-09-30" },
+    ]);
+    process.env.FMP_BASE_URL = mock.url;
+
+    const repo = createFmpCashFlowDataRepository();
+    await repo.getAnnualFinancials("AAPL", 5, "cid-cf-006");
+
+    assert.equal(mock.lastRequest?.searchParams.get("symbol"), "AAPL");
+    assert.equal(mock.lastRequest?.searchParams.get("limit"), "5");
+    assert.equal(mock.lastRequest?.searchParams.get("period"), null);
+
+    await mock.close();
+  });
+  // 1.4.7. END ......................................................................................
 });
 // 1.4. END ..........................................................................................
 

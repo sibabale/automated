@@ -1,6 +1,7 @@
 // [ BACKEND > PRESENTATION > CONTROLLERS > AUTOMATION > RUN INVESTMENT PASS ] #######################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
+import { timingSafeEqual } from "node:crypto";
 import type { RequestHandler } from "express";
 // 1.1. END ..........................................................................................
 
@@ -24,6 +25,9 @@ import { createFileAutomatedInvestmentDecisionRepository } from "../../../../inf
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
+const AUTOMATION_TRIGGER_HEADER = "x-automation-trigger";
+const MANUAL_AUTOMATION_PASSPHRASE_HEADER = "x-automation-passphrase";
+
 export interface RunInvestmentPassResponse {
   correlationId: string;
   data: Awaited<ReturnType<typeof runAutomatedInvestmentPass>>;
@@ -33,6 +37,8 @@ export interface RunInvestmentPassResponse {
 // 1.4. CONTROLLER ...................................................................................
 export const runInvestmentPassController: RequestHandler = async (request, response, next) => {
   try {
+    enforceAutomationAuthorization(request);
+
     const summary = await runAutomatedInvestmentPass(
       {
         brokerRepository: createAlpacaBrokerRepository(),
@@ -68,6 +74,33 @@ export const runInvestmentPassController: RequestHandler = async (request, respo
     next(error);
   }
 };
+
+function enforceAutomationAuthorization(request: Parameters<RequestHandler>[0]): void {
+  if (request.header(AUTOMATION_TRIGGER_HEADER) === "cron") {
+    return;
+  }
+
+  const configuredPassphrase = process.env.AUTOMATION_RUN_PASSPHRASE ?? "";
+  const providedPassphrase = request.header(MANUAL_AUTOMATION_PASSPHRASE_HEADER)?.trim() ?? "";
+
+  if (!configuredPassphrase) {
+    throw new HttpError(403, "This automation endpoint only accepts internal cron-triggered requests");
+  }
+
+  if (!providedPassphrase) {
+    throw new HttpError(403, "Manual automation runs require a valid execution passphrase");
+  }
+
+  const configuredBuffer = Buffer.from(configuredPassphrase);
+  const providedBuffer = Buffer.from(providedPassphrase);
+  const isMatch =
+    configuredBuffer.length === providedBuffer.length
+    && timingSafeEqual(configuredBuffer, providedBuffer);
+
+  if (!isMatch) {
+    throw new HttpError(403, "Manual automation runs require a valid execution passphrase");
+  }
+}
 // 1.4. END ..........................................................................................
 
 // END FILE ##########################################################################################

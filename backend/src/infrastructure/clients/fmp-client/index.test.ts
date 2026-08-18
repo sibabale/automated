@@ -255,6 +255,50 @@ describe("fmpGetJson (FMP HTTP client)", () => {
   });
   // 1.4.18. END .....................................................................................
 
+  // 1.4.18A. RETRIES 429S BEFORE SUCCEEDING .........................................................
+  it("retries a 429 response with retry-after before succeeding", async () => {
+    const savedUrl = process.env.FMP_BASE_URL;
+    const savedMinInterval = process.env.FMP_MIN_INTERVAL_MS;
+    const savedRetries = process.env.FMP_RATE_LIMIT_RETRIES;
+    let requestCount = 0;
+
+    const server = http.createServer((_req, res) => {
+      requestCount += 1;
+      if (requestCount === 1) {
+        res.statusCode = 429;
+        res.setHeader("retry-after", "0.001");
+        res.setHeader("content-type", "application/json");
+        res.end("{}");
+        return;
+      }
+
+      res.statusCode = 200;
+      res.setHeader("content-type", "application/json");
+      res.end(JSON.stringify([{ fiscalYear: 2023, netIncome: 1000 }]));
+    });
+
+    await new Promise(r => server.listen(0, "127.0.0.1", r));
+    const addr = server.address();
+    process.env.FMP_BASE_URL = `http://127.0.0.1:${addr.port}`;
+    process.env.FMP_MIN_INTERVAL_MS = "1";
+    process.env.FMP_RATE_LIMIT_RETRIES = "2";
+
+    try {
+      const rows = await fmpGetJson(FMP_ENDPOINTS.incomeStatement, { symbol: "AAPL" }, "cid-016a");
+      assert.equal(requestCount, 2);
+      assert.equal(rows.length, 1);
+      assert.equal(rows[0].fiscalYear, 2023);
+    } finally {
+      await new Promise(r => server.close(r));
+      process.env.FMP_BASE_URL = savedUrl;
+      if (savedMinInterval === undefined) delete process.env.FMP_MIN_INTERVAL_MS;
+      else process.env.FMP_MIN_INTERVAL_MS = savedMinInterval;
+      if (savedRetries === undefined) delete process.env.FMP_RATE_LIMIT_RETRIES;
+      else process.env.FMP_RATE_LIMIT_RETRIES = savedRetries;
+    }
+  });
+  // 1.4.18A. END ....................................................................................
+
   // 1.4.19. THROWS PROVIDER ERROR WITH EXACT MESSAGE ................................................
   it("throws provider error with exact message on 500", async () => {
     await withMock({ "income-statement": { status: 500, body: {} } }, async () => {
@@ -298,6 +342,38 @@ describe("fmpGetJson (FMP HTTP client)", () => {
     });
   });
   // 1.4.21. END .....................................................................................
+
+  // 1.4.21A. THROTTLES REQUESTS TO RESPECT MINIMUM INTERVAL .........................................
+  it("spaces consecutive requests by the configured minimum interval", async () => {
+    const savedUrl = process.env.FMP_BASE_URL;
+    const savedMinInterval = process.env.FMP_MIN_INTERVAL_MS;
+    const timestamps: number[] = [];
+
+    const server = http.createServer((_req, res) => {
+      timestamps.push(Date.now());
+      res.statusCode = 200;
+      res.setHeader("content-type", "application/json");
+      res.end(JSON.stringify([{ fiscalYear: 2023, netIncome: 1000 }]));
+    });
+
+    await new Promise(r => server.listen(0, "127.0.0.1", r));
+    const addr = server.address();
+    process.env.FMP_BASE_URL = `http://127.0.0.1:${addr.port}`;
+    process.env.FMP_MIN_INTERVAL_MS = "25";
+
+    try {
+      await fmpGetJson(FMP_ENDPOINTS.incomeStatement, { symbol: "AAPL" }, "cid-019a");
+      await fmpGetJson(FMP_ENDPOINTS.incomeStatement, { symbol: "MSFT" }, "cid-019b");
+      assert.equal(timestamps.length, 2);
+      assert.ok(timestamps[1] - timestamps[0] >= 20);
+    } finally {
+      await new Promise(r => server.close(r));
+      process.env.FMP_BASE_URL = savedUrl;
+      if (savedMinInterval === undefined) delete process.env.FMP_MIN_INTERVAL_MS;
+      else process.env.FMP_MIN_INTERVAL_MS = savedMinInterval;
+    }
+  });
+  // 1.4.21A. END ....................................................................................
 
   // 1.4.22. THROWS INVALID RESPONSE WITH EXACT MESSAGE ..............................................
   it("throws invalid-response with exact message when body is an unsupported primitive", async () => {

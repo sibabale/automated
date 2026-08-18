@@ -96,10 +96,10 @@ export function createFmpRepository<TYear extends { fiscalYear: number }>(
       // present (it drives ordering) while supporting statements stay a list.
       const [primaryEndpoint, ...supportingEndpoints] = config.endpoints;
       const [primaryRows, supportingRowsList] = await Promise.all([
-        fmpGetJson(primaryEndpoint, { symbol: ticker, period: "annual", limit: years }, correlationId),
+        fmpGetJson(primaryEndpoint, { symbol: ticker, limit: years }, correlationId),
         Promise.all(
           supportingEndpoints.map((endpoint) =>
-            fmpGetJson(endpoint, { symbol: ticker, period: "annual", limit: years }, correlationId),
+            fmpGetJson(endpoint, { symbol: ticker, limit: years }, correlationId),
           ),
         ),
       ]);

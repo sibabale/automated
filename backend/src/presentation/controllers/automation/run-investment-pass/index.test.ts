@@ -55,6 +55,7 @@ async function createAutomationServer() {
   process.env.ALPACA_PAPER_API_BASE_URL = "http://127.0.0.1:1";
   process.env.ALPACA_PAPER_API_KEY = "paper-key";
   process.env.ALPACA_PAPER_API_SECRET = "paper-secret";
+  process.env.AUTOMATION_RUN_PASSPHRASE = "run-passphrase";
 
   const mockFmpServer = await startMockFmpServer({
     profile: {
@@ -150,6 +151,7 @@ async function createAutomationServer() {
     delete process.env.MAX_TRADE_AMOUNT;
     delete process.env.FMP_BASE_URL;
     delete process.env.FMP_API_KEY;
+    delete process.env.AUTOMATION_RUN_PASSPHRASE;
     await new Promise((resolve) => server.close(resolve));
     await mockFmpServer.close();
   };
@@ -176,7 +178,10 @@ describe("runInvestmentPassController integration", () => {
     try {
       const response = await fetch(`${baseUrl}/automation/run-investment-pass`, {
         method: "POST",
-        headers: { "x-correlation-id": "cid-run-pass-001" },
+        headers: {
+          "x-correlation-id": "cid-run-pass-001",
+          "x-automation-trigger": "cron",
+        },
       });
       const body = await response.json();
 
@@ -197,6 +202,50 @@ describe("runInvestmentPassController integration", () => {
     }
   });
   // 1.4.1. END ......................................................................................
+
+  // 1.4.2. ALLOWS MANUAL RUNS WHEN A VALID PASSHRASE IS PROVIDED ....................................
+  it("allows manual runs when a valid passphrase is provided", async () => {
+    const { baseUrl, close } = await createAutomationServer();
+
+    try {
+      const response = await fetch(`${baseUrl}/automation/run-investment-pass`, {
+        method: "POST",
+        headers: {
+          "x-correlation-id": "cid-run-pass-002",
+          "x-automation-passphrase": "run-passphrase",
+        },
+      });
+      const body = await response.json();
+
+      assert.equal(response.status, 200);
+      assert.equal(body.data.totals.buy, 1);
+    } finally {
+      await close();
+    }
+  });
+  // 1.4.2. END ......................................................................................
+
+  // 1.4.3. REJECTS MANUAL RUNS WITHOUT A VALID PASSHRASE ............................................
+  it("rejects manual runs without a valid passphrase", async () => {
+    const { baseUrl, close } = await createAutomationServer();
+
+    try {
+      const response = await fetch(`${baseUrl}/automation/run-investment-pass`, {
+        method: "POST",
+        headers: { "x-correlation-id": "cid-run-pass-002" },
+      });
+      const body = await response.json();
+
+      assert.equal(response.status, 403);
+      assert.equal(
+        body.error?.message,
+        "Manual automation runs require a valid execution passphrase",
+      );
+    } finally {
+      await close();
+    }
+  });
+  // 1.4.3. END ......................................................................................
 });
 // 1.4. END ..........................................................................................
 

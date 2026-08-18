@@ -171,6 +171,24 @@ describe("createFmpDebtToEquityDataRepository", () => {
     assert.deepEqual(result, []);
   });
   // 1.4.9. END ......................................................................................
+
+  // 1.4.10. USES LIMIT-ONLY QUERY SHAPE FOR ANNUAL HISTORY ..........................................
+  it("requests balance-sheet history using symbol and limit without a period parameter", async () => {
+    const mock = await startRepoMock([
+      { fiscalYear: "2023", totalDebt: 120_000, totalStockholdersEquity: 60_000, date: "2023-09-30" },
+    ]);
+    process.env.FMP_BASE_URL = mock.url;
+
+    const repo = createFmpDebtToEquityDataRepository();
+    await repo.getAnnualFinancials("AAPL", 5, "cid-dte-r-009");
+
+    assert.equal(mock.lastRequest?.searchParams.get("symbol"), "AAPL");
+    assert.equal(mock.lastRequest?.searchParams.get("limit"), "5");
+    assert.equal(mock.lastRequest?.searchParams.get("period"), null);
+
+    await mock.close();
+  });
+  // 1.4.10. END .....................................................................................
 });
 // 1.4. END ..........................................................................................
 

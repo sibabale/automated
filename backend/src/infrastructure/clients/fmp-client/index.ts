@@ -1,6 +1,7 @@
 // [ BACKEND > INFRASTRUCTURE > CLIENTS > FMP CLIENT ] ###############################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
+import { setTimeout as delay } from "node:timers/promises";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
@@ -83,17 +84,81 @@ export class FmpClientError extends Error {
  * Reading configuration lazily keeps the module import-safe and lets tests
  * override values per call without a process restart.
  */
-function resolveConfig(): { baseUrl: string; apiKey: string; timeoutMs: number } {
+function resolvePositiveInteger(
+  rawValue: string | undefined,
+  fallback: number,
+): number {
+  const parsed = Number(rawValue ?? String(fallback));
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function resolveConfig(): {
+  baseUrl: string;
+  apiKey: string;
+  timeoutMs: number;
+  minIntervalMs: number;
+  maxRetries: number;
+} {
   const baseUrl = (process.env.FMP_BASE_URL ?? "https://financialmodelingprep.com/stable").replace(
     /\/+$/,
     "",
   );
   const apiKey = process.env.FMP_API_KEY ?? "";
-  const timeoutMs = Number(process.env.FMP_TIMEOUT_MS ?? "10000");
+  const timeoutMs = resolvePositiveInteger(process.env.FMP_TIMEOUT_MS, 10000);
+  const minIntervalMs = resolvePositiveInteger(process.env.FMP_MIN_INTERVAL_MS, 400);
+  const maxRetries = resolvePositiveInteger(process.env.FMP_RATE_LIMIT_RETRIES, 4);
 
-  return { baseUrl, apiKey, timeoutMs };
+  return { baseUrl, apiKey, timeoutMs, minIntervalMs, maxRetries };
 }
 // 1.6. END ..........................................................................................
+
+// 1.6.1. RATE LIMITING ..............................................................................
+let nextAvailableAt = 0;
+
+async function waitForTurn(minIntervalMs: number): Promise<void> {
+  const now = Date.now();
+  const scheduledAt = Math.max(now, nextAvailableAt);
+  nextAvailableAt = scheduledAt + minIntervalMs;
+
+  const waitMs = scheduledAt - now;
+  if (waitMs > 0) {
+    await delay(waitMs);
+  }
+}
+
+function readRetryAfterMs(response: Response): number | null {
+  const header = response.headers.get("retry-after");
+  if (!header) {
+    return null;
+  }
+
+  const seconds = Number(header);
+  if (Number.isFinite(seconds) && seconds > 0) {
+    return Math.ceil(seconds * 1000);
+  }
+
+  return null;
+}
+
+async function backOffAfterRateLimit(
+  response: Response,
+  attempt: number,
+  endpoint: FmpEndpoint,
+  correlationId: string,
+): Promise<void> {
+  const retryAfterMs = readRetryAfterMs(response);
+  const exponentialMs = Math.min(1000 * 2 ** attempt, 30000);
+  const jitterMs = Math.floor(Math.random() * 250);
+  const delayMs = retryAfterMs ?? exponentialMs + jitterMs;
+
+  logger.warn(
+    { correlationId, endpoint, attempt: attempt + 1, delayMs, retryAfterMs },
+    "FMP rate limit encountered; backing off before retry",
+  );
+
+  await delay(delayMs);
+}
+// 1.6.1. END ........................................................................................
 
 // 1.7. CLIENT .......................................................................................
 /**
@@ -113,7 +178,7 @@ export async function fmpGetJson(
   correlationId: string,
 ): Promise<FmpRecord[]> {
   // 1.7.1. GUARD ....................................................................................
-  const { baseUrl, apiKey, timeoutMs } = resolveConfig();
+  const { baseUrl, apiKey, timeoutMs, minIntervalMs, maxRetries } = resolveConfig();
 
   if (!apiKey) {
     throw new FmpClientError("authentication", "FMP API key is not configured");
@@ -132,26 +197,38 @@ export async function fmpGetJson(
   if (query.limit !== undefined) url.searchParams.set("limit", String(query.limit));
   url.searchParams.set("apikey", apiKey);
 
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    await waitForTurn(minIntervalMs);
 
-  logger.debug({ correlationId, endpoint, symbol: query.symbol }, "Calling FMP endpoint");
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
 
-  let response: Response;
-  try {
-    response = await fetch(url, { signal: controller.signal });
-  } catch (error) {
-    if (error instanceof Error && error.name === "AbortError") {
-      throw new FmpClientError("timeout", `FMP request timed out for ${endpoint}`);
+    logger.debug({ correlationId, endpoint, symbol: query.symbol, attempt }, "Calling FMP endpoint");
+
+    let response: Response;
+    try {
+      response = await fetch(url, { signal: controller.signal });
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new FmpClientError("timeout", `FMP request timed out for ${endpoint}`);
+      }
+      throw new FmpClientError("provider", `FMP request failed for ${endpoint}`);
+    } finally {
+      clearTimeout(timer);
     }
-    throw new FmpClientError("provider", `FMP request failed for ${endpoint}`);
-  } finally {
-    clearTimeout(timer);
+
+    if (response.status === 429 && attempt < maxRetries) {
+      await backOffAfterRateLimit(response, attempt, endpoint, correlationId);
+      continue;
+    }
+
+    return parseResponse(endpoint, response, correlationId);
   }
+
   // 1.7.2. END ......................................................................................
 
   // 1.7.3. RESPONSE .................................................................................
-  return parseResponse(endpoint, response, correlationId);
+  throw new FmpClientError("rate-limit", `FMP rate limit exceeded for ${endpoint}`);
   // 1.7.3. END ......................................................................................
 }
 
