@@ -1,14 +1,14 @@
 // [ COMPONENTS > ORGANISMS > REPORT HEADER ] ########################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 'use client';
 
 import React from 'react';
 import { MotionConfig } from 'motion/react';
 import type { Variants } from 'motion/react';
-// 1.1. END ........................................................................................
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import {
     ReportHeaderContainer,
     ReportIdentity,
@@ -20,16 +20,17 @@ import {
     ReportScoreLabel,
     ReportScoreSummary,
     ReportScoreValue,
+    ReportAction,
     ReportTicker,
     ReportTitle,
     ReportValuation,
 } from './report-header.styles';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. IMAGES .....................................................................................
-// 1.3. END ........................................................................................
+// 1.3. IMAGES .......................................................................................
+// 1.3. END ..........................................................................................
 
-// 1.4. DATA .......................................................................................
+// 1.4. DATA .........................................................................................
 const reportHeaderVariants: Variants = {
     hidden: { opacity: 0, y: 8 },
     visible: {
@@ -47,9 +48,9 @@ const reportScoreVariants: Variants = {
         transition: { duration: 0.35, ease: 'easeOut', delay: 0.1 },
     },
 };
-// 1.4. END ........................................................................................
+// 1.4. END ..........................................................................................
 
-// 1.5. TYPES ......................................................................................
+// 1.5. TYPES ........................................................................................
 interface IReportHeader {
     companyName?: string;
     ticker?: string;
@@ -59,10 +60,12 @@ interface IReportHeader {
     score?: string;
     scoreLabel?: string;
     scoreDescription?: string;
+    actionLabel?: string;
+    onAction?: () => void;
 }
-// 1.5. END ........................................................................................
+// 1.5. END ..........................................................................................
 
-// 1.6. COMPONENT ..................................................................................
+// 1.6. COMPONENT ....................................................................................
 
 const ReportHeader: React.FC<IReportHeader> = ({
     companyName = 'Apple Inc.',
@@ -73,14 +76,16 @@ const ReportHeader: React.FC<IReportHeader> = ({
     score = '8.2',
     scoreLabel = 'Buffett Score',
     scoreDescription = 'Strong Moat Profile',
+    actionLabel,
+    onAction,
 }) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
-    // 1.6.1. END ..................................................................................
+    // 1.6.1. END ....................................................................................
 
     // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
-    // 1.6.2. END ..................................................................................
+    // 1.6.2. END ....................................................................................
 
-    // 1.6.3. RENDER ...............................................................................
+    // 1.6.3. RENDER .................................................................................
     return (
         <MotionConfig reducedMotion="user">
             <ReportHeaderContainer data-testid="report-header">
@@ -115,26 +120,38 @@ const ReportHeader: React.FC<IReportHeader> = ({
                     animate="visible"
                     variants={reportScoreVariants}
                 >
-                    <ReportScoreSummary data-testid="report-header-score-summary">
-                        <ReportScoreLabel data-testid="report-header-score-label">
-                            {scoreLabel}
-                        </ReportScoreLabel>
-                        <ReportScoreDescription data-testid="report-header-score-description">
-                            {scoreDescription}
-                        </ReportScoreDescription>
-                    </ReportScoreSummary>
-                    <ReportScoreValue data-testid="report-header-score-value">
-                        {score}
-                    </ReportScoreValue>
+                    {actionLabel && onAction ? (
+                        <ReportAction
+                            data-testid="report-header-buy-action"
+                            onClick={onAction}
+                            type="button"
+                        >
+                            {actionLabel}
+                        </ReportAction>
+                    ) : (
+                        <>
+                            <ReportScoreSummary data-testid="report-header-score-summary">
+                                <ReportScoreLabel data-testid="report-header-score-label">
+                                    {scoreLabel}
+                                </ReportScoreLabel>
+                                <ReportScoreDescription data-testid="report-header-score-description">
+                                    {scoreDescription}
+                                </ReportScoreDescription>
+                            </ReportScoreSummary>
+                            <ReportScoreValue data-testid="report-header-score-value">
+                                {score}
+                            </ReportScoreValue>
+                        </>
+                    )}
                 </ReportScore>
             </ReportHeaderContainer>
         </MotionConfig>
     );
-    // 1.6.3. END ..................................................................................
+    // 1.6.3. END ....................................................................................
 };
 
-// 1.6. END ........................................................................................
+// 1.6. END ..........................................................................................
 
 export default ReportHeader;
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

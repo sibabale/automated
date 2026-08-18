@@ -19,6 +19,8 @@ import storage from 'redux-persist/lib/storage';
 import themeReducer from './slices/theme.slice';
 import counterReducer from './slices/counter.slice';
 import overviewReducer from './slices/overview.slice';
+import buyTradeReducer from './slices/buy-trade.slice';
+import portfolioReducer from './slices/portfolio.slice';
 import profitMarginReducer from './slices/profit-margin.slice';
 import debtToEquityReducer from './slices/debt-to-equity.slice';
 import freeCashFlowReducer from './slices/free-cash-flow.slice';
@@ -32,7 +34,7 @@ const persistConfig = {
     version: 1,
     storage,
     // whitelist: ['counter'], // only persist specific slices
-    blacklist: ['overview', 'returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin', 'marginOfSafety'], // live financial data is fetched fresh, never persisted
+    blacklist: ['overview', 'portfolio', 'buyTrade', 'returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin', 'marginOfSafety'], // live financial data and order state are fetched fresh, never persisted
 };
 // 1.3. END ..........................................................................................
 
@@ -41,6 +43,8 @@ const rootReducer = combineReducers({
     counter: counterReducer,
     theme: themeReducer,
     overview: overviewReducer,
+    portfolio: portfolioReducer,
+    buyTrade: buyTradeReducer,
     debtToEquity: debtToEquityReducer,
     freeCashFlow: freeCashFlowReducer,
     marginOfSafety: marginOfSafetyReducer,

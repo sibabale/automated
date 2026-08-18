@@ -1,19 +1,20 @@
 // [ COMPONENTS > ORGANISMS > REPORT HEADER ] ########################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
-import { render, screen } from '@testing-library/react';
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import type { ComponentProps } from 'react';
-import { describe, expect, it } from 'vitest';
-// 1.1. END ........................................................................................
+import { describe, expect, it, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { StyledThemeProvider } from '../../../theme';
-import ReduxProvider from '../../../redux/provider';
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import ReportHeader from './report-header';
+import ReduxProvider from '../../../redux/provider';
+import { StyledThemeProvider } from '../../../theme';
 import ReportHeaderLoading from './report-header.loading';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. TEST CASES ................................................................................
+// 1.3. TEST CASES ...................................................................................
 const renderReportHeader = (
     props: ComponentProps<typeof ReportHeader> = {},
 ) =>
@@ -96,6 +97,23 @@ describe('ReportHeader', () => {
         );
     });
 
+    it('renders a buy action in place of the score when an action is supplied', async () => {
+        const onAction = vi.fn();
+        const user = userEvent.setup();
+
+        renderReportHeader({
+            actionLabel: 'Buy stock',
+            onAction,
+        });
+
+        expect(screen.getByTestId('report-header-buy-action')).toHaveTextContent('Buy stock');
+        expect(screen.queryByTestId('report-header-score-value')).not.toBeInTheDocument();
+
+        await user.click(screen.getByTestId('report-header-buy-action'));
+
+        expect(onAction).toHaveBeenCalledOnce();
+    });
+
     it('announces the report loading state', () => {
         render(
             <ReduxProvider>
@@ -109,6 +127,6 @@ describe('ReportHeader', () => {
         expect(screen.getByLabelText('Loading company report')).toBeVisible();
     });
 });
-// 1.3. END ........................................................................................
+// 1.3. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################
