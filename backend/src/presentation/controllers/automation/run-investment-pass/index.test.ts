@@ -1,4 +1,4 @@
-// [ BACKEND > PRESENTATION > CONTROLLERS > AUTOMATION > RUN INVESTMENT PASS > TESTS ] #################
+// [ BACKEND > PRESENTATION > CONTROLLERS > AUTOMATION > RUN INVESTMENT PASS > TESTS ] ###############
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import os from "node:os";
@@ -169,7 +169,7 @@ afterEach(async () => {
 
 // 1.4. TEST CASES ...................................................................................
 describe("runInvestmentPassController integration", () => {
-  // 1.4.1. RUNS A BATCH PERSISTS THE DECISION AND PLACES A PAPER ORDER ................................
+  // 1.4.1. RUNS A BATCH PERSISTS THE DECISION AND PLACES A PAPER ORDER ..............................
   it("runs a batch persists the decision and places a paper order", async () => {
     const { baseUrl, close, directory } = await createAutomationServer();
 

@@ -1,4 +1,4 @@
-// [ BACKEND > INFRASTRUCTURE > REPOSITORIES > FILE AUTOMATED INVESTMENT DECISION ] ####################
+// [ BACKEND > INFRASTRUCTURE > REPOSITORIES > FILE AUTOMATED INVESTMENT DECISION ] ##################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import path from "node:path";

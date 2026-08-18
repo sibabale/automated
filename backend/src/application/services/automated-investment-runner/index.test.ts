@@ -1,4 +1,4 @@
-// [ BACKEND > APPLICATION > SERVICES > AUTOMATED INVESTMENT RUNNER > TESTS ] ###########################
+// [ BACKEND > APPLICATION > SERVICES > AUTOMATED INVESTMENT RUNNER > TESTS ] ########################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import assert from "node:assert/strict";
@@ -12,16 +12,16 @@ import {
   runAutomatedInvestmentPass,
   scoreDecisionStrengths,
 } from "./index.js";
-import type { BrokerRepository } from "../../../domain/repositories/broker.repository.js";
-import type { PurchaseSnapshotRepository } from "../../../domain/repositories/purchase-snapshot.repository.js";
-import type { CompanyProfile } from "../../../domain/entities/company-profile.entity.js";
-import type { FinancialYear } from "../../../domain/entities/financial-year.entity.js";
 import type { CashFlowYear } from "../../../domain/entities/cash-flow-year.entity.js";
-import type { DebtToEquityYear } from "../../../domain/entities/debt-to-equity-year.entity.js";
+import type { FinancialYear } from "../../../domain/entities/financial-year.entity.js";
+import type { CompanyProfile } from "../../../domain/entities/company-profile.entity.js";
+import type { BrokerRepository } from "../../../domain/repositories/broker.repository.js";
 import type { ProfitMarginYear } from "../../../domain/entities/profit-margin-year.entity.js";
+import type { DebtToEquityYear } from "../../../domain/entities/debt-to-equity-year.entity.js";
 import type { MarginOfSafetyYear } from "../../../domain/entities/margin-of-safety-year.entity.js";
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 import type { CompanyProfileRepository } from "../../../domain/repositories/company-profile.repository.js";
+import type { PurchaseSnapshotRepository } from "../../../domain/repositories/purchase-snapshot.repository.js";
 import type { AutomatedInvestmentDecision } from "../../../domain/entities/automated-investment-decision.entity.js";
 import type { AutomatedInvestmentDecisionRepository } from "../../../domain/repositories/automated-investment-decision.repository.js";
 import type {
@@ -134,7 +134,7 @@ function purchaseSnapshotRepository(): PurchaseSnapshotRepository & { snapshots:
 
 // 1.4. TEST CASES ...................................................................................
 describe("classifyMetricStrengths", () => {
-  // 1.4.1. MAPS THE AGREED THRESHOLDS TO STRONG MEDIUM WEAK ..........................................
+  // 1.4.1. MAPS THE AGREED THRESHOLDS TO STRONG MEDIUM WEAK .........................................
   it("maps the agreed thresholds to strong medium weak", () => {
     const strengths = classifyMetricStrengths({
       returnOnEquity: 25,
@@ -154,7 +154,7 @@ describe("classifyMetricStrengths", () => {
   });
   // 1.4.1. END ......................................................................................
 
-  // 1.4.2. TREATS NULL OR UNFAVORABLE VALUES AS WEAK .................................................
+  // 1.4.2. TREATS NULL OR UNFAVORABLE VALUES AS WEAK ................................................
   it("treats null or unfavorable values as weak", () => {
     const strengths = classifyMetricStrengths({
       returnOnEquity: null,
@@ -176,7 +176,7 @@ describe("classifyMetricStrengths", () => {
 });
 
 describe("deriveDecisionStatus", () => {
-  // 1.4.3. RETURNS BUY ONLY WHEN EVERY METRIC IS STRONG ...............................................
+  // 1.4.3. RETURNS BUY ONLY WHEN EVERY METRIC IS STRONG .............................................
   it("returns buy only when every metric is strong", () => {
     assert.equal(
       deriveDecisionStatus({
@@ -191,7 +191,7 @@ describe("deriveDecisionStatus", () => {
   });
   // 1.4.3. END ......................................................................................
 
-  // 1.4.4. RETURNS WATCH WHEN THERE ARE NO WEAK METRICS ...............................................
+  // 1.4.4. RETURNS WATCH WHEN THERE ARE NO WEAK METRICS .............................................
   it("returns watch when there are no weak metrics", () => {
     assert.equal(
       deriveDecisionStatus({
@@ -206,7 +206,7 @@ describe("deriveDecisionStatus", () => {
   });
   // 1.4.4. END ......................................................................................
 
-  // 1.4.5. RETURNS REJECT WHEN ANY METRIC IS WEAK ....................................................
+  // 1.4.5. RETURNS REJECT WHEN ANY METRIC IS WEAK ...................................................
   it("returns reject when any metric is weak", () => {
     assert.equal(
       deriveDecisionStatus({
@@ -223,7 +223,7 @@ describe("deriveDecisionStatus", () => {
 });
 
 describe("scoreDecisionStrengths", () => {
-  // 1.4.6. CONVERTS METRIC STRENGTHS INTO ONE PURCHASE SCORE .........................................
+  // 1.4.6. CONVERTS METRIC STRENGTHS INTO ONE PURCHASE SCORE ........................................
   it("converts metric strengths into one purchase score", () => {
     assert.equal(
       scoreDecisionStrengths({
@@ -240,7 +240,7 @@ describe("scoreDecisionStrengths", () => {
 });
 
 describe("runAutomatedInvestmentPass", () => {
-  // 1.4.7. PROCESSES NEW TICKERS PERSISTS DECISIONS AND AUTO-BUYS QUALIFIERS .........................
+  // 1.4.7. PROCESSES NEW TICKERS PERSISTS DECISIONS AND AUTO-BUYS QUALIFIERS ........................
   it("processes new tickers persists decisions and auto-buys qualifiers", async () => {
     process.env.MAX_TRADE_AMOUNT = "1000";
 
@@ -365,7 +365,7 @@ describe("runAutomatedInvestmentPass", () => {
   });
   // 1.4.7. END ......................................................................................
 
-  // 1.4.8. SKIPS AUTO-BUY WHEN THE PRICE EXCEEDS THE TRADE CAP .......................................
+  // 1.4.8. SKIPS AUTO-BUY WHEN THE PRICE EXCEEDS THE TRADE CAP ......................................
   it("skips auto-buy when the price exceeds the trade cap", async () => {
     process.env.MAX_TRADE_AMOUNT = "100";
 

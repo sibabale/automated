@@ -1,4 +1,4 @@
-// [ BACKEND > INFRASTRUCTURE > REPOSITORIES > FILE AUTOMATED INVESTMENT DECISION > TESTS ] ###########
+// [ BACKEND > INFRASTRUCTURE > REPOSITORIES > FILE AUTOMATED INVESTMENT DECISION > TESTS ] ##########
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import os from "node:os";
@@ -70,7 +70,7 @@ function decision(overrides: Partial<AutomatedInvestmentDecision> = {}): Automat
 
 // 1.4. TEST CASES ...................................................................................
 describe("createFileAutomatedInvestmentDecisionRepository", () => {
-  // 1.4.1. SAVES DECISIONS INTO ONE JSON LEDGER ......................................................
+  // 1.4.1. SAVES DECISIONS INTO ONE JSON LEDGER .....................................................
   it("saves decisions into one JSON ledger", async () => {
     const { directory, repository } = await createTempRepository();
     await repository.save(decision(), "cid-auto-decisions-001");
@@ -83,7 +83,7 @@ describe("createFileAutomatedInvestmentDecisionRepository", () => {
   });
   // 1.4.1. END ......................................................................................
 
-  // 1.4.2. REPORTS WHETHER A TICKER HAS ALREADY BEEN PROCESSED .......................................
+  // 1.4.2. REPORTS WHETHER A TICKER HAS ALREADY BEEN PROCESSED ......................................
   it("reports whether a ticker has already been processed", async () => {
     const { repository } = await createTempRepository();
     await repository.save(decision(), "cid-auto-decisions-002");

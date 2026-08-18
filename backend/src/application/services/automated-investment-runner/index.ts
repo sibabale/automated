@@ -1,12 +1,12 @@
-// [ BACKEND > APPLICATION > SERVICES > AUTOMATED INVESTMENT RUNNER ] ##################################
+// [ BACKEND > APPLICATION > SERVICES > AUTOMATED INVESTMENT RUNNER ] ################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { logger } from "../../../logger.js";
-import { buildOverview, type OverviewDependencies } from "../overview/index.js";
 import { placeBuyOrder } from "../place-buy-order/index.js";
+import { buildOverview, type OverviewDependencies } from "../overview/index.js";
 import type { BrokerRepository } from "../../../domain/repositories/broker.repository.js";
 import type { PurchaseSnapshotRepository } from "../../../domain/repositories/purchase-snapshot.repository.js";
 import type {

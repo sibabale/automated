@@ -1,4 +1,4 @@
-// [ BACKEND > INFRASTRUCTURE > REPOSITORIES > FILE TICKER SOURCE BATCH ] ###############################
+// [ BACKEND > INFRASTRUCTURE > REPOSITORIES > FILE TICKER SOURCE BATCH ] ############################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import path from "node:path";

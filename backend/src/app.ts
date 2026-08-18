@@ -14,13 +14,13 @@ import { correlationId } from "./application/middleware/correlation-id/index.js"
 import { overviewController } from "./presentation/controllers/overview/index.js";
 import { portfolioController } from "./presentation/controllers/portfolio/index.js";
 import { buyTradeController } from "./presentation/controllers/trades/buy/index.js";
-import { runInvestmentPassController } from "./presentation/controllers/automation/run-investment-pass/index.js";
 import { notFoundHandler } from "./application/middleware/not-found-handler/index.js";
 import { profitMarginController } from "./presentation/controllers/profit-margin/index.js";
 import { debtToEquityController } from "./presentation/controllers/debt-to-equity/index.js";
 import { freeCashFlowController } from "./presentation/controllers/free-cash-flow/index.js";
 import { marginOfSafetyController } from "./presentation/controllers/margin-of-safety/index.js";
 import { returnOnEquityController } from "./presentation/controllers/return-on-equity/index.js";
+import { runInvestmentPassController } from "./presentation/controllers/automation/run-investment-pass/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. APPLICATION ..................................................................................
