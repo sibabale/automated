@@ -29,7 +29,7 @@ describe("readCronRunnerConfig", () => {
       enabled: false,
       intervalMs: 86_400_000,
       initialDelayMs: 60_000,
-      endpointUrl: "http://127.0.0.1:3001/automation/run-investment-pass",
+      endpointUrl: "http://127.0.0.1:3001/api/v1/automation/run-investment-pass",
     });
   });
   // 1.4.1. END ......................................................................................
@@ -47,7 +47,7 @@ describe("readCronRunnerConfig", () => {
       enabled: true,
       intervalMs: 120000,
       initialDelayMs: 5000,
-      endpointUrl: "http://127.0.0.1:4500/automation/run-investment-pass",
+      endpointUrl: "http://127.0.0.1:4500/api/v1/automation/run-investment-pass",
     });
   });
   // 1.4.2. END ......................................................................................
@@ -71,7 +71,7 @@ describe("startCronRunner", () => {
         enabled: false,
         intervalMs: 20,
         initialDelayMs: 0,
-        endpointUrl: "http://127.0.0.1:3001/automation/run-investment-pass",
+        endpointUrl: "http://127.0.0.1:3001/api/v1/automation/run-investment-pass",
       },
       fetchMock as typeof fetch,
     );
@@ -90,7 +90,7 @@ describe("startCronRunner", () => {
         enabled: true,
         intervalMs: 1000,
         initialDelayMs: 0,
-        endpointUrl: "http://127.0.0.1:3001/automation/run-investment-pass",
+        endpointUrl: "http://127.0.0.1:3001/api/v1/automation/run-investment-pass",
       },
       fetchMock as typeof fetch,
     );
@@ -99,7 +99,10 @@ describe("startCronRunner", () => {
     await new Promise((resolve) => setTimeout(resolve, 30));
 
     assert.equal(fetchMock.mock.calls.length, 1);
-    assert.equal(fetchMock.mock.calls[0]?.arguments[0], "http://127.0.0.1:3001/automation/run-investment-pass");
+    assert.equal(
+      fetchMock.mock.calls[0]?.arguments[0],
+      "http://127.0.0.1:3001/api/v1/automation/run-investment-pass",
+    );
     assert.deepEqual(fetchMock.mock.calls[0]?.arguments[1], {
       method: "POST",
       headers: {
@@ -125,7 +128,7 @@ describe("startCronRunner", () => {
         enabled: true,
         intervalMs: 10,
         initialDelayMs: 0,
-        endpointUrl: "http://127.0.0.1:3001/automation/run-investment-pass",
+        endpointUrl: "http://127.0.0.1:3001/api/v1/automation/run-investment-pass",
       },
       fetchMock as typeof fetch,
     );

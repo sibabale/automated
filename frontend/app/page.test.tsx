@@ -200,7 +200,7 @@ describe('HomePage', () => {
         await waitFor(() => {
             expect(screen.getByTestId('home-page-buy-success')).toBeVisible();
         });
-        expect(fetchMock).toHaveBeenLastCalledWith('/api/trades/buy', {
+        expect(fetchMock).toHaveBeenLastCalledWith('/api/v1/trades/buy', {
             method: 'POST',
             headers: {
                 accept: 'application/json',

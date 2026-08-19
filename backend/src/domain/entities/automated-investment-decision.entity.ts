@@ -5,6 +5,7 @@
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import type { TradeMode } from "./trade-order.entity.js";
+import type { ApiVersion } from "../services/investment-analysis-ruleset/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -47,6 +48,7 @@ export interface AutomatedTradeExecution {
  * recomputing the entire analysis set.
  */
 export interface AutomatedInvestmentDecision {
+  apiVersion: ApiVersion;
   ticker: string;
   companyName: string | null;
   batchId: string;

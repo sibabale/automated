@@ -225,7 +225,42 @@ describe("runInvestmentPassController integration", () => {
   });
   // 1.4.2. END ......................................................................................
 
-  // 1.4.3. REJECTS MANUAL RUNS WITHOUT A VALID PASSHRASE ............................................
+  // 1.4.3. RUNS API V2 WITH THE DISTINCT RULESET METADATA ...........................................
+  it("runs api v2 with version-specific decision metadata", async () => {
+    const { baseUrl, close, directory } = await createAutomationServer();
+
+    try {
+      const response = await fetch(`${baseUrl}/api/v2/automation/run-investment-pass`, {
+        method: "POST",
+        headers: {
+          "x-correlation-id": "cid-run-pass-003",
+          "x-automation-trigger": "cron",
+        },
+      });
+      const body = await response.json();
+
+      assert.equal(response.status, 200);
+      assert.equal(body.data.decisions[0]?.apiVersion, "v2");
+      assert.equal(body.data.decisions[0]?.analysisModel, "automated-investment-v2");
+      assert.equal(
+        body.data.decisions[0]?.constitutionVersion,
+        "all-five-metrics-must-be-strong-lower-free-cash-flow-threshold",
+      );
+
+      const decisions = JSON.parse(
+        await (await import("node:fs/promises")).readFile(
+          path.join(directory, "automation", "v2", "decisions.json"),
+          "utf8",
+        ),
+      );
+      assert.equal(decisions.MSFT.apiVersion, "v2");
+    } finally {
+      await close();
+    }
+  });
+  // 1.4.3. END ......................................................................................
+
+  // 1.4.4. REJECTS MANUAL RUNS WITHOUT A VALID PASSHRASE ............................................
   it("rejects manual runs without a valid passphrase", async () => {
     const { baseUrl, close } = await createAutomationServer();
 
@@ -245,7 +280,7 @@ describe("runInvestmentPassController integration", () => {
       await close();
     }
   });
-  // 1.4.3. END ......................................................................................
+  // 1.4.4. END ......................................................................................
 });
 // 1.4. END ..........................................................................................
 

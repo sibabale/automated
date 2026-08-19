@@ -22,6 +22,10 @@ import { createFilePurchaseSnapshotRepository } from "../../../../infrastructure
 import { createFileTickerSourceBatchRepository } from "../../../../infrastructure/repositories/file-ticker-source-batch/index.js";
 import { createFmpMarginOfSafetyDataRepository } from "../../../../infrastructure/repositories/fmp-margin-of-safety-data/index.js";
 import { createFileAutomatedInvestmentDecisionRepository } from "../../../../infrastructure/repositories/file-automated-investment-decision/index.js";
+import {
+  resolveInvestmentAnalysisRuleset,
+  type ApiVersion,
+} from "../../../../domain/services/investment-analysis-ruleset/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -35,45 +39,50 @@ export interface RunInvestmentPassResponse {
 // 1.3. END ..........................................................................................
 
 // 1.4. CONTROLLER ...................................................................................
-export const runInvestmentPassController: RequestHandler = async (request, response, next) => {
-  try {
-    enforceAutomationAuthorization(request);
+export function createRunInvestmentPassController(apiVersion: ApiVersion): RequestHandler {
+  return async (request, response, next) => {
+    try {
+      enforceAutomationAuthorization(request);
 
-    const summary = await runAutomatedInvestmentPass(
-      {
-        brokerRepository: createAlpacaBrokerRepository(),
-        purchaseSnapshotRepository: createFilePurchaseSnapshotRepository(),
-        decisionRepository: createFileAutomatedInvestmentDecisionRepository(),
-        tickerSourceBatchRepository: createFileTickerSourceBatchRepository(),
-        companyProfileRepository: createFmpCompanyProfileRepository(),
-        debtToEquityRepository: createFmpDebtToEquityDataRepository(),
-        freeCashFlowRepository: createFmpCashFlowDataRepository(),
-        marginOfSafetyRepository: createFmpMarginOfSafetyDataRepository(),
-        profitMarginRepository: createFmpProfitMarginDataRepository(),
-        returnOnEquityRepository: createFmpFinancialDataRepository(),
-      },
-      request.correlationId,
-    );
+      const summary = await runAutomatedInvestmentPass(
+        {
+          brokerRepository: createAlpacaBrokerRepository(),
+          purchaseSnapshotRepository: createFilePurchaseSnapshotRepository(),
+          decisionRepository: createFileAutomatedInvestmentDecisionRepository(apiVersion),
+          tickerSourceBatchRepository: createFileTickerSourceBatchRepository(),
+          companyProfileRepository: createFmpCompanyProfileRepository(),
+          debtToEquityRepository: createFmpDebtToEquityDataRepository(),
+          freeCashFlowRepository: createFmpCashFlowDataRepository(),
+          marginOfSafetyRepository: createFmpMarginOfSafetyDataRepository(),
+          profitMarginRepository: createFmpProfitMarginDataRepository(),
+          returnOnEquityRepository: createFmpFinancialDataRepository(),
+          ruleset: resolveInvestmentAnalysisRuleset(apiVersion),
+        },
+        request.correlationId,
+      );
 
-    const body: RunInvestmentPassResponse = {
-      correlationId: request.correlationId,
-      data: summary,
-    };
+      const body: RunInvestmentPassResponse = {
+        correlationId: request.correlationId,
+        data: summary,
+      };
 
-    response.status(200).json(body);
-  } catch (error) {
-    if (error instanceof FmpClientError) {
-      return next(new HttpError(statusForFmpError(error.kind), error.message));
+      response.status(200).json(body);
+    } catch (error) {
+      if (error instanceof FmpClientError) {
+        return next(new HttpError(statusForFmpError(error.kind), error.message));
+      }
+      if (error instanceof AlpacaClientError) {
+        return next(new HttpError(statusForAlpacaError(error.kind), error.message));
+      }
+      if (error instanceof Error && error.message.includes("MAX_TRADE_AMOUNT")) {
+        return next(new HttpError(500, error.message));
+      }
+      next(error);
     }
-    if (error instanceof AlpacaClientError) {
-      return next(new HttpError(statusForAlpacaError(error.kind), error.message));
-    }
-    if (error instanceof Error && error.message.includes("MAX_TRADE_AMOUNT")) {
-      return next(new HttpError(500, error.message));
-    }
-    next(error);
-  }
-};
+  };
+}
+
+export const runInvestmentPassController = createRunInvestmentPassController("v1");
 
 function enforceAutomationAuthorization(request: Parameters<RequestHandler>[0]): void {
   if (request.header(AUTOMATION_TRIGGER_HEADER) === "cron") {

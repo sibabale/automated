@@ -47,7 +47,7 @@ describe('buyTrade slice', () => {
             undefined,
         );
 
-        expect(fetchMock).toHaveBeenCalledWith('/api/trades/buy', {
+        expect(fetchMock).toHaveBeenCalledWith('/api/v1/trades/buy', {
             method: 'POST',
             headers: {
                 accept: 'application/json',

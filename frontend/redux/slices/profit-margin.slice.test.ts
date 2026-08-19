@@ -51,7 +51,7 @@ describe('profitMargin slice', () => {
         const state = store.getState().profitMargin;
 
         expect(fetchMock).toHaveBeenCalledWith(
-            '/api/analysis/profit-margin?ticker=AAPL',
+            '/api/v1/analysis/profit-margin?ticker=AAPL',
             expect.objectContaining({
                 headers: expect.objectContaining({
                     accept: 'application/json',

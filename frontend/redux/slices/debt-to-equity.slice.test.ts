@@ -51,7 +51,7 @@ describe('debtToEquity slice', () => {
         const state = store.getState().debtToEquity;
 
         expect(fetchMock).toHaveBeenCalledWith(
-            '/api/analysis/debt-to-equity?ticker=AAPL',
+            '/api/v1/analysis/debt-to-equity?ticker=AAPL',
             expect.objectContaining({
                 headers: expect.objectContaining({
                     accept: 'application/json',

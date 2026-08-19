@@ -22,6 +22,7 @@ async function createTempRepository() {
   return {
     directory,
     repository: createFileAutomatedInvestmentDecisionRepository(
+      "v1",
       path.join(directory, "automation", "decisions.json"),
     ),
   };
@@ -29,6 +30,7 @@ async function createTempRepository() {
 
 function decision(overrides: Partial<AutomatedInvestmentDecision> = {}): AutomatedInvestmentDecision {
   return {
+    apiVersion: "v1",
     ticker: "MSFT",
     companyName: "Microsoft",
     batchId: "batch-1",
@@ -78,6 +80,7 @@ describe("createFileAutomatedInvestmentDecisionRepository", () => {
     const content = await readFile(path.join(directory, "automation", "decisions.json"), "utf8");
     const parsed = JSON.parse(content);
 
+    assert.equal(parsed.MSFT.apiVersion, "v1");
     assert.equal(parsed.MSFT.status, "buy");
     assert.equal(parsed.MSFT.tradeExecution.quantity, 5);
   });
@@ -111,6 +114,37 @@ describe("createFileAutomatedInvestmentDecisionRepository", () => {
     assert.equal(decisions.length, 2);
   });
   // 1.4.3. END ......................................................................................
+
+  // 1.4.4. KEEPS VERSIONED LEDGERS SEPARATE WHEN A LEGACY FILE OVERRIDE IS CONFIGURED ...............
+  it("keeps versioned ledgers separate when a legacy file override is configured", async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), "automated-decisions-override-"));
+    temporaryDirectories.push(directory);
+    const configuredFilePath = path.join(directory, "automation", "decisions.json");
+
+    const v1Repository = createFileAutomatedInvestmentDecisionRepository("v1", configuredFilePath);
+    const v2Repository = createFileAutomatedInvestmentDecisionRepository("v2", configuredFilePath);
+
+    await v1Repository.save(decision(), "cid-auto-decisions-008");
+    await v2Repository.save(
+      decision({
+        apiVersion: "v2",
+        analysisModel: "automated-investment-v2",
+        constitutionVersion: "all-five-metrics-must-be-strong-lower-free-cash-flow-threshold",
+      }),
+      "cid-auto-decisions-009",
+    );
+
+    const v1Content = JSON.parse(
+      await readFile(path.join(directory, "automation", "decisions.json"), "utf8"),
+    );
+    const v2Content = JSON.parse(
+      await readFile(path.join(directory, "automation", "v2", "decisions.json"), "utf8"),
+    );
+
+    assert.equal(v1Content.MSFT.apiVersion, "v1");
+    assert.equal(v2Content.MSFT.apiVersion, "v2");
+  });
+  // 1.4.4. END ......................................................................................
 });
 // 1.4. END ..........................................................................................
 

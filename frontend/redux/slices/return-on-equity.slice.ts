@@ -5,6 +5,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import { buildVersionedFrontendApiPath } from '../../lib/api-version';
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -101,7 +102,7 @@ export const fetchReturnOnEquity = createAsyncThunk<
     let response: Response;
 
     try {
-        response = await fetch(`/api/analysis/return-on-equity?ticker=${encodeURIComponent(ticker)}`, {
+        response = await fetch(`${buildVersionedFrontendApiPath('/analysis/return-on-equity')}?ticker=${encodeURIComponent(ticker)}`, {
             headers: { accept: 'application/json' },
         });
     } catch {

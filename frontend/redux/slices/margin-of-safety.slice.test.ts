@@ -42,7 +42,7 @@ describe('marginOfSafety slice', () => {
         const state = store.getState().marginOfSafety;
 
         expect(fetchMock).toHaveBeenCalledWith(
-            '/api/analysis/margin-of-safety?ticker=AAPL',
+            '/api/v1/analysis/margin-of-safety?ticker=AAPL',
             expect.objectContaining({
                 headers: expect.objectContaining({
                     accept: 'application/json',

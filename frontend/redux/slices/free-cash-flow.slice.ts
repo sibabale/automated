@@ -2,6 +2,7 @@
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { buildVersionedFrontendApiPath } from '../../lib/api-version';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
@@ -101,7 +102,7 @@ export const fetchFreeCashFlow = createAsyncThunk<
     let response: Response;
 
     try {
-        response = await fetch(`/api/analysis/free-cash-flow?ticker=${encodeURIComponent(ticker)}`, {
+        response = await fetch(`${buildVersionedFrontendApiPath('/analysis/free-cash-flow')}?ticker=${encodeURIComponent(ticker)}`, {
             headers: { accept: 'application/json' },
         });
     } catch {

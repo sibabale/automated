@@ -9,6 +9,7 @@ import {
     CORRELATION_ID_HEADER,
     createCorrelationId,
 } from '../../lib/correlation-id';
+import { buildVersionedFrontendApiPath } from '../../lib/api-version';
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -89,7 +90,7 @@ export const fetchOverview = createAsyncThunk<
     let response: Response;
 
     try {
-        response = await fetch(`/api/overview?ticker=${encodeURIComponent(ticker)}`, {
+        response = await fetch(`${buildVersionedFrontendApiPath('/overview')}?ticker=${encodeURIComponent(ticker)}`, {
             headers: {
                 accept: 'application/json',
                 [CORRELATION_ID_HEADER]: createCorrelationId(),

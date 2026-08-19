@@ -1,0 +1,28 @@
+{
+  "appVersion": "0.1.0",
+  "frontendVersion": "0.1.0",
+  "backendVersion": "0.1.0",
+  "api": {
+    "defaultVersion": "v1",
+    "supportedVersions": [
+      "v1",
+      "v2"
+    ]
+  },
+  "analysis": {
+    "v1": {
+      "analysisModel": "automated-investment-v1",
+      "constitutionVersion": "all-five-metrics-must-be-strong",
+      "freeCashFlowStrongThreshold": 10000000000
+    },
+    "v2": {
+      "analysisModel": "automated-investment-v2",
+      "constitutionVersion": "all-five-metrics-must-be-strong-lower-free-cash-flow-threshold",
+      "freeCashFlowStrongThreshold": 5000000000
+    }
+  },
+  "datasets": {
+    "v1": "backend/data/v1/decisions.json",
+    "v2": "backend/data/v2/decisions.json"
+  }
+}

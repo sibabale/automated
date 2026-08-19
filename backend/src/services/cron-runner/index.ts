@@ -25,7 +25,7 @@ export interface CronRunnerHandle {
 const DEFAULT_INTERVAL_MS = 86_400_000;
 const DEFAULT_INITIAL_DELAY_MS = 60_000;
 const DEFAULT_INTERNAL_API_BASE_URL = "http://127.0.0.1:3001";
-const AUTOMATION_PATH = "/automation/run-investment-pass";
+const AUTOMATION_PATH = "/api/v1/automation/run-investment-pass";
 
 export function readCronRunnerConfig(environment = process.env): CronRunnerConfig {
   const enabled = String(environment.AUTOMATION_CRON_ENABLED ?? "false").trim() === "true";

@@ -9,18 +9,10 @@ import type { Application } from "express";
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { logger } from "./logger.js";
+import { createApiRouter } from "./presentation/routes/create-api-router.js";
 import { errorHandler } from "./application/middleware/error-handler/index.js";
 import { correlationId } from "./application/middleware/correlation-id/index.js";
-import { overviewController } from "./presentation/controllers/overview/index.js";
-import { portfolioController } from "./presentation/controllers/portfolio/index.js";
-import { buyTradeController } from "./presentation/controllers/trades/buy/index.js";
 import { notFoundHandler } from "./application/middleware/not-found-handler/index.js";
-import { profitMarginController } from "./presentation/controllers/profit-margin/index.js";
-import { debtToEquityController } from "./presentation/controllers/debt-to-equity/index.js";
-import { freeCashFlowController } from "./presentation/controllers/free-cash-flow/index.js";
-import { marginOfSafetyController } from "./presentation/controllers/margin-of-safety/index.js";
-import { returnOnEquityController } from "./presentation/controllers/return-on-equity/index.js";
-import { runInvestmentPassController } from "./presentation/controllers/automation/run-investment-pass/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. APPLICATION ..................................................................................
@@ -53,15 +45,12 @@ export function createApp(options?: { repositoryFactory?: () => any }): Applicat
     response.status(200).json({ status: "ok", correlationId: request.correlationId });
   });
 
-  app.get("/analysis/return-on-equity", returnOnEquityController);
-  app.get("/analysis/free-cash-flow", freeCashFlowController);
-  app.get("/analysis/debt-to-equity", debtToEquityController);
-  app.get("/analysis/profit-margin", profitMarginController);
-  app.get("/analysis/margin-of-safety", marginOfSafetyController);
-  app.get("/overview", overviewController);
-  app.post("/trades/buy", buyTradeController);
-  app.get("/portfolio", portfolioController);
-  app.post("/automation/run-investment-pass", runInvestmentPassController);
+  app.use("/api/v1", createApiRouter("v1"));
+  app.use("/api/v2", createApiRouter("v2"));
+
+  // Keep the original paths mapped to v1 so existing callers do not break while
+  // the frontend and scripts migrate to explicit API versions.
+  app.use(createApiRouter("v1"));
   // 1.3.2. END ......................................................................................
 
   // 1.3.3. ERROR HANDLING ...........................................................................

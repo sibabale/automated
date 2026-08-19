@@ -22,6 +22,7 @@ import type { MarginOfSafetyYear } from "../../../domain/entities/margin-of-safe
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 import type { CompanyProfileRepository } from "../../../domain/repositories/company-profile.repository.js";
 import type { PurchaseSnapshotRepository } from "../../../domain/repositories/purchase-snapshot.repository.js";
+import { resolveInvestmentAnalysisRuleset } from "../../../domain/services/investment-analysis-ruleset/index.js";
 import type { AutomatedInvestmentDecision } from "../../../domain/entities/automated-investment-decision.entity.js";
 import type { AutomatedInvestmentDecisionRepository } from "../../../domain/repositories/automated-investment-decision.repository.js";
 import type {
@@ -246,6 +247,7 @@ describe("runAutomatedInvestmentPass", () => {
 
     const decisions = decisionRepository([
       {
+        apiVersion: "v1",
         ticker: "DONE",
         companyName: "Done Corp",
         batchId: "batch-0",
@@ -294,6 +296,7 @@ describe("runAutomatedInvestmentPass", () => {
             tickers: ["BUY", "WATCH", "REJECT", "DONE"],
           },
         ]),
+        ruleset: resolveInvestmentAnalysisRuleset("v1"),
         decisionRepository: decisions,
         brokerRepository: broker,
         purchaseSnapshotRepository: snapshots,
@@ -374,6 +377,7 @@ describe("runAutomatedInvestmentPass", () => {
         tickerSourceBatchRepository: tickerBatchRepository([
           { batchId: "batch-1", sourceFile: "single.json", tickers: ["EXP"] },
         ]),
+        ruleset: resolveInvestmentAnalysisRuleset("v1"),
         decisionRepository: decisionRepository(),
         brokerRepository: brokerRepository(),
         purchaseSnapshotRepository: purchaseSnapshotRepository(),

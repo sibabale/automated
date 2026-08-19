@@ -12,15 +12,19 @@ import type { PurchaseSnapshotRepository } from "../../../domain/repositories/pu
 import type {
   MetricStrength,
   AutomatedDecisionStatus,
+  AutomatedDecisionStrengths,
   AutomatedTradeExecution,
   AutomatedInvestmentDecision,
-  AutomatedDecisionStrengths,
 } from "../../../domain/entities/automated-investment-decision.entity.js";
 import type { AutomatedInvestmentDecisionRepository } from "../../../domain/repositories/automated-investment-decision.repository.js";
 import type {
   TickerSourceBatch,
   TickerSourceBatchRepository,
 } from "../../../domain/repositories/ticker-source-batch.repository.js";
+import {
+  resolveInvestmentAnalysisRuleset,
+  type InvestmentAnalysisRuleset,
+} from "../../../domain/services/investment-analysis-ruleset/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -29,6 +33,7 @@ export interface AutomatedInvestmentRunnerDependencies extends OverviewDependenc
   purchaseSnapshotRepository: PurchaseSnapshotRepository;
   decisionRepository: AutomatedInvestmentDecisionRepository;
   tickerSourceBatchRepository: TickerSourceBatchRepository;
+  ruleset: InvestmentAnalysisRuleset;
 }
 
 export interface AutomatedInvestmentRunSummary {
@@ -51,110 +56,16 @@ export interface AutomatedInvestmentRunSummary {
 // 1.3. END ..........................................................................................
 
 // 1.4. HELPERS ......................................................................................
-const ANALYSIS_MODEL = "automated-investment-v1";
-const CONSTITUTION_VERSION = "all-five-metrics-must-be-strong";
-
 export function classifyMetricStrengths(metrics: AutomatedInvestmentDecision["metrics"]): AutomatedDecisionStrengths {
-  return {
-    returnOnEquity: classifyReturnOnEquity(metrics.returnOnEquity),
-    freeCashFlow: classifyFreeCashFlow(metrics.freeCashFlow),
-    debtToEquity: classifyDebtToEquity(metrics.debtToEquity),
-    profitMargin: classifyProfitMargin(metrics.profitMargin),
-    marginOfSafety: classifyMarginOfSafety(metrics.marginOfSafety),
-  };
+  return resolveInvestmentAnalysisRuleset("v1").classifyMetricStrengths(metrics);
 }
 
 export function deriveDecisionStatus(strengths: AutomatedDecisionStrengths): AutomatedDecisionStatus {
-  const values = Object.values(strengths);
-
-  if (values.every((value) => value === "strong")) {
-    return "buy";
-  }
-
-  if (values.some((value) => value === "weak")) {
-    return "reject";
-  }
-
-  return "watch";
+  return resolveInvestmentAnalysisRuleset("v1").deriveDecisionStatus(strengths);
 }
 
 export function scoreDecisionStrengths(strengths: AutomatedDecisionStrengths): number {
-  const scores = Object.values(strengths).map((value) => {
-    if (value === "strong") {
-      return 100;
-    }
-    if (value === "medium") {
-      return 60;
-    }
-    return 20;
-  });
-
-  return scores.reduce((sum, value) => sum + value, 0) / scores.length;
-}
-
-function classifyReturnOnEquity(value: number | null): MetricStrength {
-  if (value === null) {
-    return "weak";
-  }
-  if (value >= 20) {
-    return "strong";
-  }
-  if (value >= 10) {
-    return "medium";
-  }
-  return "weak";
-}
-
-function classifyFreeCashFlow(value: number | null): MetricStrength {
-  if (value === null) {
-    return "weak";
-  }
-  if (value > 10_000_000_000) {
-    return "strong";
-  }
-  if (value > 0) {
-    return "medium";
-  }
-  return "weak";
-}
-
-function classifyDebtToEquity(value: number | null): MetricStrength {
-  if (value === null) {
-    return "weak";
-  }
-  if (value <= 0.5) {
-    return "strong";
-  }
-  if (value <= 1.5) {
-    return "medium";
-  }
-  return "weak";
-}
-
-function classifyProfitMargin(value: number | null): MetricStrength {
-  if (value === null) {
-    return "weak";
-  }
-  if (value >= 20) {
-    return "strong";
-  }
-  if (value >= 10) {
-    return "medium";
-  }
-  return "weak";
-}
-
-function classifyMarginOfSafety(value: number | null): MetricStrength {
-  if (value === null) {
-    return "weak";
-  }
-  if (value >= 20) {
-    return "strong";
-  }
-  if (value >= 0) {
-    return "medium";
-  }
-  return "weak";
+  return resolveInvestmentAnalysisRuleset("v1").scoreDecisionStrengths(strengths);
 }
 
 function readMaxTradeAmount(): number {
@@ -219,9 +130,9 @@ async function processTicker(
   correlationId: string,
 ): Promise<AutomatedInvestmentDecision> {
   const overview = await buildOverview(ticker, dependencies, correlationId);
-  const strengths = classifyMetricStrengths(overview.metrics);
-  const status = deriveDecisionStatus(strengths);
-  const scoreAtPurchase = scoreDecisionStrengths(strengths);
+  const strengths = dependencies.ruleset.classifyMetricStrengths(overview.metrics);
+  const status = dependencies.ruleset.deriveDecisionStatus(strengths);
+  const scoreAtPurchase = dependencies.ruleset.scoreDecisionStrengths(strengths);
 
   let tradeExecution = createTradeExecution(maxTradeAmount, overview.reportHeader.sharePrice);
 
@@ -234,12 +145,13 @@ async function processTicker(
         side: "buy",
         orderType: "market",
         limitPrice: null,
-        analysisModel: ANALYSIS_MODEL,
-        constitutionVersion: CONSTITUTION_VERSION,
+        analysisModel: dependencies.ruleset.analysisModel,
+        constitutionVersion: dependencies.ruleset.constitutionVersion,
         scoreAtPurchase,
         verdictAtPurchase: status,
         thesisSnapshot: {
           source: "automated-investment-runner",
+          apiVersion: dependencies.ruleset.apiVersion,
           metrics: overview.metrics,
           strengths,
           batchId: batch.batchId,
@@ -261,6 +173,7 @@ async function processTicker(
   }
 
   return {
+    apiVersion: dependencies.ruleset.apiVersion,
     ticker,
     companyName: overview.reportHeader.companyName,
     batchId: batch.batchId,
@@ -269,8 +182,8 @@ async function processTicker(
     status,
     verdictAtPurchase: status,
     scoreAtPurchase,
-    analysisModel: ANALYSIS_MODEL,
-    constitutionVersion: CONSTITUTION_VERSION,
+    analysisModel: dependencies.ruleset.analysisModel,
+    constitutionVersion: dependencies.ruleset.constitutionVersion,
     metrics: overview.metrics,
     strengths,
     tradeExecution,

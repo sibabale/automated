@@ -7,6 +7,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { logger } from "../../../logger.js";
+import type { ApiVersion } from "../../../domain/services/investment-analysis-ruleset/index.js";
 import type { AutomatedInvestmentDecision } from "../../../domain/entities/automated-investment-decision.entity.js";
 import type { AutomatedInvestmentDecisionRepository } from "../../../domain/repositories/automated-investment-decision.repository.js";
 // 1.2. END ..........................................................................................
@@ -17,10 +18,11 @@ type DecisionLedger = Record<string, AutomatedInvestmentDecision>;
 
 // 1.4. REPOSITORY ...................................................................................
 export function createFileAutomatedInvestmentDecisionRepository(
-  filePath = process.env.AUTOMATED_INVESTMENT_DECISIONS_FILE
-    ? path.resolve(process.env.AUTOMATED_INVESTMENT_DECISIONS_FILE)
-    : path.resolve(process.cwd(), "data", "automation", "decisions.json"),
+  apiVersion: ApiVersion,
+  configuredFilePath = process.env.AUTOMATED_INVESTMENT_DECISIONS_FILE,
 ): AutomatedInvestmentDecisionRepository {
+  const filePath = resolveLedgerFilePath(apiVersion, configuredFilePath);
+
   return {
     async hasDecisionForTicker(ticker, correlationId): Promise<boolean> {
       const ledger = await readLedger(filePath, correlationId);
@@ -59,6 +61,20 @@ async function readLedger(filePath: string, correlationId: string): Promise<Deci
     logger.error({ correlationId, filePath, err: error }, "Failed to read automated decision ledger");
     throw error;
   }
+}
+
+function resolveLedgerFilePath(apiVersion: ApiVersion, configuredPath: string | undefined): string {
+  if (!configuredPath) {
+    return path.resolve(process.cwd(), "data", apiVersion, "decisions.json");
+  }
+
+  const resolvedPath = path.resolve(configuredPath);
+  if (apiVersion === "v1") {
+    return resolvedPath;
+  }
+
+  const parsedPath = path.parse(resolvedPath);
+  return path.join(parsedPath.dir, apiVersion, parsedPath.base);
 }
 
 function normalizeTicker(ticker: string): string {

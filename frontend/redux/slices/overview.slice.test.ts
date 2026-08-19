@@ -48,7 +48,7 @@ describe('overview slice', () => {
         const state = store.getState().overview;
 
         expect(fetchMock).toHaveBeenCalledWith(
-            '/api/overview?ticker=MSFT',
+            '/api/v1/overview?ticker=MSFT',
             expect.objectContaining({
                 headers: expect.objectContaining({
                     accept: 'application/json',

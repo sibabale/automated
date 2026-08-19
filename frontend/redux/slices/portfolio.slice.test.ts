@@ -58,7 +58,7 @@ describe('portfolio slice', () => {
         const state = store.getState().portfolio;
 
         expect(fetchMock).toHaveBeenCalledWith(
-            '/api/portfolio?mode=paper',
+            '/api/v1/portfolio?mode=paper',
             expect.objectContaining({
                 headers: expect.objectContaining({
                     accept: 'application/json',

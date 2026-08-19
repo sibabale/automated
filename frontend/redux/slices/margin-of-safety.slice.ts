@@ -9,6 +9,7 @@ import {
     CORRELATION_ID_HEADER,
     createCorrelationId,
 } from '../../lib/correlation-id';
+import { buildVersionedFrontendApiPath } from '../../lib/api-version';
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -102,7 +103,7 @@ export const fetchMarginOfSafety = createAsyncThunk<
     let response: Response;
 
     try {
-        response = await fetch(`/api/analysis/margin-of-safety?ticker=${encodeURIComponent(ticker)}`, {
+        response = await fetch(`${buildVersionedFrontendApiPath('/analysis/margin-of-safety')}?ticker=${encodeURIComponent(ticker)}`, {
             headers: {
                 accept: 'application/json',
                 [CORRELATION_ID_HEADER]: createCorrelationId(),
