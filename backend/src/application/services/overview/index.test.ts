@@ -1,7 +1,8 @@
 // [ BACKEND > APPLICATION > SERVICES > OVERVIEW > TESTS ] ###########################################
 //
-// These tests prove the overview service reuses the existing metric analyzers
-// and reduces them to the exact current card values the home page needs.
+// These tests prove the overview service reuses the existing metric analyzers,
+// reduces them to the current card values, and adds structured qualitative
+// commentary without failing the numeric overview when AI generation is absent.
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import assert from "node:assert/strict";
@@ -18,6 +19,7 @@ import type { DebtToEquityYear } from "../../../domain/entities/debt-to-equity-y
 import type { MarginOfSafetyYear } from "../../../domain/entities/margin-of-safety-year.entity.js";
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 import type { CompanyProfileRepository } from "../../../domain/repositories/company-profile.repository.js";
+import { resolveInvestmentAnalysisRuleset } from "../../../domain/services/investment-analysis-ruleset/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. MOCKS ........................................................................................
@@ -42,8 +44,9 @@ function financialRepository<TYear>(years: TYear[]): FinancialDataRepository<TYe
 
 // 1.4. TEST CASES ...................................................................................
 describe("buildOverview", () => {
-  // 1.4.1. RETURNS THE HEADER FACTS AND CURRENT CARD VALUES .........................................
-  it("returns the current overview header facts and summary values for every metric", async () => {
+  it("returns the current overview facts plus generated qualitative output", async () => {
+    let capturedInput: unknown;
+
     const overview = await buildOverview(
       "AAPL",
       {
@@ -72,11 +75,46 @@ describe("buildOverview", () => {
           { fiscalYear: 2023, netIncome: 20, revenue: 100 },
           { fiscalYear: 2022, netIncome: 10, revenue: 100 },
         ]),
+        qualitativeAnalysisRepository: {
+          async generateOverviewQualitative(input) {
+            capturedInput = input;
+            return {
+              verdict: {
+                label: "Investment Verdict",
+                title: "Watchlist Candidate",
+                description: "The metrics are mixed but still constructive.",
+              },
+              pillars: [
+                {
+                  label: "Durable Competitive Advantage",
+                  title: "Moat signals are encouraging",
+                  description: "Returns and margins point to solid economics.",
+                },
+                {
+                  label: "Management Quality",
+                  title: "Capital discipline is acceptable",
+                  description: "Cash flow supports investment while leverage remains manageable.",
+                },
+                {
+                  label: "Predictable Earnings",
+                  title: "Earnings quality looks durable",
+                  description: "Profitability and cash generation support resilience.",
+                },
+                {
+                  label: "Simple Business Model",
+                  title: "Manual diligence still matters",
+                  description: "The business description is concise but not exhaustive.",
+                },
+              ],
+            };
+          },
+        },
         returnOnEquityRepository: financialRepository<FinancialYear>([
           { fiscalYear: 2024, netIncome: 20, shareholdersEquity: 100 },
           { fiscalYear: 2023, netIncome: 30, shareholdersEquity: 100 },
           { fiscalYear: 2022, netIncome: 40, shareholdersEquity: 100 },
         ]),
+        ruleset: resolveInvestmentAnalysisRuleset("v1"),
       },
       CORRELATION_ID,
     );
@@ -95,11 +133,30 @@ describe("buildOverview", () => {
       profitMargin: (30 + 20 + 10) / 3,
       returnOnEquity: (20 + 30 + 40) / 3,
     });
+    assert.deepEqual(overview.strengths, {
+      returnOnEquity: "strong",
+      freeCashFlow: "medium",
+      debtToEquity: "medium",
+      profitMargin: "strong",
+      marginOfSafety: "strong",
+    });
+    assert.deepEqual(overview.qualitative.verdict, {
+      label: "Investment Verdict",
+      title: "Watchlist Candidate",
+      description: "The metrics are mixed but still constructive.",
+    });
+    assert.deepEqual(capturedInput, {
+      reportHeader: overview.reportHeader,
+      metrics: overview.metrics,
+      strengths: overview.strengths,
+      decision: "watch",
+      score: 76,
+      analysisModel: "automated-investment-v1",
+      constitutionVersion: "all-five-metrics-must-be-strong",
+    });
   });
-  // 1.4.1. END ......................................................................................
 
-  // 1.4.2. KEEPS EMPTY OR INVALID SOURCES AS NULL PLACEHOLDERS ......................................
-  it("keeps empty horizon metrics and unusable margin of safety as null placeholders", async () => {
+  it("builds a fallback qualitative summary when no qualitative repository is configured", async () => {
     const overview = await buildOverview(
       "MISS",
       {
@@ -117,6 +174,7 @@ describe("buildOverview", () => {
         ]),
         profitMarginRepository: financialRepository<ProfitMarginYear>([]),
         returnOnEquityRepository: financialRepository<FinancialYear>([]),
+        ruleset: resolveInvestmentAnalysisRuleset("v1"),
       },
       "cid-overview-service-002",
     );
@@ -128,8 +186,42 @@ describe("buildOverview", () => {
       profitMargin: null,
       returnOnEquity: null,
     });
+    assert.equal(overview.qualitative.verdict.label, "Investment Verdict");
+    assert.equal(overview.qualitative.pillars).toBeUndefined;
   });
-  // 1.4.2. END ......................................................................................
+
+  it("falls back when qualitative generation throws", async () => {
+    const overview = await buildOverview(
+      "AAPL",
+      {
+        companyProfileRepository: profileRepository({
+          companyName: "Apple Inc.",
+          industry: "Consumer Electronics",
+          sector: "Technology",
+          sharePrice: 184.25,
+          ticker: "AAPL",
+        }),
+        debtToEquityRepository: financialRepository<DebtToEquityYear>([]),
+        freeCashFlowRepository: financialRepository<CashFlowYear>([]),
+        marginOfSafetyRepository: financialRepository<MarginOfSafetyYear>([
+          { fiscalYear: 2024, intrinsicValue: 0, stockPrice: 150 },
+        ]),
+        profitMarginRepository: financialRepository<ProfitMarginYear>([]),
+        qualitativeAnalysisRepository: {
+          async generateOverviewQualitative() {
+            throw new Error("provider unavailable");
+          },
+        },
+        returnOnEquityRepository: financialRepository<FinancialYear>([]),
+        ruleset: resolveInvestmentAnalysisRuleset("v1"),
+      },
+      "cid-overview-service-003",
+    );
+
+    assert.equal(overview.qualitative.verdict.label, "Investment Verdict");
+    assert.equal(overview.qualitative.verdict.title, "Reject for Now");
+    assert.equal(overview.qualitative.pillars).toHaveLength;
+  });
 });
 // 1.4. END ..........................................................................................
 
