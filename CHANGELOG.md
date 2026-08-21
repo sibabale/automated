@@ -26,3 +26,5 @@ to keep release history consistent.
   type configuration, and runtime typing fixes required for Railway builds.
 - Bumped the backend release version to `0.1.2` after adding overview
   qualitative analysis support and the corresponding client rendering states.
+- Bumped the backend release version to `0.1.3` after adding capped background
+  automation runs, resumable ticker progress, and cheaper default cron settings.

@@ -57,10 +57,39 @@ function financialRepository<TYear>(
 }
 
 function tickerBatchRepository(batches: TickerSourceBatch[]): TickerSourceBatchRepository {
+  const progressCalls: Array<{ batchId: string; completedAt: string | null; lastTicker: string | null; sourceFile: string }> = [];
+
   return {
-    async listBatches() {
-      return batches;
+    async listBatches(_correlationId, options) {
+      if (!options?.maxTickers) {
+        return batches;
+      }
+
+      let remaining = options.maxTickers;
+      const limited: TickerSourceBatch[] = [];
+
+      for (const batch of batches) {
+        if (remaining <= 0) {
+          break;
+        }
+
+        const tickers = batch.tickers.slice(0, remaining);
+        if (tickers.length === 0) {
+          continue;
+        }
+
+        limited.push({ ...batch, tickers });
+        remaining -= tickers.length;
+      }
+
+      return limited;
     },
+    async markBatchProgress(progress) {
+      progressCalls.push(progress);
+    },
+    progressCalls,
+  } as TickerSourceBatchRepository & {
+    progressCalls: Array<{ batchId: string; completedAt: string | null; lastTicker: string | null; sourceFile: string }>;
   };
 }
 
@@ -244,6 +273,7 @@ describe("runAutomatedInvestmentPass", () => {
   // 1.4.7. PROCESSES NEW TICKERS PERSISTS DECISIONS AND AUTO-BUYS QUALIFIERS ........................
   it("processes new tickers persists decisions and auto-buys qualifiers", async () => {
     process.env.MAX_TRADE_AMOUNT = "1000";
+    process.env.MAX_TICKERS_PER_RUN = "3";
 
     const decisions = decisionRepository([
       {
@@ -286,16 +316,17 @@ describe("runAutomatedInvestmentPass", () => {
     ]);
     const broker = brokerRepository();
     const snapshots = purchaseSnapshotRepository();
+    const batchRepository = tickerBatchRepository([
+      {
+        batchId: "batch-1",
+        sourceFile: "us-tech.json",
+        tickers: ["BUY", "WATCH", "REJECT", "DONE"],
+      },
+    ]);
 
     const summary = await runAutomatedInvestmentPass(
       {
-        tickerSourceBatchRepository: tickerBatchRepository([
-          {
-            batchId: "batch-1",
-            sourceFile: "us-tech.json",
-            tickers: ["BUY", "WATCH", "REJECT", "DONE"],
-          },
-        ]),
+        tickerSourceBatchRepository: batchRepository,
         ruleset: resolveInvestmentAnalysisRuleset("v1"),
         decisionRepository: decisions,
         brokerRepository: broker,
@@ -353,7 +384,7 @@ describe("runAutomatedInvestmentPass", () => {
     );
 
     assert.equal(summary.totals.processedTickers, 3);
-    assert.equal(summary.totals.skippedTickers, 1);
+    assert.equal(summary.totals.skippedTickers, 0);
     assert.equal(summary.totals.buy, 1);
     assert.equal(summary.totals.watch, 1);
     assert.equal(summary.totals.reject, 1);
@@ -363,8 +394,32 @@ describe("runAutomatedInvestmentPass", () => {
     assert.equal(summary.decisions[0]?.tradeExecution.quantity, 5);
     assert.equal(summary.decisions[1]?.status, "watch");
     assert.equal(summary.decisions[2]?.status, "reject");
+    assert.deepEqual(summary.batches, [
+      {
+        batchId: "batch-1",
+        completed: true,
+        lastTicker: "REJECT",
+        sourceFile: "us-tech.json",
+        processedTickers: 3,
+        skippedTickers: 0,
+      },
+    ]);
+    assert.equal(batchRepository.progressCalls.length, 1);
+    assert.deepEqual(
+      {
+        ...batchRepository.progressCalls[0],
+        completedAt: batchRepository.progressCalls[0]?.completedAt ? "set" : null,
+      },
+      {
+        batchId: "batch-1",
+        completedAt: "set",
+        lastTicker: "REJECT",
+        sourceFile: "us-tech.json",
+      },
+    );
 
     delete process.env.MAX_TRADE_AMOUNT;
+    delete process.env.MAX_TICKERS_PER_RUN;
   });
   // 1.4.7. END ......................................................................................
 

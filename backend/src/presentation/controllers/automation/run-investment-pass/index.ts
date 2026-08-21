@@ -19,6 +19,7 @@ import { createFmpCompanyProfileRepository } from "../../../../infrastructure/re
 import { createFmpProfitMarginDataRepository } from "../../../../infrastructure/repositories/fmp-profit-margin-data/index.js";
 import { createFmpDebtToEquityDataRepository } from "../../../../infrastructure/repositories/fmp-debt-to-equity-data/index.js";
 import { createFilePurchaseSnapshotRepository } from "../../../../infrastructure/repositories/file-purchase-snapshot/index.js";
+import { createOpenAiQualitativeAnalysisClient } from "../../../../infrastructure/clients/openai-qualitative-analysis/index.js";
 import { createFileTickerSourceBatchRepository } from "../../../../infrastructure/repositories/file-ticker-source-batch/index.js";
 import { createFmpMarginOfSafetyDataRepository } from "../../../../infrastructure/repositories/fmp-margin-of-safety-data/index.js";
 import { createFileAutomatedInvestmentDecisionRepository } from "../../../../infrastructure/repositories/file-automated-investment-decision/index.js";
@@ -49,12 +50,15 @@ export function createRunInvestmentPassController(apiVersion: ApiVersion): Reque
           brokerRepository: createAlpacaBrokerRepository(),
           purchaseSnapshotRepository: createFilePurchaseSnapshotRepository(),
           decisionRepository: createFileAutomatedInvestmentDecisionRepository(apiVersion),
-          tickerSourceBatchRepository: createFileTickerSourceBatchRepository(),
+          tickerSourceBatchRepository: createFileTickerSourceBatchRepository(undefined, apiVersion),
           companyProfileRepository: createFmpCompanyProfileRepository(),
           debtToEquityRepository: createFmpDebtToEquityDataRepository(),
           freeCashFlowRepository: createFmpCashFlowDataRepository(),
           marginOfSafetyRepository: createFmpMarginOfSafetyDataRepository(),
           profitMarginRepository: createFmpProfitMarginDataRepository(),
+          qualitativeAnalysisClient: shouldUseOpenAiForAutomation()
+            ? createOpenAiQualitativeAnalysisClient()
+            : null,
           returnOnEquityRepository: createFmpFinancialDataRepository(),
           ruleset: resolveInvestmentAnalysisRuleset(apiVersion),
         },
@@ -82,7 +86,11 @@ export function createRunInvestmentPassController(apiVersion: ApiVersion): Reque
   };
 }
 
-export const runInvestmentPassController = createRunInvestmentPassController("v1");
+export const runInvestmentPassController: RequestHandler = createRunInvestmentPassController("v1");
+
+function shouldUseOpenAiForAutomation(environment = process.env): boolean {
+  return String(environment.AUTOMATION_OPENAI_ENABLED ?? "false").trim() === "true";
+}
 
 function enforceAutomationAuthorization(request: Parameters<RequestHandler>[0]): void {
   if (request.header(AUTOMATION_TRIGGER_HEADER) === "cron") {

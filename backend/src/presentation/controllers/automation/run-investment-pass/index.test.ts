@@ -56,6 +56,7 @@ async function createAutomationServer() {
   process.env.ALPACA_PAPER_API_KEY = "paper-key";
   process.env.ALPACA_PAPER_API_SECRET = "paper-secret";
   process.env.AUTOMATION_RUN_PASSPHRASE = "run-passphrase";
+  process.env.MAX_TICKERS_PER_RUN = "20";
 
   const mockFmpServer = await startMockFmpServer({
     profile: {
@@ -149,6 +150,7 @@ async function createAutomationServer() {
     delete process.env.TICKER_SOURCE_DIRECTORY;
     delete process.env.AUTOMATED_INVESTMENT_DECISIONS_FILE;
     delete process.env.MAX_TRADE_AMOUNT;
+    delete process.env.MAX_TICKERS_PER_RUN;
     delete process.env.FMP_BASE_URL;
     delete process.env.FMP_API_KEY;
     delete process.env.AUTOMATION_RUN_PASSPHRASE;

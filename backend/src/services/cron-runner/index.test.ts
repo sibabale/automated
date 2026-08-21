@@ -28,7 +28,7 @@ describe("readCronRunnerConfig", () => {
     assert.deepEqual(config, {
       enabled: false,
       intervalMs: 86_400_000,
-      initialDelayMs: 60_000,
+      initialDelayMs: 14_400_000,
       endpointUrl: "http://127.0.0.1:3001/api/v1/automation/run-investment-pass",
     });
   });

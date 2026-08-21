@@ -39,6 +39,8 @@ export interface AutomatedInvestmentRunnerDependencies extends OverviewDependenc
 export interface AutomatedInvestmentRunSummary {
   batches: Array<{
     batchId: string;
+    completed: boolean;
+    lastTicker: string | null;
     sourceFile: string;
     processedTickers: number;
     skippedTickers: number;
@@ -203,7 +205,10 @@ export async function runAutomatedInvestmentPass(
   correlationId: string,
 ): Promise<AutomatedInvestmentRunSummary> {
   const maxTradeAmount = readMaxTradeAmount();
-  const batches = await dependencies.tickerSourceBatchRepository.listBatches(correlationId);
+  const maxTickersPerRun = readMaxTickersPerRun();
+  const batches = await dependencies.tickerSourceBatchRepository.listBatches(correlationId, {
+    maxTickers: maxTickersPerRun,
+  });
   const decisions: AutomatedInvestmentDecision[] = [];
   const batchSummaries: AutomatedInvestmentRunSummary["batches"] = [];
   let skippedTickers = 0;
@@ -253,8 +258,22 @@ export async function runAutomatedInvestmentPass(
       );
     }
 
+    const lastTicker = batch.tickers.at(-1) ?? null;
+    const completed = lastTicker !== null && (processedForBatch + skippedForBatch) >= batch.tickers.length;
+    await dependencies.tickerSourceBatchRepository.markBatchProgress(
+      {
+        batchId: batch.batchId,
+        completedAt: completed ? new Date().toISOString() : null,
+        lastTicker,
+        sourceFile: batch.sourceFile,
+      },
+      correlationId,
+    );
+
     batchSummaries.push({
       batchId: batch.batchId,
+      completed,
+      lastTicker,
       sourceFile: batch.sourceFile,
       processedTickers: processedForBatch,
       skippedTickers: skippedForBatch,
@@ -273,6 +292,20 @@ export async function runAutomatedInvestmentPass(
     },
     decisions,
   };
+}
+
+function readMaxTickersPerRun(): number | undefined {
+  const rawValue = process.env.MAX_TICKERS_PER_RUN;
+  if (rawValue === undefined || rawValue.trim() === "") {
+    return undefined;
+  }
+
+  const parsed = Number(rawValue);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new Error("MAX_TICKERS_PER_RUN must be configured as an integer greater than zero");
+  }
+
+  return parsed;
 }
 // 1.5. END ..........................................................................................
 
