@@ -1,5 +1,9 @@
 {
   "servers": {
+    "railway": {
+      "type": "http",
+      "url": "https://mcp.railway.com"
+    },
     "motion": {
       "type": "http",
       "url": "https://mcp.motion.dev"
