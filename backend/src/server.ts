@@ -8,6 +8,7 @@ import { createApp } from "./app.js";
 import { logger } from "./logger.js";
 import { fileURLToPath } from "node:url";
 import { startCronRunner } from "./services/cron-runner/index.js";
+import { seedTickerVolume } from "./services/seed-ticker-volume/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. CONSTANTS ....................................................................................
@@ -44,10 +45,19 @@ export function getPort(value = process.env.PORT): number {
  * module (for example from tests that exercise {@link getPort}) has no side
  * effects and never binds a port.
  */
-export function startServer(): void {
+export async function startServer(): Promise<void> {
   const port = getPort();
   const app = createApp();
   let cronRunnerStarted = false;
+
+  try {
+    await seedTickerVolume();
+  } catch (error) {
+    logger.error(
+      { err: error },
+      "Ticker volume seeding failed; continuing startup so the service remains available",
+    );
+  }
 
   app.listen(port, () => {
     logger.info({ port }, "HTTP server listening");
@@ -65,7 +75,7 @@ export function startServer(): void {
 // point, not when it is imported. `process.argv[1]` is the executed script's
 // path, which matches this module's own path only for a direct run.
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  startServer();
+  void startServer();
 }
 // 1.5. END ..........................................................................................
 
