@@ -150,7 +150,7 @@ describe("buildOverview", () => {
       metrics: overview.metrics,
       strengths: overview.strengths,
       decision: "watch",
-      score: 76,
+      score: 84,
       analysisModel: "automated-investment-v1",
       constitutionVersion: "all-five-metrics-must-be-strong",
     });
