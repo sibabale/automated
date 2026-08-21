@@ -14,6 +14,7 @@ import { createFmpFinancialDataRepository } from "../../../infrastructure/reposi
 import { createFmpCompanyProfileRepository } from "../../../infrastructure/repositories/fmp-company-profile/index.js";
 import { createFmpProfitMarginDataRepository } from "../../../infrastructure/repositories/fmp-profit-margin-data/index.js";
 import { createFmpDebtToEquityDataRepository } from "../../../infrastructure/repositories/fmp-debt-to-equity-data/index.js";
+import { createOpenAiQualitativeAnalysisClient } from "../../../infrastructure/clients/openai-qualitative-analysis/index.js";
 import { createFmpMarginOfSafetyDataRepository } from "../../../infrastructure/repositories/fmp-margin-of-safety-data/index.js";
 import {
   formatCurrency,
@@ -49,6 +50,14 @@ export interface OverviewResponse {
   correlationId: string;
   data: {
     metrics: OverviewMetricView[];
+    qualitativeAnalysis: {
+      pillars: Array<{
+        description: string;
+        label: string;
+        title: string;
+      }>;
+      summary: string;
+    };
     reportHeader: OverviewReportHeaderView;
   };
 }
@@ -83,41 +92,41 @@ function toResponseData(
   apiVersion: ApiVersion,
 ): OverviewResponse["data"] {
   const ruleset = resolveInvestmentAnalysisRuleset(apiVersion);
-  const strengths = ruleset.classifyMetricStrengths(analysis.metrics);
 
   return {
     metrics: [
       {
         slug: "return-on-equity",
         value: formatMetricValue("return-on-equity", analysis.metrics.returnOnEquity),
-        strength: strengths.returnOnEquity,
-        description: ruleset.describeMetric("return-on-equity", strengths.returnOnEquity),
+        strength: analysis.strengths.returnOnEquity,
+        description: ruleset.describeMetric("return-on-equity", analysis.strengths.returnOnEquity),
       },
       {
         slug: "free-cash-flow",
         value: formatMetricValue("free-cash-flow", analysis.metrics.freeCashFlow),
-        strength: strengths.freeCashFlow,
-        description: ruleset.describeMetric("free-cash-flow", strengths.freeCashFlow),
+        strength: analysis.strengths.freeCashFlow,
+        description: ruleset.describeMetric("free-cash-flow", analysis.strengths.freeCashFlow),
       },
       {
         slug: "debt-to-equity",
         value: formatMetricValue("debt-to-equity", analysis.metrics.debtToEquity),
-        strength: strengths.debtToEquity,
-        description: ruleset.describeMetric("debt-to-equity", strengths.debtToEquity),
+        strength: analysis.strengths.debtToEquity,
+        description: ruleset.describeMetric("debt-to-equity", analysis.strengths.debtToEquity),
       },
       {
         slug: "profit-margin",
         value: formatMetricValue("profit-margin", analysis.metrics.profitMargin),
-        strength: strengths.profitMargin,
-        description: ruleset.describeMetric("profit-margin", strengths.profitMargin),
+        strength: analysis.strengths.profitMargin,
+        description: ruleset.describeMetric("profit-margin", analysis.strengths.profitMargin),
       },
       {
         slug: "margin-of-safety",
         value: formatMetricValue("margin-of-safety", analysis.metrics.marginOfSafety),
-        strength: strengths.marginOfSafety,
-        description: ruleset.describeMetric("margin-of-safety", strengths.marginOfSafety),
+        strength: analysis.strengths.marginOfSafety,
+        description: ruleset.describeMetric("margin-of-safety", analysis.strengths.marginOfSafety),
       },
     ],
+    qualitativeAnalysis: analysis.qualitativeAnalysis,
     reportHeader: {
       companyName: analysis.reportHeader.companyName ?? "\u2014",
       industry: analysis.reportHeader.industry ?? "\u2014",
@@ -155,6 +164,8 @@ export function createOverviewController(apiVersion: ApiVersion): RequestHandler
           freeCashFlowRepository: createFmpCashFlowDataRepository(),
           marginOfSafetyRepository: createFmpMarginOfSafetyDataRepository(),
           profitMarginRepository: createFmpProfitMarginDataRepository(),
+          qualitativeAnalysisClient: createOpenAiQualitativeAnalysisClient(),
+          ruleset: resolveInvestmentAnalysisRuleset(apiVersion),
           returnOnEquityRepository: createFmpFinancialDataRepository(),
         },
         request.correlationId,
@@ -175,7 +186,7 @@ export function createOverviewController(apiVersion: ApiVersion): RequestHandler
   };
 }
 
-export const overviewController = createOverviewController("v1");
+export const overviewController: RequestHandler = createOverviewController("v1");
 // 1.5. END ..........................................................................................
 
 // END FILE ##########################################################################################

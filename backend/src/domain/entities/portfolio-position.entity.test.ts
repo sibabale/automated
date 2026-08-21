@@ -17,6 +17,7 @@ describe("portfolio position domain contract", () => {
         {
           ticker: "AAPL",
           companyName: "Apple Inc.",
+          mode: "paper",
           quantity: 2,
           averageEntryPrice: 180,
           currentPrice: 190,

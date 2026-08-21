@@ -19,11 +19,17 @@ export interface CronRunnerConfig {
 export interface CronRunnerHandle {
   stop(): void;
 }
+
+interface AutomationErrorPayload {
+  error?: {
+    message?: string;
+  };
+}
 // 1.3. END ..........................................................................................
 
 // 1.4. CONFIGURATION ................................................................................
 const DEFAULT_INTERVAL_MS = 86_400_000;
-const DEFAULT_INITIAL_DELAY_MS = 60_000;
+const DEFAULT_INITIAL_DELAY_MS = 14_400_000;
 const DEFAULT_INTERNAL_API_BASE_URL = "http://127.0.0.1:3001";
 const AUTOMATION_PATH = "/api/v1/automation/run-investment-pass";
 
@@ -91,6 +97,8 @@ function readNonNegativeInteger(
  * The runner owns only timing, overlap protection, and internal HTTP dispatch.
  * Investment analysis and order placement stay behind the existing automation
  * endpoint so there is still one execution surface for the actual workflow.
+ * With the default four-hour interval and staggered first run, the prototype
+ * pace stays at roughly 20 tickers per run and 6 runs per day.
  */
 export function startCronRunner(
   config = readCronRunnerConfig(),
@@ -127,7 +135,7 @@ export function startCronRunner(
       });
 
       if (!response.ok) {
-        const payload = await response.json().catch(() => null);
+        const payload = await response.json().catch(() => null) as AutomationErrorPayload | null;
         logger.error(
           {
             correlationId,

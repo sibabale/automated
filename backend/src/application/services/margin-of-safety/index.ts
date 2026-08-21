@@ -66,8 +66,8 @@ export async function analyseMarginOfSafety(
   return {
     ticker,
     currentMarginOfSafety,
-    currentIntrinsicValue: currentMarginOfSafety === null ? null : latest.intrinsicValue,
-    currentStockPrice: currentMarginOfSafety === null ? null : latest.stockPrice,
+    currentIntrinsicValue: latest && currentMarginOfSafety !== null ? latest.intrinsicValue : null,
+    currentStockPrice: latest && currentMarginOfSafety !== null ? latest.stockPrice : null,
   };
 }
 // 1.5. END ..........................................................................................

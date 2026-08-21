@@ -22,3 +22,5 @@ to keep release history consistent.
 - Preserved the original hard-coded free-cash-flow threshold as API `v1`.
 - Introduced an initial API `v2` ruleset that lowers the free-cash-flow strong
   threshold to create a clear behavioural contrast from `v1`.
+- Bumped the backend release version to `0.1.1` after aligning the compiler,
+  type configuration, and runtime typing fixes required for Railway builds.
