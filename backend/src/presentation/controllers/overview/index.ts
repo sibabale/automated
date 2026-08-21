@@ -175,7 +175,7 @@ export function createOverviewController(apiVersion: ApiVersion): RequestHandler
   };
 }
 
-export const overviewController = createOverviewController("v1");
+export const overviewController: RequestHandler = createOverviewController("v1");
 // 1.5. END ..........................................................................................
 
 // END FILE ##########################################################################################

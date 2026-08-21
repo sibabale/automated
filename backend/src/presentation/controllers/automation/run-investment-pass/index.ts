@@ -82,7 +82,7 @@ export function createRunInvestmentPassController(apiVersion: ApiVersion): Reque
   };
 }
 
-export const runInvestmentPassController = createRunInvestmentPassController("v1");
+export const runInvestmentPassController: RequestHandler = createRunInvestmentPassController("v1");
 
 function enforceAutomationAuthorization(request: Parameters<RequestHandler>[0]): void {
   if (request.header(AUTOMATION_TRIGGER_HEADER) === "cron") {

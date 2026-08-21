@@ -38,6 +38,8 @@ export interface AlpacaOrderRecord {
 
 export interface AlpacaPositionRecord {
   symbol?: unknown;
+  asset_name?: unknown;
+  name?: unknown;
   qty?: unknown;
   avg_entry_price?: unknown;
   current_price?: unknown;
@@ -142,18 +144,23 @@ async function alpacaRequest(
 
   logger.debug({ correlationId, mode, resource, method }, "Calling Alpaca endpoint");
 
+  const requestInit: RequestInit = {
+    method,
+    signal: controller.signal,
+    headers: {
+      "APCA-API-KEY-ID": apiKey,
+      "APCA-API-SECRET-KEY": apiSecret,
+      "Content-Type": "application/json",
+    },
+  };
+
+  if (body) {
+    requestInit.body = JSON.stringify(body);
+  }
+
   let response: Response;
   try {
-    response = await fetch(url, {
-      method,
-      signal: controller.signal,
-      headers: {
-        "APCA-API-KEY-ID": apiKey,
-        "APCA-API-SECRET-KEY": apiSecret,
-        "Content-Type": "application/json",
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
+    response = await fetch(url, requestInit);
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
       throw new AlpacaClientError("timeout", `Alpaca ${resource} request timed out`);
