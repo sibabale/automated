@@ -187,7 +187,7 @@ describe("buildOverview", () => {
       returnOnEquity: null,
     });
     assert.equal(overview.qualitative.verdict.label, "Investment Verdict");
-    assert.equal(overview.qualitative.pillars).toBeUndefined;
+    assert.equal(overview.qualitative.pillars.length, 4);
   });
 
   it("falls back when qualitative generation throws", async () => {
@@ -220,7 +220,7 @@ describe("buildOverview", () => {
 
     assert.equal(overview.qualitative.verdict.label, "Investment Verdict");
     assert.equal(overview.qualitative.verdict.title, "Reject for Now");
-    assert.equal(overview.qualitative.pillars).toHaveLength;
+    assert.equal(overview.qualitative.pillars.length, 4);
   });
 });
 // 1.4. END ..........................................................................................

@@ -15,6 +15,7 @@ import { createFmpCompanyProfileRepository } from "../../../infrastructure/repos
 import { createFmpProfitMarginDataRepository } from "../../../infrastructure/repositories/fmp-profit-margin-data/index.js";
 import { createFmpDebtToEquityDataRepository } from "../../../infrastructure/repositories/fmp-debt-to-equity-data/index.js";
 import { createFmpMarginOfSafetyDataRepository } from "../../../infrastructure/repositories/fmp-margin-of-safety-data/index.js";
+import { createOpenAiQualitativeAnalysisRepository } from "../../../infrastructure/repositories/openai-qualitative-analysis/index.js";
 import {
   formatCurrency,
   formatPercent,
@@ -147,6 +148,7 @@ export function createOverviewController(apiVersion: ApiVersion): RequestHandler
     }
 
     try {
+      const ruleset = resolveInvestmentAnalysisRuleset(apiVersion);
       const analysis = await buildOverview(
         ticker,
         {
@@ -155,7 +157,11 @@ export function createOverviewController(apiVersion: ApiVersion): RequestHandler
           freeCashFlowRepository: createFmpCashFlowDataRepository(),
           marginOfSafetyRepository: createFmpMarginOfSafetyDataRepository(),
           profitMarginRepository: createFmpProfitMarginDataRepository(),
+          qualitativeAnalysisRepository: process.env.OPENAI_API_KEY
+            ? createOpenAiQualitativeAnalysisRepository()
+            : undefined,
           returnOnEquityRepository: createFmpFinancialDataRepository(),
+          ruleset,
         },
         request.correlationId,
       );
