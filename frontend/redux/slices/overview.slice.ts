@@ -24,6 +24,17 @@ export interface OverviewMetricValue {
     description: string;
 }
 
+export interface OverviewQualitativePillar {
+    description: string;
+    label: string;
+    title: string;
+}
+
+export interface OverviewQualitativeAnalysis {
+    pillars: OverviewQualitativePillar[];
+    summary: string;
+}
+
 export interface OverviewReportHeader {
     companyName: string;
     industry: string;
@@ -41,6 +52,7 @@ interface OverviewState {
     status: OverviewStatus;
     ticker: string | null;
     metrics: OverviewMetricValue[];
+    qualitativeAnalysis: OverviewQualitativeAnalysis | null;
     reportHeader: OverviewReportHeader | null;
     errorKind: OverviewErrorKind | null;
     errorMessage: string | null;
@@ -52,6 +64,7 @@ const initialState: OverviewState = {
     status: 'idle',
     ticker: null,
     metrics: [],
+    qualitativeAnalysis: null,
     reportHeader: null,
     errorKind: null,
     errorMessage: null,
@@ -82,6 +95,7 @@ export const fetchOverview = createAsyncThunk<
     {
         ticker: string;
         metrics: OverviewMetricValue[];
+        qualitativeAnalysis: OverviewQualitativeAnalysis | null;
         reportHeader: OverviewReportHeader;
     },
     string,
@@ -115,6 +129,7 @@ export const fetchOverview = createAsyncThunk<
     return {
         ticker: payload?.data?.reportHeader?.ticker ?? ticker,
         metrics: payload?.data?.metrics ?? [],
+        qualitativeAnalysis: payload?.data?.qualitativeAnalysis ?? null,
         reportHeader: payload?.data?.reportHeader ?? {
             companyName: '—',
             industry: '—',
@@ -143,6 +158,7 @@ const overviewSlice = createSlice({
                 state.status = 'succeeded';
                 state.ticker = action.payload.ticker;
                 state.metrics = action.payload.metrics;
+                state.qualitativeAnalysis = action.payload.qualitativeAnalysis;
                 state.reportHeader = action.payload.reportHeader;
                 state.errorKind = null;
                 state.errorMessage = null;
@@ -150,6 +166,7 @@ const overviewSlice = createSlice({
             .addCase(fetchOverview.rejected, (state, action) => {
                 state.status = 'failed';
                 state.metrics = [];
+                state.qualitativeAnalysis = null;
                 state.reportHeader = null;
                 state.errorKind = action.payload?.kind ?? 'server';
                 state.errorMessage = action.payload?.message ?? 'The overview could not be loaded.';

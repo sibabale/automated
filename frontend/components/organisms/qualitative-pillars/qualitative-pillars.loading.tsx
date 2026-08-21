@@ -1,14 +1,15 @@
-// [ COMPONENTS > ORGANISMS > QUALITATIVE PILLARS LOADING ] #########################################
+// [ COMPONENTS > ORGANISMS > QUALITATIVE PILLARS LOADING ] ##########################################
 
 'use client';
 
 import React from 'react';
-import ContentLoader from 'react-content-loader';
 import { useTheme } from 'styled-components';
+import ContentLoader from 'react-content-loader';
 import {
     QualitativePillarsContainer,
     QualitativePillarsGrid,
     QualitativePillarsLoadingCard,
+    QualitativePillarsLoadingSummary,
     QualitativePillarsLoadingTitle,
 } from './qualitative-pillars.styles';
 
@@ -24,6 +25,7 @@ const QualitativePillarsLoading: React.FC<IQualitativePillarsLoading> = ({
     return (
         <QualitativePillarsContainer aria-label={label} data-testid="qualitative-pillars-loading" role="status">
             <QualitativePillarsLoadingTitle />
+            <QualitativePillarsLoadingSummary />
             <QualitativePillarsGrid>
                 {Array.from({ length: 4 }, (_, index) => (
                     <QualitativePillarsLoadingCard key={index}>

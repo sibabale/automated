@@ -24,3 +24,5 @@ to keep release history consistent.
   threshold to create a clear behavioural contrast from `v1`.
 - Bumped the backend release version to `0.1.1` after aligning the compiler,
   type configuration, and runtime typing fixes required for Railway builds.
+- Bumped the backend release version to `0.1.2` after adding overview
+  qualitative analysis support and the corresponding client rendering states.

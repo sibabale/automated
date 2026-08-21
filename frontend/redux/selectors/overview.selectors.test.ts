@@ -9,6 +9,7 @@ import type { RootState } from '../store';
 import {
     selectOverviewError,
     selectOverviewMetricCards,
+    selectOverviewQualitativeAnalysis,
     selectOverviewReportHeader,
     selectOverviewStatus,
     selectOverviewTicker,
@@ -39,6 +40,16 @@ describe('overview selectors', () => {
                 sector: 'Technology',
                 sharePrice: '$512.34 USD',
                 ticker: 'MSFT',
+            },
+            qualitativeAnalysis: {
+                summary: 'Microsoft shows a constructive profile.',
+                pillars: [
+                    {
+                        label: 'Capital Efficiency',
+                        title: 'Returns and margins look healthy',
+                        description: 'ROE and margins both screen well.',
+                    },
+                ],
             },
             errorKind: null,
             errorMessage: null,
@@ -93,6 +104,7 @@ describe('overview selectors', () => {
                 sharePrice: '$172.42 USD',
                 ticker: 'NVDA',
             },
+            qualitativeAnalysis: null,
             errorKind: null,
             errorMessage: null,
         });
@@ -128,6 +140,7 @@ describe('overview selectors', () => {
                 sharePrice: '$289.12 USD',
                 ticker: 'TSLA',
             },
+            qualitativeAnalysis: null,
             errorKind: null,
             errorMessage: null,
         });
@@ -168,6 +181,16 @@ describe('overview selectors', () => {
                 sharePrice: '$512.34 USD',
                 ticker: 'MSFT',
             },
+            qualitativeAnalysis: {
+                summary: 'Microsoft shows a constructive profile.',
+                pillars: [
+                    {
+                        label: 'Capital Efficiency',
+                        title: 'Returns and margins look healthy',
+                        description: 'ROE and margins both screen well.',
+                    },
+                ],
+            },
             errorKind: null,
             errorMessage: null,
         });
@@ -181,6 +204,16 @@ describe('overview selectors', () => {
             sharePrice: '$512.34 USD',
             ticker: 'MSFT',
         });
+        expect(selectOverviewQualitativeAnalysis(state)).toEqual({
+            summary: 'Microsoft shows a constructive profile.',
+            pillars: [
+                {
+                    label: 'Capital Efficiency',
+                    title: 'Returns and margins look healthy',
+                    description: 'ROE and margins both screen well.',
+                },
+            ],
+        });
     });
 
     it('exposes an error view only when the overview request failed', () => {
@@ -189,6 +222,7 @@ describe('overview selectors', () => {
             ticker: 'MISS',
             metrics: [],
             reportHeader: null,
+            qualitativeAnalysis: null,
             errorKind: 'not-found',
             errorMessage: 'Company not found',
         });
@@ -203,6 +237,7 @@ describe('overview selectors', () => {
                 sharePrice: '$184.25 USD',
                 ticker: 'AAPL',
             },
+            qualitativeAnalysis: null,
             errorKind: null,
             errorMessage: null,
         });

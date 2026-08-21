@@ -125,6 +125,36 @@ describe("Overview controller integration (mocked FMP)", () => {
       sharePrice: "$184.25 USD",
       ticker: "AAPL",
     });
+    assert.deepEqual(body.data.qualitativeAnalysis, {
+      summary:
+        "Apple Inc. shows a constructive quantitative profile, with 3 of 5 tracked metrics screening strong and no weak readings in the current dataset.",
+      pillars: [
+        {
+          label: "Capital Efficiency",
+          title: "Returns and margins both screen strong",
+          description:
+            "Return on equity (25.0%) and profit margin (20.0%) frame how efficiently Apple Inc. converts capital and revenue into profit within the current dataset.",
+        },
+        {
+          label: "Cash Generation",
+          title: "Cash flow remains positive but not exceptional",
+          description:
+            "Free cash flow screens medium at $96.0, which indicates how much room Apple Inc. currently has to fund investment needs without leaning on outside capital.",
+        },
+        {
+          label: "Balance Sheet Discipline",
+          title: "Leverage remains manageable rather than conservative",
+          description:
+            "Debt-to-equity screens medium at 1.50, which sets the current balance-sheet discipline in relation to the rest of the profitability profile.",
+        },
+        {
+          label: "Valuation Context",
+          title: "Current price still shows a margin of safety",
+          description:
+            "Margin of safety screens strong at 25.0%, so the current market price still needs to be weighed against the modelled intrinsic value produced by this framework.",
+        },
+      ],
+    });
     assert.deepEqual(body.data.metrics, [
       {
         slug: "return-on-equity",
@@ -192,6 +222,36 @@ describe("Overview controller integration (mocked FMP)", () => {
         sector: "—",
         sharePrice: "—",
         ticker: "MISS",
+      });
+      assert.deepEqual(body.data.qualitativeAnalysis, {
+        summary:
+          "MISS currently falls short of the framework across all 5 tracked metrics, leaving limited quantitative support for a high-conviction case.",
+        pillars: [
+          {
+            label: "Capital Efficiency",
+            title: "Profitability evidence is limited",
+            description:
+              "Return on equity (unavailable) and profit margin (unavailable) frame how efficiently MISS converts capital and revenue into profit within the current dataset.",
+          },
+          {
+            label: "Cash Generation",
+            title: "Cash conversion is under pressure",
+            description:
+              "Free cash flow screens weak at unavailable, which indicates how much room MISS currently has to fund investment needs without leaning on outside capital.",
+          },
+          {
+            label: "Balance Sheet Discipline",
+            title: "Leverage is elevated for this framework",
+            description:
+              "Debt-to-equity screens weak at unavailable, which sets the current balance-sheet discipline in relation to the rest of the profitability profile.",
+          },
+          {
+            label: "Valuation Context",
+            title: "The current price looks stretched",
+            description:
+              "Margin of safety screens weak at unavailable, so the current market price still needs to be weighed against the modelled intrinsic value produced by this framework.",
+          },
+        ],
       });
       assert.deepEqual(body.data.metrics, [
         {

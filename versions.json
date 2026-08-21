@@ -1,7 +1,7 @@
 {
   "appVersion": "0.1.0",
   "frontendVersion": "0.1.0",
-  "backendVersion": "0.1.1",
+  "backendVersion": "0.1.2",
   "api": {
     "defaultVersion": "v1",
     "supportedVersions": [

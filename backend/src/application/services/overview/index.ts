@@ -4,6 +4,7 @@
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import { logger } from "../../../logger.js";
 import { analyseProfitMargin } from "../profit-margin/index.js";
 import { analyseDebtToEquity } from "../debt-to-equity/index.js";
 import { analyseFreeCashFlow } from "../free-cash-flow/index.js";
@@ -17,6 +18,14 @@ import type { DebtToEquityYear } from "../../../domain/entities/debt-to-equity-y
 import type { MarginOfSafetyYear } from "../../../domain/entities/margin-of-safety-year.entity.js";
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 import type { CompanyProfileRepository } from "../../../domain/repositories/company-profile.repository.js";
+import type { AutomatedDecisionStrengths } from "../../../domain/entities/automated-investment-decision.entity.js";
+import { resolveInvestmentAnalysisRuleset, type InvestmentAnalysisRuleset } from "../../../domain/services/investment-analysis-ruleset/index.js";
+import {
+  buildDeterministicQualitativeAnalysis,
+  type OverviewMetricSnapshot,
+  type QualitativeAnalysis,
+  type QualitativeAnalysisClient,
+} from "../qualitative-analysis/index.js";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................
@@ -26,18 +35,16 @@ export interface OverviewDependencies {
   freeCashFlowRepository: FinancialDataRepository<CashFlowYear>;
   marginOfSafetyRepository: FinancialDataRepository<MarginOfSafetyYear>;
   profitMarginRepository: FinancialDataRepository<ProfitMarginYear>;
+  qualitativeAnalysisClient?: QualitativeAnalysisClient | null;
+  ruleset?: InvestmentAnalysisRuleset;
   returnOnEquityRepository: FinancialDataRepository<FinancialYear>;
 }
 
 export interface OverviewAnalysis {
-  metrics: {
-    debtToEquity: number | null;
-    freeCashFlow: number | null;
-    marginOfSafety: number | null;
-    profitMargin: number | null;
-    returnOnEquity: number | null;
-  };
+  metrics: OverviewMetricSnapshot;
+  qualitativeAnalysis: QualitativeAnalysis;
   reportHeader: CompanyProfile;
+  strengths: AutomatedDecisionStrengths;
 }
 // 1.3. END ..........................................................................................
 
@@ -70,6 +77,7 @@ export async function buildOverview(
   dependencies: OverviewDependencies,
   correlationId: string,
 ): Promise<OverviewAnalysis> {
+  const ruleset = dependencies.ruleset ?? resolveInvestmentAnalysisRuleset("v1");
   const [
     reportHeader,
     returnOnEquity,
@@ -86,15 +94,49 @@ export async function buildOverview(
     analyseMarginOfSafety(ticker, dependencies.marginOfSafetyRepository, correlationId),
   ]);
 
-  return {
-    metrics: {
-      debtToEquity: averageHorizons(debtToEquity.horizons),
-      freeCashFlow: averageHorizons(freeCashFlow.horizons),
-      marginOfSafety: marginOfSafety.currentMarginOfSafety,
-      profitMargin: averageHorizons(profitMargin.horizons),
-      returnOnEquity: averageHorizons(returnOnEquity.horizons),
-    },
+  const metrics: OverviewMetricSnapshot = {
+    debtToEquity: averageHorizons(debtToEquity.horizons),
+    freeCashFlow: averageHorizons(freeCashFlow.horizons),
+    marginOfSafety: marginOfSafety.currentMarginOfSafety,
+    profitMargin: averageHorizons(profitMargin.horizons),
+    returnOnEquity: averageHorizons(returnOnEquity.horizons),
+  };
+  const strengths = ruleset.classifyMetricStrengths(metrics);
+  const qualitativeSeed = buildDeterministicQualitativeAnalysis({
+    metrics,
     reportHeader,
+    strengths,
+  });
+
+  let qualitativeAnalysis = qualitativeSeed;
+  if (dependencies.qualitativeAnalysisClient) {
+    try {
+      qualitativeAnalysis = await dependencies.qualitativeAnalysisClient.generateOverview(
+        {
+          deterministicAnalysis: qualitativeSeed,
+          metrics,
+          reportHeader,
+          strengths,
+        },
+        correlationId,
+      );
+    } catch (error) {
+      logger.warn(
+        {
+          correlationId,
+          ticker,
+          error: error instanceof Error ? error.message : String(error),
+        },
+        "Falling back to deterministic qualitative analysis",
+      );
+    }
+  }
+
+  return {
+    metrics,
+    qualitativeAnalysis,
+    reportHeader,
+    strengths,
   };
 }
 // 1.5. END ..........................................................................................

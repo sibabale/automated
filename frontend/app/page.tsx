@@ -14,10 +14,13 @@ import ReportHeaderLoading from "../components/organisms/report-header/report-he
 import QualitativePillars from "../components/organisms/qualitative-pillars/qualitative-pillars";
 import VerdictSectionLoading from "../components/organisms/verdict-section/verdict-section.loading";
 import KeyTenetsFrameLoading from "../components/organisms/key-tenets-frame/key-tenets-frame.loading";
+import QualitativePillarsEmpty from "../components/organisms/qualitative-pillars/qualitative-pillars.empty";
+import QualitativePillarsError from "../components/organisms/qualitative-pillars/qualitative-pillars.error";
 import QualitativePillarsLoading from "../components/organisms/qualitative-pillars/qualitative-pillars.loading";
 import {
   selectOverviewMetricCards,
   selectOverviewError,
+  selectOverviewQualitativeAnalysis,
   selectOverviewReportHeader,
   selectOverviewStatus,
   selectOverviewTicker,
@@ -96,6 +99,7 @@ export default function Home() {
   const overviewError = useAppSelector(selectOverviewError);
   const overviewTicker = useAppSelector(selectOverviewTicker);
   const overviewMetrics = useAppSelector(selectOverviewMetricCards);
+  const overviewQualitativeAnalysis = useAppSelector(selectOverviewQualitativeAnalysis);
   const overviewReportHeader = useAppSelector(selectOverviewReportHeader);
   const buyTradeStatus = useAppSelector((state: RootState) => state.buyTrade.status);
   const buyTradeError = useAppSelector((state: RootState) => state.buyTrade.errorMessage);
@@ -113,6 +117,9 @@ export default function Home() {
       sharePrice: '—',
       ticker: activeTicker,
     };
+  const qualitativeAnalysis = overviewTicker === activeTicker
+    ? overviewQualitativeAnalysis
+    : null;
   const estimatedCost = useMemo(() => {
     const normalizedPrice = reportHeader.sharePrice.replace('USD', '').replace(/\s+/g, '').replace('$', '');
     const parsedPrice = Number(normalizedPrice);
@@ -204,7 +211,16 @@ export default function Home() {
                   {isContentLoading ? <KeyTenetsFrameLoading /> : <KeyTenetsFrame activeTicker={activeTicker} metrics={overviewMetrics} />}
                   {isContentLoading ? <VerdictSectionLoading /> : <VerdictSection />}
                 </ReportContext>
-                {isContentLoading ? <QualitativePillarsLoading /> : <QualitativePillars />}
+                {isContentLoading ? <QualitativePillarsLoading /> : overviewError ? (
+                  <QualitativePillarsError onRetry={() => dispatch(fetchOverview(activeTicker))} />
+                ) : qualitativeAnalysis && qualitativeAnalysis.pillars.length > 0 ? (
+                  <QualitativePillars
+                    pillars={qualitativeAnalysis.pillars}
+                    summary={qualitativeAnalysis.summary}
+                  />
+                ) : (
+                  <QualitativePillarsEmpty />
+                )}
               </AnalysisPanel>
             </motion.div>
           </motion.div>

@@ -9,6 +9,7 @@ import type { RootState } from '../store';
 import { financialMetrics } from '../../data/financial-metrics';
 import type {
     OverviewErrorKind,
+    OverviewQualitativeAnalysis,
     OverviewMetricValue,
     OverviewReportHeader,
     OverviewStatus,
@@ -38,6 +39,11 @@ export const selectOverviewTicker = createSelector(
 export const selectOverviewReportHeader = createSelector(
     selectOverview,
     (slice): OverviewReportHeader | null => slice.reportHeader,
+);
+
+export const selectOverviewQualitativeAnalysis = createSelector(
+    selectOverview,
+    (slice): OverviewQualitativeAnalysis | null => slice.qualitativeAnalysis,
 );
 
 /**

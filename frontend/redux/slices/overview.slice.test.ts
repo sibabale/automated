@@ -39,6 +39,16 @@ describe('overview slice', () => {
                 metrics: [
                     { slug: 'return-on-equity', value: '35.0%' },
                 ],
+                qualitativeAnalysis: {
+                    summary: 'Microsoft shows a strong quantitative profile.',
+                    pillars: [
+                        {
+                            label: 'Capital Efficiency',
+                            title: 'Returns look strong',
+                            description: 'ROE and margin both screen well.',
+                        },
+                    ],
+                },
             },
         }));
         vi.stubGlobal('fetch', fetchMock);
@@ -65,6 +75,16 @@ describe('overview slice', () => {
             sharePrice: '$512.34 USD',
             ticker: 'MSFT',
         });
+        expect(state.qualitativeAnalysis).toEqual({
+            summary: 'Microsoft shows a strong quantitative profile.',
+            pillars: [
+                {
+                    label: 'Capital Efficiency',
+                    title: 'Returns look strong',
+                    description: 'ROE and margin both screen well.',
+                },
+            ],
+        });
         expect(state.metrics).toEqual([{ slug: 'return-on-equity', value: '35.0%' }]);
     });
 
@@ -80,6 +100,10 @@ describe('overview slice', () => {
                         ticker: 'AAPL',
                     },
                     metrics: [{ slug: 'return-on-equity', value: '25.0%' }],
+                    qualitativeAnalysis: {
+                        summary: 'Apple looks constructive.',
+                        pillars: [],
+                    },
                 },
             }))
             .mockResolvedValueOnce(jsonResponse(404, { error: { message: 'Company not found' } })));
@@ -94,6 +118,7 @@ describe('overview slice', () => {
         expect(state.errorKind).toBe('not-found');
         expect(state.errorMessage).toBe('Company not found');
         expect(state.metrics).toEqual([]);
+        expect(state.qualitativeAnalysis).toBeNull();
         expect(state.reportHeader).toBeNull();
     });
 

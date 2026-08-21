@@ -1,4 +1,4 @@
-// [ COMPONENTS > ORGANISMS > QUALITATIVE PILLARS ] ##################################################
+// [ COMPONENTS > STATES > QUALITATIVE PILLARS ERROR ] ###############################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 'use client';
@@ -7,12 +7,11 @@ import React from 'react';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import CriteriaCard from '../../molecules/criteria-card/criteria-card';
 import {
-    QualitativePillarsContainer,
-    QualitativePillarsGrid,
-    QualitativePillarsHeading,
-    QualitativePillarsSummary,
+    QualitativePillarsRetryButton,
+    QualitativePillarsStateContainer,
+    QualitativePillarsStateDescription,
+    QualitativePillarsStateTitle,
 } from './qualitative-pillars.styles';
 // 1.2. END ..........................................................................................
 
@@ -23,23 +22,21 @@ import {
 // 1.4. END ..........................................................................................
 
 // 1.5. TYPES ........................................................................................
-interface IQualitativePillars {
-    pillars: Array<{
-        description: string;
-        label: string;
-        title: string;
-    }>;
-    summary: string;
+interface IQualitativePillarsError {
+    message?: string;
+    onRetry?: () => void;
+    retryLabel?: string;
     title?: string;
 }
 // 1.5. END ..........................................................................................
 
 // 1.6. COMPONENT ....................................................................................
 
-const QualitativePillars: React.FC<IQualitativePillars> = ({
-    pillars,
-    summary,
-    title = 'Buffett Framework Qualitative Pillars',
+const QualitativePillarsError: React.FC<IQualitativePillarsError> = ({
+    message = 'We could not load the qualitative analysis. Please try again in a moment.',
+    onRetry,
+    retryLabel = 'Try again',
+    title = 'Unable to load qualitative analysis',
 }) => {
     // 1.6.1. HOOKS & API CALLS ....................................................................
     // 1.6.1. END ....................................................................................
@@ -49,30 +46,25 @@ const QualitativePillars: React.FC<IQualitativePillars> = ({
 
     // 1.6.3. RENDER .................................................................................
     return (
-        <QualitativePillarsContainer data-testid="qualitative-pillars">
-            <QualitativePillarsHeading data-testid="qualitative-pillars-title">
-                {title}
-            </QualitativePillarsHeading>
-            <QualitativePillarsSummary data-testid="qualitative-pillars-summary">
-                {summary}
-            </QualitativePillarsSummary>
-            <QualitativePillarsGrid data-testid="qualitative-pillars-grid">
-                {pillars.map((pillar) => (
-                    <CriteriaCard
-                        key={pillar.label}
-                        label={pillar.label}
-                        title={pillar.title}
-                        description={pillar.description}
-                    />
-                ))}
-            </QualitativePillarsGrid>
-        </QualitativePillarsContainer>
+        <QualitativePillarsStateContainer data-testid="qualitative-pillars-error" role="alert">
+            <QualitativePillarsStateTitle>{title}</QualitativePillarsStateTitle>
+            <QualitativePillarsStateDescription>{message}</QualitativePillarsStateDescription>
+            {onRetry && (
+                <QualitativePillarsRetryButton
+                    data-testid="qualitative-pillars-error-retry"
+                    onClick={onRetry}
+                    type="button"
+                >
+                    {retryLabel}
+                </QualitativePillarsRetryButton>
+            )}
+        </QualitativePillarsStateContainer>
     );
     // 1.6.3. END ....................................................................................
 };
 
 // 1.6. END ..........................................................................................
 
-export default QualitativePillars;
+export default QualitativePillarsError;
 
 // END FILE ##########################################################################################
