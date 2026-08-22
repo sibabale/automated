@@ -45,6 +45,18 @@ export const PaginationControl = styled.button`
         opacity: 0.6;
     }
 `;
+
+/**
+ * Non-interactive ellipsis indicator shown when pages are skipped.
+ */
+export const PaginationEllipsis = styled.span`
+    display: grid;
+    min-width: ${({ theme }) => `calc(${theme.size[5]} + ${theme.spacing.s})`};
+    min-height: ${({ theme }) => `calc(${theme.size[5]} + ${theme.spacing.s})`};
+    place-items: center;
+    color: ${({ theme }) => theme.text.tertiary};
+    font: inherit;
+`;
 // 1.3. END ..........................................................................................
 
 // END FILE ##########################################################################################
