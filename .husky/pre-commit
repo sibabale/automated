@@ -8,3 +8,10 @@ node scripts/validate-version-artifacts.js || version_failed=1
 if [ "$banner_failed" = "1" ] || [ "$import_failed" = "1" ] || [ "$object_failed" = "1" ] || [ "$version_failed" = "1" ]; then
   exit 1
 fi
+
+# Type-check backend and frontend to catch compile errors before commit
+echo "Running backend type check..."
+(cd backend && pnpm build) || { echo "Backend build failed"; exit 1; }
+
+echo "Running frontend type check..."
+(cd frontend && pnpm build) || { echo "Frontend build failed"; exit 1; }

@@ -8,6 +8,8 @@ export interface IFinancialMetricFormula {
     denominatorValue: string;
     factor: string;
     calculationOperator?: 'divide' | 'subtract';
+    subtractionDisplayMode?: 'absolute-value';
+    standardSubtractionFormula?: string;
     result: string;
     footnote: string;
     metricAbbreviation?: string;

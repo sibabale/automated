@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { media } from '../../../../theme';
+import type { ITheme } from '../../../../theme';
 // 1.2. END ..........................................................................................
 
 // 1.3. STYLES .......................................................................................
@@ -21,9 +22,9 @@ export const DetailContent = styled.main`
     margin: 0 auto;
     padding: ${({ theme }) => theme.spacing.m};
 
-    ${media.tablet} {
-        padding: ${({ theme }) => theme.spacing.xl};
-    }
+    ${media.up('md')`
+        padding: ${({ theme }: { theme: ITheme }) => theme.spacing.xl};
+    `}
 `;
 
 export const DetailHeader = styled.header`
@@ -76,13 +77,13 @@ export const DetailGrid = styled.div`
     gap: ${({ theme }) => theme.spacing.s};
     grid-template-columns: 1fr;
 
-    ${media.tablet} {
+    ${media.up('md')`
         grid-template-columns: repeat(2, 1fr);
-    }
+    `}
 
-    ${media.desktop} {
+    ${media.up('lg')`
         grid-template-columns: repeat(3, 1fr);
-    }
+    `}
 `;
 
 export const DetailCard = styled.div`
@@ -92,7 +93,7 @@ export const DetailCard = styled.div`
     padding: ${({ theme }) => theme.spacing.m};
     border: 1px solid ${({ theme }) => theme.border.default};
     border-radius: ${({ theme }) => theme.spacing.s};
-    background-color: ${({ theme }) => theme.background.secondary};
+    background-color: ${({ theme }) => theme.background.surface};
 `;
 
 export const DetailCardLabel = styled.span`
@@ -142,7 +143,7 @@ export const DetailStrengthBadge = styled.span<{ $strength: 'strong' | 'medium' 
             case 'weak':
                 return theme.status.negative.background;
             default:
-                return theme.background.secondary;
+                return theme.background.surface;
         }
     }};
     color: ${({ theme, $strength }) => {

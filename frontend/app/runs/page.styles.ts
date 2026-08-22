@@ -110,11 +110,11 @@ export const RunsTableRowClickable = styled.tr`
     cursor: pointer;
 
     &:hover {
-        background-color: ${({ theme }) => theme.background.secondary};
+        background-color: ${({ theme }) => theme.background.surface};
     }
 
     &:focus-visible {
-        outline: 2px solid ${({ theme }) => theme.border.focus};
+        outline: 2px solid ${({ theme }) => theme.border.strong};
         outline-offset: -2px;
     }
 `;
