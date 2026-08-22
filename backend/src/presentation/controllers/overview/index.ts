@@ -59,6 +59,7 @@ export interface OverviewResponse {
       summary: string;
     };
     reportHeader: OverviewReportHeaderView;
+    verdict: "buy" | "watch" | "reject";
   };
 }
 // 1.3. END ..........................................................................................
@@ -137,6 +138,7 @@ function toResponseData(
           : `${formatSharePrice(analysis.reportHeader.sharePrice)} USD`,
       ticker: analysis.reportHeader.ticker,
     },
+    verdict: analysis.verdict,
   };
 }
 // 1.4. END ..........................................................................................

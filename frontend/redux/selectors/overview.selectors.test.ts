@@ -51,6 +51,7 @@ describe('overview selectors', () => {
                     },
                 ],
             },
+            verdict: 'watch',
             errorKind: null,
             errorMessage: null,
         });
@@ -105,6 +106,7 @@ describe('overview selectors', () => {
                 ticker: 'NVDA',
             },
             qualitativeAnalysis: null,
+            verdict: 'reject',
             errorKind: null,
             errorMessage: null,
         });
@@ -141,6 +143,7 @@ describe('overview selectors', () => {
                 ticker: 'TSLA',
             },
             qualitativeAnalysis: null,
+            verdict: 'reject',
             errorKind: null,
             errorMessage: null,
         });
@@ -191,6 +194,7 @@ describe('overview selectors', () => {
                     },
                 ],
             },
+            verdict: 'watch',
             errorKind: null,
             errorMessage: null,
         });
@@ -223,6 +227,7 @@ describe('overview selectors', () => {
             metrics: [],
             reportHeader: null,
             qualitativeAnalysis: null,
+            verdict: null,
             errorKind: 'not-found',
             errorMessage: 'Company not found',
         });
@@ -238,6 +243,7 @@ describe('overview selectors', () => {
                 ticker: 'AAPL',
             },
             qualitativeAnalysis: null,
+            verdict: 'buy',
             errorKind: null,
             errorMessage: null,
         });

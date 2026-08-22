@@ -48,12 +48,15 @@ interface OverviewRejection {
     message: string;
 }
 
+export type OverviewVerdict = 'buy' | 'watch' | 'reject';
+
 interface OverviewState {
     status: OverviewStatus;
     ticker: string | null;
     metrics: OverviewMetricValue[];
     qualitativeAnalysis: OverviewQualitativeAnalysis | null;
     reportHeader: OverviewReportHeader | null;
+    verdict: OverviewVerdict | null;
     errorKind: OverviewErrorKind | null;
     errorMessage: string | null;
 }
@@ -66,6 +69,7 @@ const initialState: OverviewState = {
     metrics: [],
     qualitativeAnalysis: null,
     reportHeader: null,
+    verdict: null,
     errorKind: null,
     errorMessage: null,
 };
@@ -97,6 +101,7 @@ export const fetchOverview = createAsyncThunk<
         metrics: OverviewMetricValue[];
         qualitativeAnalysis: OverviewQualitativeAnalysis | null;
         reportHeader: OverviewReportHeader;
+        verdict: OverviewVerdict | null;
     },
     string,
     { rejectValue: OverviewRejection }
@@ -137,6 +142,7 @@ export const fetchOverview = createAsyncThunk<
             sharePrice: '—',
             ticker,
         },
+        verdict: payload?.data?.verdict ?? null,
     };
 });
 // 1.5. END ..........................................................................................
@@ -160,6 +166,7 @@ const overviewSlice = createSlice({
                 state.metrics = action.payload.metrics;
                 state.qualitativeAnalysis = action.payload.qualitativeAnalysis;
                 state.reportHeader = action.payload.reportHeader;
+                state.verdict = action.payload.verdict;
                 state.errorKind = null;
                 state.errorMessage = null;
             })
@@ -168,6 +175,7 @@ const overviewSlice = createSlice({
                 state.metrics = [];
                 state.qualitativeAnalysis = null;
                 state.reportHeader = null;
+                state.verdict = null;
                 state.errorKind = action.payload?.kind ?? 'server';
                 state.errorMessage = action.payload?.message ?? 'The overview could not be loaded.';
             });

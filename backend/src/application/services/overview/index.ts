@@ -18,7 +18,7 @@ import type { DebtToEquityYear } from "../../../domain/entities/debt-to-equity-y
 import type { MarginOfSafetyYear } from "../../../domain/entities/margin-of-safety-year.entity.js";
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 import type { CompanyProfileRepository } from "../../../domain/repositories/company-profile.repository.js";
-import type { AutomatedDecisionStrengths } from "../../../domain/entities/automated-investment-decision.entity.js";
+import type { AutomatedDecisionStrengths, AutomatedDecisionStatus } from "../../../domain/entities/automated-investment-decision.entity.js";
 import { resolveInvestmentAnalysisRuleset, type InvestmentAnalysisRuleset } from "../../../domain/services/investment-analysis-ruleset/index.js";
 import {
   buildDeterministicQualitativeAnalysis,
@@ -45,6 +45,7 @@ export interface OverviewAnalysis {
   qualitativeAnalysis: QualitativeAnalysis;
   reportHeader: CompanyProfile;
   strengths: AutomatedDecisionStrengths;
+  verdict: AutomatedDecisionStatus;
 }
 // 1.3. END ..........................................................................................
 
@@ -147,11 +148,14 @@ export async function buildOverview(
     }
   }
 
+  const verdict = ruleset.deriveDecisionStatus(strengths);
+
   return {
     metrics,
     qualitativeAnalysis,
     reportHeader,
     strengths,
+    verdict,
   };
 }
 // 1.5. END ..........................................................................................

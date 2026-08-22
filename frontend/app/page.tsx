@@ -24,6 +24,7 @@ import {
   selectOverviewReportHeader,
   selectOverviewStatus,
   selectOverviewTicker,
+  selectOverviewVerdict,
 } from '../redux/selectors/overview.selectors';
 import HomePageError from './page.error';
 import { fetchOverview } from '../redux/slices/overview.slice';
@@ -101,6 +102,7 @@ export default function Home() {
   const overviewMetrics = useAppSelector(selectOverviewMetricCards);
   const overviewQualitativeAnalysis = useAppSelector(selectOverviewQualitativeAnalysis);
   const overviewReportHeader = useAppSelector(selectOverviewReportHeader);
+  const overviewVerdict = useAppSelector(selectOverviewVerdict);
   const buyTradeStatus = useAppSelector((state: RootState) => state.buyTrade.status);
   const buyTradeError = useAppSelector((state: RootState) => state.buyTrade.errorMessage);
   const lastBuyTrade = useAppSelector((state: RootState) => state.buyTrade.lastOrder);
@@ -120,6 +122,30 @@ export default function Home() {
   const qualitativeAnalysis = overviewTicker === activeTicker
     ? overviewQualitativeAnalysis
     : null;
+  const verdict = overviewTicker === activeTicker ? overviewVerdict : null;
+  const verdictDisplay = useMemo(() => {
+    if (!verdict) {
+      return { title: '—', description: 'Analysis pending.' };
+    }
+    const companyName = reportHeader.companyName !== '—' ? reportHeader.companyName : reportHeader.ticker;
+    switch (verdict) {
+      case 'buy':
+        return {
+          title: 'Strong Buy Candidate',
+          description: `${companyName} shows strength across all five quantitative metrics, presenting a compelling alignment with value-investing principles. The combination of robust returns, healthy cash generation, and attractive valuation creates a favourable risk-reward profile.`,
+        };
+      case 'watch':
+        return {
+          title: 'On Watch List',
+          description: `${companyName} presents a mixed quantitative profile with some metrics showing strength while others fall short. Consider monitoring for improvements in weaker areas before committing capital.`,
+        };
+      case 'reject':
+        return {
+          title: 'Does Not Meet Criteria',
+          description: `${companyName} currently fails to meet the minimum threshold on one or more key metrics. The quantitative profile suggests elevated risk relative to the value-investing framework at current levels.`,
+        };
+    }
+  }, [verdict, reportHeader.companyName, reportHeader.ticker]);
   const estimatedCost = useMemo(() => {
     const normalizedPrice = reportHeader.sharePrice.replace('USD', '').replace(/\s+/g, '').replace('$', '');
     const parsedPrice = Number(normalizedPrice);
@@ -209,7 +235,11 @@ export default function Home() {
                     valuation={reportHeader.sharePrice}
                   />}
                   {isContentLoading ? <KeyTenetsFrameLoading /> : <KeyTenetsFrame activeTicker={activeTicker} metrics={overviewMetrics} />}
-                  {isContentLoading ? <VerdictSectionLoading /> : <VerdictSection />}
+                  {isContentLoading ? <VerdictSectionLoading /> : <VerdictSection
+                    label="Automated Decision"
+                    verdict={verdictDisplay.title}
+                    description={verdictDisplay.description}
+                  />}
                 </ReportContext>
                 {isContentLoading ? <QualitativePillarsLoading /> : overviewError ? (
                   <QualitativePillarsError onRetry={() => dispatch(fetchOverview(activeTicker))} />

@@ -13,6 +13,7 @@ import type {
     OverviewMetricValue,
     OverviewReportHeader,
     OverviewStatus,
+    OverviewVerdict,
 } from '../slices/overview.slice';
 // 1.2. END ..........................................................................................
 
@@ -83,6 +84,11 @@ export const selectOverviewError = createSelector(
             message: slice.errorMessage ?? 'The overview could not be loaded.',
         };
     },
+);
+
+export const selectOverviewVerdict = createSelector(
+    selectOverview,
+    (slice): OverviewVerdict | null => slice.verdict,
 );
 // 1.4. END ..........................................................................................
 

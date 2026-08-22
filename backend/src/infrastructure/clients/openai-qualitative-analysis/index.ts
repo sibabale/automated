@@ -65,7 +65,7 @@ const SYSTEM_PROMPT = [
   "You write concise qualitative commentary for an equity overview page.",
   "Use only the supplied grounded data.",
   "Do not invent management behaviour, competitive moats, market events, or facts not present in the input.",
-  "Keep each title short and each description to one or two sentences.",
+  "Keep each title short and each description to one or two sentences maximum.",
   "Preserve the supplied pillar labels and keep them in the same order.",
   "Return JSON only.",
 ].join(" ");
@@ -189,7 +189,10 @@ function parseQualitativeAnalysis(text: string): QualitativeAnalysis {
 export function createOpenAiQualitativeAnalysisClient(): QualitativeAnalysisClient | null {
   const config = resolveConfig();
 
+  logger.debug({ hasApiKey: !!config.apiKey, model: config.model }, "Creating OpenAI client");
+
   if (!config.apiKey) {
+    logger.warn("No OPENAI_API_KEY found, returning null client");
     return null;
   }
 
@@ -202,7 +205,7 @@ export function createOpenAiQualitativeAnalysisClient(): QualitativeAnalysisClie
     async generateOverview(input, correlationId) {
       logger.debug(
         { correlationId, model: config.model, ticker: input.reportHeader.ticker },
-        "Generating qualitative analysis with OpenAI",
+        "Calling OpenAI for qualitative analysis",
       );
 
       const response = await client.chat.completions.create({
@@ -222,6 +225,7 @@ export function createOpenAiQualitativeAnalysisClient(): QualitativeAnalysisClie
       });
 
       const content = response.choices[0]?.message.content?.trim();
+      logger.debug({ correlationId, hasContent: !!content }, "OpenAI response received");
       if (!content) {
         throw new Error("OpenAI qualitative analysis returned no content");
       }
