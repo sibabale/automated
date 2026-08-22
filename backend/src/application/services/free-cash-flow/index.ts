@@ -41,7 +41,12 @@ export function calculateFreeCashFlowCoverageYears(year: CashFlowYear): number |
     return null;
   }
 
-  return calculateFreeCashFlow(year) / year.operatingCashFlow;
+  const fcf = calculateFreeCashFlow(year);
+  if (fcf === null) {
+    return null;
+  }
+
+  return fcf / year.operatingCashFlow;
 }
 // 1.4. END ..........................................................................................
 
@@ -65,7 +70,7 @@ export async function analyseFreeCashFlow(
 ): Promise<FreeCashFlowAnalysis> {
   const analysis = await analyseHorizons(ticker, repository, calculateFreeCashFlow, correlationId);
 
-  const latest = analysis.years[0] ?? { operatingCashFlow: 0, capitalExpenditure: 0 };
+  const latest = analysis.years[0] ?? { fiscalYear: 0, operatingCashFlow: 0, capitalExpenditure: 0 };
 
   return {
     ...analysis,
