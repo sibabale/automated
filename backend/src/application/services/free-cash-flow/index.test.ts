@@ -11,7 +11,11 @@ import { describe, it } from "node:test";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
-import { calculateFreeCashFlow, analyseFreeCashFlow } from "./index.js";
+import {
+  calculateFreeCashFlow,
+  calculateFreeCashFlowCoverageYears,
+  analyseFreeCashFlow,
+} from "./index.js";
 import type { CashFlowYear } from "../../../domain/entities/cash-flow-year.entity.js";
 import type { FinancialDataRepository } from "../../../domain/repositories/financial-data.repository.js";
 // 1.2. END ..........................................................................................
@@ -44,6 +48,17 @@ describe("calculateFreeCashFlow", () => {
   it("adds the negative capital expenditure to operating cash flow (kills '+' to '-')", () => {
     assert.equal(calculateFreeCashFlow(cashFlowYear(2024, 110_000, -30_000)), 80_000);
   });
+
+  describe("calculateFreeCashFlowCoverageYears", () => {
+    it("returns the free-cash-flow-to-operating-cash-flow ratio for positive operating cash flow", () => {
+      assert.equal(calculateFreeCashFlowCoverageYears(cashFlowYear(2024, 100_000, -20_000)), 0.8);
+    });
+
+    it("returns null when operating cash flow is zero or negative", () => {
+      assert.equal(calculateFreeCashFlowCoverageYears(cashFlowYear(2024, 0, -20_000)), null);
+      assert.equal(calculateFreeCashFlowCoverageYears(cashFlowYear(2024, -10_000, -20_000)), null);
+    });
+  });
   // 1.4.1. END ......................................................................................
 
   // 1.4.2. RETURNS ZERO WHEN OUTFLOW MATCHES INFLOW .................................................
@@ -73,6 +88,7 @@ describe("analyseFreeCashFlow", () => {
     assert.equal(analysis.ticker, "AAPL");
     assert.equal(analysis.ttmOperatingCashFlow, 110_000);
     assert.equal(analysis.ttmCapitalExpenditure, -30_000);
+    assert.equal(analysis.ttmCoverageYears, 80_000 / 110_000);
     assert.ok(analysis.horizons.length > 0);
   });
   // 1.4.4. END ......................................................................................
@@ -98,6 +114,7 @@ describe("analyseFreeCashFlow", () => {
 
     assert.equal(analysis.ttmOperatingCashFlow, 0);
     assert.equal(analysis.ttmCapitalExpenditure, 0);
+    assert.equal(analysis.ttmCoverageYears, null);
     assert.deepEqual(analysis.horizons, []);
   });
   // 1.4.6. END ......................................................................................

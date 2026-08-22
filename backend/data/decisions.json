@@ -3624,5 +3624,4781 @@
       "status": "not-attempted",
       "skipReason": null
     }
+  },
+  "A": {
+    "apiVersion": "v1",
+    "ticker": "A",
+    "companyName": "Agilent Technologies, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:02.034Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.46353707051532217,
+      "freeCashFlow": 929916666.6666666,
+      "marginOfSafety": -110.7039684105604,
+      "profitMargin": 15.37818321051068,
+      "returnOnEquity": 16.47903373352001
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 158.6,
+      "quantity": 6,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AA": {
+    "apiVersion": "v1",
+    "ticker": "AA",
+    "companyName": "Alcoa Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:06.964Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.3686268051163485,
+      "freeCashFlow": 201999999.99999997,
+      "marginOfSafety": -214.52721428714324,
+      "profitMargin": -1.1490878262827604,
+      "returnOnEquity": -2.117645772015483
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 52.39,
+      "quantity": 19,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AACI": {
+    "apiVersion": "v1",
+    "ticker": "AACI",
+    "companyName": "Armada Acquisition Corp. III",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:11.659Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -1.2880143112701252,
+      "freeCashFlow": -20919,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": 664.8801431127013
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 10.025,
+      "quantity": 99,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AACO": {
+    "apiVersion": "v1",
+    "ticker": "AACO",
+    "companyName": "Abony Acquisition Corp. I Class A Ordinary Share",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:14.622Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": null,
+      "freeCashFlow": null,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": null
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.92,
+      "quantity": 100,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AACP": {
+    "apiVersion": "v1",
+    "ticker": "AACP",
+    "companyName": "Apogee Acquisition Corp Class A Ordinary Shares",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:17.415Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0,
+      "freeCashFlow": -107,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": 1679.1582588642261
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 10.07,
+      "quantity": 99,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AADX": {
+    "apiVersion": "v1",
+    "ticker": "AADX",
+    "companyName": "Applied Aerospace & Defense, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:20.254Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 3.936998877444026,
+      "freeCashFlow": -28301500,
+      "marginOfSafety": null,
+      "profitMargin": -8.403593880290842,
+      "returnOnEquity": -25.851400419797287
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 15.2,
+      "quantity": 65,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAL": {
+    "apiVersion": "v1",
+    "ticker": "AAL",
+    "companyName": "American Airlines Group Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:23.223Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -45.39762787247087,
+      "freeCashFlow": -829666666.6666666,
+      "marginOfSafety": 95.35072801399377,
+      "profitMargin": -1.0596970366570755,
+      "returnOnEquity": -164.03810432531236
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 13.795,
+      "quantity": 72,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAME": {
+    "apiVersion": "v1",
+    "ticker": "AAME",
+    "companyName": "Atlantic American Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:25.989Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.3200515553157795,
+      "freeCashFlow": 3567666.666666667,
+      "marginOfSafety": 75.14182601157289,
+      "profitMargin": 1.85946562177277,
+      "returnOnEquity": 2.783882585599863
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 1.4,
+      "quantity": 714,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAMI": {
+    "apiVersion": "v1",
+    "ticker": "AAMI",
+    "companyName": "Acadian Asset Management",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:28.987Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 10.79901063365801,
+      "freeCashFlow": 95141666.66666667,
+      "marginOfSafety": -104.9907903662551,
+      "profitMargin": 32.03042758660074,
+      "returnOnEquity": -296.61033873544466
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 91.76,
+      "quantity": 10,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAOI": {
+    "apiVersion": "v1",
+    "ticker": "AAOI",
+    "companyName": "Applied Optoelectronics, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:31.727Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.45091857597703816,
+      "freeCashFlow": -64522000,
+      "marginOfSafety": null,
+      "profitMargin": -15.371120631898,
+      "returnOnEquity": -14.13848089697646
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 124.64,
+      "quantity": 8,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAON": {
+    "apiVersion": "v1",
+    "ticker": "AAON",
+    "companyName": "AAON, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:34.615Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.08165734139508582,
+      "freeCashFlow": 11184833.333333332,
+      "marginOfSafety": -3722.895012106519,
+      "profitMargin": 12.336120434511843,
+      "returnOnEquity": 20.412704882038586
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 79.4821,
+      "quantity": 12,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AARD": {
+    "apiVersion": "v1",
+    "ticker": "AARD",
+    "companyName": "Aardvark Therapeutics, Inc. Common Stock",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:37.422Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.00715403905354948,
+      "freeCashFlow": -18319333.333333336,
+      "marginOfSafety": -186.07217902051494,
+      "profitMargin": null,
+      "returnOnEquity": 25.018243098963918
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.2324,
+      "quantity": 160,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAT": {
+    "apiVersion": "v1",
+    "ticker": "AAT",
+    "companyName": "American Assets Trust, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:40.325Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.4008742075297647,
+      "freeCashFlow": 64710000.00000001,
+      "marginOfSafety": 62.19754238723693,
+      "profitMargin": 13.716193502238607,
+      "returnOnEquity": 4.79339174283306
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 22.795,
+      "quantity": 43,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AAUC": {
+    "apiVersion": "v1",
+    "ticker": "AAUC",
+    "companyName": "Allied Gold Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:43.191Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.7791208227316156,
+      "freeCashFlow": -6921356.833333334,
+      "marginOfSafety": null,
+      "profitMargin": -9.140913503517243,
+      "returnOnEquity": -27.531551912812056
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 23.56,
+      "quantity": 42,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABAT": {
+    "apiVersion": "v1",
+    "ticker": "ABAT",
+    "companyName": "American Battery Technology Company Common Stock",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:46.273Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.2910409024292655,
+      "freeCashFlow": -11476091.333333332,
+      "marginOfSafety": -93.32767279573294,
+      "profitMargin": -8187.177382577726,
+      "returnOnEquity": 557.074726041795
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 2.545,
+      "quantity": 392,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABCB": {
+    "apiVersion": "v1",
+    "ticker": "ABCB",
+    "companyName": "Ameris Bancorp",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:49.164Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.3983718807458302,
+      "freeCashFlow": 133990916.6666667,
+      "marginOfSafety": -68.73747589608291,
+      "profitMargin": 22.560959870278907,
+      "returnOnEquity": 9.55205879731554
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 86.08,
+      "quantity": 11,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABCL": {
+    "apiVersion": "v1",
+    "ticker": "ABCL",
+    "companyName": "AbCellera Biologics Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:51.996Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.20490380979423758,
+      "freeCashFlow": -9791277.777777776,
+      "marginOfSafety": null,
+      "profitMargin": -115.94085551379119,
+      "returnOnEquity": -3.2768357232619905
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 11.515,
+      "quantity": 86,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABEO": {
+    "apiVersion": "v1",
+    "ticker": "ABEO",
+    "companyName": "Abeona Therapeutics Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:54.850Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.2397524494149907,
+      "freeCashFlow": -42290750,
+      "marginOfSafety": -492.683737581046,
+      "profitMargin": -1787.6664619631797,
+      "returnOnEquity": -133.0926797834694
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.0864,
+      "quantity": 164,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABG": {
+    "apiVersion": "v1",
+    "ticker": "ABG",
+    "companyName": "Asbury Automotive Group, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:16:57.733Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 3.1345260465734217,
+      "freeCashFlow": 330025000,
+      "marginOfSafety": 66.58102469499319,
+      "profitMargin": 3.2445831463086354,
+      "returnOnEquity": 30.75787051068063
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 215.945,
+      "quantity": 4,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABLV": {
+    "apiVersion": "v1",
+    "ticker": "ABLV",
+    "companyName": "Able View Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:00.709Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.3543057666311566,
+      "freeCashFlow": 1656250.3333333333,
+      "marginOfSafety": -94.67942941186912,
+      "profitMargin": 3.793067374480165,
+      "returnOnEquity": 51.2116813763723
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 0.8734,
+      "quantity": 1144,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABM": {
+    "apiVersion": "v1",
+    "ticker": "ABM",
+    "companyName": "ABM Industries Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:03.512Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.6165185455848113,
+      "freeCashFlow": 153775000,
+      "marginOfSafety": 39.281115378415635,
+      "profitMargin": 1.5635306988384183,
+      "returnOnEquity": 7.118434685187016
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 46.94,
+      "quantity": 21,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABOS": {
+    "apiVersion": "v1",
+    "ticker": "ABOS",
+    "companyName": "Acumen Pharmaceuticals, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:06.846Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.07946576976748056,
+      "freeCashFlow": -36240111.11111111,
+      "marginOfSafety": -749.4078598693873,
+      "profitMargin": -488.01869348333855,
+      "returnOnEquity": -7.604436885060238
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 3.215,
+      "quantity": 311,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABR": {
+    "apiVersion": "v1",
+    "ticker": "ABR",
+    "companyName": "Arbor Realty Trust",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:10.021Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 3.6047511482993557,
+      "freeCashFlow": 219467483.5,
+      "marginOfSafety": 97.755326041705,
+      "profitMargin": 44.19642884370603,
+      "returnOnEquity": 11.108122439690472
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 5.215,
+      "quantity": 191,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABSI": {
+    "apiVersion": "v1",
+    "ticker": "ABSI",
+    "companyName": "Absci Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:13.099Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.010095431191342394,
+      "freeCashFlow": -51448222.22222223,
+      "marginOfSafety": -21677.757636976086,
+      "profitMargin": -1501.9018374338086,
+      "returnOnEquity": -24.483602722741022
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.7487,
+      "quantity": 102,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABT": {
+    "apiVersion": "v1",
+    "ticker": "ABT",
+    "companyName": "Abbott Laboratories",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:16.104Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5560818471041317,
+      "freeCashFlow": 5113000000,
+      "marginOfSafety": 22.793338981694845,
+      "profitMargin": 13.911023067863876,
+      "returnOnEquity": 13.938188270218514
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 115.89,
+      "quantity": 8,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABTC": {
+    "apiVersion": "v1",
+    "ticker": "ABTC",
+    "companyName": "American Bitcoin Corp",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:19.032Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -3.120740560719567,
+      "freeCashFlow": -23394126.277777776,
+      "marginOfSafety": null,
+      "profitMargin": -34.81263276396443,
+      "returnOnEquity": -546.3710141728021
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 8.02,
+      "quantity": 124,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABTS": {
+    "apiVersion": "v1",
+    "ticker": "ABTS",
+    "companyName": "Abits Group Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:22.210Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -20.893363250490726,
+      "freeCashFlow": -7419036.999999999,
+      "marginOfSafety": null,
+      "profitMargin": -9319.087865990157,
+      "returnOnEquity": 11363.00990883412
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 1.36,
+      "quantity": 735,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABUS": {
+    "apiVersion": "v1",
+    "ticker": "ABUS",
+    "companyName": "Arbutus Biopharma Corp",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:25.278Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.06626348565717145,
+      "freeCashFlow": -56368250,
+      "marginOfSafety": null,
+      "profitMargin": -2832.6159236769017,
+      "returnOnEquity": -72.75739424392067
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 5.195,
+      "quantity": 192,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABVC": {
+    "apiVersion": "v1",
+    "ticker": "ABVC",
+    "companyName": "ABVC BioPharma, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:28.133Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -1.8653947614190494,
+      "freeCashFlow": -3134925.75,
+      "marginOfSafety": null,
+      "profitMargin": -15271.400652489561,
+      "returnOnEquity": -31.43249726552368
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 0.9051,
+      "quantity": 1104,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ABX": {
+    "apiVersion": "v1",
+    "ticker": "ABX",
+    "companyName": "Abacus Global Management, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:31.116Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 76,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.8364603396367265,
+      "freeCashFlow": -48093319.666666664,
+      "marginOfSafety": 95.8090634560187,
+      "profitMargin": 22.962993729331195,
+      "returnOnEquity": 44.31978775305542
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.26,
+      "quantity": 107,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACA": {
+    "apiVersion": "v1",
+    "ticker": "ACA",
+    "companyName": "Arcosa, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:34.004Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.20911019490038463,
+      "freeCashFlow": 149050000,
+      "marginOfSafety": -106.39211750873557,
+      "profitMargin": 6.315418426515537,
+      "returnOnEquity": 6.981270472754643
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 145.25,
+      "quantity": 6,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACAA": {
+    "apiVersion": "v1",
+    "ticker": "ACAA",
+    "companyName": "Averin Capital Acquisition Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:36.954Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -4.412169563689726,
+      "freeCashFlow": 0,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": 151.6710414815121
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 10.02,
+      "quantity": 99,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACAD": {
+    "apiVersion": "v1",
+    "ticker": "ACAD",
+    "companyName": "ACADIA Pharmaceuticals Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:41.766Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.05107970454566668,
+      "freeCashFlow": -91382166.66666666,
+      "marginOfSafety": null,
+      "profitMargin": -29058.85381292879,
+      "returnOnEquity": -34.75120421758019
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 29.26,
+      "quantity": 34,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACB": {
+    "apiVersion": "v1",
+    "ticker": "ACB",
+    "companyName": "Aurora Cannabis Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:44.674Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5319753854914859,
+      "freeCashFlow": -183152282.5,
+      "marginOfSafety": null,
+      "profitMargin": -284.3135827139115,
+      "returnOnEquity": -91.56384838008924
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 3.8998,
+      "quantity": 256,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACCL": {
+    "apiVersion": "v1",
+    "ticker": "ACCL",
+    "companyName": "Acco Group Holdings Limited",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:47.603Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 92,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.11098232730355084,
+      "freeCashFlow": 584097.3333333334,
+      "marginOfSafety": 77.8598719116989,
+      "profitMargin": 20.318663288515655,
+      "returnOnEquity": 193.74906765048482
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 2.7901,
+      "quantity": 358,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACCO": {
+    "apiVersion": "v1",
+    "ticker": "ACCO",
+    "companyName": "ACCO Brands Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:50.571Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.2833766362902779,
+      "freeCashFlow": 128350000,
+      "marginOfSafety": 72.76879456398349,
+      "profitMargin": 3.2066361977480615,
+      "returnOnEquity": 7.601451704387301
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 4.235,
+      "quantity": 236,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACCS": {
+    "apiVersion": "v1",
+    "ticker": "ACCS",
+    "companyName": "ACCESS Newswire Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:55.078Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.2130105896883759,
+      "freeCashFlow": 2595604.3333333335,
+      "marginOfSafety": 77.2956072056279,
+      "profitMargin": 4.105979453985087,
+      "returnOnEquity": 2.8644922983790653
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 5.0305,
+      "quantity": 198,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACDC": {
+    "apiVersion": "v1",
+    "ticker": "ACDC",
+    "companyName": "ProFrac Holding Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:17:57.817Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.0627483747437607,
+      "freeCashFlow": 27006555.555555552,
+      "marginOfSafety": 54.664366993385016,
+      "profitMargin": -4.756299085691459,
+      "returnOnEquity": -13.950680291768634
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 4.605,
+      "quantity": 217,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACET": {
+    "apiVersion": "v1",
+    "ticker": "ACET",
+    "companyName": "Adicet Bio, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:00.811Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.7556890757486769,
+      "freeCashFlow": -38363500,
+      "marginOfSafety": -219.9813357975076,
+      "profitMargin": -450.9819348514498,
+      "returnOnEquity": -25.58341940264792
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.55,
+      "quantity": 104,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACFN": {
+    "apiVersion": "v1",
+    "ticker": "ACFN",
+    "companyName": "Acorn Energy, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:05.421Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.6789686180810474,
+      "freeCashFlow": -2247250,
+      "marginOfSafety": -115.20874769975273,
+      "profitMargin": -16.390686974604037,
+      "returnOnEquity": -249.50295863704443
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 18.93,
+      "quantity": 52,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACGC": {
+    "apiVersion": "v1",
+    "ticker": "ACGC",
+    "companyName": "ACP Holdings Acquisition Corp. Class A Ordinary Shares",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:08.309Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": null,
+      "freeCashFlow": null,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": null
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 10.02,
+      "quantity": 99,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACGL": {
+    "apiVersion": "v1",
+    "ticker": "ACGL",
+    "companyName": "Arch Capital Group Ltd.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:11.256Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 76,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.20082831867214704,
+      "freeCashFlow": 3037834833.3333335,
+      "marginOfSafety": 75.82465368997934,
+      "profitMargin": 19.650164980808356,
+      "returnOnEquity": 13.407764429860624
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 100.12,
+      "quantity": 9,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACH": {
+    "apiVersion": "v1",
+    "ticker": "ACH",
+    "companyName": "Accendra Health, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:14.021Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.4058305288904949,
+      "freeCashFlow": 96750000,
+      "marginOfSafety": null,
+      "profitMargin": -3.5375807344023347,
+      "returnOnEquity": 11.511457750532156
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 1.235,
+      "quantity": 809,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACHC": {
+    "apiVersion": "v1",
+    "ticker": "ACHC",
+    "companyName": "Acadia Healthcare Company, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:16.943Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.1256709581880295,
+      "freeCashFlow": -3289333.333333331,
+      "marginOfSafety": null,
+      "profitMargin": -1.4669003083861623,
+      "returnOnEquity": -3.815189268731026
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 27.2351,
+      "quantity": 36,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACHR": {
+    "apiVersion": "v1",
+    "ticker": "ACHR",
+    "companyName": "Archer Aviation Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:19.670Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.3783535127606392,
+      "freeCashFlow": -180504333.33333334,
+      "marginOfSafety": -333.8154113063811,
+      "profitMargin": -206066.66666666666,
+      "returnOnEquity": -51.58464367091346
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.3834,
+      "quantity": 156,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACHV": {
+    "apiVersion": "v1",
+    "ticker": "ACHV",
+    "companyName": "Achieve Life Sciences, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:22.600Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.6542466762838399,
+      "freeCashFlow": -22989500.000000004,
+      "marginOfSafety": -6601.749568674543,
+      "profitMargin": -195.64503512569635,
+      "returnOnEquity": 34.45229787641799
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 8.0348,
+      "quantity": 124,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACI": {
+    "apiVersion": "v1",
+    "ticker": "ACI",
+    "companyName": "Albertsons Companies, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:25.491Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 7.441216161036046,
+      "freeCashFlow": 571408333.3333333,
+      "marginOfSafety": 86.1224300282461,
+      "profitMargin": 0.2972402733513585,
+      "returnOnEquity": 18.083414275418832
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 12.235,
+      "quantity": 81,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACIC": {
+    "apiVersion": "v1",
+    "ticker": "ACIC",
+    "companyName": "American Coastal Insurance Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:28.363Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 76,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.2799422732204516,
+      "freeCashFlow": 2902583.333333334,
+      "marginOfSafety": 88.69106154684985,
+      "profitMargin": -4.433014031733242,
+      "returnOnEquity": 41.43282844969628
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.2451,
+      "quantity": 108,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACIU": {
+    "apiVersion": "v1",
+    "ticker": "ACIU",
+    "companyName": "AC Immune S.A.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:31.249Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.018973528776452277,
+      "freeCashFlow": -22021560.166666668,
+      "marginOfSafety": null,
+      "profitMargin": -547.016652742352,
+      "returnOnEquity": -25.26968720049877
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 2.825,
+      "quantity": 353,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACIW": {
+    "apiVersion": "v1",
+    "ticker": "ACIW",
+    "companyName": "ACI Worldwide, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:34.226Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.9727119724109817,
+      "freeCashFlow": 162810583.3333333,
+      "marginOfSafety": 25.9947328785464,
+      "profitMargin": 8.272912198692882,
+      "returnOnEquity": 10.1313818250363
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 52.235,
+      "quantity": 19,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACLS": {
+    "apiVersion": "v1",
+    "ticker": "ACLS",
+    "companyName": "Axcelis Technologies, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:37.079Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.11116798338086598,
+      "freeCashFlow": 69522500,
+      "marginOfSafety": -105.26899392915018,
+      "profitMargin": 12.573421983240896,
+      "returnOnEquity": 14.478750005872504
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 123.6922,
+      "quantity": 8,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACM": {
+    "apiVersion": "v1",
+    "ticker": "ACM",
+    "companyName": "Aecom",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:40.644Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.0661693395490706,
+      "freeCashFlow": 575611083.3333334,
+      "marginOfSafety": 41.23827677776027,
+      "profitMargin": 0.9993470063035655,
+      "returnOnEquity": 5.858230504361741
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 65.23,
+      "quantity": 15,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACMR": {
+    "apiVersion": "v1",
+    "ticker": "ACMR",
+    "companyName": "ACM Research, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:43.767Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.26176506175374253,
+      "freeCashFlow": -34197166.666666664,
+      "marginOfSafety": null,
+      "profitMargin": 10.93369049808297,
+      "returnOnEquity": -6.4725559350640935
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 77.3488,
+      "quantity": 12,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACN": {
+    "apiVersion": "v1",
+    "ticker": "ACN",
+    "companyName": "Accenture plc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:47.918Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 76,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.09042399997621939,
+      "freeCashFlow": 6679299166.666667,
+      "marginOfSafety": 18.365080427120954,
+      "profitMargin": 10.676558892910622,
+      "returnOnEquity": 36.23320284048901
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "medium"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 186.28,
+      "quantity": 5,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACNB": {
+    "apiVersion": "v1",
+    "ticker": "ACNB",
+    "companyName": "ACNB Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:50.791Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 76,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.7208442880734576,
+      "freeCashFlow": 27551666.666666664,
+      "marginOfSafety": 28.144739430686744,
+      "profitMargin": 23.56983604454078,
+      "returnOnEquity": 10.209233671752079
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 63.35,
+      "quantity": 15,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACNT": {
+    "apiVersion": "v1",
+    "ticker": "ACNT",
+    "companyName": "Ascent Industries Co.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:53.533Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5403515305814156,
+      "freeCashFlow": 5982334.083333333,
+      "marginOfSafety": -71.31032809888342,
+      "profitMargin": -2.413280318287484,
+      "returnOnEquity": -3.9593245983034278
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 15.08,
+      "quantity": 66,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACOG": {
+    "apiVersion": "v1",
+    "ticker": "ACOG",
+    "companyName": "Alpha Cognition Inc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:56.474Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 33.30082924039244,
+      "freeCashFlow": -7708703.79999961,
+      "marginOfSafety": -39.76759539716819,
+      "profitMargin": -202.24382416324414,
+      "returnOnEquity": -5868.108810197446
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.6,
+      "quantity": 104,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACON": {
+    "apiVersion": "v1",
+    "ticker": "ACON",
+    "companyName": "Aclarion, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:18:59.360Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.34885794486162064,
+      "freeCashFlow": -4371316.666666667,
+      "marginOfSafety": 86.92727095606018,
+      "profitMargin": -11735.646498499462,
+      "returnOnEquity": 48.90756098064518
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 2.665,
+      "quantity": 375,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACR": {
+    "apiVersion": "v1",
+    "ticker": "ACR",
+    "companyName": "ACRES Commercial Realty Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:02.456Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 3.0865736700131636,
+      "freeCashFlow": 50086666.666666664,
+      "marginOfSafety": 98.7010611052703,
+      "profitMargin": 49.323540081945836,
+      "returnOnEquity": -1.0267348726316452
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 14.83,
+      "quantity": 67,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACRE": {
+    "apiVersion": "v1",
+    "ticker": "ACRE",
+    "companyName": "Ares Commercial Real Estate Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:05.427Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 2.0470382886799787,
+      "freeCashFlow": 33105250.000000004,
+      "marginOfSafety": null,
+      "profitMargin": 30.878815519080465,
+      "returnOnEquity": 4.47424536985477
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 4.73,
+      "quantity": 211,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACRS": {
+    "apiVersion": "v1",
+    "ticker": "ACRS",
+    "companyName": "Aclaris Therapeutics, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:08.305Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.040063740717017286,
+      "freeCashFlow": -52220083.333333336,
+      "marginOfSafety": null,
+      "profitMargin": -1493.9342397941127,
+      "returnOnEquity": -63.51407615843929
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.42,
+      "quantity": 155,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACRV": {
+    "apiVersion": "v1",
+    "ticker": "ACRV",
+    "companyName": "Acrivon Therapeutics, Inc. Common Stock",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:11.263Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.02186018581772947,
+      "freeCashFlow": -37836833.333333336,
+      "marginOfSafety": -130.3852715272354,
+      "profitMargin": null,
+      "returnOnEquity": -8.604070288846195
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 2.305,
+      "quantity": 433,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACT": {
+    "apiVersion": "v1",
+    "ticker": "ACT",
+    "companyName": "Enact Holdings Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:14.231Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 84,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.11692270108386975,
+      "freeCashFlow": 494831500,
+      "marginOfSafety": 45.667493832241995,
+      "profitMargin": 56.27317356793069,
+      "returnOnEquity": 14.387521257293171
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 49.41,
+      "quantity": 20,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACTG": {
+    "apiVersion": "v1",
+    "ticker": "ACTG",
+    "companyName": "Acacia Research Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:17.114Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.14606876157470006,
+      "freeCashFlow": -13668000,
+      "marginOfSafety": null,
+      "profitMargin": -4.601713142554139,
+      "returnOnEquity": -8.886111343160707
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 4.505,
+      "quantity": 221,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACTU": {
+    "apiVersion": "v1",
+    "ticker": "ACTU",
+    "companyName": "Actuate Therapeutics Inc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:19.985Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.02217054810997479,
+      "freeCashFlow": -19342724.5,
+      "marginOfSafety": -127.94048963323806,
+      "profitMargin": null,
+      "returnOnEquity": -4475.412638273255
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 1.23,
+      "quantity": 813,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACVA": {
+    "apiVersion": "v1",
+    "ticker": "ACVA",
+    "companyName": "ACV Auctions Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:22.874Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.11487390064194598,
+      "freeCashFlow": -19894333.333333332,
+      "marginOfSafety": null,
+      "profitMargin": -40.22275578168896,
+      "returnOnEquity": 18.057607373367556
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 7.55,
+      "quantity": 132,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ACXP": {
+    "apiVersion": "v1",
+    "ticker": "ACXP",
+    "companyName": "Acurx Pharmaceuticals, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:25.793Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.002735142328329441,
+      "freeCashFlow": -759536628.7777778,
+      "marginOfSafety": 99.97123467426377,
+      "profitMargin": null,
+      "returnOnEquity": -596.1095868575103
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 1.4999,
+      "quantity": 666,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AD": {
+    "apiVersion": "v1",
+    "ticker": "AD",
+    "companyName": "Array Digital Infrastructure Inc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:28.674Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.6325111429834734,
+      "freeCashFlow": -70780333.33333333,
+      "marginOfSafety": null,
+      "profitMargin": 16.862227892499682,
+      "returnOnEquity": 2.8950633549480997
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 35.62,
+      "quantity": 28,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADAC": {
+    "apiVersion": "v1",
+    "ticker": "ADAC",
+    "companyName": "American Drive Acquisition Company Class A Ordinary Shares",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:31.543Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0,
+      "freeCashFlow": -92068,
+      "marginOfSafety": -20374.036577284915,
+      "profitMargin": null,
+      "returnOnEquity": 0.04270826387227323
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 10.09,
+      "quantity": 99,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADAM": {
+    "apiVersion": "v1",
+    "ticker": "ADAM",
+    "companyName": "Adamas Trust, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:35.198Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 6.465049169410873,
+      "freeCashFlow": 59862666.666666664,
+      "marginOfSafety": 49.91171986687964,
+      "profitMargin": -15.19980804714212,
+      "returnOnEquity": 3.4396649893597977
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.9113,
+      "quantity": 100,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADC": {
+    "apiVersion": "v1",
+    "ticker": "ADC",
+    "companyName": "Agree Realty Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:38.074Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5551878844224818,
+      "freeCashFlow": 210224942.1666667,
+      "marginOfSafety": 58.13140134750889,
+      "profitMargin": 39.65148140681861,
+      "returnOnEquity": 4.731421154631865
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 73.985,
+      "quantity": 13,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADCT": {
+    "apiVersion": "v1",
+    "ticker": "ADCT",
+    "companyName": "ADC Therapeutics S.A.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:41.063Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.07871855468658977,
+      "freeCashFlow": -140443777.77777776,
+      "marginOfSafety": null,
+      "profitMargin": -2514.744951892101,
+      "returnOnEquity": -36.83009474660205
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 0.9832,
+      "quantity": 1017,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADEA": {
+    "apiVersion": "v1",
+    "ticker": "ADEA",
+    "companyName": "Adeia Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:44.030Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.9448624736780127,
+      "freeCashFlow": 172535166.66666666,
+      "marginOfSafety": -144.06108509893753,
+      "profitMargin": 7.526829626229006,
+      "returnOnEquity": 0.5754006883324498
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 26.305,
+      "quantity": 38,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADGM": {
+    "apiVersion": "v1",
+    "ticker": "ADGM",
+    "companyName": "Adagio Medical Holdings, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:46.944Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.36303412078402836,
+      "freeCashFlow": -19407560,
+      "marginOfSafety": null,
+      "profitMargin": -13152.854989083615,
+      "returnOnEquity": -48.53670837410114
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 0.67,
+      "quantity": 1492,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADI": {
+    "apiVersion": "v1",
+    "ticker": "ADI",
+    "companyName": "Analog Devices, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:49.867Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.32979945378861947,
+      "freeCashFlow": 2220158416.6666665,
+      "marginOfSafety": -95.03570397081415,
+      "profitMargin": 21.522740780126846,
+      "returnOnEquity": 9.885852931609984
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 372.345,
+      "quantity": 2,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADIG": {
+    "apiVersion": "v1",
+    "ticker": "ADIG",
+    "companyName": "ADI Global Distribution Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:52.735Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.8497624703087886,
+      "freeCashFlow": -576000000,
+      "marginOfSafety": null,
+      "profitMargin": -5.455685618729097,
+      "returnOnEquity": -15.498812351543942
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 22.82,
+      "quantity": 43,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADIL": {
+    "apiVersion": "v1",
+    "ticker": "ADIL",
+    "companyName": "Adial Pharmaceuticals, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:55.909Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.3291366665125113,
+      "freeCashFlow": -4557446.5,
+      "marginOfSafety": 25.97684430861583,
+      "profitMargin": null,
+      "returnOnEquity": -189.40448509428845
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 5.8,
+      "quantity": 172,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADM": {
+    "apiVersion": "v1",
+    "ticker": "ADM",
+    "companyName": "Archer-Daniels-Midland Company",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:19:58.878Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.431733171879987,
+      "freeCashFlow": 661500000,
+      "marginOfSafety": -4.027735729930926,
+      "profitMargin": 2.7066010696910556,
+      "returnOnEquity": 10.063823033716123
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 82.07,
+      "quantity": 12,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADMA": {
+    "apiVersion": "v1",
+    "ticker": "ADMA",
+    "companyName": "ADMA Biologics, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:01.848Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 2.3287389703935277,
+      "freeCashFlow": -33986254.416666664,
+      "marginOfSafety": null,
+      "profitMargin": -142.32816765888532,
+      "returnOnEquity": -230.80089764171603
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.86,
+      "quantity": 101,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADNT": {
+    "apiVersion": "v1",
+    "ticker": "ADNT",
+    "companyName": "Adient plc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:05.145Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.260590332145303,
+      "freeCashFlow": -30333333.33333333,
+      "marginOfSafety": 76.80107591805829,
+      "profitMargin": -0.7610557373922052,
+      "returnOnEquity": -8.287901789086385
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 20.21,
+      "quantity": 49,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADP": {
+    "apiVersion": "v1",
+    "ticker": "ADP",
+    "companyName": "Automatic Data Processing, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:07.891Z",
+    "status": "watch",
+    "verdictAtPurchase": "watch",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.6808039253370398,
+      "freeCashFlow": 2804550000,
+      "marginOfSafety": 15.578166845737796,
+      "profitMargin": 16.57816131643148,
+      "returnOnEquity": 57.948948556016674
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "medium"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 280.915,
+      "quantity": 3,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADPT": {
+    "apiVersion": "v1",
+    "ticker": "ADPT",
+    "companyName": "Adaptive Biotechnologies Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:10.677Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.2226963269198111,
+      "freeCashFlow": -91092444.44444443,
+      "marginOfSafety": null,
+      "profitMargin": -101.03763286288493,
+      "returnOnEquity": -27.887198679031354
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 25.57,
+      "quantity": 39,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADSE": {
+    "apiVersion": "v1",
+    "ticker": "ADSE",
+    "companyName": "ADS-TEC Energy PLC",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:13.726Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.47717464581241265,
+      "freeCashFlow": -32049946.555555552,
+      "marginOfSafety": null,
+      "profitMargin": -95.90302135425264,
+      "returnOnEquity": -172.78030008198846
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 11.78,
+      "quantity": 84,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADSK": {
+    "apiVersion": "v1",
+    "ticker": "ADSK",
+    "companyName": "Autodesk, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:16.607Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -1.6424198693765224,
+      "freeCashFlow": 1059766666.6666667,
+      "marginOfSafety": -87.08489649460003,
+      "profitMargin": 3.92537256744818,
+      "returnOnEquity": 32.79660927748211
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 253.8842,
+      "quantity": 3,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADT": {
+    "apiVersion": "v1",
+    "ticker": "ADT",
+    "companyName": "ADT Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:19.563Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 2.5111621234607013,
+      "freeCashFlow": 758064250,
+      "marginOfSafety": 88.14785543760124,
+      "profitMargin": -3.8780077655308043,
+      "returnOnEquity": -4.778315650812569
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 7.425,
+      "quantity": 134,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADTN": {
+    "apiVersion": "v1",
+    "ticker": "ADTN",
+    "companyName": "ADTRAN Holdings Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:22.477Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.3562734185287389,
+      "freeCashFlow": 1997416.666666667,
+      "marginOfSafety": null,
+      "profitMargin": -6.080333439294333,
+      "returnOnEquity": -36.15854411217573
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 7.715,
+      "quantity": 129,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADUR": {
+    "apiVersion": "v1",
+    "ticker": "ADUR",
+    "companyName": "Aduro Clean Technologies Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:25.383Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.004979992042514693,
+      "freeCashFlow": -3202839.7777777775,
+      "marginOfSafety": -9590.896209903625,
+      "profitMargin": -2924.5416524146226,
+      "returnOnEquity": -82.6255530775369
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 16.32,
+      "quantity": 61,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADUS": {
+    "apiVersion": "v1",
+    "ticker": "ADUS",
+    "companyName": "Addus HomeCare Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T15:20:28.260Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.2173539278133809,
+      "freeCashFlow": 53050083.333333336,
+      "marginOfSafety": 11.437989277700792,
+      "profitMargin": 4.520131247128566,
+      "returnOnEquity": 7.624056299585325
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "medium",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "medium"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 120.87,
+      "quantity": 8,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADV": {
+    "apiVersion": "v1",
+    "ticker": "ADV",
+    "companyName": "Advantage Solutions Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:53:51.793Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.5161850688679381,
+      "freeCashFlow": 104263083.33333333,
+      "freeCashFlowCoverageYears": 0.8947376974582331,
+      "marginOfSafety": -4278.020226232459,
+      "profitMargin": -6.4902286724398754,
+      "returnOnEquity": -23.844934510070324
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 34.38,
+      "quantity": 29,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "ADVB": {
+    "apiVersion": "v1",
+    "ticker": "ADVB",
+    "companyName": "Advanced Biomed Inc. Common Stock",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:53:54.512Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.1404322254929566,
+      "freeCashFlow": -1564757.0833333335,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": -412.3665388114361,
+      "profitMargin": null,
+      "returnOnEquity": -105.80303359452049
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 8.14,
+      "quantity": 122,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEAQ": {
+    "apiVersion": "v1",
+    "ticker": "AEAQ",
+    "companyName": "Activate Energy Acquisition Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:53:57.373Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": null,
+      "freeCashFlow": null,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": null
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 10.05,
+      "quantity": 99,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEBI": {
+    "apiVersion": "v1",
+    "ticker": "AEBI",
+    "companyName": "Aebi Schmidt Holding AG",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:01.655Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.234492141088112,
+      "freeCashFlow": 22700000,
+      "freeCashFlowCoverageYears": -0.583259028087383,
+      "marginOfSafety": null,
+      "profitMargin": 1.522003653279777,
+      "returnOnEquity": 4.304256211597025
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 12.32,
+      "quantity": 81,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEC": {
+    "apiVersion": "v1",
+    "ticker": "AEC",
+    "companyName": "Anfield Energy Inc. Common Shares",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:04.863Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.08684480517602482,
+      "freeCashFlow": -9760146.833333332,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": -4.416359952335106
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 4.66,
+      "quantity": 214,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEE": {
+    "apiVersion": "v1",
+    "ticker": "AEE",
+    "companyName": "Ameren Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:07.735Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.2842151164983704,
+      "freeCashFlow": -749083333.3333334,
+      "freeCashFlowCoverageYears": -0.24485535341485237,
+      "marginOfSafety": null,
+      "profitMargin": 13.135202642282666,
+      "returnOnEquity": 9.680977719414672
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 106.13,
+      "quantity": 9,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEHL": {
+    "apiVersion": "v1",
+    "ticker": "AEHL",
+    "companyName": "Antelope Enterprise Holdings Limited",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:10.529Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.1517844303099607,
+      "freeCashFlow": -8504105.410833335,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": -92.66070673934914,
+      "returnOnEquity": -3399.470904395515
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.28,
+      "quantity": 159,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEHR": {
+    "apiVersion": "v1",
+    "ticker": "AEHR",
+    "companyName": "Aehr Test Systems",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:13.325Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.49816165562319636,
+      "freeCashFlow": -2867833.333333333,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": -2277.9738022467964,
+      "profitMargin": -10.060104051322488,
+      "returnOnEquity": 64.8646966069891
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 101.73,
+      "quantity": 9,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEI": {
+    "apiVersion": "v1",
+    "ticker": "AEI",
+    "companyName": "Alset Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:16.461Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.6237399801472626,
+      "freeCashFlow": -7447121.416666667,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": -588.3908313838862,
+      "profitMargin": -368.2893511508173,
+      "returnOnEquity": -35.29793982090622
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 1.46,
+      "quantity": 684,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEIS": {
+    "apiVersion": "v1",
+    "ticker": "AEIS",
+    "companyName": "Advanced Energy Industries, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:19.230Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.34821110820904966,
+      "freeCashFlow": 112961333.33333333,
+      "freeCashFlowCoverageYears": 0.5396485212173168,
+      "marginOfSafety": -368.2765401799527,
+      "profitMargin": 7.889104691819092,
+      "returnOnEquity": 9.97909287567751
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 285.83,
+      "quantity": 3,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEM": {
+    "apiVersion": "v1",
+    "ticker": "AEM",
+    "companyName": "Agnico Eagle Mines Limited",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:22.303Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.23027800578445679,
+      "freeCashFlow": 729701916.6666666,
+      "freeCashFlowCoverageYears": 0.6251885512239566,
+      "marginOfSafety": 1.2269326479598783,
+      "profitMargin": 13.330940186437461,
+      "returnOnEquity": 6.061079382498519
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "medium"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 216.06,
+      "quantity": 4,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEMD": {
+    "apiVersion": "v1",
+    "ticker": "AEMD",
+    "companyName": "Aethlon Medical, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:25.201Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.19808451837766847,
+      "freeCashFlow": -583514075348.7499,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": 56.75905369913173,
+      "profitMargin": -1955.9493404818895,
+      "returnOnEquity": -312.7787309411417
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 2.73,
+      "quantity": 366,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AENT": {
+    "apiVersion": "v1",
+    "ticker": "AENT",
+    "companyName": "Alliance Entertainment Holding Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:27.940Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.258514619361172,
+      "freeCashFlow": 7908222.222222223,
+      "freeCashFlowCoverageYears": 0.9979857510537506,
+      "marginOfSafety": -53.91741149975656,
+      "profitMargin": 0.189192308570445,
+      "returnOnEquity": 9.047782066415415
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 5.62,
+      "quantity": 177,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEO": {
+    "apiVersion": "v1",
+    "ticker": "AEO",
+    "companyName": "American Eagle Outfitters, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:31.517Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.6326382267109196,
+      "freeCashFlow": 192379333.33333334,
+      "freeCashFlowCoverageYears": 0.42830931514176357,
+      "marginOfSafety": 13.754165966908483,
+      "profitMargin": 4.0878733494282535,
+      "returnOnEquity": 12.94166167434031
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "medium"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 16.17,
+      "quantity": 61,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEON": {
+    "apiVersion": "v1",
+    "ticker": "AEON",
+    "companyName": "AEON Biopharma, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:35.582Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.40186338819993206,
+      "freeCashFlow": -33182222.22222222,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": 1921.9594433927377,
+      "returnOnEquity": -59.91178194227398
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 0.1921,
+      "quantity": 5205,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEP": {
+    "apiVersion": "v1",
+    "ticker": "AEP",
+    "companyName": "American Electric Power Company, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:38.483Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.4842758006790675,
+      "freeCashFlow": -573616666.6666666,
+      "freeCashFlowCoverageYears": 0.981278801843318,
+      "marginOfSafety": -8.766936817028705,
+      "profitMargin": 12.248205098780351,
+      "returnOnEquity": 9.810777795450676
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 120.94,
+      "quantity": 8,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AER": {
+    "apiVersion": "v1",
+    "ticker": "AER",
+    "companyName": "AerCap Holdings N.V.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:41.421Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 3.135442124941389,
+      "freeCashFlow": -532947999.99999994,
+      "freeCashFlowCoverageYears": -0.12630416063120373,
+      "marginOfSafety": null,
+      "profitMargin": 20.807234893616123,
+      "returnOnEquity": 10.233394984946836
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 146.29,
+      "quantity": 6,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AERT": {
+    "apiVersion": "v1",
+    "ticker": "AERT",
+    "companyName": "Aeries Technology, Inc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:44.290Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -1.2834569996730951,
+      "freeCashFlow": 63083.333333333314,
+      "freeCashFlowCoverageYears": 0.8356467808623745,
+      "marginOfSafety": -158.62069016162573,
+      "profitMargin": 2.6647681892770003,
+      "returnOnEquity": 37.56699292772565
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.905,
+      "quantity": 144,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AES": {
+    "apiVersion": "v1",
+    "ticker": "AES",
+    "companyName": "The AES Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:47.129Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 7.1760307597405975,
+      "freeCashFlow": -951083333.3333334,
+      "freeCashFlowCoverageYears": -0.37691593125870876,
+      "marginOfSafety": null,
+      "profitMargin": 2.480515660352931,
+      "returnOnEquity": 6.8284523882381745
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 14.77,
+      "quantity": 67,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AESI": {
+    "apiVersion": "v1",
+    "ticker": "AESI",
+    "companyName": "Atlas Energy Solutions Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:49.984Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.4214705679993911,
+      "freeCashFlow": -15591333.333333336,
+      "freeCashFlowCoverageYears": -0.2635368909038229,
+      "marginOfSafety": -2515.6599954232015,
+      "profitMargin": 7.292084426712366,
+      "returnOnEquity": 8.894764077585704
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 12.58,
+      "quantity": 79,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AESP": {
+    "apiVersion": "v1",
+    "ticker": "AESP",
+    "companyName": "Aeon Acquisition I Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:52.861Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": null,
+      "freeCashFlow": null,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": null
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 9.95,
+      "quantity": 100,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEVA": {
+    "apiVersion": "v1",
+    "ticker": "AEVA",
+    "companyName": "Aeva Technologies, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:55.793Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 28,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 1.4105818377032782,
+      "freeCashFlow": -70088000,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": -2846.365769829588,
+      "returnOnEquity": -13188.114316305464
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 18.29,
+      "quantity": 54,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEXA": {
+    "apiVersion": "v1",
+    "ticker": "AEXA",
+    "companyName": "American Exceptionalism Acquisition Corp. A",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:54:59.914Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 20,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": null,
+      "freeCashFlow": null,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": null,
+      "returnOnEquity": null
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 11.68,
+      "quantity": 85,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AEYE": {
+    "apiVersion": "v1",
+    "ticker": "AEYE",
+    "companyName": "AudioEye, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:04.643Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 44,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5464375993304392,
+      "freeCashFlow": -3068466.083333333,
+      "freeCashFlowCoverageYears": 0.9886387544708605,
+      "marginOfSafety": 77.22436325902385,
+      "profitMargin": -457.1775998072214,
+      "returnOnEquity": -452.2161267455063
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 7.2,
+      "quantity": 138,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AFCG": {
+    "apiVersion": "v1",
+    "ticker": "AFCG",
+    "companyName": "Advanced Flower Capital Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:07.780Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.49805685192695104,
+      "freeCashFlow": 16066893.5,
+      "freeCashFlowCoverageYears": 1,
+      "marginOfSafety": 60.44182642772489,
+      "profitMargin": 33.7182295239887,
+      "returnOnEquity": 5.448378129766025
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 3.27,
+      "quantity": 305,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AFG": {
+    "apiVersion": "v1",
+    "ticker": "AFG",
+    "companyName": "American Financial Group, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:12.042Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.3260437848299947,
+      "freeCashFlow": 1537166666.6666667,
+      "freeCashFlowCoverageYears": 0.9119373776908023,
+      "marginOfSafety": 60.903753205498525,
+      "profitMargin": 11.922247453487909,
+      "returnOnEquity": 16.17531283427205
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 143.7,
+      "quantity": 6,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AFL": {
+    "apiVersion": "v1",
+    "ticker": "AFL",
+    "companyName": "Aflac Incorporated",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:15.810Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.2726358902125093,
+      "freeCashFlow": 5020833333.333334,
+      "freeCashFlowCoverageYears": 1,
+      "marginOfSafety": 28.583061109776292,
+      "profitMargin": 18.74437455818298,
+      "returnOnEquity": 15.78181183781825
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 116.07,
+      "quantity": 8,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AFRI": {
+    "apiVersion": "v1",
+    "ticker": "AFRI",
+    "companyName": "Forafric Global PLC",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:18.565Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -11.705444655020534,
+      "freeCashFlow": -7851333.333333333,
+      "freeCashFlowCoverageYears": -0.45224719101123595,
+      "marginOfSafety": null,
+      "profitMargin": -4.937849444403884,
+      "returnOnEquity": 170.2280468026453
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 11.15,
+      "quantity": 89,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AFRM": {
+    "apiVersion": "v1",
+    "ticker": "AFRM",
+    "companyName": "Affirm Holdings, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:23.379Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.03462151421580003,
+      "freeCashFlow": -16063111.111111114,
+      "freeCashFlowCoverageYears": 0.7579206181061053,
+      "marginOfSafety": null,
+      "profitMargin": -38.28927763284949,
+      "returnOnEquity": 7.509114682760401
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 77.03,
+      "quantity": 12,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AFYA": {
+    "apiVersion": "v1",
+    "ticker": "AFYA",
+    "companyName": "Afya Limited",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:26.145Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5029073010674644,
+      "freeCashFlow": 473841907.77777773,
+      "freeCashFlowCoverageYears": 0.8642863778081757,
+      "marginOfSafety": 71.18173587317347,
+      "profitMargin": 19.290996393170982,
+      "returnOnEquity": 21.508676460031207
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 14.33,
+      "quantity": 69,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AG": {
+    "apiVersion": "v1",
+    "ticker": "AG",
+    "companyName": "First Majestic Silver Corp.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:28.930Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.16238651664108866,
+      "freeCashFlow": -7416442.58333333,
+      "freeCashFlowCoverageYears": 0.6212458518694903,
+      "marginOfSafety": null,
+      "profitMargin": -16.844343276280163,
+      "returnOnEquity": -8.087647850931567
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 21.09,
+      "quantity": 47,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGBK": {
+    "apiVersion": "v1",
+    "ticker": "AGBK",
+    "companyName": "AGI Inc",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:31.908Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 60,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.8267159410104986,
+      "freeCashFlow": 204629833.33333334,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": 61.72745165406417,
+      "profitMargin": 7.382195057488368,
+      "returnOnEquity": 32.47362074167393
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 6.1,
+      "quantity": 163,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGCC": {
+    "apiVersion": "v1",
+    "ticker": "AGCC",
+    "companyName": "Agencia Comercial Spirits Ltd",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:34.794Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 68,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.08893441783121758,
+      "freeCashFlow": -255679.5,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": 28.837661975223003,
+      "returnOnEquity": 30.384988772685602
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "strong",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 14.63,
+      "quantity": 68,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGCO": {
+    "apiVersion": "v1",
+    "ticker": "AGCO",
+    "companyName": "AGCO Corporation",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:37.696Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.5101688923665931,
+      "freeCashFlow": 409866666.6666667,
+      "freeCashFlowCoverageYears": 0.7491144620989778,
+      "marginOfSafety": -20.111482777382054,
+      "profitMargin": 4.006170911789964,
+      "returnOnEquity": 11.803239017327224
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "medium",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 106.81,
+      "quantity": 9,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGEN": {
+    "apiVersion": "v1",
+    "ticker": "AGEN",
+    "companyName": "Agenus Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:41.279Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.4799709998467388,
+      "freeCashFlow": -115523483.16666667,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": -260.6290494429528,
+      "returnOnEquity": 76.38810602584064
+    },
+    "strengths": {
+      "returnOnEquity": "strong",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 8.09,
+      "quantity": 123,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGI": {
+    "apiVersion": "v1",
+    "ticker": "AGI",
+    "companyName": "Alamos Gold Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:44.268Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.057625555692788294,
+      "freeCashFlow": 43294685.16666667,
+      "freeCashFlowCoverageYears": 0.3436049479533237,
+      "marginOfSafety": null,
+      "profitMargin": -7.635486475101658,
+      "returnOnEquity": -0.0018059620474724092
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 37.86,
+      "quantity": 26,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGIG": {
+    "apiVersion": "v1",
+    "ticker": "AGIG",
+    "companyName": "Abundia Global Impact Group Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:47.180Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.17139736534233327,
+      "freeCashFlow": -3528769.3333333335,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": -1180.5498195408984,
+      "returnOnEquity": -12.461363025577754
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 0.9601,
+      "quantity": 1041,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGIO": {
+    "apiVersion": "v1",
+    "ticker": "AGIO",
+    "companyName": "Agios Pharmaceuticals, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:50.057Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 0.06276639182004058,
+      "freeCashFlow": -267688250,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": -697.9864644086723,
+      "profitMargin": -593.8601990431018,
+      "returnOnEquity": -26.126774447564074
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 33.09,
+      "quantity": 30,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGL": {
+    "apiVersion": "v1",
+    "ticker": "AGL",
+    "companyName": "Agilon Health, Inc.",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:52.957Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 36,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": -0.0774055921063553,
+      "freeCashFlow": -120106222.22222221,
+      "freeCashFlowCoverageYears": null,
+      "marginOfSafety": null,
+      "profitMargin": -17.7813144884808,
+      "returnOnEquity": -8.417300269339236
+    },
+    "strengths": {
+      "returnOnEquity": "weak",
+      "freeCashFlow": "weak",
+      "debtToEquity": "strong",
+      "profitMargin": "weak",
+      "marginOfSafety": "weak"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 96.58,
+      "quantity": 10,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
+  },
+  "AGM": {
+    "apiVersion": "v1",
+    "ticker": "AGM",
+    "companyName": "Federal Agricultural Mortgage",
+    "batchId": "nyse-nasdaq-common-stocks",
+    "sourceFile": "ticker.json",
+    "processedAt": "2026-08-21T22:55:55.830Z",
+    "status": "reject",
+    "verdictAtPurchase": "reject",
+    "scoreAtPurchase": 52,
+    "analysisModel": "automated-investment-v1",
+    "constitutionVersion": "all-five-metrics-must-be-strong",
+    "metrics": {
+      "debtToEquity": 23.353358718251048,
+      "freeCashFlow": 259808999.99999997,
+      "freeCashFlowCoverageYears": 1,
+      "marginOfSafety": 63.649184040088336,
+      "profitMargin": 19.87478428285343,
+      "returnOnEquity": 12.462490015201597
+    },
+    "strengths": {
+      "returnOnEquity": "medium",
+      "freeCashFlow": "weak",
+      "debtToEquity": "weak",
+      "profitMargin": "medium",
+      "marginOfSafety": "strong"
+    },
+    "tradeExecution": {
+      "attempted": false,
+      "mode": "paper",
+      "maxTradeAmount": 1000,
+      "sharePrice": 220.84,
+      "quantity": 4,
+      "orderClientId": null,
+      "status": "not-attempted",
+      "skipReason": null
+    }
   }
 }

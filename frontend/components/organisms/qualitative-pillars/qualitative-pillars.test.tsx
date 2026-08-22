@@ -30,8 +30,8 @@ const renderQualitativePillars = () =>
                         },
                         {
                             label: 'Cash Generation',
-                            title: 'Cash flow supports internal reinvestment',
-                            description: 'Free cash flow remains strong and supports internal investment capacity.',
+                            title: 'Cash flow funds several years of operations',
+                            description: 'Free cash flow covers more than 3 years of operating cash flow in the current dataset.',
                         },
                         {
                             label: 'Balance Sheet Discipline',

@@ -35,6 +35,7 @@ export interface FreeCashFlowConsolidatedSummary {
 export interface FreeCashFlowTrailingTwelveMonthsActuals {
     operatingCashFlow: string;
     capitalExpenditure: string;
+    freeCashFlow: string;
 }
 
 interface FreeCashFlowRejection {
@@ -128,6 +129,7 @@ export const fetchFreeCashFlow = createAsyncThunk<
         trailingTwelveMonthsActuals: payload?.data?.trailingTwelveMonthsActuals ?? {
             operatingCashFlow: '—',
             capitalExpenditure: '—',
+            freeCashFlow: '—',
         },
     };
 });

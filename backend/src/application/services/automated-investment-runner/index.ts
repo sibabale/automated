@@ -206,9 +206,13 @@ export async function runAutomatedInvestmentPass(
 ): Promise<AutomatedInvestmentRunSummary> {
   const maxTradeAmount = readMaxTradeAmount();
   const maxTickersPerRun = readMaxTickersPerRun();
-  const batches = await dependencies.tickerSourceBatchRepository.listBatches(correlationId, {
-    maxTickers: maxTickersPerRun,
-  });
+  const batchSelection = maxTickersPerRun === undefined
+    ? undefined
+    : { maxTickers: maxTickersPerRun };
+  const batches = await dependencies.tickerSourceBatchRepository.listBatches(
+    correlationId,
+    batchSelection,
+  );
   const decisions: AutomatedInvestmentDecision[] = [];
   const batchSummaries: AutomatedInvestmentRunSummary["batches"] = [];
   let skippedTickers = 0;

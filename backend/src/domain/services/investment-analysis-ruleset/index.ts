@@ -39,7 +39,6 @@ export interface InvestmentAnalysisRuleset {
 interface RulesetDefinition {
   analysisModel: string;
   constitutionVersion: string;
-  freeCashFlowStrongThreshold: number;
 }
 // 1.3. END ..........................................................................................
 
@@ -48,12 +47,10 @@ const RULESET_DEFINITIONS: Record<ApiVersion, RulesetDefinition> = {
   v1: {
     analysisModel: "automated-investment-v1",
     constitutionVersion: "all-five-metrics-must-be-strong",
-    freeCashFlowStrongThreshold: 10_000_000_000,
   },
   v2: {
     analysisModel: "automated-investment-v2",
-    constitutionVersion: "all-five-metrics-must-be-strong-lower-free-cash-flow-threshold",
-    freeCashFlowStrongThreshold: 5_000_000_000,
+    constitutionVersion: "all-five-metrics-must-be-strong-free-cash-flow-coverage-years",
   },
 };
 // 1.4. END ..........................................................................................
@@ -76,17 +73,14 @@ function classifyReturnOnEquity(value: number | null): MetricStrength {
   return "weak";
 }
 
-function classifyFreeCashFlow(
-  value: number | null,
-  freeCashFlowStrongThreshold: number,
-): MetricStrength {
-  if (value === null) {
+function classifyFreeCashFlowCoverageYears(value: number | null): MetricStrength {
+  if (value === null || !Number.isFinite(value)) {
     return "weak";
   }
-  if (value > freeCashFlowStrongThreshold) {
+  if (value >= 3) {
     return "strong";
   }
-  if (value > 0) {
+  if (value >= 2) {
     return "medium";
   }
   return "weak";
@@ -143,10 +137,7 @@ export function resolveInvestmentAnalysisRuleset(apiVersion: ApiVersion): Invest
     classifyMetricStrengths(metrics) {
       return {
         returnOnEquity: classifyReturnOnEquity(metrics.returnOnEquity),
-        freeCashFlow: classifyFreeCashFlow(
-          metrics.freeCashFlow,
-          definition.freeCashFlowStrongThreshold,
-        ),
+        freeCashFlow: classifyFreeCashFlowCoverageYears(metrics.freeCashFlowCoverageYears),
         debtToEquity: classifyDebtToEquity(metrics.debtToEquity),
         profitMargin: classifyProfitMargin(metrics.profitMargin),
         marginOfSafety: classifyMarginOfSafety(metrics.marginOfSafety),
@@ -190,12 +181,12 @@ export function resolveInvestmentAnalysisRuleset(apiVersion: ApiVersion): Invest
           return "Weak shareholder returns";
         case "free-cash-flow":
           if (strength === "strong") {
-            return "Funds growth and expansion";
+            return "Funds 3 or more years of operations";
           }
           if (strength === "medium") {
-            return "Supports ongoing investment";
+            return "Funds between 2 and under 3 years of operations";
           }
-          return "Limited capacity to self-fund growth";
+          return "Funds less than 2 years of operations";
         case "debt-to-equity":
           if (strength === "strong") {
             return "Conservative leverage";

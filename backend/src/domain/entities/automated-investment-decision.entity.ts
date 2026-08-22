@@ -16,6 +16,7 @@ export type AutomatedDecisionStatus = "buy" | "watch" | "reject";
 export interface AutomatedDecisionMetrics {
   returnOnEquity: number | null;
   freeCashFlow: number | null;
+  freeCashFlowCoverageYears: number | null;
   debtToEquity: number | null;
   profitMargin: number | null;
   marginOfSafety: number | null;

@@ -49,6 +49,17 @@ export interface OverviewAnalysis {
 // 1.3. END ..........................................................................................
 
 // 1.4. HELPERS ......................................................................................
+function calculateFreeCashFlowCoverageYears(
+  operatingCashFlow: number,
+  freeCashFlow: number,
+): number | null {
+  if (!Number.isFinite(operatingCashFlow) || operatingCashFlow <= 0) {
+    return null;
+  }
+
+  return freeCashFlow / operatingCashFlow;
+}
+
 /**
  * Collapses the horizon cards into the same single number shown on the overview
  * cards: the arithmetic mean of each horizon average. Empty horizon sets stay
@@ -97,6 +108,10 @@ export async function buildOverview(
   const metrics: OverviewMetricSnapshot = {
     debtToEquity: averageHorizons(debtToEquity.horizons),
     freeCashFlow: averageHorizons(freeCashFlow.horizons),
+    freeCashFlowCoverageYears: calculateFreeCashFlowCoverageYears(
+      freeCashFlow.ttmOperatingCashFlow,
+      freeCashFlow.ttmOperatingCashFlow + freeCashFlow.ttmCapitalExpenditure,
+    ),
     marginOfSafety: marginOfSafety.currentMarginOfSafety,
     profitMargin: averageHorizons(profitMargin.horizons),
     returnOnEquity: averageHorizons(returnOnEquity.horizons),

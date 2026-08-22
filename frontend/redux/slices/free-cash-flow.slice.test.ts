@@ -35,7 +35,18 @@ describe('freeCashFlow slice', () => {
                 trend: 'up' as const,
             },
         ];
-        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(jsonResponse(200, { data: { ticker: 'RDDT', horizons } })));
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(jsonResponse(200, {
+            data: {
+                ticker: 'RDDT',
+                horizons,
+                consolidatedSummary: { values: ['$10.0B'], result: '$10.0B', denominator: '1' },
+                trailingTwelveMonthsActuals: {
+                    operatingCashFlow: '$12.0B',
+                    capitalExpenditure: '$-2.0B',
+                    freeCashFlow: '$10.0B',
+                },
+            },
+        })));
 
         const store = makeStore();
         await store.dispatch(fetchFreeCashFlow('RDDT'));
@@ -48,7 +59,18 @@ describe('freeCashFlow slice', () => {
     });
 
     it('treats an empty horizon list as a successful but empty analysis', async () => {
-        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(jsonResponse(200, { data: { ticker: 'ZZZZ', horizons: [] } })));
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(jsonResponse(200, {
+            data: {
+                ticker: 'ZZZZ',
+                horizons: [],
+                consolidatedSummary: { values: [], result: '—', denominator: '0' },
+                trailingTwelveMonthsActuals: {
+                    operatingCashFlow: '—',
+                    capitalExpenditure: '—',
+                    freeCashFlow: '—',
+                },
+            },
+        })));
 
         const store = makeStore();
         await store.dispatch(fetchFreeCashFlow('ZZZZ'));
@@ -103,7 +125,18 @@ describe('freeCashFlow slice', () => {
         expect(store.getState().freeCashFlow.status).toBe('loading');
         expect(store.getState().freeCashFlow.errorKind).toBeNull();
 
-        resolveFetch(jsonResponse(200, { data: { ticker: 'RDDT', horizons: [] } }));
+        resolveFetch(jsonResponse(200, {
+            data: {
+                ticker: 'RDDT',
+                horizons: [],
+                consolidatedSummary: { values: [], result: '—', denominator: '0' },
+                trailingTwelveMonthsActuals: {
+                    operatingCashFlow: '—',
+                    capitalExpenditure: '—',
+                    freeCashFlow: '—',
+                },
+            },
+        }));
         await pending;
     });
 });

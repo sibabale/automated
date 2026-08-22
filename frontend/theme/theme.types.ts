@@ -1,6 +1,6 @@
-// [ THEME > TYPES ] ###############################################################################
+// [ THEME > TYPES ] #################################################################################
 
-// 1.1. TYPES ..........................................................................................
+// 1.1. TYPES ........................................................................................
 
 export interface IThemeSpacing {
     xxxs: string; // extra extra extra small — 2px
@@ -43,6 +43,12 @@ export interface IThemeFontWeights {
     bold:       number; // 700
     extraBold:  number; // 800
     black:      number; // 900
+}
+
+export interface IThemeFonts {
+    body: string;
+    math: string;
+    mono: string;
 }
 
 export interface IThemeBreakpoints {
@@ -98,11 +104,12 @@ export interface ITheme extends IThemeColors {
     breakpoints: IThemeBreakpoints;
     fontWeights: IThemeFontWeights;
     fontSizes:   IThemeFontSizes;
+    fonts:       IThemeFonts;
 }
 
-// 1.1. END ............................................................................................
+// 1.1. END ..........................................................................................
 
-// 1.2. STYLED-COMPONENTS DECLARATION ..............................................................
+// 1.2. STYLED-COMPONENTS DECLARATION ................................................................
 
 // Augment the DefaultTheme so every styled-component automatically receives
 // the typed theme object from ThemeProvider with no extra casting needed.
@@ -113,6 +120,6 @@ declare module 'styled-components' {
     export interface DefaultTheme extends ITheme {}
 }
 
-// 1.2. END ............................................................................................
+// 1.2. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

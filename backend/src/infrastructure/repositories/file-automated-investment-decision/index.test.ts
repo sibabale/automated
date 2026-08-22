@@ -44,6 +44,7 @@ function decision(overrides: Partial<AutomatedInvestmentDecision> = {}): Automat
     metrics: {
       returnOnEquity: 25,
       freeCashFlow: 12_000_000_000,
+      freeCashFlowCoverageYears: 3.2,
       debtToEquity: 0.4,
       profitMargin: 22,
       marginOfSafety: 25,
@@ -129,7 +130,7 @@ describe("createFileAutomatedInvestmentDecisionRepository", () => {
       decision({
         apiVersion: "v2",
         analysisModel: "automated-investment-v2",
-        constitutionVersion: "all-five-metrics-must-be-strong-lower-free-cash-flow-threshold",
+        constitutionVersion: "all-five-metrics-must-be-strong-free-cash-flow-coverage-years",
       }),
       "cid-auto-decisions-009",
     );

@@ -349,7 +349,9 @@ export default function MetricDetailsPage({
             denominatorValue: freeCashFlowActuals?.capitalExpenditure ?? formula.denominatorValue,
         };
     })();
-    const formulaResult = liveConfig?.kind === 'margin-of-safety'
+    const formulaResult = liveConfig?.kind === 'free-cash-flow'
+        ? freeCashFlowActuals?.freeCashFlow ?? formula?.result ?? '—'
+        : liveConfig?.kind === 'margin-of-safety'
         ? currentMetricValue
         : (formula?.result ?? '—');
 

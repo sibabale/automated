@@ -37,6 +37,7 @@ interface HorizonView {
 interface FormulaTrailingTwelveMonthsActuals {
   operatingCashFlow: string;
   capitalExpenditure: string;
+  freeCashFlow: string;
 }
 
 /**
@@ -79,6 +80,7 @@ function toResponseData(analysis: FreeCashFlowAnalysis): FreeCashFlowResponse["d
   );
 
   const trailingTwelveMonthsActuals: FormulaTrailingTwelveMonthsActuals = {
+    freeCashFlow: formatCurrency(analysis.ttmOperatingCashFlow + analysis.ttmCapitalExpenditure),
     operatingCashFlow: formatCurrency(analysis.ttmOperatingCashFlow),
     capitalExpenditure: formatCurrency(analysis.ttmCapitalExpenditure),
   };

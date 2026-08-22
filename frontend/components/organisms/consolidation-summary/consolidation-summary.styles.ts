@@ -1,24 +1,24 @@
-// [ COMPONENTS > ORGANISMS > CONSOLIDATION SUMMARY ] ##############################################
+// [ COMPONENTS > ORGANISMS > CONSOLIDATION SUMMARY ] ################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import styled from 'styled-components';
-// 1.1. END ........................................................................................
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { media } from '../../../theme';
 import type { ITheme } from '../../../theme';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. IMAGES .....................................................................................
-// 1.3. END ........................................................................................
+// 1.3. IMAGES .......................................................................................
+// 1.3. END ..........................................................................................
 
-// 1.4. DATA .......................................................................................
-// 1.4. END ........................................................................................
+// 1.4. DATA .........................................................................................
+// 1.4. END ..........................................................................................
 
-// 1.5. FUNCTIONS ..................................................................................
-// 1.5. END ........................................................................................
+// 1.5. FUNCTIONS ....................................................................................
+// 1.5. END ..........................................................................................
 
-// 1.6. STYLES .....................................................................................
+// 1.6. STYLES .......................................................................................
 export const ConsolidationSummaryContainer = styled.section`
     display: grid;
     gap: ${({ theme }) => theme.spacing.m};
@@ -45,8 +45,10 @@ export const ConsolidationTitle = styled.h2`
 export const ConsolidationMobileCalculation = styled.p`
     margin: 0;
     color: ${({ theme }) => theme.text.primary};
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
     font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
     line-height: 1.4;
 
     ${media.up('md')`
@@ -62,8 +64,10 @@ export const ConsolidationDesktopCalculation = styled.div`
         align-items: center;
         gap: ${({ theme }: { theme: ITheme }) => theme.spacing.m};
         color: ${({ theme }: { theme: ITheme }) => theme.text.primary};
+        font-family: ${({ theme }: { theme: ITheme }) => theme.fonts.math};
+        font-style: italic;
         font-size: ${({ theme }: { theme: ITheme }) => theme.fontSizes.lg};
-        font-weight: ${({ theme }: { theme: ITheme }) => theme.fontWeights.bold};
+        font-weight: ${({ theme }: { theme: ITheme }) => theme.fontWeights.regular};
     `}
 `;
 
@@ -75,13 +79,20 @@ export const ConsolidationFraction = styled.span`
 export const ConsolidationNumerator = styled.span`
     padding: 0 ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.ss};
     border-bottom: 1px solid ${({ theme }) => theme.text.primary};
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
 `;
 
 export const ConsolidationDenominator = styled.span`
     padding: ${({ theme }) => theme.spacing.ss} ${({ theme }) => theme.spacing.xs} 0;
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
 `;
 
 export const ConsolidationResult = styled.strong`
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
     font-size: ${({ theme }) => theme.fontSizes.xxxl};
 `;
 
@@ -149,6 +160,6 @@ export const ConsolidationMobileNote = styled.span`
         display: none;
     `}
 `;
-// 1.6. END ........................................................................................
+// 1.6. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

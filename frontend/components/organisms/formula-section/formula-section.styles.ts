@@ -1,24 +1,24 @@
-// [ COMPONENTS > ORGANISMS > FORMULA SECTION ] #####################################################
+// [ COMPONENTS > ORGANISMS > FORMULA SECTION ] ######################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import styled from 'styled-components';
-// 1.1. END ........................................................................................
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
-import { media, pressableBounce } from '../../../theme';
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import type { ITheme } from '../../../theme';
-// 1.2. END ........................................................................................
+import { media, pressableBounce } from '../../../theme';
+// 1.2. END ..........................................................................................
 
-// 1.3. IMAGES .....................................................................................
-// 1.3. END ........................................................................................
+// 1.3. IMAGES .......................................................................................
+// 1.3. END ..........................................................................................
 
-// 1.4. DATA .......................................................................................
-// 1.4. END ........................................................................................
+// 1.4. DATA .........................................................................................
+// 1.4. END ..........................................................................................
 
-// 1.5. FUNCTIONS ..................................................................................
-// 1.5. END ........................................................................................
+// 1.5. FUNCTIONS ....................................................................................
+// 1.5. END ..........................................................................................
 
-// 1.6. STYLES .....................................................................................
+// 1.6. STYLES .......................................................................................
 export const FormulaSectionContainer = styled.section`
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -136,8 +136,15 @@ export const FormulaExpression = styled.div`
     gap: ${({ theme }) => theme.spacing.ss};
     color: ${({ theme }) => theme.text.primary};
     font-size: ${({ theme }) => theme.fontSizes.xs};
-    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
     line-height: 1.2;
+
+    > span,
+    > strong {
+        font-family: ${({ theme }) => theme.fonts.math};
+        font-style: italic;
+        font-weight: ${({ theme }) => theme.fontWeights.regular};
+    }
 
     ${media.up('md')`
         gap: ${({ theme }: { theme: ITheme }) => theme.spacing.xs};
@@ -154,13 +161,20 @@ export const FormulaFraction = styled.span`
 export const FormulaNumerator = styled.span`
     padding: 0 ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.ss};
     border-bottom: 1px solid ${({ theme }) => theme.text.primary};
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
 `;
 
 export const FormulaDenominator = styled.span`
     padding: ${({ theme }) => theme.spacing.ss} ${({ theme }) => theme.spacing.xs} 0;
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
 `;
 
 export const FormulaResult = styled.strong`
+    font-family: ${({ theme }) => theme.fonts.math};
+    font-style: italic;
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
     font-size: ${({ theme }) => theme.fontSizes.lg};
 
     ${media.up('md')`
@@ -226,6 +240,6 @@ export const FormulaStateAction = styled.button`
     margin-top: ${({ theme }) => theme.spacing.s};
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.s}`};
 `;
-// 1.6. END ........................................................................................
+// 1.6. END ..........................................................................................
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

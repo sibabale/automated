@@ -2,9 +2,9 @@
 //
 // Integration tests for the full free-cash-flow HTTP pipeline. The FMP provider
 // is replaced by a local mock server; the real repository, service, and
-// controller run. Free-cash-flow figures are dollars, so every value is asserted
-// as a formatted currency string, and the provider-error mapping is verified end
-// to end alongside the injected-repository seam.
+// controller run. Horizon, summary, and trailing-actual figures remain dollar
+// amounts for the client contract. Provider-error mapping is verified end to
+// end alongside the injected-repository seam.
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import { once } from "node:events";
@@ -101,13 +101,14 @@ describe("Free cash flow controller integration (mocked FMP)", () => {
   // 1.4.3. END ......................................................................................
 
   // 1.4.4. FORMATS TRAILING TWELVE MONTH ACTUALS AS CURRENCY ........................................
-  it("formats trailing twelve-month operating cash flow and capital expenditure as currency", async () => {
+  it("formats trailing twelve-month operating cash flow, capital expenditure, and free cash flow as currency", async () => {
     const res = await fetch(`${sharedBaseUrl}/analysis/free-cash-flow?ticker=AAPL`);
     const body = await res.json();
     const ttm = body.data.trailingTwelveMonthsActuals;
 
     assert.match(ttm.operatingCashFlow, /^\$\d+\.\d{2}B$/);
     assert.ok(ttm.capitalExpenditure.startsWith("$-"), "negative outflow keeps its sign");
+    assert.match(ttm.freeCashFlow, /^\$\d+\.\d{2}B$/);
   });
   // 1.4.4. END ......................................................................................
 

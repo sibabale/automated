@@ -1,5 +1,5 @@
-import type { ITheme, IThemeSpacing, IThemeSize, IThemeBreakpoints, IThemeFontWeights, IThemeFontSizes } from './theme.types';
 import { breakpoints as bp } from './media';
+import type { ITheme, IThemeSpacing, IThemeSize, IThemeBreakpoints, IThemeFontWeights, IThemeFontSizes, IThemeFonts } from './theme.types';
 
 const spacing: IThemeSpacing = {
     xxxs: '2px',
@@ -35,6 +35,12 @@ const fontWeights: IThemeFontWeights = {
     black:      900,
 };
 
+const fonts: IThemeFonts = {
+    body: 'var(--font-geist-sans), sans-serif',
+    math: '"KaTeX_Main", var(--font-geist-mono), monospace',
+    mono: 'var(--font-geist-mono), monospace',
+};
+
 const fontSizes: IThemeFontSizes = {
     xs:   '12px',
     sm:   '14px',
@@ -52,6 +58,7 @@ export const lightTheme: ITheme = {
     breakpoints,
     fontWeights,
     fontSizes,
+    fonts,
     text: {
         primary: '#111827',
         secondary: '#4B5563',
@@ -95,6 +102,7 @@ export const darkTheme: ITheme = {
     breakpoints,
     fontWeights,
     fontSizes,
+    fonts,
     text: {
         primary: '#F1F5F9',
         secondary: '#9CA3AF',

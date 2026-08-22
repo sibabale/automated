@@ -12,6 +12,7 @@ import type { AutomatedDecisionStrengths, MetricStrength } from "../../../domain
 export interface OverviewMetricSnapshot {
   debtToEquity: number | null;
   freeCashFlow: number | null;
+  freeCashFlowCoverageYears: number | null;
   marginOfSafety: number | null;
   profitMargin: number | null;
   returnOnEquity: number | null;
@@ -125,6 +126,8 @@ function formatMetricValue(
   switch (metric) {
     case "freeCashFlow":
       return formatCompactCurrency(value);
+    case "freeCashFlowCoverageYears":
+      return `${value.toFixed(1)}x`;
     case "debtToEquity":
       return formatRatio(value);
     case "marginOfSafety":
@@ -191,17 +194,17 @@ function buildCashGenerationPillar(
   let title = "Cash conversion is under pressure";
 
   if (strengths.freeCashFlow === "strong") {
-    title = "Cash flow supports internal reinvestment";
+    title = "Cash flow can fund 3 or more years of operations";
   } else if (strengths.freeCashFlow === "medium") {
-    title = "Cash flow remains positive but not exceptional";
+    title = "Cash flow can fund 2 to under 3 years of operations";
   }
 
   return {
     label: "Cash Generation",
     title,
     description:
-      `Free cash flow screens ${strengths.freeCashFlow} at ${formatMetricValue("freeCashFlow", metrics.freeCashFlow)}, ` +
-      `which indicates how much room ${subject} currently has to fund investment needs without leaning on outside capital.`,
+      `Free cash flow screens ${strengths.freeCashFlow} at ${formatMetricValue("freeCashFlowCoverageYears", metrics.freeCashFlowCoverageYears)}, ` +
+      `which indicates how many years of operating cash flow ${subject} can currently self-fund without leaning on outside capital.`,
   };
 }
 

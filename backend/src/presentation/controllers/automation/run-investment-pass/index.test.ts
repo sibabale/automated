@@ -246,7 +246,7 @@ describe("runInvestmentPassController integration", () => {
       assert.equal(body.data.decisions[0]?.analysisModel, "automated-investment-v2");
       assert.equal(
         body.data.decisions[0]?.constitutionVersion,
-        "all-five-metrics-must-be-strong-lower-free-cash-flow-threshold",
+        "all-five-metrics-must-be-strong-free-cash-flow-coverage-years",
       );
 
       const decisions = JSON.parse(

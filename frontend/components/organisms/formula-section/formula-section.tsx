@@ -1,12 +1,12 @@
-// [ COMPONENTS > ORGANISMS > FORMULA SECTION ] #####################################################
+// [ COMPONENTS > ORGANISMS > FORMULA SECTION ] ######################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 'use client';
 
 import React from 'react';
-// 1.1. END ........................................................................................
+// 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import {
     FormulaContent,
     FormulaDenominator,
@@ -23,15 +23,15 @@ import {
     FormulaSectionContainer,
     FormulaSectionTitle,
 } from './formula-section.styles';
-// 1.2. END ........................................................................................
+// 1.2. END ..........................................................................................
 
-// 1.3. IMAGES .....................................................................................
-// 1.3. END ........................................................................................
+// 1.3. IMAGES .......................................................................................
+// 1.3. END ..........................................................................................
 
-// 1.4. DATA .......................................................................................
-// 1.4. END ........................................................................................
+// 1.4. DATA .........................................................................................
+// 1.4. END ..........................................................................................
 
-// 1.5. TYPES ......................................................................................
+// 1.5. TYPES ........................................................................................
 interface IFormulaSection {
     title: string;
     standardFormulaLabel: string;
@@ -45,10 +45,36 @@ interface IFormulaSection {
     result: string;
     footnote: string;
     metricAbbreviation?: string;
+    subtractionDisplayMode?: 'signed-negative' | 'absolute-value';
+    standardSubtractionFormula?: string;
 }
-// 1.5. END ........................................................................................
+// 1.5. END ..........................................................................................
 
-// 1.6. COMPONENT ..................................................................................
+// 1.6. COMPONENT ....................................................................................
+
+function isNegativeValue(value: string): boolean {
+    return value.startsWith('$-') || value.startsWith('-') || value.startsWith('−');
+}
+
+function formatAbsoluteValue(value: string): string {
+    if (!isNegativeValue(value)) {
+        return `|${value}|`;
+    }
+
+    if (value.startsWith('$-')) {
+        return `|$${value.slice(2)}|`;
+    }
+
+    if (value.startsWith('-')) {
+        return `|${value.slice(1)}|`;
+    }
+
+    if (value.startsWith('−')) {
+        return `|${value.slice(1)}|`;
+    }
+
+    return `|${value}|`;
+}
 
 const FormulaSection: React.FC<IFormulaSection> = ({
     title,
@@ -63,16 +89,22 @@ const FormulaSection: React.FC<IFormulaSection> = ({
     result,
     footnote,
     metricAbbreviation = 'ROE',
+    subtractionDisplayMode = 'signed-negative',
+    standardSubtractionFormula,
 }) => {
     const isSubtraction = calculationOperator === 'subtract';
-
+    const shouldUseAbsoluteValue = isSubtraction
+        && subtractionDisplayMode === 'absolute-value'
+        && isNegativeValue(denominatorValue);
+    const standardSubtractionDisplay = standardSubtractionFormula
+        ?? `${numeratorLabel} − ${denominatorLabel}`;
     // 1.6.1. HOOKS & API CALLS ....................................................................
-    // 1.6.1. END ........................................................................................
+    // 1.6.1. END ....................................................................................
 
     // 1.6.2. FUNCTIONS & LOCAL VARIABLES ..........................................................
-    // 1.6.2. END ........................................................................................
+    // 1.6.2. END ....................................................................................
 
-    // 1.6.3. RENDER ...............................................................................
+    // 1.6.3. RENDER .................................................................................
     return (
         <FormulaSectionContainer data-testid="formula-section">
             <FormulaIntro>
@@ -94,7 +126,7 @@ const FormulaSection: React.FC<IFormulaSection> = ({
                             <span>{metricAbbreviation}</span>
                             <span>=</span>
                             {isSubtraction ? (
-                                <span>{numeratorLabel} − {denominatorLabel}</span>
+                                <span>{standardSubtractionDisplay}</span>
                             ) : (
                                 <>
                                     <FormulaFraction>
@@ -114,7 +146,7 @@ const FormulaSection: React.FC<IFormulaSection> = ({
                             <span>{metricAbbreviation}</span>
                             <span>=</span>
                             {isSubtraction ? (
-                                <span>{numeratorValue} − {denominatorValue}</span>
+                                <span>{numeratorValue} − {shouldUseAbsoluteValue ? formatAbsoluteValue(denominatorValue) : denominatorValue}</span>
                             ) : (
                                 <>
                                     <FormulaFraction>
@@ -134,11 +166,11 @@ const FormulaSection: React.FC<IFormulaSection> = ({
             </FormulaContent>
         </FormulaSectionContainer>
     );
-    // 1.6.3. END ........................................................................................
+    // 1.6.3. END ....................................................................................
 };
 
-// 1.6. END ........................................................................................
+// 1.6. END ..........................................................................................
 
 export default FormulaSection;
 
-// END FILE ########################################################################################
+// END FILE ##########################################################################################

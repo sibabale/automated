@@ -35,6 +35,7 @@ const consolidatedSummary = {
 const trailingTwelveMonthsActuals = {
     operatingCashFlow: '$12.0B',
     capitalExpenditure: '$-2.0B',
+    freeCashFlow: '$10.0B',
 };
 // 1.3. END ..........................................................................................
 

@@ -169,6 +169,7 @@ describe("classifyMetricStrengths", () => {
     const strengths = classifyMetricStrengths({
       returnOnEquity: 25,
       freeCashFlow: 12_000_000_000,
+      freeCashFlowCoverageYears: 3.2,
       debtToEquity: 0.4,
       profitMargin: 20,
       marginOfSafety: 25,
@@ -189,6 +190,7 @@ describe("classifyMetricStrengths", () => {
     const strengths = classifyMetricStrengths({
       returnOnEquity: null,
       freeCashFlow: -1,
+      freeCashFlowCoverageYears: 1.5,
       debtToEquity: 2,
       profitMargin: 5,
       marginOfSafety: -10,
@@ -291,6 +293,7 @@ describe("runAutomatedInvestmentPass", () => {
         metrics: {
           returnOnEquity: 1,
           freeCashFlow: -1,
+          freeCashFlowCoverageYears: 1.5,
           debtToEquity: 5,
           profitMargin: 1,
           marginOfSafety: -20,
@@ -360,8 +363,8 @@ describe("runAutomatedInvestmentPass", () => {
           REJECT: [{ fiscalYear: 2024, netIncome: 5, shareholdersEquity: 100 }],
         }),
         freeCashFlowRepository: financialRepository<CashFlowYear>({
-          BUY: [{ fiscalYear: 2024, operatingCashFlow: 12_500_000_000, capitalExpenditure: 0 }],
-          WATCH: [{ fiscalYear: 2024, operatingCashFlow: 100, capitalExpenditure: -50 }],
+          BUY: [{ fiscalYear: 2024, operatingCashFlow: 100, capitalExpenditure: 250 }],
+          WATCH: [{ fiscalYear: 2024, operatingCashFlow: 100, capitalExpenditure: 120 }],
           REJECT: [{ fiscalYear: 2024, operatingCashFlow: -50, capitalExpenditure: 0 }],
         }),
         debtToEquityRepository: financialRepository<DebtToEquityYear>({
@@ -449,7 +452,7 @@ describe("runAutomatedInvestmentPass", () => {
           EXP: [{ fiscalYear: 2024, netIncome: 25, shareholdersEquity: 100 }],
         }),
         freeCashFlowRepository: financialRepository<CashFlowYear>({
-          EXP: [{ fiscalYear: 2024, operatingCashFlow: 12_500_000_000, capitalExpenditure: 0 }],
+          EXP: [{ fiscalYear: 2024, operatingCashFlow: 100, capitalExpenditure: 250 }],
         }),
         debtToEquityRepository: financialRepository<DebtToEquityYear>({
           EXP: [{ fiscalYear: 2024, totalDebt: 40, shareholdersEquity: 100 }],

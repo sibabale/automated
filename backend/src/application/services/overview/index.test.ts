@@ -92,13 +92,14 @@ describe("buildOverview", () => {
     assert.deepEqual(overview.metrics, {
       debtToEquity: (2 + 1.5 + 1) / 3,
       freeCashFlow: (120 + 90 + 80) / 3,
+      freeCashFlowCoverageYears: 120 / 140,
       marginOfSafety: 25,
       profitMargin: (30 + 20 + 10) / 3,
       returnOnEquity: (20 + 30 + 40) / 3,
     });
     assert.deepEqual(overview.strengths, {
       returnOnEquity: "strong",
-      freeCashFlow: "medium",
+      freeCashFlow: "weak",
       debtToEquity: "medium",
       profitMargin: "strong",
       marginOfSafety: "strong",
@@ -115,9 +116,9 @@ describe("buildOverview", () => {
         },
         {
           label: "Cash Generation",
-          title: "Cash flow remains positive but not exceptional",
+          title: "Cash conversion is under pressure",
           description:
-            "Free cash flow screens medium at $96.7, which indicates how much room Apple Inc. currently has to fund investment needs without leaning on outside capital.",
+            "Free cash flow screens weak at 0.9x, which indicates how many years of operating cash flow Apple Inc. can currently self-fund without leaning on outside capital.",
         },
         {
           label: "Balance Sheet Discipline",
@@ -162,6 +163,7 @@ describe("buildOverview", () => {
     assert.deepEqual(overview.metrics, {
       debtToEquity: null,
       freeCashFlow: null,
+      freeCashFlowCoverageYears: null,
       marginOfSafety: null,
       profitMargin: null,
       returnOnEquity: null,
@@ -207,7 +209,7 @@ describe("buildOverview", () => {
         captured.push({ correlationId, ticker: input.reportHeader.ticker });
         assert.deepEqual(input.strengths, {
           returnOnEquity: "strong",
-          freeCashFlow: "medium",
+          freeCashFlow: "weak",
           debtToEquity: "medium",
           profitMargin: "strong",
           marginOfSafety: "strong",

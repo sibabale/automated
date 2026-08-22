@@ -44,15 +44,15 @@ describe('DetailLeadSection', () => {
             companyName: 'Apple Incorporated International',
             ticker: 'AAPL',
             title: 'Long-Term Shareholder Return on Common Equity',
-            value: '$1,284.72B',
-            description: 'Consistent expansion through challenging market conditions',
+            value: '3.4x',
+            description: 'Funds 3 or more years of operations',
         });
 
         expect(screen.getByTestId('detail-lead-section-title')).toHaveTextContent(
             'Long-Term Shareholder Return on Common Equity',
         );
         expect(screen.getByTestId('detail-lead-section-description')).toHaveTextContent(
-            'Consistent expansion through challenging market conditions',
+            'Funds 3 or more years of operations',
         );
     });
 

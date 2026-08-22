@@ -153,6 +153,10 @@ return (
   size values. Literal color values and raw `font-size` declarations are not
   permitted in application styles. If the system lacks a semantic token,
   extend the typed theme deliberately before consuming it.
+- Formula and equation rendering must use the theme's dedicated math font token.
+  When a surface presents symbolic or numeric formula content, wire that
+  typography through the typed theme rather than hardcoding a font family in the
+  component.
 - Use typed, transient style props (for example, `$isOpen`) only when a style
   varies by component state or a public prop.
 - Do not put layout-only or visual logic in the component file.

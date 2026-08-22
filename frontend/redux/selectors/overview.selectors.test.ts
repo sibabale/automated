@@ -29,7 +29,7 @@ describe('overview selectors', () => {
             ticker: 'MSFT',
             metrics: [
                 { slug: 'return-on-equity', value: '35.0%', strength: 'strong', description: 'Strong shareholder returns' },
-                { slug: 'free-cash-flow', value: '$12.5B', strength: 'strong', description: 'Funds growth and expansion' },
+                { slug: 'free-cash-flow', value: '3.2x', strength: 'strong', description: 'Funds 3 or more years of operations' },
                 { slug: 'debt-to-equity', value: '0.80', strength: 'medium', description: 'Manageable leverage' },
                 { slug: 'profit-margin', value: '18.0%', strength: 'medium', description: 'Acceptable pricing power' },
                 { slug: 'margin-of-safety', value: '12.0%', strength: 'medium', description: 'Fairly valued' },
@@ -65,9 +65,9 @@ describe('overview selectors', () => {
             }),
             expect.objectContaining({
                 slug: 'free-cash-flow',
-                value: '$12.5B',
+                value: '3.2x',
                 strength: 'strong',
-                description: 'Funds growth and expansion',
+                description: 'Funds 3 or more years of operations',
             }),
             expect.objectContaining({
                 slug: 'debt-to-equity',
@@ -95,7 +95,7 @@ describe('overview selectors', () => {
             status: 'succeeded',
             ticker: 'NVDA',
             metrics: [
-                { slug: 'free-cash-flow', value: '—', strength: 'weak', description: 'Limited capacity to self-fund growth' },
+                { slug: 'free-cash-flow', value: '—', strength: 'weak', description: 'Funds less than 2 years of operations' },
             ],
             reportHeader: {
                 companyName: 'NVIDIA Corporation',
@@ -113,7 +113,7 @@ describe('overview selectors', () => {
             expect.objectContaining({
                 slug: 'free-cash-flow',
                 strength: 'weak',
-                description: 'Limited capacity to self-fund growth',
+                description: 'Funds less than 2 years of operations',
             }),
             expect.objectContaining({
                 slug: 'debt-to-equity',
@@ -128,7 +128,7 @@ describe('overview selectors', () => {
             status: 'succeeded',
             ticker: 'TSLA',
             metrics: [
-                { slug: 'free-cash-flow', value: '-$0.5B', strength: 'weak', description: 'Limited capacity to self-fund growth' },
+                { slug: 'free-cash-flow', value: '1.2x', strength: 'weak', description: 'Funds less than 2 years of operations' },
                 { slug: 'debt-to-equity', value: '2.10', strength: 'weak', description: 'Leverage risk' },
                 { slug: 'profit-margin', value: '8.0%', strength: 'weak', description: 'Low pricing power' },
                 { slug: 'margin-of-safety', value: '-12.0%', strength: 'weak', description: 'Overvalued' },
@@ -149,7 +149,7 @@ describe('overview selectors', () => {
             expect.objectContaining({
                 slug: 'free-cash-flow',
                 strength: 'weak',
-                description: 'Limited capacity to self-fund growth',
+                description: 'Funds less than 2 years of operations',
             }),
             expect.objectContaining({
                 slug: 'debt-to-equity',

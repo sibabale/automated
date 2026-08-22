@@ -165,8 +165,8 @@ describe("Overview controller integration (mocked FMP)", () => {
       {
         slug: "free-cash-flow",
         value: "$96",
-        strength: "medium",
-        description: "Supports ongoing investment",
+        strength: "weak",
+        description: "Funds less than 2 years of operations",
       },
       {
         slug: "debt-to-equity",
@@ -264,7 +264,7 @@ describe("Overview controller integration (mocked FMP)", () => {
           slug: "free-cash-flow",
           value: "—",
           strength: "weak",
-          description: "Limited capacity to self-fund growth",
+          description: "Funds less than 2 years of operations",
         },
         {
           slug: "debt-to-equity",

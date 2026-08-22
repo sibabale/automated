@@ -18,6 +18,7 @@ import type { FinancialDataRepository } from "../../../domain/repositories/finan
 export interface FreeCashFlowAnalysis extends HorizonAnalysis<CashFlowYear> {
   ttmOperatingCashFlow: number;
   ttmCapitalExpenditure: number;
+  ttmCoverageYears: number | null;
 }
 // 1.3. END ..........................................................................................
 
@@ -33,6 +34,14 @@ export interface FreeCashFlowAnalysis extends HorizonAnalysis<CashFlowYear> {
  */
 export function calculateFreeCashFlow(year: CashFlowYear): number | null {
   return year.operatingCashFlow + year.capitalExpenditure;
+}
+
+export function calculateFreeCashFlowCoverageYears(year: CashFlowYear): number | null {
+  if (!Number.isFinite(year.operatingCashFlow) || year.operatingCashFlow <= 0) {
+    return null;
+  }
+
+  return calculateFreeCashFlow(year) / year.operatingCashFlow;
 }
 // 1.4. END ..........................................................................................
 
@@ -60,6 +69,7 @@ export async function analyseFreeCashFlow(
 
   return {
     ...analysis,
+    ttmCoverageYears: calculateFreeCashFlowCoverageYears(latest),
     ttmOperatingCashFlow: latest.operatingCashFlow,
     ttmCapitalExpenditure: latest.capitalExpenditure,
   };

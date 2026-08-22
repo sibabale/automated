@@ -91,6 +91,72 @@ describe('FormulaSection', () => {
         );
     });
 
+    it('renders FCF subtraction formulas with absolute-value presentation while preserving the supplied result', () => {
+        renderFormulaSection({
+            ...formulaProps,
+            title: 'How FCF Is Calculated',
+            actualsLabel: 'AAPL Trailing Twelve Months',
+            numeratorLabel: 'Operating Cash Flow',
+            denominatorLabel: 'Capital Expenditures',
+            numeratorValue: '$111.48B',
+            denominatorValue: '$-12.71B',
+            calculationOperator: 'subtract',
+            subtractionDisplayMode: 'absolute-value',
+            result: '$98.77B',
+            metricAbbreviation: 'FCF',
+        });
+
+        expect(screen.getByTestId('formula-section-standard-formula')).toHaveTextContent(
+            'FCF=Operating Cash Flow − |Capital Expenditures|',
+        );
+        expect(screen.getByTestId('formula-section-actuals-formula')).toHaveTextContent(
+            'FCF=$111.48B − |$12.71B|=$98.77B',
+        );
+        expect(screen.getByTestId('formula-section-result')).toHaveTextContent('$98.77B');
+    });
+
+    it('does not show absolute-value notation when the supplied FCF capex value is already positive', () => {
+        renderFormulaSection({
+            ...formulaProps,
+            title: 'How FCF Is Calculated',
+            actualsLabel: 'AMZN Trailing Twelve Months',
+            numeratorLabel: 'Operating Cash Flow',
+            denominatorLabel: 'Capital Expenditures',
+            numeratorValue: '$139.51B',
+            denominatorValue: '$131.82B',
+            calculationOperator: 'subtract',
+            subtractionDisplayMode: 'absolute-value',
+            result: '$7.70B',
+            metricAbbreviation: 'FCF',
+        });
+
+        expect(screen.getByTestId('formula-section-standard-formula')).toHaveTextContent(
+            'FCF=Operating Cash Flow − |Capital Expenditures|',
+        );
+        expect(screen.getByTestId('formula-section-actuals-formula')).toHaveTextContent(
+            'FCF=$139.51B − $131.82B=$7.70B',
+        );
+    });
+
+    it('leaves subtract formulas without absolute-value mode unchanged', () => {
+        renderFormulaSection({
+            ...formulaProps,
+            title: 'How FCF Is Calculated',
+            actualsLabel: 'AAPL Trailing Twelve Months',
+            numeratorLabel: 'Operating Cash Flow',
+            denominatorLabel: 'Capital Expenditures',
+            numeratorValue: '$111.48B',
+            denominatorValue: '$-12.71B',
+            calculationOperator: 'subtract',
+            result: '$110.5B',
+            metricAbbreviation: 'FCF',
+        });
+
+        expect(screen.getByTestId('formula-section-actuals-formula')).toHaveTextContent(
+            'FCF=$111.48B − $-12.71B=$110.5B',
+        );
+    });
+
     it('announces the calculation loading state', () => {
         render(
             <ReduxProvider>
