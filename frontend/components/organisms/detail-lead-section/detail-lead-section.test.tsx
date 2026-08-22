@@ -20,7 +20,7 @@ const renderDetailLeadSection = (props: DetailLeadSectionProps = {
     ticker: 'AAPL',
     title: 'Return on Equity',
     value: '21.3%',
-    description: 'Buffett Target: > 15%',
+    description: 'Target: > 15%',
 }) =>
     render(
         <StyledThemeProvider>
@@ -73,7 +73,7 @@ describe('DetailLeadSection', () => {
             ticker: 'AAPL',
             title: 'Return on Equity',
             value: '21.3%',
-            description: 'Buffett Target: > 15%',
+            description: 'Target: > 15%',
             isValueLoading: true,
         });
 

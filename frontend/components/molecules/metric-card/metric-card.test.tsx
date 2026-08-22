@@ -16,7 +16,7 @@ const renderMetricCard = (props = {
     href: '/details/return-on-equity',
     label: 'Return on Equity',
     value: '21.3%',
-    description: 'Buffett Target: > 15%',
+    description: 'Target: > 15%',
 }) =>
     render(
         <ReduxProvider>
@@ -42,7 +42,7 @@ describe('MetricCard', () => {
             '21.3%',
         );
         expect(screen.getByTestId('metric-card-description')).toHaveTextContent(
-            'Buffett Target: > 15%',
+            'Target: > 15%',
         );
     });
 

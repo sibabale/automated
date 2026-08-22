@@ -185,6 +185,12 @@ function parseQualitativeAnalysis(text: string): QualitativeAnalysis {
 }
 // 1.4. END ..........................................................................................
 
+export const __openAiQualitativeAnalysisInternals = {
+  buildUserPrompt,
+  parseQualitativeAnalysis,
+  resolveConfig,
+};
+
 // 1.5. CLIENT .......................................................................................
 export function createOpenAiQualitativeAnalysisClient(): QualitativeAnalysisClient | null {
   const config = resolveConfig();

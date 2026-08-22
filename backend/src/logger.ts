@@ -13,14 +13,29 @@ import pino from "pino";
  *
  * Credentials are redacted before log output to prevent accidental disclosure.
  */
-export const logger = pino({
+const isDevelopment = process.env.NODE_ENV !== "production";
+
+const loggerOptions: pino.LoggerOptions = {
   level: process.env.LOG_LEVEL ?? "info",
   redact: [
     "req.headers.authorization",
     "req.headers.cookie",
     "res.headers.set-cookie",
   ],
-});
+};
+
+if (isDevelopment) {
+  loggerOptions.transport = {
+    target: "pino-pretty",
+    options: {
+      colorize: true,
+      ignore: "pid,hostname",
+      translateTime: "SYS:standard",
+    },
+  };
+}
+
+export const logger = pino(loggerOptions);
 // 1.3. END ..........................................................................................
 
 // END FILE ##########################################################################################

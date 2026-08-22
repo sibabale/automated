@@ -67,7 +67,7 @@ export const financialMetrics: IFinancialMetric[] = [
         slug: 'return-on-equity',
         label: 'Return on Equity',
         value: '156.1%',
-        description: 'Buffett Target: > 15%',
+        description: 'Target: > 15%',
         liveCompanyName: 'Reddit, Inc.',
         liveTicker: 'RDDT',
         formula: {
@@ -144,8 +144,8 @@ export const financialMetrics: IFinancialMetric[] = [
             definition: "Return on Equity (ROE) measures the net income returned as a percentage of shareholders' equity. It reveals how efficiently a company uses investor capital to generate profits.",
             importanceTitle: 'Why ROE Matters in Value Investing',
             importance: [
-                'Warren Buffett considers ROE one of the most important indicators of a quality business. A consistently high ROE (above 15%) suggests a company has a durable competitive advantage — or economic moat.',
-                'Companies that can sustain high ROE over decades demonstrate that their business model generates superior returns without requiring excessive leverage. This is a hallmark of what Buffett calls "wonderful businesses at fair prices."',
+                'From a long-term value-investing perspective, return on equity is one of the clearest indicators of business quality. A consistently high ROE (above 15%) suggests a company has a durable competitive advantage — or economic moat.',
+                'Companies that sustain high ROE over decades demonstrate that their business model generates superior returns without requiring excessive leverage. That combination often points to a high-quality business trading on sound economics rather than financial engineering.',
             ],
             quote: '"We prefer businesses that can be characterized as wonderful businesses at fair prices rather than fair businesses at wonderful prices. One of the keys is consistently high return on equity without excess debt."',
             quoteAuthor: 'Warren Buffett',
@@ -302,8 +302,8 @@ export const financialMetrics: IFinancialMetric[] = [
             definition: "The Debt-to-Equity (D/E) ratio is a crucial metric that evaluates a company's financial leverage. It compares a company's total liabilities against its total shareholders' equity, determining the proportion of debt used to fund assets relative to equity.",
             importanceTitle: 'Why D/E Matters in Value Investing',
             importance: [
-                "Warren Buffett heavily favors businesses that maintain low debt levels while achieving superior returns on capital. A rising D/E ratio can indicate high default risk, but context is critical: Apple's debt strategy is highly structured, utilizing cheap debt to execute massive share buybacks and optimize taxes, rather than covering core operational shortfalls.",
-                "Buffett's baseline emphasizes that a truly exceptional business model generates so much native cash flow that it rarely requires excessive debt to expand its operations or reward its shareholders.",
+                "From a long-term value-investing perspective, businesses that maintain low debt while still earning strong returns on capital are generally more resilient. A rising D/E ratio can indicate higher default risk, but context is critical: some companies use cheap debt for capital allocation efficiency rather than to cover core operational shortfalls.",
+                'The baseline idea is that an exceptional business model generates enough native cash flow that it rarely needs excessive debt to expand operations or reward shareholders.',
             ],
             quote: '"I look for businesses that can earn high returns on equity while employing little or no debt."',
             quoteAuthor: 'Warren Buffett',
