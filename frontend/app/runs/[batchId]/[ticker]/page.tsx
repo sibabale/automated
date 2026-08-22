@@ -36,7 +36,10 @@ import {
  * Formats a metric value for display. Large numbers are abbreviated with K/M/B
  * suffixes; percentages and ratios are shown with two decimal places.
  */
-function formatMetricValue(label: string, value: number): string {
+function formatMetricValue(label: string, value: number | null): string {
+    if (value === null || value === undefined) {
+        return '—';
+    }
     if (label === 'freeCashFlow') {
         const absValue = Math.abs(value);
         if (absValue >= 1_000_000_000) {
