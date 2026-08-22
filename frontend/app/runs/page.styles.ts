@@ -102,14 +102,11 @@ export const RunsTableRow = styled.tr`
 
 /**
  * Clickable table row that navigates to a decision detail page.
- * Renders as an anchor styled as a table row, using display:table-row to
- * preserve normal table layout while providing link semantics.
+ * Uses a regular `<tr>` with click handling via onClick + useRouter in the
+ * component. An `<a>` cannot wrap `<td>` elements in valid HTML.
  */
-export const RunsTableRowLink = styled.a`
-    display: table-row;
+export const RunsTableRowClickable = styled.tr`
     border-top: 1px solid ${({ theme }) => theme.border.default};
-    color: inherit;
-    text-decoration: none;
     cursor: pointer;
 
     &:hover {

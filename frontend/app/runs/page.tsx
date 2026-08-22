@@ -3,6 +3,7 @@
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 // 1.1. END ..........................................................................................
 
@@ -40,7 +41,7 @@ import {
     RunsTableCell,
     RunsTableHead,
     RunsTableHeaderCell,
-    RunsTableRowLink,
+    RunsTableRowClickable,
 } from './page.styles';
 // 1.2. END ..........................................................................................
 
@@ -60,6 +61,7 @@ const STATUS_FILTERS: { value: StatusFilter; label: string }[] = [
 
 // 1.5. COMPONENT ....................................................................................
 const RunsPage: React.FC<IRunsPage> = () => {
+    const router = useRouter();
     const dispatch = useAppDispatch();
     const runsStatus = useAppSelector(selectRunsStatus);
     const runsItems = useAppSelector(selectRunsItems);
@@ -80,6 +82,13 @@ const RunsPage: React.FC<IRunsPage> = () => {
     const handleStatusChange = (value: StatusFilter) => {
         setStatusFilter(value);
         setPage(1);
+    };
+
+    /**
+     * Navigate to the decision detail page when a table row is clicked.
+     */
+    const handleRowClick = (batchId: string, ticker: string) => {
+        router.push(`/runs/${encodeURIComponent(batchId)}/${encodeURIComponent(ticker)}`);
     };
 
     return (
@@ -140,15 +149,22 @@ const RunsPage: React.FC<IRunsPage> = () => {
                             </RunsTableHead>
                             <RunsTableBody>
                                 {runsItems.map((run) => (
-                                    <RunsTableRowLink
+                                    <RunsTableRowClickable
                                         key={`${run.batchId}-${run.ticker}-${run.processedAt}`}
-                                        href={`/runs/${encodeURIComponent(run.batchId)}/${encodeURIComponent(run.ticker)}`}
+                                        onClick={() => handleRowClick(run.batchId, run.ticker)}
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                handleRowClick(run.batchId, run.ticker);
+                                            }
+                                        }}
                                     >
                                         <RunsTableCell>{run.processedAt.replace('T', ' ').slice(0, 16)}</RunsTableCell>
                                         <RunsTableCell>{run.ticker}</RunsTableCell>
                                         <RunsTableCell><RunsStatusBadge>{run.status}</RunsStatusBadge></RunsTableCell>
                                         <RunsTableCell>{run.batchId}</RunsTableCell>
-                                    </RunsTableRowLink>
+                                    </RunsTableRowClickable>
                                 ))}
                             </RunsTableBody>
                         </RunsTable>
