@@ -26,14 +26,51 @@ function parseDecisionDate(value: string): number {
   return Number.isFinite(timestamp) ? timestamp : 0;
 }
 
+/**
+ * Reads a decisions.json file and returns its entries. Returns an empty array
+ * if the file is missing or contains invalid JSON, allowing the service to
+ * gracefully handle partial data availability.
+ */
 async function readDecisionFile(filePath: string): Promise<RunsDecision[]> {
-  const contents = await fs.readFile(filePath, "utf8");
-  const parsed = JSON.parse(contents) as Record<string, RunsDecision>;
-  return Object.values(parsed);
+  try {
+    const contents = await fs.readFile(filePath, "utf8");
+    const parsed = JSON.parse(contents) as Record<string, RunsDecision>;
+    return Object.values(parsed);
+  } catch {
+    // File missing or malformed — skip without blocking other files.
+    return [];
+  }
 }
 
 function resolveRunsDataDirectory(): string {
   return path.resolve(process.cwd(), "data");
+}
+
+/**
+ * Discovers all decisions.json files in the data directory, including the root
+ * file and any versioned subdirectories (v1, v2, v3, etc.). This allows new
+ * decision batches to be added without code changes.
+ */
+async function discoverDecisionFiles(dataDir: string): Promise<string[]> {
+  const files: string[] = [];
+
+  // Check root decisions.json
+  const rootFile = path.join(dataDir, "decisions.json");
+  files.push(rootFile);
+
+  // Scan for versioned subdirectories (v1, v2, v3, ...)
+  try {
+    const entries = await fs.readdir(dataDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory() && /^v\d+$/.test(entry.name)) {
+        files.push(path.join(dataDir, entry.name, "decisions.json"));
+      }
+    }
+  } catch {
+    // Data directory inaccessible — return just the root file attempt.
+  }
+
+  return files;
 }
 // 1.4. END ..........................................................................................
 
@@ -84,11 +121,7 @@ export async function buildRunsPage(
 
 export async function loadRunsDecisions(): Promise<RunsDecision[]> {
   const dataDir = resolveRunsDataDirectory();
-  const files = [
-    "decisions.json",
-    "v1/decisions.json",
-    "v2/decisions.json",
-  ].map((file) => path.join(dataDir, file));
+  const files = await discoverDecisionFiles(dataDir);
 
   const allDecisions = await Promise.all(files.map(readDecisionFile));
   return allDecisions.flat();
@@ -116,6 +149,18 @@ export async function findDecisionByBatchAndTicker(
 
   logger.info({ correlationId, batchId, ticker }, "Decision found");
   return match;
+}
+
+/**
+ * Pure helper for finding a decision by batch and ticker. Exported for
+ * testability; production code uses findDecisionByBatchAndTicker.
+ */
+export function findDecisionByBatchAndTickerFromList(
+  decisions: RunsDecision[],
+  batchId: string,
+  ticker: string,
+): RunsDecision | null {
+  return decisions.find((d) => d.batchId === batchId && d.ticker === ticker) ?? null;
 }
 // 1.5. END ..........................................................................................
 
