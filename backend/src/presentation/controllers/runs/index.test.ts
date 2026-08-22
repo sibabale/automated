@@ -1,4 +1,4 @@
-// [ BACKEND > PRESENTATION > CONTROLLERS > RUNS > TESTS ] ############################################
+// [ BACKEND > PRESENTATION > CONTROLLERS > RUNS > TESTS ] ###########################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 import assert from "node:assert/strict";

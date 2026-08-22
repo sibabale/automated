@@ -1,17 +1,17 @@
 // [ APP > RUNS PAGE ] ###############################################################################
 
-// 1.1. EXTERNAL DEPENDENCIES ......................................................................
+// 1.1. EXTERNAL DEPENDENCIES ........................................................................
 'use client';
 
 import React, { useEffect, useState } from 'react';
 // 1.1. END ..........................................................................................
 
-// 1.2. INTERNAL DEPENDENCIES ......................................................................
-import Header from '../../components/molecules/header/header';
-import RunsSummaryCard from '../../components/molecules/runs-summary-card/runs-summary-card';
-import Pagination from '../../components/molecules/pagination/pagination';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+// 1.2. INTERNAL DEPENDENCIES ........................................................................
 import { fetchRuns } from '../../redux/slices/runs.slice';
+import Header from '../../components/molecules/header/header';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import Pagination from '../../components/molecules/pagination/pagination';
+import RunsSummaryCard from '../../components/molecules/runs-summary-card/runs-summary-card';
 import {
     selectRunsError,
     selectRunsIsEmpty,

@@ -1,13 +1,13 @@
-// [ BACKEND > APPLICATION > SERVICES > RUNS ] ########################################################
+// [ BACKEND > APPLICATION > SERVICES > RUNS ] #######################################################
 
 // 1.1. EXTERNAL DEPENDENCIES ........................................................................
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import * as path from "node:path";
+import * as fs from "node:fs/promises";
 import { logger } from "../../../logger.js";
 import type { RunsDecision } from "../../../domain/entities/runs-decision.entity.js";
-import * as fs from "node:fs/promises";
-import * as path from "node:path";
 // 1.2. END ..........................................................................................
 
 // 1.3. TYPES ........................................................................................

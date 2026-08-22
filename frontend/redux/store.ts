@@ -16,6 +16,7 @@ import storage from 'redux-persist/lib/storage';
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import runsReducer from './slices/runs.slice';
 import themeReducer from './slices/theme.slice';
 import counterReducer from './slices/counter.slice';
 import overviewReducer from './slices/overview.slice';
@@ -24,7 +25,6 @@ import portfolioReducer from './slices/portfolio.slice';
 import profitMarginReducer from './slices/profit-margin.slice';
 import debtToEquityReducer from './slices/debt-to-equity.slice';
 import freeCashFlowReducer from './slices/free-cash-flow.slice';
-import runsReducer from './slices/runs.slice';
 import marginOfSafetyReducer from './slices/margin-of-safety.slice';
 import returnOnEquityReducer from './slices/return-on-equity.slice';
 // 1.2. END ..........................................................................................

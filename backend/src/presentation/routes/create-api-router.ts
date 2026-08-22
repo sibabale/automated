@@ -5,6 +5,7 @@ import { Router } from "express";
 // 1.1. END ..........................................................................................
 
 // 1.2. INTERNAL DEPENDENCIES ........................................................................
+import { runsController } from "../controllers/runs/index.js";
 import { overviewController } from "../controllers/overview/index.js";
 import { portfolioController } from "../controllers/portfolio/index.js";
 import { buyTradeController } from "../controllers/trades/buy/index.js";
@@ -13,7 +14,6 @@ import { debtToEquityController } from "../controllers/debt-to-equity/index.js";
 import { freeCashFlowController } from "../controllers/free-cash-flow/index.js";
 import { marginOfSafetyController } from "../controllers/margin-of-safety/index.js";
 import { returnOnEquityController } from "../controllers/return-on-equity/index.js";
-import { runsController } from "../controllers/runs/index.js";
 import {
   createOverviewController,
 } from "../controllers/overview/index.js";
