@@ -91,9 +91,8 @@ const Header: React.FC<IHeader> = () => {
                             </BrandLockup>
                         </HeaderLink>
                     </ListItem>
-                    <ListItem data-testid="header-about" $hideOnMobile>About</ListItem>
-                    <ListItem data-testid="header-methodology" $hideOnMobile>
-                        Methodology
+                    <ListItem data-testid="header-runs" $hideOnMobile>
+                        <HeaderLink href="/runs">Runs</HeaderLink>
                     </ListItem>
                     <ListItem data-testid="header-portfolio" $hideOnMobile>
                         <HeaderLink href="/portfolio">Portfolio</HeaderLink>
@@ -143,16 +142,11 @@ const Header: React.FC<IHeader> = () => {
                         variants={mobileMenuVariants}
                     >
                         <MobileMenuItem
-                            data-testid="header-mobile-about"
+                            $interactive
+                            data-testid="header-mobile-runs"
                             variants={mobileMenuItemVariants}
                         >
-                            About
-                        </MobileMenuItem>
-                        <MobileMenuItem
-                            data-testid="header-mobile-methodology"
-                            variants={mobileMenuItemVariants}
-                        >
-                            Methodology
+                            <HeaderLink href="/runs">Runs</HeaderLink>
                         </MobileMenuItem>
                         <MobileMenuItem
                             $interactive

@@ -13,6 +13,7 @@ import { debtToEquityController } from "../controllers/debt-to-equity/index.js";
 import { freeCashFlowController } from "../controllers/free-cash-flow/index.js";
 import { marginOfSafetyController } from "../controllers/margin-of-safety/index.js";
 import { returnOnEquityController } from "../controllers/return-on-equity/index.js";
+import { runsController } from "../controllers/runs/index.js";
 import {
   createOverviewController,
 } from "../controllers/overview/index.js";
@@ -39,6 +40,7 @@ export function createApiRouter(apiVersion: ApiVersion): Router {
   router.get("/analysis/profit-margin", profitMarginController);
   router.get("/analysis/margin-of-safety", marginOfSafetyController);
   router.get("/overview", selectedOverviewController);
+  router.get("/runs", runsController);
   router.post("/trades/buy", buyTradeController);
   router.get("/portfolio", portfolioController);
   router.post("/automation/run-investment-pass", selectedRunInvestmentPassController);

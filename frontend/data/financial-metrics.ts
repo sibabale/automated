@@ -233,6 +233,14 @@ export const financialMetrics: IFinancialMetric[] = [
         },
     },
     {
+        slug: 'runs',
+        label: 'Runs',
+        value: '226',
+        description: 'Latest automated decisions',
+        liveCompanyName: 'Automated runs',
+        liveTicker: 'RUNS',
+    },
+    {
         slug: 'debt-to-equity',
         label: 'Debt-to-Equity',
         value: '1.87',

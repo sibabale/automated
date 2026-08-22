@@ -107,7 +107,7 @@ describe('FormulaSection', () => {
         });
 
         expect(screen.getByTestId('formula-section-standard-formula')).toHaveTextContent(
-            'FCF=Operating Cash Flow − |Capital Expenditures|',
+            'FCF=Operating Cash Flow − Capital Expenditures',
         );
         expect(screen.getByTestId('formula-section-actuals-formula')).toHaveTextContent(
             'FCF=$111.48B − |$12.71B|=$98.77B',
@@ -131,7 +131,7 @@ describe('FormulaSection', () => {
         });
 
         expect(screen.getByTestId('formula-section-standard-formula')).toHaveTextContent(
-            'FCF=Operating Cash Flow − |Capital Expenditures|',
+            'FCF=Operating Cash Flow − Capital Expenditures',
         );
         expect(screen.getByTestId('formula-section-actuals-formula')).toHaveTextContent(
             'FCF=$139.51B − $131.82B=$7.70B',

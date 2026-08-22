@@ -37,7 +37,7 @@ describe('KeyTenetsFrame', () => {
             within(screen.getByTestId('key-tenets-frame-metrics')).getAllByTestId(
                 'metric-card',
             ),
-        ).toHaveLength(5);
+        ).toHaveLength(6);
         expect(screen.getAllByTestId('metric-card')[0]).toHaveAttribute(
             'href',
             '/details/return-on-equity?ticker=AAPL',

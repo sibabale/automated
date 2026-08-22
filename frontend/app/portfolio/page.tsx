@@ -13,9 +13,9 @@ import PortfolioPageError from './page.error';
 import PortfolioPageEmpty from './page.empty';
 import PortfolioPageLoading from './page.loading';
 import Header from '../../components/molecules/header/header';
+import Pagination from '../../components/molecules/pagination/pagination';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { TrendValue } from '../../components/atoms/trend-badge/trend-badge.styles';
-import PortfolioPagination from '../../components/molecules/portfolio-pagination/portfolio-pagination';
 import PortfolioSummaryCard from '../../components/molecules/portfolio-summary-card/portfolio-summary-card';
 import PortfolioHoldingsTableRow from '../../components/molecules/portfolio-holdings-table-row/portfolio-holdings-table-row';
 import PortfolioHoldingsTableHeader from '../../components/molecules/portfolio-holdings-table-header/portfolio-holdings-table-header';
@@ -200,9 +200,11 @@ const PortfolioPage: React.FC<IPortfolioPage> = () => {
                         </>
                     )}
                     {!isContentLoading && !portfolioError && !isPortfolioEmpty && (
-                        <PortfolioPagination
+                        <Pagination
+                            ariaLabel="Portfolio holdings pages"
                             currentPage={currentPage}
                             onPageChange={setCurrentPage}
+                            testId="portfolio-pagination"
                             totalPages={totalPages}
                         />
                     )}

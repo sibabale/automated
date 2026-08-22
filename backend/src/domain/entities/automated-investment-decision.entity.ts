@@ -64,6 +64,20 @@ export interface AutomatedInvestmentDecision {
   strengths: AutomatedDecisionStrengths;
   tradeExecution: AutomatedTradeExecution;
 }
+
+export type RunsDecisionView = Pick<
+  AutomatedInvestmentDecision,
+  | "apiVersion"
+  | "ticker"
+  | "companyName"
+  | "batchId"
+  | "sourceFile"
+  | "processedAt"
+  | "status"
+  | "scoreAtPurchase"
+  | "analysisModel"
+  | "constitutionVersion"
+>;
 // 1.3. END ..........................................................................................
 
 // END FILE ##########################################################################################

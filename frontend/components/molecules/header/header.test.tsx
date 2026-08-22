@@ -37,8 +37,8 @@ describe('Header', () => {
             'href',
             '/',
         );
-        expect(screen.queryByTestId('header-signin')).not.toBeInTheDocument();
-        expect(screen.queryByTestId('header-create-account')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('header-about')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('header-methodology')).not.toBeInTheDocument();
     });
 
     it('switches the selected color mode', async () => {
@@ -71,8 +71,7 @@ describe('Header', () => {
 
         await waitFor(() => {
             [
-                'header-mobile-about',
-                'header-mobile-methodology',
+                'header-mobile-runs',
                 'header-mobile-portfolio',
             ].forEach((testId) => {
                     expect(
@@ -82,12 +81,12 @@ describe('Header', () => {
         }, { timeout: 3000 });
     });
 
-    it('links to the portfolio page', () => {
+    it('links to the runs page', () => {
         renderHeader();
 
-        expect(screen.getByTestId('header-portfolio').querySelector('a')).toHaveAttribute(
+        expect(screen.getByTestId('header-runs').querySelector('a')).toHaveAttribute(
             'href',
-            '/portfolio',
+            '/runs',
         );
     });
 
