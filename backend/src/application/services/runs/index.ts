@@ -93,6 +93,30 @@ export async function loadRunsDecisions(): Promise<RunsDecision[]> {
   const allDecisions = await Promise.all(files.map(readDecisionFile));
   return allDecisions.flat();
 }
+
+/**
+ * Finds a single decision by batch ID and ticker.
+ * Returns the full decision record including metrics, strengths, and trade
+ * execution details.
+ */
+export async function findDecisionByBatchAndTicker(
+  batchId: string,
+  ticker: string,
+  correlationId: string,
+): Promise<RunsDecision | null> {
+  logger.debug({ correlationId, batchId, ticker }, "Finding decision by batch and ticker");
+
+  const decisions = await loadRunsDecisions();
+  const match = decisions.find((d) => d.batchId === batchId && d.ticker === ticker);
+
+  if (!match) {
+    logger.warn({ correlationId, batchId, ticker }, "Decision not found");
+    return null;
+  }
+
+  logger.info({ correlationId, batchId, ticker }, "Decision found");
+  return match;
+}
 // 1.5. END ..........................................................................................
 
 // END FILE ##########################################################################################

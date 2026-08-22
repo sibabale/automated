@@ -100,6 +100,28 @@ export const RunsTableRow = styled.tr`
     border-top: 1px solid ${({ theme }) => theme.border.default};
 `;
 
+/**
+ * Clickable table row that navigates to a decision detail page.
+ * Renders as an anchor styled as a table row, using display:table-row to
+ * preserve normal table layout while providing link semantics.
+ */
+export const RunsTableRowLink = styled.a`
+    display: table-row;
+    border-top: 1px solid ${({ theme }) => theme.border.default};
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.background.secondary};
+    }
+
+    &:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.border.focus};
+        outline-offset: -2px;
+    }
+`;
+
 export const RunsTableHeaderCell = styled.th`
     padding: ${({ theme }) => `${theme.spacing.s} ${theme.spacing.m}`};
     color: ${({ theme }) => theme.text.secondary};

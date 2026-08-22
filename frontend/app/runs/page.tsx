@@ -40,7 +40,7 @@ import {
     RunsTableCell,
     RunsTableHead,
     RunsTableHeaderCell,
-    RunsTableRow,
+    RunsTableRowLink,
 } from './page.styles';
 // 1.2. END ..........................................................................................
 
@@ -119,7 +119,6 @@ const RunsPage: React.FC<IRunsPage> = () => {
                                     <RunsTableHeaderCell>Time</RunsTableHeaderCell>
                                     <RunsTableHeaderCell>Ticker</RunsTableHeaderCell>
                                     <RunsTableHeaderCell>Status</RunsTableHeaderCell>
-                                    <RunsTableHeaderCell>Score</RunsTableHeaderCell>
                                     <RunsTableHeaderCell>Batch</RunsTableHeaderCell>
                                 </tr>
                             </RunsTableHead>
@@ -136,19 +135,20 @@ const RunsPage: React.FC<IRunsPage> = () => {
                                     <RunsTableHeaderCell>Time</RunsTableHeaderCell>
                                     <RunsTableHeaderCell>Ticker</RunsTableHeaderCell>
                                     <RunsTableHeaderCell>Status</RunsTableHeaderCell>
-                                    <RunsTableHeaderCell>Score</RunsTableHeaderCell>
                                     <RunsTableHeaderCell>Batch</RunsTableHeaderCell>
                                 </tr>
                             </RunsTableHead>
                             <RunsTableBody>
                                 {runsItems.map((run) => (
-                                    <RunsTableRow key={`${run.batchId}-${run.ticker}-${run.processedAt}`}>
+                                    <RunsTableRowLink
+                                        key={`${run.batchId}-${run.ticker}-${run.processedAt}`}
+                                        href={`/runs/${encodeURIComponent(run.batchId)}/${encodeURIComponent(run.ticker)}`}
+                                    >
                                         <RunsTableCell>{run.processedAt.replace('T', ' ').slice(0, 16)}</RunsTableCell>
                                         <RunsTableCell>{run.ticker}</RunsTableCell>
                                         <RunsTableCell><RunsStatusBadge>{run.status}</RunsStatusBadge></RunsTableCell>
-                                        <RunsTableCell>{run.scoreAtPurchase.toFixed(0)}</RunsTableCell>
                                         <RunsTableCell>{run.batchId}</RunsTableCell>
-                                    </RunsTableRow>
+                                    </RunsTableRowLink>
                                 ))}
                             </RunsTableBody>
                         </RunsTable>

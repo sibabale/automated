@@ -22,6 +22,7 @@ import counterReducer from './slices/counter.slice';
 import overviewReducer from './slices/overview.slice';
 import buyTradeReducer from './slices/buy-trade.slice';
 import portfolioReducer from './slices/portfolio.slice';
+import runDetailReducer from './slices/run-detail.slice';
 import profitMarginReducer from './slices/profit-margin.slice';
 import debtToEquityReducer from './slices/debt-to-equity.slice';
 import freeCashFlowReducer from './slices/free-cash-flow.slice';
@@ -35,7 +36,7 @@ const persistConfig = {
     version: 1,
     storage,
     // whitelist: ['counter'], // only persist specific slices
-    blacklist: ['overview', 'portfolio', 'buyTrade', 'returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin', 'marginOfSafety', 'runs'], // live financial data and order state are fetched fresh, never persisted
+    blacklist: ['overview', 'portfolio', 'buyTrade', 'returnOnEquity', 'freeCashFlow', 'debtToEquity', 'profitMargin', 'marginOfSafety', 'runs', 'runDetail'], // live financial data and order state are fetched fresh, never persisted
 };
 // 1.3. END ..........................................................................................
 
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
     debtToEquity: debtToEquityReducer,
     freeCashFlow: freeCashFlowReducer,
     runs: runsReducer,
+    runDetail: runDetailReducer,
     marginOfSafety: marginOfSafetyReducer,
     profitMargin: profitMarginReducer,
     returnOnEquity: returnOnEquityReducer,
