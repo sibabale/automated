@@ -216,7 +216,9 @@ const RunDetailPage: React.FC = () => {
                                 <DetailCard>
                                     <DetailCardLabel>Share Price</DetailCardLabel>
                                     <DetailCardValue>
-                                        ${data.tradeExecution.sharePrice.toFixed(2)}
+                                        {data.tradeExecution.sharePrice != null
+                                            ? `$${data.tradeExecution.sharePrice.toFixed(2)}`
+                                            : '—'}
                                     </DetailCardValue>
                                 </DetailCard>
                                 <DetailCard>

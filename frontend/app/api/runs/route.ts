@@ -22,7 +22,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const correlationId = readOrCreateCorrelationId(request.headers);
     const page = request.nextUrl.searchParams.get('page')?.trim() ?? '1';
     const pageSize = request.nextUrl.searchParams.get('pageSize')?.trim() ?? '10';
-    const upstream = `${BACKEND_URL}/runs?page=${encodeURIComponent(page)}&pageSize=${encodeURIComponent(pageSize)}`;
+    const status = request.nextUrl.searchParams.get('status')?.trim();
+
+    const params = new URLSearchParams({ page, pageSize });
+    if (status) {
+        params.set('status', status);
+    }
+    const upstream = `${BACKEND_URL}/runs?${params.toString()}`;
 
     try {
         const response = await fetch(upstream, {
